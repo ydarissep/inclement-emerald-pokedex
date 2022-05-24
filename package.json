@@ -1,0 +1,25 @@
+{
+  "name": "inclement-emerald-pokedex",
+  "version": "1.0.0",
+  "description": "Pokedex application for the Inclement Emerald ROM Hack",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ydarissep/inclement-emerald-pokedex.git"
+  },
+  "author": "Ydarissep",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ydarissep/inclement-emerald-pokedex/issues"
+  },
+  "homepage": "https://github.com/ydarissep/inclement-emerald-pokedex#readme",
+  "devDependencies": {
+    "html-webpack-plugin": "^5.5.0",
+    "standard": "^17.0.0",
+    "webpack": "^5.72.1",
+    "webpack-cli": "^4.9.2"
+  }
+}
