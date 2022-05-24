@@ -6,26 +6,70 @@ async function getSpecies(pokemon){
 }
 
 function regexSpecies(textSpecies, pokemon){
-	const lines = textSpecies.split("\n").map(line => line.trim())
-	let formsStart = null, ID
+	const lines = textSpecies.split("\n")
+	let formsStart = null, ID = 0
 
 	lines.forEach(line => {
+
 		if (/#define *FORMS_START *\w+/i.test(line))
 			formsStart = ID
-		if(/#define SPECIES_\w+/i.test(line) && /SPECIES_NONE /i.test(line) !== true && /SPECIES_EGG /i.test(line) !== true){
-			const species = line.match(/#define (SPECIES_\w+)/i)[1]
-			ID = parseInt(line.match(/\d+/)[0])
-			pokemon[species] = {}
-			pokemon[species]["species"] = species
-			if(Number.isInteger(formsStart))
-				pokemon[species]["ID"] = ID+formsStart
-			else{
-				pokemon[species]["ID"] = ID
+
+		const matchSpecies = line.match(/#define *(SPECIES_\w+)/i)
+		if(matchSpecies !== null && /SPECIES_NONE /i.test(line) !== true && /SPECIES_EGG /i.test(line) !== true){
+			const species = matchSpecies[1]
+
+
+			matchInt = line.match(/\d+/)
+			if(matchInt !== null){
+				ID = parseInt(matchInt[0])
+
+
+
+				pokemon[species] = {}
+				pokemon[species]["species"] = species
+
+
+				if(Number.isInteger(formsStart))
+					pokemon[species]["ID"] = ID+formsStart
+				else
+					pokemon[species]["ID"] = ID
 			}
 		}
 	})
 	return pokemon
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -36,51 +80,124 @@ async function getBaseStats(pokemon){
 	const rawBaseStats = await fetch("https://raw.githubusercontent.com/BuffelSaft/pokeemerald/master/src/data/pokemon/base_stats.h")
 	const textBaseStats = await rawBaseStats.text()
 	return regexBaseStats(textBaseStats, pokemon)
-	/*
-	fetch("https://raw.githubusercontent.com/BuffelSaft/pokeemerald/master/src/data/pokemon/base_stats.h")
-	.then(response => response.text())
-	.then(response => {regexBaseStats(response)})
-	.catch(err => console.error(err))
-	*/
 }
 
 function regexBaseStats(textBaseStats, pokemon){
-	const lines = textBaseStats.split("\n").map(line => line.trim())
+	const lines = textBaseStats.split("\n")
 
-	const regex = /baseHP|baseAttack|baseDefense|baseSpeed|baseSpAttack|baseSpDefense|type1|type2|item1|item2|eggGroup1|eggGroup2|abilities|SPECIES_\w*/i
-	let change, value, key
+	const regex = /baseHP|baseAttack|baseDefense|baseSpeed|baseSpAttack|baseSpDefense|type1|type2|item1|item2|eggGroup1|eggGroup2|abilities/i
+	let change = false, value, species
 
 	lines.forEach(line => {
 
 		if(/#else/i.test(line))
 				change = true
-		else if(/#endif/i.test(line))
+		if(/#endif/i.test(line))
 				change = false
 
-		if(regex.test(line)){
 
-			const match = line.match(regex)[0]
 
-			if(match === "baseHP" || match === "baseAttack" || match === "baseDefense" || match === "baseSpeed" || match === "baseSpAttack" || match === "baseSpDefense")
-				value = parseInt(line.match(/\d+/)[0])
-			else if(match === "type1" || match === "type2" || match === "item1" || match === "item2" || match === "eggGroup1" || match === "eggGroup2")
-				value = line.match(/\w+/ig)[1]
+
+
+		const matchSpecies = line.match(/SPECIES_\w+/i)
+		if(matchSpecies !== null && /SPECIES_NONE/i.test(line) !== true){
+			species = matchSpecies[0]
+			change = false
+		}
+
+
+
+
+
+		const matchRegex = line.match(regex)
+		if(matchRegex !== null){
+			const match = matchRegex[0]
+
+
+
+
+
+			if(match === "baseHP" || match === "baseAttack" || match === "baseDefense" || match === "baseSpeed" || match === "baseSpAttack" || match === "baseSpDefense"){
+				const matchInt = line.match(/\d+/)
+				if(matchInt !== null)
+					value = parseInt(matchInt[0])
+			}
+			else if(match === "type1" || match === "type2" || match === "item1" || match === "item2" || match === "eggGroup1" || match === "eggGroup2"){
+				value = line.match(/\w+_\w+/i)
+				if(value !== null)
+					value = value[0]
+			}
 			else if(match === "abilities")
 				value = line.match(/ABILITY_\w+/ig)
 
-			if(/SPECIES_/i.test(line) && /SPECIES_NONE/i.test(line) !== true){
-				key = match
-				change = false // technically useless, could be removed
-			}
-			else if(change === true)
-				pokemon[key]["changes"].push([match, value])
-			else if(change === false){
-				pokemon[key][match] = value
-			}
+
+
+
+
+			if(change === true)
+				pokemon[species]["changes"].push([match, value])
+			else if(change === false)
+				pokemon[species][match] = value
 		}
 	})
+
+
 	return pokemon
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -95,47 +212,110 @@ async function getLevelUpLearnsets(pokemon){
 
 	const rawLevelUpLearnsetsPointers = await fetch("https://raw.githubusercontent.com/BuffelSaft/pokeemerald/master/src/data/pokemon/level_up_learnset_pointers.h")
 	const textLevelUpLearnsetsPointers = await rawLevelUpLearnsetsPointers.text()
+
+
 	const levelUpLearnsetsConversionTable = getLevelUpLearnsetsConversionTable(textLevelUpLearnsetsPointers)
+
 
 	return regexLevelUpLearnsets(textLevelUpLearnsets, levelUpLearnsetsConversionTable, pokemon)
 }
 
-function getLevelUpLearnsetsConversionTable(bigString){
-	const lines = bigString.split("\n").map(line => line.trim())
+function getLevelUpLearnsetsConversionTable(textLevelUpLearnsetsPointers){
+	const lines = textLevelUpLearnsetsPointers.split("\n")
 	let conversionTable = {}
 
 	lines.forEach(line => {
-		if(/SPECIES_/i.test(line) && /SPECIES_NONE/i.test(line) !== true){
-			const match = line.match(/\w+/ig)
-			const species = match[0]
-			const conversion = match[1]
 
-			if(conversionTable[conversion] === undefined)
-				conversionTable[conversion] = [species]
-			else
-				conversionTable[conversion].push(species)
+		const matchSpecies = line.match(/SPECIES_\w+/i)
+		if(matchSpecies != null && /SPECIES_NONE/i.test(line) !== true){
+			const value = matchSpecies[0]
+
+
+
+			const matchConversion = line.match(/s\w+LevelUpLearnset/i)
+			if(matchConversion !== null){
+				const index = matchConversion[0]
+
+
+
+				if(conversionTable[index] === undefined) // DO NOT TOUCH THAT FUTURE ME, THIS IS THE WAY, DON'T QUESTION ME
+					conversionTable[index] = [value]
+				else // DO NOT TOUCH THAT FUTURE ME, THIS IS THE WAY, DON'T QUESTION ME
+					conversionTable[index].push(value)
+			}
 		}
 	})
-	//console.log(conversionTable)
 	return conversionTable
 }
 
 function regexLevelUpLearnsets(textLevelUpLearnsets, conversionTable, pokemon){
-	const lines = textLevelUpLearnsets.split("\n").map(line => line.trim())
-	let key = []
+	const lines = textLevelUpLearnsets.split("\n")
+	let species = []
 
 	lines.forEach(line => {
-		if(/s\w+LevelUpLearnset/i.test(line))
-			key = conversionTable[line.match(/s\w+LevelUpLearnset/i)[0]]
-		if(/LEVEL_UP_MOVE\( *\d+, *\w+/i.test(line)){
-			const move = line.match(/, *(\w+)/)[1]
-			const level = line.match(/\( *(\d+) *,/)[1]
-			for(let i = 0; i < key.length; i++)
-				pokemon[key[i]]["levelUpLearnsets"].push([move, parseInt(level)])
+		const matchConversion = line.match(/s\w+LevelUpLearnset/i)
+		if(matchConversion !== null){
+			const index = matchConversion[0]
+			species = conversionTable[index]
+		}
+
+
+
+		const matchLevelMove = line.match(/(\d+) *, *(MOVE_\w+)/i)
+		if(matchLevelMove !== null){
+			const level = parseInt(matchLevelMove[1])
+			const move = matchLevelMove[2]
+			for(let i = 0; i < species.length; i++)
+				pokemon[species[i]]["levelUpLearnsets"].push([move, level])
 		}
 	})
 	return pokemon
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -152,43 +332,70 @@ async function getTMHMLearnsets(pokemon){
 }
 
 function regexTMHMLearnsets(textTMHMLearnsets, pokemon){
-	const pokemonValues = Object.values(pokemon)
-	const lines = textTMHMLearnsets.split("\n").map(line => line.trim())
-	let key
+	const lines = textTMHMLearnsets.split("\n")
+	let species = null
 
 	lines.forEach(line => {
-		if(/SPECIES_/.test(line) && /SPECIES_NONE/i.test(line) !== true){
-			key = line.match(/SPECIES_\w+/i)[0]
+		const matchSpecies = line.match(/SPECIES_\w+/i)
+		if(matchSpecies !== null){
+			species = matchSpecies[0]
 		}
-		if(/TMHM\d *\( *[TH]M\d+ *_ *\w+/i.test(line)){
-			let move = line.match(/[TH]M\d+_(\w+)/i)[1]
+
+
+
+
+		const matchTmhmMove = line.match(/TMHM\d* *\((\w+ *\d+) *_ *(\w+)/i)
+		if(matchTmhmMove !== null){
+			const TMHM = matchTmhmMove[1]
+			let move = matchTmhmMove[2]
 			if(move === "SOLARBEAM")
 				move = "SOLAR_BEAM" // Fuck Oldplayer :)
 			move = `MOVE_${move}`
-			const TMHM = line.match(/([TH]M\d+)_\w+/i)[1]
 
-			pokemon[key]["TMHMLearnsets"].push([move, TMHM])
+			pokemon[species]["TMHMLearnsets"].push([move, TMHM])
 		}
-
 	})
 
 
 
-	for (let i = 0; i < pokemonValues.length; i++){ // this should be a separate function :)
-
-		key = pokemonValues[i].species
-
-		if(pokemon[key]["forms"].length >= 2){
-				for (let j = 0; j < pokemon[key]["forms"].length; j++){
-					const targetKey = pokemon[key]["forms"][j]
-					if(pokemon[targetKey]["TMHMLearnsets"].length <= 0)
-						pokemon[targetKey]["TMHMLearnsets"] = pokemon[key]["TMHMLearnsets"]
-				}
-		}
-	}
-
-	return pokemon
+	return altFormsLearnsets(pokemon, "forms", "TMHMLearnsets")
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -204,48 +411,99 @@ async function getEvolution(pokemon){
 	return regexEvolution(textEvolution, pokemon)
 }
 
+
+
 function regexEvolution(textEvolution, pokemon){
-	const lines = textEvolution.split("\n").map(line => line.trim())
-	let key
+	const lines = textEvolution.split("\n")
+	let species
 
 	lines.forEach(line =>{
-		if(/\[ *SPECIES_\w+ *\]/i.test(line))
-			key = line.match(/\[ *(SPECIES_\w+) *\]/i)[1]
-		if(/\w+, *\w+, *\w+/.test(line)){
-			const match = line.match(/(\w+), *(\w+), *(\w+)/)
-			pokemon[key]["evolution"].push([match[1], match[2], match[3]])
+
+		const matchSpecies = line.match(/\[ *(SPECIES_\w+) *\]/i)
+		if(matchSpecies !== null)
+			species = matchSpecies[1]
+
+
+
+
+
+		const matchEvoInfo = line.match(/(\w+), *(\w+), *(\w+)/)
+		if(matchEvoInfo !== null){
+			const method = matchEvoInfo[1]
+			const condition = matchEvoInfo[2]
+			const targetSpecies = matchEvoInfo[3]
+			pokemon[species]["evolution"].push([method, condition, targetSpecies])
 		}
 	})
-	getEvolutionLine(pokemon)
-	return pokemon
+
+
+	return getEvolutionLine(pokemon)
 }
+
+
 
 function getEvolutionLine(pokemon){
-	const pokemonValues = Object.values(pokemon)
+	for (const species of Object.keys(pokemon)){
 
-	for (let i = 0; i < pokemonValues.length; i++){
+		for (let j = 0; j < pokemon[species]["evolution"].length; j++){
 
-		const key = pokemonValues[i].species
-
-		for (let j = 0; j < pokemon[key]["evolution"].length; j++){
-			const targetSpecies = pokemon[key]["evolution"][j][2]
-			pokemon[key]["evolutionLine"].push(targetSpecies)
+			const targetSpecies = pokemon[species]["evolution"][j][2]
+			pokemon[species]["evolutionLine"].push(targetSpecies)
 		}
 
-		for (let j = 0; j < pokemon[key]["evolution"].length; j++){
-			const targetSpecies = pokemon[key]["evolution"][j][2]
-			pokemon[targetSpecies]["evolutionLine"] = pokemon[key]["evolutionLine"]
+
+
+		for (let j = 0; j < pokemon[species]["evolution"].length; j++){
+
+			const targetSpecies = pokemon[species]["evolution"][j][2]
+			pokemon[targetSpecies]["evolutionLine"] = pokemon[species]["evolutionLine"]
 		}
 	}
 
-	for (let i = 0; i < pokemonValues.length; i++){
+	for (const species of Object.keys(pokemon))
+		pokemon[species]["evolutionLine"] = Array.from(new Set(pokemon[species]["evolutionLine"])) // remove duplicates
 
-		const key = pokemonValues[i].species
 
-		pokemon[key]["evolutionLine"] = Array.from(new Set(pokemon[key]["evolutionLine"])) // remove duplicates
-	}
 	return pokemon
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -264,22 +522,54 @@ async function getForms(pokemon){
 }
 
 function regexForms(textForms, pokemon){
-	const lines = textForms.split("\n").map(line => line.trim())
+	const lines = textForms.split("\n")
 	let speciesArray = []
 
 	lines.forEach(line => {
+		const matchSpecies = line.match(/SPECIES_\w+/i)
+		
 		if(/FORM_SPECIES_END/i.test(line)){
+			console.log(speciesArray)
 			for (let i = 0; i < speciesArray.length; i++)
 				pokemon[speciesArray[i]]["forms"] = speciesArray
 			speciesArray = []
 		}
-		else if(/SPECIES_\w+/.test(line)){	
-			const match = line.match(/SPECIES_\w+/i)[0]
-			speciesArray.push(match)
+		else if(matchSpecies !== null){
+			const species = matchSpecies[0]
+			speciesArray.push(species)
 		}
 	})
 	return pokemon
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -298,9 +588,8 @@ async function getEggMovesLearnsets(pokemon){
 }
 
 function regexEggMovesLearnsets(textEggMoves, pokemon){
-	const lines = textEggMoves.split("\n").map(line => line.trim())
+	const lines = textEggMoves.split("\n")
 	const speciesString = JSON.stringify(Object.keys(pokemon))
-	const pokemonValues = Object.values(pokemon)
 	let key = null
 
 	lines.forEach(line => {
@@ -323,22 +612,24 @@ function regexEggMovesLearnsets(textEggMoves, pokemon){
 	})
 
 
-	for (let i = 0; i < pokemonValues.length; i++){ // this should be a separate function :)
-
-		key = pokemonValues[i].species
-
-		if(pokemon[key]["evolutionLine"].length > 1){
-				for (let j = 0; j < pokemon[key]["evolutionLine"].length; j++){
-					const targetKey = pokemon[key]["evolutionLine"][j]
-					if(pokemon[targetKey]["eggMovesLearnsets"].length <= 0)
-						pokemon[targetKey]["eggMovesLearnsets"] = pokemon[key]["eggMovesLearnsets"]
-				}
-		}
-	}
-
-
-	return pokemon
+	return altFormsLearnsets(pokemon, "evolutionLine", "eggMovesLearnsets")
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -358,18 +649,21 @@ function regexEggMovesLearnsets(textEggMoves, pokemon){
 
 async function buildPokemonObj(){
 	let pokemon = {}
-	pokemon = await getSpecies(pokemon)
-
+	pokemon = await getSpecies(pokemon) 
+ 
 	pokemon = await initializePokemonObj(pokemon)
 
 	pokemon = await getEvolution(pokemon)
-	pokemon = await getForms(pokemon)
+	pokemon = await getForms(pokemon) // should be called in that order until here
 	pokemon = await getBaseStats(pokemon)
 	pokemon = await getLevelUpLearnsets(pokemon)
 	pokemon = await getTMHMLearnsets(pokemon)
 	pokemon = await getEggMovesLearnsets(pokemon)
 	console.log(pokemon)
 }
+
+
+
 
 function initializePokemonObj(pokemon){
 	pokemonValues = Object.values(pokemon)
@@ -395,6 +689,27 @@ function initializePokemonObj(pokemon){
 		pokemon[key]["evolution"] = []
 		pokemon[key]["evolutionLine"] = [key]
 		pokemon[key]["forms"] = []
+		pokemon[key]["sprite"] = ""
+	}
+	return pokemon
+}
+
+
+
+
+
+function altFormsLearnsets(pokemon, input, output){
+	for (const species of Object.keys(pokemon)){
+
+		if(pokemon[species][input].length >= 2){
+
+				for (let j = 0; j < pokemon[species][input].length; j++){
+					const targetSpecies = pokemon[species][input][j]
+
+					if(pokemon[targetSpecies][output].length <= 0)
+						pokemon[targetSpecies][output] = pokemon[species][output]
+				}
+		}
 	}
 	return pokemon
 }
