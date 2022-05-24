@@ -1,4 +1,5 @@
 import altFormsLearnsets from './altFormsLearnsets'
+
 function regexEggMovesLearnsets (textEggMoves, pokemon) {
   const lines = textEggMoves.split('\n')
   const speciesString = JSON.stringify(Object.keys(pokemon))
