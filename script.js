@@ -529,7 +529,6 @@ function regexForms(textForms, pokemon){
 		const matchSpecies = line.match(/SPECIES_\w+/i)
 		
 		if(/FORM_SPECIES_END/i.test(line)){
-			console.log(speciesArray)
 			for (let i = 0; i < speciesArray.length; i++)
 				pokemon[speciesArray[i]]["forms"] = speciesArray
 			speciesArray = []
