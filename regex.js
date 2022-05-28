@@ -86,7 +86,6 @@ async function buildPokemonObj(){
 		img.src = pokemon[species]["sprite"]
 		elt.append(img)
 	}
-	//displaySpecies(pokemon, Object.keys(pokemon))
 	console.log(pokemon)
 }
 
