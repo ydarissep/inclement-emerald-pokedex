@@ -80,13 +80,7 @@ async function buildPokemonObj(){
 	pokemon = await getTMHMLearnsets(pokemon)
 	pokemon = await getEggMovesLearnsets(pokemon)
 	pokemon = await getSprite(pokemon)
-	let elt = document.getElementsByTagName("body")[0]
-	for (const species of Object.keys(pokemon)){
-		let img = document.createElement("img")
-		img.src = pokemon[species]["sprite"]
-		elt.append(img)
-	}
-	//displaySpecies(pokemon, Object.keys(pokemon))
+	displaySpecies(pokemon, Object.keys(pokemon))
 	console.log(pokemon)
 }
 

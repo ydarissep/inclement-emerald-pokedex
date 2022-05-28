@@ -1,66 +1,68 @@
 function displaySpecies(pokemon, speciesArrayToDisplay){
     const length = 11
-    const elt = document.getElementById("searchResultPokemon")
+    const tbody = document.getElementById("pokemonSearchResult")
     for (let i = 0; i < speciesArrayToDisplay.length; i++){
-        let newSpecies = document.createElement("div")
-        newSpecies.className = "species"
+        let newSpecies = document.createElement("tr")
         const species = speciesArrayToDisplay[i]
         for(let j = 0; j < length; j++){
-            if(j === 1){
-                let name = document.createElement("div")
-                name.append(pokemon[species]["species"])
-                name.className = "name"
-                newSpecies.appendChild(name)
+            if(j === 0){
+                let sprite = document.createElement("td")
+                let img = document.createElement("img")
+                img.src = pokemon[species]["sprite"]
+                sprite.append(img)
+                newSpecies.append(sprite)
+            }
+            else if(j === 1){
+                let name = document.createElement("td")
+                name.innerText = pokemon[species]["species"]
+                newSpecies.append(name)
             }
             else if(j === 2){
-                let types = document.createElement("div")
-                types.append(pokemon[species]["type1"]+"/"+pokemon[species]["type2"])
-                types.className = "types"
-                newSpecies.appendChild(types)
+                let types = document.createElement("td")
+                types.innerText = pokemon[species]["type1"]+"/"+pokemon[species]["type2"]
+                newSpecies.append(types)
             }
             else if(j === 3){
-                let abilities = document.createElement("div")
-                abilities.append(pokemon[species]["abilities"][0]+"/"+pokemon[species]["abilities"][1]+"/"+pokemon[species]["abilities"][2])
-                abilities.className = "abilities"
-                newSpecies.appendChild(abilities)
+                let abilities = document.createElement("td")
+                abilities.innerText = pokemon[species]["abilities"][0]+" / "+pokemon[species]["abilities"][1]+" / "+pokemon[species]["abilities"][2]
+                newSpecies.append(abilities)
             }
             else if(j === 4){
-                let baseHP = document.createElement("div")
-                baseHP.append(pokemon[species]["baseHP"])
-                baseHP.className = "baseHP"
-                newSpecies.appendChild(baseHP)
+                let baseHP = document.createElement("td")
+                baseHP.innerText = pokemon[species]["baseHP"]
+                newSpecies.append(baseHP)
             }
             else if(j === 5){
-                let baseAttack = document.createElement("div")
-                baseAttack.append(pokemon[species]["baseAttack"])
-                baseAttack.className = "baseAttack"
-                newSpecies.appendChild(baseAttack)
+                let baseAttack = document.createElement("td")
+                baseAttack.innerText = pokemon[species]["baseAttack"]
+                newSpecies.append(baseAttack)
             }
             else if(j === 6){
-                let baseDefense = document.createElement("div")
-                baseDefense.append(pokemon[species]["baseDefense"])
-                baseDefense.className = "baseDefense"
-                newSpecies.appendChild(baseDefense)
+                let baseDefense = document.createElement("td")
+                baseDefense.innerText = pokemon[species]["baseDefense"]
+                newSpecies.append(baseDefense)
             }
             else if(j === 7){
-                let baseSpAttack = document.createElement("div")
-                baseSpAttack.append(pokemon[species]["baseSpAttack"])
-                baseSpAttack.className = "baseSpAttack"
-                newSpecies.appendChild(baseSpAttack)
+                let baseSpAttack = document.createElement("td")
+                baseSpAttack.innerText = pokemon[species]["baseSpAttack"]
+                newSpecies.append(baseSpAttack)
             }
             else if(j === 8){
-                let baseSpDefense = document.createElement("div")
-                baseSpDefense.append(pokemon[species]["baseSpDefense"])
-                baseSpDefense.className = "baseSpDefense"
-                newSpecies.appendChild(baseSpDefense)
+                let baseSpDefense = document.createElement("td")
+                baseSpDefense.innerText = pokemon[species]["baseSpDefense"]
+                newSpecies.append(baseSpDefense)
             }
             else if(j === 9){
-                let baseSpeed = document.createElement("div")
-                baseSpeed.append(pokemon[species]["baseSpeed"])
-                baseSpeed.className = "baseSpeed"
-                newSpecies.appendChild(baseSpeed)
+                let baseSpeed = document.createElement("td")
+                baseSpeed.innerText = pokemon[species]["baseSpeed"]
+                newSpecies.append(baseSpeed)
+            }
+            else if(j === 10){
+                let BST = document.createElement("td")
+                BST.innerText = pokemon[species]["baseHP"] + pokemon[species]["baseAttack"] + pokemon[species]["baseDefense"] + pokemon[species]["baseSpAttack"] + pokemon[species]["baseSpDefense"] + pokemon[species]["baseSpeed"]
+                newSpecies.append(BST)
             }
         }
-        elt.appendChild(newSpecies)
+        tbody.appendChild(newSpecies)
     }
 }
