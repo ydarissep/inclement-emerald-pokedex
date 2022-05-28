@@ -1,4 +1,5 @@
 function displaySpecies(pokemon, speciesArrayToDisplay){
+    /*
     const length = 11
     const elt = document.getElementById("searchResultPokemon")
     for (let i = 0; i < speciesArrayToDisplay.length; i++){
@@ -63,4 +64,5 @@ function displaySpecies(pokemon, speciesArrayToDisplay){
         }
         elt.appendChild(newSpecies)
     }
+    */
 }
