@@ -131,7 +131,7 @@ function sanitizeString(string){
 function updateDisplayedSpecies(input){
     const inputArray = input.toLowerCase().split(" ")
     const table = document.getElementById("pokemonSearchResult")
-    let hideRows = []
+    let hideRows = {}
     for (let j = 0; j < table.rows.length; j++){
         let compareValue = ""
         for (let i = 0; i < 3; i++){
@@ -139,11 +139,13 @@ function updateDisplayedSpecies(input){
         }
         for (let i = 0; i < inputArray.length; i++){
             if(!compareValue.includes(inputArray[i]))
-                hideRows.push(j)
+                hideRows[j.toString()] = "hide"
         }
     }
-    for(let i = 0; i < table.rows.length; i++)
-        table.rows[i].classList.remove("hide")
-    for(let i = 0; i < hideRows.length; i++)
-        table.rows[hideRows[i]].className = "hide"
+    for(let i = 0; i < table.rows.length; i++){
+        if(hideRows[i] !== undefined)
+            table.rows[i].className = "hide"
+        else
+            table.rows[i].classList.remove("hide")
+    }
 }
