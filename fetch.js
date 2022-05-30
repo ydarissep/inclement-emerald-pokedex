@@ -80,8 +80,7 @@ async function buildPokemonObj(){
 	pokemon = await getTMHMLearnsets(pokemon)
 	pokemon = await getEggMovesLearnsets(pokemon)
 	pokemon = await getSprite(pokemon)
-	displaySpecies(pokemon, Object.keys(pokemon))
-	console.log(pokemon)
+	localStorage.setItem("pokemon", JSON.stringify(pokemon))
 }
 
 
@@ -110,4 +109,18 @@ function initializePokemonObj(pokemon){
 		pokemon[species]["sprite"] = ""
 	}
 	return pokemon
+}
+
+
+
+function fetchPokemonObj(){
+	if(!localStorage.getItem("pokemon"))
+		buildPokemonObj()
+
+
+	const pokemonObjString = localStorage.getItem("pokemon")
+	window.pokemon = JSON.parse(pokemonObjString)
+	console.log(pokemon)
+	displaySpecies(Object.keys(pokemon))
+	document.getElementById("pokemonSearch").style.display = "table"
 }

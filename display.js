@@ -1,72 +1,81 @@
-function displaySpecies(pokemon, speciesArrayToDisplay){
+const pokemonInput = document.getElementById("pokemonInput")
+
+pokemonInput.addEventListener("input", e => {
+    const value = e.target.value
+    updateDisplayedSpecies(value)
+})
+
+
+function displaySpecies(speciesArrayToDisplay){
     const length = 11
-    const tbody = document.getElementById("pokemonSearchResult")
+    let tbody = document.getElementById("pokemonSearchResult")
+    tbody.innerText = ""
     for (let i = 0; i < speciesArrayToDisplay.length; i++){
         let newSpecies = document.createElement("tr")
         const species = speciesArrayToDisplay[i]
-        for(let j = 0; j < length; j++){
-            if(j === 0){
-                let sprite = document.createElement("td")
-                let canvas = document.createElement("canvas")
-                canvas.width = 64
-                canvas.height = 64
-                renderSprite(pokemon[species]["sprite"], canvas)
-                sprite.append(canvas)
-                newSpecies.append(sprite)
-            }
-            else if(j === 1){
-                let name = document.createElement("td")
-                name.innerText = sanitizeString(pokemon[species]["species"])
-                newSpecies.append(name)
-            }
-            else if(j === 2){
-                let types = document.createElement("td")
-                const type1 = pokemon[species]["type1"]
-                const type2 = pokemon[species]["type2"]
-                types.innerText = sanitizeString(Array.from(new Set([type1, type2])).join(' / '))
-                newSpecies.append(types)
-            }
-            else if(j === 3){
-                let abilities = document.createElement("td")
-                abilities.innerText = sanitizeString(Array.from(new Set(pokemon[species]["abilities"])).join(' / '))
-                newSpecies.append(abilities)
-            }
-            else if(j === 4){
-                let baseHP = document.createElement("td")
-                baseHP.innerText = pokemon[species]["baseHP"]
-                newSpecies.append(baseHP)
-            }
-            else if(j === 5){
-                let baseAttack = document.createElement("td")
-                baseAttack.innerText = pokemon[species]["baseAttack"]
-                newSpecies.append(baseAttack)
-            }
-            else if(j === 6){
-                let baseDefense = document.createElement("td")
-                baseDefense.innerText = pokemon[species]["baseDefense"]
-                newSpecies.append(baseDefense)
-            }
-            else if(j === 7){
-                let baseSpAttack = document.createElement("td")
-                baseSpAttack.innerText = pokemon[species]["baseSpAttack"]
-                newSpecies.append(baseSpAttack)
-            }
-            else if(j === 8){
-                let baseSpDefense = document.createElement("td")
-                baseSpDefense.innerText = pokemon[species]["baseSpDefense"]
-                newSpecies.append(baseSpDefense)
-            }
-            else if(j === 9){
-                let baseSpeed = document.createElement("td")
-                baseSpeed.innerText = pokemon[species]["baseSpeed"]
-                newSpecies.append(baseSpeed)
-            }
-            else if(j === 10){
-                let BST = document.createElement("td")
-                BST.innerText = pokemon[species]["baseHP"] + pokemon[species]["baseAttack"] + pokemon[species]["baseDefense"] + pokemon[species]["baseSpAttack"] + pokemon[species]["baseSpDefense"] + pokemon[species]["baseSpeed"]
-                newSpecies.append(BST)
-            }
-        }
+
+
+        let sprite = document.createElement("td")
+        let canvas = document.createElement("canvas")
+        canvas.width = 64
+        canvas.height = 64
+        renderSprite(pokemon[species]["sprite"], canvas)
+        sprite.append(canvas)
+        newSpecies.append(sprite)
+
+
+        let name = document.createElement("td")
+        name.innerText = sanitizeString(pokemon[species]["species"])
+        newSpecies.append(name)
+
+
+        let types = document.createElement("td")
+        const type1 = pokemon[species]["type1"]
+        const type2 = pokemon[species]["type2"]
+        types.innerText = sanitizeString(Array.from(new Set([type1, type2])).join(' / '))
+        newSpecies.append(types)
+
+
+        let abilities = document.createElement("td")
+        abilities.innerText = sanitizeString(Array.from(new Set(pokemon[species]["abilities"])).join(' / '))
+        newSpecies.append(abilities)
+
+
+        let baseHP = document.createElement("td")
+        baseHP.innerText = pokemon[species]["baseHP"]
+        newSpecies.append(baseHP)
+
+
+        let baseAttack = document.createElement("td")
+        baseAttack.innerText = pokemon[species]["baseAttack"]
+        newSpecies.append(baseAttack)
+
+
+        let baseDefense = document.createElement("td")
+        baseDefense.innerText = pokemon[species]["baseDefense"]
+        newSpecies.append(baseDefense)
+
+
+        let baseSpAttack = document.createElement("td")
+        baseSpAttack.innerText = pokemon[species]["baseSpAttack"]
+        newSpecies.append(baseSpAttack)
+
+
+        let baseSpDefense = document.createElement("td")
+        baseSpDefense.innerText = pokemon[species]["baseSpDefense"]
+        newSpecies.append(baseSpDefense)
+
+
+        let baseSpeed = document.createElement("td")
+        baseSpeed.innerText = pokemon[species]["baseSpeed"]
+        newSpecies.append(baseSpeed)
+
+
+        let BST = document.createElement("td")
+        BST.innerText = pokemon[species]["baseHP"] + pokemon[species]["baseAttack"] + pokemon[species]["baseDefense"] + pokemon[species]["baseSpAttack"] + pokemon[species]["baseSpDefense"] + pokemon[species]["baseSpeed"]
+        newSpecies.append(BST)
+
+
         tbody.appendChild(newSpecies)
     }
 }
@@ -75,7 +84,7 @@ function displaySpecies(pokemon, speciesArrayToDisplay){
 
 
 
-function renderSprite(url, canvas) {
+function renderSprite(url, canvas){
   const sprite = new Image()
   sprite.crossOrigin = 'anonymous'
   sprite.src = url
@@ -102,8 +111,7 @@ function renderSprite(url, canvas) {
 }
 
 
-
-function sanitizeString(string) {
+function sanitizeString(string){
     const regex = /SPECIES_|TYPE_|ABILITY_/ig
     const unsanitizedString = string.replace(regex, "")
     let matchArray = unsanitizedString.match(/\w+/g)
@@ -117,4 +125,25 @@ function sanitizeString(string) {
         }
     }
     return matchArray.join(" / ")
+}
+
+
+function updateDisplayedSpecies(input){
+    const inputArray = input.toLowerCase().split(" ")
+    const table = document.getElementById("pokemonSearchResult")
+    let hideRows = []
+    for (let j = 0; j < table.rows.length; j++){
+        let compareValue = ""
+        for (let i = 0; i < 3; i++){
+            compareValue += table.rows[j].cells[1+i].innerText.toLowerCase() + " "
+        }
+        for (let i = 0; i < inputArray.length; i++){
+            if(!compareValue.includes(inputArray[i]))
+                hideRows.push(j)
+        }
+    }
+    for(let i = 0; i < table.rows.length; i++)
+        table.rows[i].classList.remove("hide")
+    for(let i = 0; i < hideRows.length; i++)
+        table.rows[hideRows[i]].className = "hide"
 }

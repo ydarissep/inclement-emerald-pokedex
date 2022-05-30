@@ -4,16 +4,12 @@
   <meta charset="utf-8">
   <title>IE Dex</title>
   <link rel="stylesheet" href="style.css">
-  <script src="fetch.js"></script>
-  <script src="regex.js"></script>
-  <script src="display.js"></script>
 </head>
 <body>
-	<script>
-    		buildPokemonObj()
-	</script>
-  <table class="table table-sortable">
-    <thead>
+
+  <input type="search"  id="pokemonInput">
+  <table id="pokemonSearch">
+    <thead id="pokemonSearchHeader">
       <tr>
         <th>ID</th>
         <th>Name</th>
@@ -22,16 +18,19 @@
         <th>HP</th>
         <th>Atk</th>
         <th>Def</th>
-        <th>SpAtk</th>
-        <th>SpDef</th>
+        <th>SpA</th>
+        <th>SpD</th>
         <th>Spe</th>
         <th>BST</th>
       </tr>
     </thead>
-    <tbody id="pokemonSearchResult">
-    </tbody>
+    <tbody id="pokemonSearchResult"></tbody>
   </table>
-
-  </div>
+  <script src="fetch.js"></script>
+  <script src="regex.js"></script>
+  <script src="display.js"></script>
+  <script> 
+    fetchPokemonObj()
+   </script>
 </body>
 </html>
