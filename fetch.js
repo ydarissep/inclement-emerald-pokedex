@@ -113,14 +113,14 @@ function initializePokemonObj(pokemon){
 
 
 
-function fetchPokemonObj(){
+async function fetchPokemonObj(){
 	if(!localStorage.getItem("pokemon"))
-		buildPokemonObj()
+		await buildPokemonObj()
 
 
-	const pokemonObjString = localStorage.getItem("pokemon")
-	window.pokemon = JSON.parse(pokemonObjString)
+	const pokemonObjString = await localStorage.getItem("pokemon")
+	window.pokemon = await JSON.parse(pokemonObjString)
 	console.log(pokemon)
-	displaySpecies(Object.keys(pokemon))
+	await displaySpecies(Object.keys(pokemon))
 	document.getElementById("pokemonSearch").style.display = "table"
 }
