@@ -124,7 +124,7 @@ function sanitizeString(string){
             matchArray[i] = matchArray[i].join(" ")
         }
     }
-    return matchArray.join(" / ")
+    return matchArray.join("\n")
 }
 
 

@@ -124,3 +124,6 @@ async function fetchPokemonObj(){
 	await displaySpecies(Object.keys(pokemon))
 	document.getElementById("pokemonSearch").style.display = "table"
 }
+
+
+fetchPokemonObj()
