@@ -32,12 +32,12 @@ function displaySpecies(speciesArrayToDisplay){
         let types = document.createElement("td")
         const type1 = pokemon[species]["type1"]
         const type2 = pokemon[species]["type2"]
-        types.innerText = sanitizeString(Array.from(new Set([type1, type2])).join(' / '))
+        types.innerText = sanitizeString(Array.from(new Set([type1, type2])).join(' '))
         newSpecies.append(types)
 
 
         let abilities = document.createElement("td")
-        abilities.innerText = sanitizeString(Array.from(new Set(pokemon[species]["abilities"])).join(' / '))
+        abilities.innerText = sanitizeString(Array.from(new Set(pokemon[species]["abilities"])).join(' '))
         newSpecies.append(abilities)
 
 
@@ -148,4 +148,9 @@ function updateDisplayedSpecies(input){
         else
             table.rows[i].classList.remove("hide")
     }
+}
+
+function displaySetup(){
+    document.getElementById("pokemonSearchTable").classList.remove("hide")
+    document.getElementById("pokemonInput").classList.remove("hide")
 }

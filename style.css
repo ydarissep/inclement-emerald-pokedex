@@ -10,10 +10,6 @@ td {
 	font-size: 0.7em;
 }
 
-#pokemonSearch {
-	display: none;
-}
-
 input {
 	display: block;
 	margin: auto;

@@ -118,11 +118,9 @@ async function fetchPokemonObj(){
 		await buildPokemonObj()
 
 
-	const pokemonObjString = await localStorage.getItem("pokemon")
-	window.pokemon = await JSON.parse(pokemonObjString)
+	window.pokemon = await JSON.parse(localStorage.getItem("pokemon"))
 	console.log(pokemon)
 	await displaySpecies(Object.keys(pokemon))
-	document.getElementById("pokemonSearch").style.display = "table"
 }
 
 
