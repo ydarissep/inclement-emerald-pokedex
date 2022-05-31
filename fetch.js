@@ -111,9 +111,18 @@ function initializePokemonObj(pokemon){
 	return pokemon
 }
 
+async function forceUpdate(){
+	const update = 1
+	if(localStorage.getItem("forceUpdate") != update){
+		await localStorage.removeItem("pokemon")
+		await localStorage.setItem("forceUpdate", update)
+	}
+}
+
 
 
 async function fetchPokemonObj(){
+	await forceUpdate()
 	if(!localStorage.getItem("pokemon"))
 		await buildPokemonObj()
 

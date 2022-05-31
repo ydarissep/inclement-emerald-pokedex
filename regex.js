@@ -12,9 +12,9 @@ function regexSpecies(textSpecies, pokemon){
 			const species = matchSpecies[1]
 
 
-			matchInt = line.match(/\d+/)
+			matchInt = line.match(/\d+/g)
 			if(matchInt !== null){
-				ID = parseInt(matchInt[0])
+				ID = parseInt(matchInt[matchInt.length-1])
 
 
 
@@ -29,6 +29,7 @@ function regexSpecies(textSpecies, pokemon){
 			}
 		}
 	})
+	console.log(pokemon)
 	return pokemon
 }
 
@@ -363,12 +364,6 @@ function regexSprite(textSprite, conversionTable, pokemon){
     })
     return pokemon
 }
-
-
-
-
-
-
 
 
 
