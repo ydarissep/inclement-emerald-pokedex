@@ -101,16 +101,23 @@ function displaySpecies(speciesArrayToDisplay){
         let row = tBody.insertRow()
 
         let ID = document.createElement("td")
-        ID.className = "hide"
+        //ID.className = "hide"
         ID.innerText = pokemon[species]["ID"]
         row.append(ID)
 
+        let sprite = document.createElement("td")
+        ID.className = "hide"
+        ID.innerText = pokemon[species]["ID"]
+        row.append(sprite)
+
+        /*
         let sprite = row.insertCell()
         let canvas = document.createElement("canvas")
         canvas.width = 64
         canvas.height = 64
         renderSprite(pokemon[species]["sprite"], canvas)
         sprite.append(canvas)
+        */
 
         let name = row.insertCell().innerText = sanitizeString(pokemon[species]["species"])
 
