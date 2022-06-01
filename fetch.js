@@ -92,6 +92,7 @@ function initializePokemonObj(pokemon){
 		pokemon[species]["baseSpAttack"] = 0
 		pokemon[species]["baseSpDefense"] = 0
 		pokemon[species]["baseSpeed"] = 0
+		pokemon[species]["BST"] = 0
 		pokemon[species]["abilities"] = []
 		pokemon[species]["type1"] = ""
 		pokemon[species]["type2"] = ""
@@ -112,7 +113,7 @@ function initializePokemonObj(pokemon){
 }
 
 async function forceUpdate(){
-	const update = 1
+	const update = 0
 	if(localStorage.getItem("forceUpdate") != update){
 		await localStorage.removeItem("pokemon")
 		await localStorage.setItem("forceUpdate", update)

@@ -94,82 +94,43 @@ pokemonInput.addEventListener("input", e => {
 
 function displaySpecies(speciesArrayToDisplay){
     const length = 11
-    let tbody = document.getElementById("pokemonSearchResult")
-    tbody.innerText = ""
+    let tBody = document.getElementById("pokemonSearchResult")
+    tBody.innerText = ""
     for (let i = 0; i < speciesArrayToDisplay.length; i++){
-        let newSpecies = document.createElement("tr")
         const species = speciesArrayToDisplay[i]
-        newSpecies.classList.add("row")
+        let row = tBody.insertRow()
 
-        //ID
         let ID = document.createElement("td")
         ID.className = "hide"
         ID.innerText = pokemon[species]["ID"]
-        newSpecies.append(ID)
+        row.append(ID)
 
-        //sprite
-        let sprite = document.createElement("td")
+        let sprite = row.insertCell()
         let canvas = document.createElement("canvas")
         canvas.width = 64
         canvas.height = 64
         renderSprite(pokemon[species]["sprite"], canvas)
         sprite.append(canvas)
-        newSpecies.append(sprite)
 
-        //name
-        let name = document.createElement("td")
-        name.innerText = sanitizeString(pokemon[species]["species"])
-        newSpecies.append(name)
+        let name = row.insertCell().innerText = sanitizeString(pokemon[species]["species"])
 
-        //types
-        let types = document.createElement("td")
-        const type1 = pokemon[species]["type1"]
-        const type2 = pokemon[species]["type2"]
-        types.innerText = sanitizeString(Array.from(new Set([type1, type2])).join(' '))
-        newSpecies.append(types)
+        let types = row.insertCell().innerText = sanitizeString(pokemon[species]["type1"] + " " +pokemon[species]["type2"])
 
-        //abilities
-        let abilities = document.createElement("td")
-        abilities.innerText = sanitizeString(Array.from(new Set(pokemon[species]["abilities"])).join(' '))
-        newSpecies.append(abilities)
+        let abilities = row.insertCell().innerText = sanitizeString(Array.from(new Set(pokemon[species]["abilities"])).join(' '))
 
-        //base HP
-        let baseHP = document.createElement("td")
-        baseHP.innerText = pokemon[species]["baseHP"]
-        newSpecies.append(baseHP)
+        let baseHP = row.insertCell().innerText = pokemon[species]["baseHP"]
 
-        //base Attack
-        let baseAttack = document.createElement("td")
-        baseAttack.innerText = pokemon[species]["baseAttack"]
-        newSpecies.append(baseAttack)
+        let baseAttack = row.insertCell().innerText = pokemon[species]["baseAttack"]
 
-        //base Defense
-        let baseDefense = document.createElement("td")
-        baseDefense.innerText = pokemon[species]["baseDefense"]
-        newSpecies.append(baseDefense)
+        let baseDefense = row.insertCell().innerText = pokemon[species]["baseDefense"]
 
-        //base SpAttack
-        let baseSpAttack = document.createElement("td")
-        baseSpAttack.innerText = pokemon[species]["baseSpAttack"]
-        newSpecies.append(baseSpAttack)
+        let baseSpAttack = row.insertCell().innerText = pokemon[species]["baseSpAttack"]
 
-        //base SpDefense
-        let baseSpDefense = document.createElement("td")
-        baseSpDefense.innerText = pokemon[species]["baseSpDefense"]
-        newSpecies.append(baseSpDefense)
+        let baseSpDefense = row.insertCell().innerText = pokemon[species]["baseSpDefense"]
 
-        //base Speed
-        let baseSpeed = document.createElement("td")
-        baseSpeed.innerText = pokemon[species]["baseSpeed"]
-        newSpecies.append(baseSpeed)
+        let baseSpeed = row.insertCell().innerText = pokemon[species]["baseSpeed"]
 
-        //BST
-        let BST = document.createElement("td")
-        BST.innerText = pokemon[species]["baseHP"] + pokemon[species]["baseAttack"] + pokemon[species]["baseDefense"] + pokemon[species]["baseSpAttack"] + pokemon[species]["baseSpDefense"] + pokemon[species]["baseSpeed"]
-        newSpecies.append(BST)
-
-
-        tbody.appendChild(newSpecies)
+        let BST = row.insertCell().innerText = pokemon[species]["BST"]
     }
 }
 

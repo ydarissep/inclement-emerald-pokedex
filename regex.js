@@ -29,7 +29,6 @@ function regexSpecies(textSpecies, pokemon){
 			}
 		}
 	})
-	console.log(pokemon)
 	return pokemon
 }
 
@@ -90,7 +89,7 @@ function regexBaseStats(textBaseStats, pokemon){
 				pokemon[species][match] = value
 		}
 	})
-	return pokemon
+	return getBST(pokemon)
 }
 
 
@@ -383,6 +382,23 @@ function altFormsLearnsets(pokemon, input, output){
 						pokemon[targetSpecies][output] = pokemon[species][output]
 				}
 		}
+	}
+	return pokemon
+}
+
+
+function getBST(pokemon){
+	for (const species of Object.keys(pokemon)){
+		const baseHP = pokemon[species]["baseHP"]
+		const baseAttack = pokemon[species]["baseAttack"]
+		const baseDefense = pokemon[species]["baseDefense"]
+		const baseSpAttack = pokemon[species]["baseSpAttack"]
+		const baseSpDefense = pokemon[species]["baseSpDefense"]
+		const baseSpeed = pokemon[species]["baseSpeed"]
+		const BST = baseHP + baseAttack + baseDefense + baseSpAttack + baseSpDefense + baseSpeed
+
+		pokemon[species]["BST"] = BST
+
 	}
 	return pokemon
 }
