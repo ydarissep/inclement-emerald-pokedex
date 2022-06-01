@@ -17,12 +17,9 @@ input, button {
 	margin: auto;
 }
 
-.hide {
+.hide, .hideTemp {
 	display: none;
 }
-
-
-
 
 th {
 	background-color: #d3d3d3;
@@ -45,4 +42,8 @@ th {
 .th-sort-asc,
 .th-sort-desc {
   background: rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+	text-align: center;
 }

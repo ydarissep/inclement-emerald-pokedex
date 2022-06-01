@@ -1,5 +1,6 @@
 const pokemonButton = document.getElementById("pokemonButton")
 const pokemonTable = document.getElementById("pokemonSearchTable")
+const pokemonResult = document.getElementById("pokemonSearchResult")
 const pokemonInput = document.getElementById("pokemonInput")
 const headerID = document.getElementById("ID")
 const headerSprite = document.getElementById("Sprite")
@@ -91,6 +92,7 @@ headerBST.addEventListener("click", () => {
         sortTableByColumn(pokemonTable, 11, false, true)
     else
         sortTableByColumn(pokemonTable, 11, true, true)
+
 })
 
 pokemonInput.addEventListener("input", e => {
@@ -105,6 +107,9 @@ function displaySpecies(speciesArrayToDisplay){
     for (let i = 0; i < speciesArrayToDisplay.length; i++){
         const species = speciesArrayToDisplay[i]
         let row = tBody.insertRow()
+
+        if(i > 75)
+            row.className = "hideTemp"
 
         let ID = document.createElement("td")
         ID.className = "hide"
@@ -196,6 +201,7 @@ function updateDisplayedSpecies(input){
     const inputArray = input.toLowerCase().split(" ")
     const table = document.getElementById("pokemonSearchResult")
     let hideRows = {}
+    let k = 0
     for (let j = 0; j < table.rows.length; j++){
         let compareValue = ""
         for (let i = 0; i < 3; i++){
@@ -211,17 +217,28 @@ function updateDisplayedSpecies(input){
             table.rows[i].className = "hide"
         else
             table.rows[i].classList.remove("hide")
+        if(k <= 75){
+            if(!table.rows[i].classList.contains("hide")){
+                table.rows[i].classList.remove("hideTemp")
+                k++
+            }
+        }
+        else
+            table.rows[i].className = "hideTemp"
     }
 }
 
-function displaySetup(){
-    document.getElementById("pokemonButton").classList.remove("hide")
+async function displaySetup(){
+    await document.getElementById("pokemonButton").classList.remove("hide")
+    await document.getElementById("pokemonSearchTable").classList.remove("hide")
+    await document.getElementById("pokemonInput").classList.remove("hide")
+    await pokemonButton.classList.add("active")
+    const observer = await new IntersectionObserver(isTouching, options)
+    await observer.observe(document.querySelector("footer"))
 }
+
 function pokemonButtonClick(){
     pokemonButton.classList.add("active")
-    document.getElementById("pokemonSearchTable").classList.remove("hide")
-    document.getElementById("pokemonInput").classList.remove("hide")
-    displaySpecies(Object.keys(pokemon))
 }
 
 
@@ -229,6 +246,8 @@ function sortTableByColumn(table, column, asc = true, parseInteger = false) {
     const dirModifier = asc ? 1 : -1;
     const tBody = table.tBodies[0];
     const rows = Array.from(tBody.querySelectorAll("tr"));
+    let j = 0
+
 
     // Sort each row
     const sortedRows = rows.sort((a, b) => {
@@ -250,8 +269,51 @@ function sortTableByColumn(table, column, asc = true, parseInteger = false) {
     // Re-add the newly sorted rows
     tBody.append(...sortedRows);
 
+
+    for(let i = 0; i < rows.length; i++){
+        if(j <= 75){
+            if(!rows[i].classList.contains("hide")){
+                rows[i].classList.remove("hideTemp")
+                j++
+            }
+        }
+        else
+            rows[i].className = "hideTemp"
+    }
+
     // Remember how the column is currently sorted
     table.querySelectorAll("th").forEach(th => th.classList.remove("th-sort-asc", "th-sort-desc"));
     table.querySelector(`th:nth-child(${ column + 1})`).classList.toggle("th-sort-asc", asc);
     table.querySelector(`th:nth-child(${ column + 1})`).classList.toggle("th-sort-desc", !asc);
 }
+
+
+
+
+const options = {
+    root: null,
+    rootMartings: "0px",
+    threshold: 0.5
+}
+
+
+
+
+function isTouching(entries){
+    if(entries[0].isIntersecting){
+        let j = 0
+        for(let i = 0; i < Object.keys(pokemon).length; i++){
+            if(pokemonResult.rows[i].classList.contains("hideTemp")){
+                j++
+                pokemonResult.rows[i].classList.remove("hideTemp")
+            }
+            if(j >= 75)
+                break
+        }
+    }
+}
+
+
+window.onbeforeunload = () => {  
+  window.scrollTo(0, 0);  
+};

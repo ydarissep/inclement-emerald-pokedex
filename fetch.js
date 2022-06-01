@@ -130,7 +130,7 @@ async function fetchPokemonObj(){
 
 	window.pokemon = await JSON.parse(localStorage.getItem("pokemon"))
 	console.log(pokemon)
-	//await displaySpecies(Object.keys(pokemon))
+	await displaySpecies(Object.keys(pokemon))
 }
 
 
