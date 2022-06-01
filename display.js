@@ -1,3 +1,4 @@
+const pokemonButton = document.getElementById("pokemonButton")
 const pokemonTable = document.getElementById("pokemonSearchTable")
 const pokemonInput = document.getElementById("pokemonInput")
 const headerID = document.getElementById("ID")
@@ -12,6 +13,11 @@ const headerSpA = document.getElementById("SpA")
 const headerSpD = document.getElementById("SpD")
 const headerSpe = document.getElementById("Spe")
 const headerBST = document.getElementById("BST")
+
+pokemonButton.addEventListener("click", () => {
+    if(!pokemonButton.classList.contains("active"))
+        pokemonButtonClick()
+})
 
 headerID.addEventListener("click", () => {
     if(headerID.classList.contains("th-sort-asc"))
@@ -93,7 +99,6 @@ pokemonInput.addEventListener("input", e => {
 
 
 function displaySpecies(speciesArrayToDisplay){
-    const length = 11
     let tBody = document.getElementById("pokemonSearchResult")
     tBody.innerText = ""
     for (let i = 0; i < speciesArrayToDisplay.length; i++){
@@ -114,7 +119,11 @@ function displaySpecies(speciesArrayToDisplay){
 
         let name = row.insertCell().innerText = sanitizeString(pokemon[species]["species"])
 
-        let types = row.insertCell().innerText = sanitizeString(pokemon[species]["type1"] + " " +pokemon[species]["type2"])
+        let type1 = pokemon[species]["type1"]
+        let type2 = pokemon[species]["type2"]
+        if(type1 === type2)
+            type2 = ""
+        let types = row.insertCell().innerText = sanitizeString(type1 + " " +type2)
 
         let abilities = row.insertCell().innerText = sanitizeString(Array.from(new Set(pokemon[species]["abilities"])).join(' '))
 
@@ -202,12 +211,16 @@ function updateDisplayedSpecies(input){
         else
             table.rows[i].classList.remove("hide")
     }
-    table.insertBefore(table.rows[2], table.rows[1])
 }
 
 function displaySetup(){
-    document.getElementById("pokemonSearchTable").classList.remove("hide")
-    document.getElementById("pokemonInput").classList.remove("hide")
+    document.getElementById("pokemonButton").classList.remove("hide")
+}
+async function pokemonButtonClick(){
+    await pokemonButton.classList.add("active")
+    await document.getElementById("pokemonSearchTable").classList.remove("hide")
+    await document.getElementById("pokemonInput").classList.remove("hide")
+    await displaySpecies(Object.keys(pokemon))
 }
 
 
