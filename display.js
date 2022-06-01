@@ -14,6 +14,7 @@ const headerSpD = document.getElementById("SpD")
 const headerSpe = document.getElementById("Spe")
 const headerBST = document.getElementById("BST")
 
+
 pokemonButton.addEventListener("click", () => {
     if(!pokemonButton.classList.contains("active"))
         pokemonButtonClick()
