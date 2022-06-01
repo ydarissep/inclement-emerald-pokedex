@@ -1,6 +1,8 @@
 table, th, td {
 	text-align: center;
 	margin:  auto;
+	padding: 0.3em;
+	border-collapse: collapse;
 }
 th {
 	font-size: 1em;
@@ -22,9 +24,9 @@ input {
 
 
 
-
-.th-sort-asc {
-  cursor: pointer;
+th {
+	background-color: #d3d3d3;
+	cursor: pointer;
 }
 
 .th-sort-asc::after {
