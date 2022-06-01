@@ -1,0 +1,48 @@
+table, th, td {
+	text-align: center;
+	margin:  auto;
+	padding: 0.3em;
+	border-collapse: collapse;
+}
+th {
+	font-size: 1em;
+}
+
+td {
+	font-size: 0.7em;
+}
+
+input {
+	display: block;
+	margin: auto;
+}
+
+.hide {
+	display: none;
+}
+
+
+
+
+th {
+	background-color: #d3d3d3;
+	cursor: pointer;
+}
+
+.th-sort-asc::after {
+  content: "\25b4";
+}
+
+.th-sort-desc::after {
+  content: "\25be";
+}
+
+.th-sort-asc::after,
+.th-sort-desc::after {
+  margin-left: 5px;
+}
+
+.th-sort-asc,
+.th-sort-desc {
+  background: rgba(0, 0, 0, 0.1);
+}
