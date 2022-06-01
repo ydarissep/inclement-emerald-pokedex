@@ -216,11 +216,11 @@ function updateDisplayedSpecies(input){
 function displaySetup(){
     document.getElementById("pokemonButton").classList.remove("hide")
 }
-async function pokemonButtonClick(){
-    await pokemonButton.classList.add("active")
-    await document.getElementById("pokemonSearchTable").classList.remove("hide")
-    await document.getElementById("pokemonInput").classList.remove("hide")
-    await displaySpecies(Object.keys(pokemon))
+function pokemonButtonClick(){
+    pokemonButton.classList.add("active")
+    document.getElementById("pokemonSearchTable").classList.remove("hide")
+    document.getElementById("pokemonInput").classList.remove("hide")
+    displaySpecies(Object.keys(pokemon))
 }
 
 
