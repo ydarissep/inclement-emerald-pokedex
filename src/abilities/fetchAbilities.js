@@ -54,21 +54,6 @@ async function getEggMovesLearnsets(species){
     return regexEggMovesLearnsets(textEggMoves, species)
 }
 
-async function getTutorLearnsets(species){
-    const rawTutorLearnsets = await fetch("https://raw.githubusercontent.com/ydarissep/inclement-emerald-pokedex/main/src/species/tutorLearnsets.json");
-    const tutorLearnsets = await rawTutorLearnsets.json();
-
-    const rawConversionMoveBadge = await fetch("https://raw.githubusercontent.com/ydarissep/inclement-emerald-pokedex/main/src/species/conversionMoveBadge.json")
-    const conversionMoveBadge = await rawConversionMoveBadge.json();
-
-    const rawMoves = await fetch("https://raw.githubusercontent.com/BuffelSaft/pokeemerald/master/include/constants/moves.h")
-    const textMoves = await rawMoves.text()
-
-    const tutorLearnsetsConversionTable = getTutorLearnsetsConversionTable(textMoves)
-
-    return regexTutorLearnsets(tutorLearnsets, tutorLearnsetsConversionTable, conversionMoveBadge, species)
-}
-
 async function getSprite(species){
     const rawFrontPicTable = await fetch("https://raw.githubusercontent.com/BuffelSaft/pokeemerald/master/src/data/pokemon_graphics/front_pic_table.h")
     const textFrontPicTable = await rawFrontPicTable.text()
@@ -80,12 +65,6 @@ async function getSprite(species){
 
     return regexSprite(textSprite, spriteConversionTable, species)
 }
-
-
-
-
-
-
 
 
 async function buildSpeciesObj(){
@@ -100,7 +79,6 @@ async function buildSpeciesObj(){
     species = await getLevelUpLearnsets(species)
     species = await getTMHMLearnsets(species)
     species = await getEggMovesLearnsets(species)
-    species = await getTutorLearnsets(species)
     species = await getSprite(species)
     localStorage.setItem("species", JSON.stringify(species))
 }
@@ -126,7 +104,6 @@ function initializeSpeciesObj(species){
         species[name]["levelUpLearnsets"] = []
         species[name]["TMHMLearnsets"] = []
         species[name]["eggMovesLearnsets"] = []
-        species[name]["tutorLearnsets"] = []
         species[name]["evolution"] = []
         species[name]["evolutionLine"] = [name]
         species[name]["forms"] = []
@@ -136,7 +113,7 @@ function initializeSpeciesObj(species){
 }
 
 async function forceUpdate(){
-    const update = 0
+    const update = 1
     if(localStorage.getItem("forceUpdate") != update){
         await localStorage.removeItem("species")
         await localStorage.setItem("forceUpdate", update)

@@ -368,62 +368,6 @@ function regexSprite(textSprite, conversionTable, species){
 
 
 
-
-
-
-
-
-
-function getTutorLearnsetsConversionTable(textMoves){
-    const lines = textMoves.split("\n")
-    let conversionTable = {}
-
-    lines.forEach(line => {
-        const matchMoveID = line.match(/#define *(MOVE_\w+) *(\d+)/i)
-        if(matchMoveID !== null){
-            const move = matchMoveID[1]
-            const ID = matchMoveID[2]
-            conversionTable[ID] = move
-        }
-    })
-    return conversionTable
-}
-
-function regexTutorLearnsets(tutorLearnsets, conversionTable, conversionMoveBadge, species){
-    for (const name of Object.keys(species)){
-        const speciesID = species[name]["ID"]
-        for (let i = 0; i < tutorLearnsets[speciesID].length; i++){
-            const move = conversionTable[tutorLearnsets[speciesID][i]]
-            let badge = conversionMoveBadge[move]
-            if(badge === undefined){
-                badge = "Special"
-            }
-            species[name]["tutorLearnsets"].push([move, badge])
-        }
-        if(species[name]["tutorLearnsets"].length === 0){
-            const targetSpecies = species[name]["forms"][0]
-            if(targetSpecies !== undefined){
-                species[name]["tutorLearnsets"] = species[targetSpecies]["tutorLearnsets"]
-            }
-        }
-    }
-    return species
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 function altFormsLearnsets(species, input, output){
     for (const name of Object.keys(species)){
 

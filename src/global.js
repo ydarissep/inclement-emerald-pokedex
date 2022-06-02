@@ -102,3 +102,8 @@ speciesInput.addEventListener("input", e => {
 window.onbeforeunload = () => {  
   window.scrollTo(0, 0);  
 };
+
+function isTouching(entries){
+    if(entries[0].isIntersecting)
+        lazyLoading(false)
+}

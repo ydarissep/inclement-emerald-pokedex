@@ -25,6 +25,13 @@ function renderSprite(url, canvas){
 }
 
 
+
+
+
+
+
+
+
 function sanitizeString(string){
     const regex = /SPECIES_|TYPE_|ABILITY_/ig
     const unsanitizedString = string.replace(regex, "")
@@ -40,6 +47,12 @@ function sanitizeString(string){
     }
     return matchArray.join("\n")
 }
+
+
+
+
+
+
 
 
 
@@ -60,9 +73,17 @@ async function displaySetup(){
     await observer.observe(document.querySelector("footer"))
 }
 
-function speciesButtonClick(){
-    speciesTable.classList.add("active")
-}
+
+
+
+
+
+
+
+
+
+
+
 
 
 function sortTableByColumn(table, column, asc = true, parseInteger = false) {
@@ -92,17 +113,7 @@ function sortTableByColumn(table, column, asc = true, parseInteger = false) {
     // Re-add the newly sorted rows
     tBody.append(...sortedRows);
 
-
-    for(let i = 0; i < rows.length; i++){
-        if(j <= 75){
-            if(!rows[i].classList.contains("hide")){
-                rows[i].classList.remove("hideTemp")
-                j++
-            }
-        }
-        else
-            rows[i].className = "hideTemp"
-    }
+    lazyLoading(true)
 
     // Remember how the column is currently sorted
     table.querySelectorAll("th").forEach(th => th.classList.remove("th-sort-asc", "th-sort-desc"));
@@ -112,17 +123,32 @@ function sortTableByColumn(table, column, asc = true, parseInteger = false) {
 
 
 
-function isTouching(entries){
-    if(entries[0].isIntersecting){
-        let j = 0
-        for(let i = 0; i < Object.keys(species).length; i++){
-            if(speciesResult.rows[i].classList.contains("hideTemp")){
+
+
+
+
+
+function lazyLoading(reset = false){
+    const rows = document.getElementsByClassName("active")[0].tBodies[0].rows
+    let j = 0
+    for(let i = 0; i < rows.length; i++){
+        if(!reset){
+            if(rows[i].classList.contains("hideTemp")){
                 j++
-                speciesResult.rows[i].classList.remove("hideTemp")
+                rows[i].classList.remove("hideTemp")
             }
             if(j >= 75)
                 break
         }
+        else{
+            if(j <= 75){
+                if(!rows[i].classList.contains("hide")){
+                    rows[i].classList.remove("hideTemp")
+                    j++
+                }
+            }
+            else
+                rows[i].className = "hideTemp"
+        }
     }
 }
-
