@@ -45,7 +45,7 @@ function sanitizeString(string){
             matchArray[i] = matchArray[i].join(" ")
         }
     }
-    return matchArray.join("\n")
+        return matchArray.join("\n")
 }
 
 

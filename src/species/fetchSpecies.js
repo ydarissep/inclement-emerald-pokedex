@@ -146,6 +146,7 @@ async function forceUpdate(){
 
 
 async function fetchSpeciesObj(){
+    localStorage.removeItem("pokemon") // can be removed later
     await forceUpdate()
     if(!localStorage.getItem("species"))
         await buildSpeciesObj()

@@ -70,11 +70,13 @@ function displaySpecies(){
 
         let speciesName = row.insertCell().innerText = sanitizeString(species[name]["species"])
 
+
         let type1 = species[name]["type1"]
         let type2 = species[name]["type2"]
         if(type1 === type2)
             type2 = ""
         let types = row.insertCell().innerText = sanitizeString(type1 + " " +type2)
+
 
         let abilities = row.insertCell().innerText = sanitizeString(Array.from(new Set(species[name]["abilities"])).join(' '))
 
