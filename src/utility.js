@@ -33,7 +33,7 @@ function renderSprite(url, canvas){
 
 
 function sanitizeString(string){
-    const regex = /SPECIES_|TYPE_|ABILITY_/ig
+    const regex = /SPECIES_|TYPE_|ABILITY_|SPECIES_NONE|ABILITY_NONE/ig
     const unsanitizedString = string.replace(regex, "")
     let matchArray = unsanitizedString.match(/\w+/g)
     if(matchArray !== null){

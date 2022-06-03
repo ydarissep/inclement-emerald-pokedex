@@ -1,3 +1,7 @@
+* {
+	font-family: sans-serif;
+}
+
 input, button {
 	display: block;
 	margin: auto;
@@ -31,53 +35,192 @@ h1 {
 	text-align: center;
 }
 
-
 table {
 	margin: auto;
-  	table-layout: auto;
+  	table-layout: fixed;
   	border-collapse: collapse;
 }
-/* Zebra striping */
-tr:nth-of-type(odd) { 
+
+tr:nth-of-type(odd) {  
   background: #eee; 
 }
 
 td, th { 
-  border: 1px solid #ccc; 
+  /* border: 1px solid #ccc; */
   text-align: center; 
 }
 
 
-td:nth-of-type(2) {
+th:nth-of-type(1) {
+	width: 40px;
+}
+th:nth-of-type(2) {
 	width: 64px;
 }
-td:nth-of-type(3) {
+th:nth-of-type(3) {
 	width: 250px;
 }
-td:nth-of-type(4) {
-	width: 64px;
+th:nth-of-type(4) {
+	width: 80px;
 }
-td:nth-of-type(5) {
-	width: 150px;
+th:nth-of-type(5) {
+	width: 175px;
 }
-td:nth-of-type(6) {
+th:nth-of-type(6) {
 	width: 40px;
 }
-td:nth-of-type(7) {
+th:nth-of-type(7) {
 	width: 40px;
 }
-td:nth-of-type(8) {
+th:nth-of-type(8) {
 	width: 40px;
 }
-td:nth-of-type(9) {
-	width: 40px;
-}
-td:nth-of-type(10) {
-	width: 40px;
-}
-td:nth-of-type(11) {
-	width: 40px;
-}
-td:nth-of-type(12) {
+th:nth-of-type(9) {
 	width: 45px;
+}
+th:nth-of-type(10) {
+	width: 45px;
+}
+th:nth-of-type(11) {
+	width: 40px;
+}
+th:nth-of-type(12) {
+	width: 45px;
+}
+
+
+
+[class*="TYPE_"] {
+	border: none;
+	width: 78px;
+	height: 18px;
+	display: block;
+	color: white;
+}
+.TYPE_NORMAL {
+	background: #A8A77A;
+}
+.TYPE_FIRE {
+	background: #EE8130;
+}
+.TYPE_WATER {
+	background: #6390F0;
+}
+.TYPE_ELECTRIC {
+	background: #F7D02C;
+}
+.TYPE_GRASS {
+	background: #7AC74C;
+}
+.TYPE_ICE {
+	background: #96D9D6;
+}
+.TYPE_FIGHTING {
+	background: #C22E28;
+}
+.TYPE_POISON {
+	background: #A33EA1;
+}
+.TYPE_GROUND {
+	background: #E2BF65;
+}
+.TYPE_FLYING {
+	background: #A98FF3;
+}
+.TYPE_PSYCHIC {
+	background: #F95587;
+}
+.TYPE_BUG {
+	background: #A6B91A;
+}
+.TYPE_ROCK {
+	background: #B6A136;
+}
+.TYPE_GHOST {
+	background: #735797;
+}
+.TYPE_DRAGON {
+	background: #6F35FC;
+}
+.TYPE_DARK {
+	background: #705746;
+}
+.TYPE_STEEL {
+	background: #B7B7CE;
+}
+.TYPE_FAIRY {
+	background: #D685AD;
+}
+
+.abilities div {
+    border: 1px solid #ccc;
+}
+
+
+/*
+position: relative;
+display: inline-block;
+
+
+formule magic
+*/
+
+
+
+
+@media 
+only screen and (max-width: 700px) {
+    table, thead, tbody, th, td, tr { 
+        display: block; 
+    }
+    
+    tr { border: 1px solid #ccc; }
+    
+    td { 
+        /* Behave  like a "row" */
+        border: none;
+        position: relative;
+        padding-left: 50%; 
+        font-weight:  bold; 
+    }
+
+    td:before { 
+        position: absolute;
+        top: 2px;
+        left: 6px;
+        width: 45%; 
+        padding-right: 10px;
+        white-space: nowrap;
+        font-weight: normal !important;
+    }
+
+    .abilities div {
+        border: 1px solid #565656;
+        position: relative !important;
+        display: inline-block !important
+    }
+    [class*="TYPE_"] {
+        position: relative !important;
+        display: inline-block !important;
+    }
+    
+    /*
+    Label the data
+    */
+    td:nth-of-type(1):before { content: "";}
+    td:nth-of-type(2):before { content: "";}
+    td:nth-of-type(3):before { content: "Name";}
+    td:nth-of-type(4):before { content: "Types";}
+    td:nth-of-type(5):before { content: "Abilities";}
+    td:nth-of-type(6):before { content: "HP";}
+    td:nth-of-type(7):before { content: "Atk";}
+    td:nth-of-type(8):before { content: "Def";}
+    td:nth-of-type(9):before { content: "SpA";}
+    td:nth-of-type(10):before { content: "SpD";}
+    td:nth-of-type(11):before { content: "Spe";}
+    td:nth-of-type(12):before { content: "BST";}
+
+    th {
+        min-width: 100%;
+    }
 }

@@ -28,7 +28,7 @@ headerID.addEventListener("click", () => {
         sortTableByColumn(speciesTable, 0, true, true)
 })
 headerSprite.addEventListener("click", () => {
-    if(headerSprite.classList.contains("th-sort-asc"))
+    if(headerID.classList.contains("th-sort-asc"))
         sortTableByColumn(speciesTable, 0, false, true)
     else
         sortTableByColumn(speciesTable, 0, true, true)

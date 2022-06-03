@@ -78,8 +78,15 @@ function regexBaseStats(textBaseStats, species){
                 if(value !== null)
                     value = value[0]
             }
-            else if(match === "abilities")
+            else if(match === "abilities"){
                 value = line.match(/ABILITY_\w+/ig)
+                if(value !== null){
+                    for (let i = 0; i < 3; i++){
+                        if(value[i] === "ABILITY_NONE" || value[i] === undefined && i >= 1)
+                            value[i] = value[i-1]
+                    }
+                }
+            }
 
 
 

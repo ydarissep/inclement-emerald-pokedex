@@ -52,46 +52,91 @@ function displaySpecies(){
     tBody.innerText = ""
     for (let i = 0; i < speciesArray.length; i++){
         const name = speciesArray[i]
-        let row = tBody.insertRow()
+        let row = document.createElement("tr")
+        tBody.append(row)
 
         row.className = "hideTemp"
 
         let ID = document.createElement("td")
-        ID.className = "hide"
         ID.innerText = species[name]["ID"]
         row.append(ID)
 
-        let sprite = row.insertCell()
+        let sprite = document.createElement("td")
         let canvas = document.createElement("canvas")
         canvas.width = 64
         canvas.height = 64
         renderSprite(species[name]["sprite"], canvas)
+        sprite.alt = sanitizeString(species[name]["species"])
         sprite.append(canvas)
+        row.append(sprite)
 
-        let speciesName = row.insertCell().innerText = sanitizeString(species[name]["species"])
+        let speciesName = document.createElement("td")
+        speciesName.innerText = sanitizeString(species[name]["species"])
+        row.append(speciesName)
+
+        let types = document.createElement("td")
+        let type1 = document.createElement("div")
+        let type2 = document.createElement("div")
+        type1.innerText = sanitizeString(species[name]["type1"])
+        type2.innerText = sanitizeString(species[name]["type2"])
+        type1.className = species[name]["type1"]
+        type2.className = species[name]["type2"]
+        types.append(type1)
+        if(type1.innerText !== type2.innerText)
+            types.append(type2)
+        row.append(types)
 
 
-        let type1 = species[name]["type1"]
-        let type2 = species[name]["type2"]
-        if(type1 === type2)
-            type2 = ""
-        let types = row.insertCell().innerText = sanitizeString(type1 + " " +type2)
+        //let abilities = row.insertCell().innerText = sanitizeString(Array.from(new Set(species[name]["abilities"])).join(' ')).split("\n")
 
+        let abilities = document.createElement("td")
+        let ability1 = document.createElement("div")
+        let ability2 = document.createElement("div")
+        let HA = document.createElement("div")
+        abilities.className = "abilities"
+        const abilitiesArray = sanitizeString(Array.from(new Set(species[name]["abilities"])).join(' ')).split("\n")
+        for (let j = 0; j < abilitiesArray.length; j++){
+            if(j === 0){
+                ability1.innerText = abilitiesArray[j]
+                abilities.append(ability1)
+            }
+            else if(j === 1){
+                ability2.innerText = abilitiesArray[j]
+                abilities.append(ability2)
+            }                
+            else if(j === 2){
+                HA.innerText = abilitiesArray[j]
+                abilities.append(HA)
+            }                
+        }
+        row.append(abilities)
 
-        let abilities = row.insertCell().innerText = sanitizeString(Array.from(new Set(species[name]["abilities"])).join(' '))
+        let baseHP = document.createElement("td")
+        baseHP.innerText = species[name]["baseHP"]
+        row.append(baseHP)
 
-        let baseHP = row.insertCell().innerText = species[name]["baseHP"]
+        let baseAttack = document.createElement("td")
+        baseAttack.innerText = species[name]["baseAttack"]
+        row.append(baseAttack)
 
-        let baseAttack = row.insertCell().innerText = species[name]["baseAttack"]
+        let baseDefense = document.createElement("td")
+        baseDefense.innerText = species[name]["baseDefense"]
+        row.append(baseDefense)
 
-        let baseDefense = row.insertCell().innerText = species[name]["baseDefense"]
+        let baseSpAttack = document.createElement("td")
+        baseSpAttack.innerText = species[name]["baseSpAttack"]
+        row.append(baseSpAttack)
 
-        let baseSpAttack = row.insertCell().innerText = species[name]["baseSpAttack"]
+        let baseSpDefense = document.createElement("td")
+        baseSpDefense.innerText = species[name]["baseSpDefense"]
+        row.append(baseSpDefense)
 
-        let baseSpDefense = row.insertCell().innerText = species[name]["baseSpDefense"]
+        let baseSpeed = document.createElement("td")
+        baseSpeed.innerText = species[name]["baseSpeed"]
+        row.append(baseSpeed)
 
-        let baseSpeed = row.insertCell().innerText = species[name]["baseSpeed"]
-
-        let BST = row.insertCell().innerText = species[name]["BST"]
+        let BST = document.createElement("td")
+        BST.innerText = species[name]["BST"]
+        row.append(BST)
     }
 }
