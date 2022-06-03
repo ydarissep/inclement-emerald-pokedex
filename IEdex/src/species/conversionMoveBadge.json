@@ -1,0 +1,186 @@
+{
+	"MOVE_FURY_CUTTER": "Stone",
+	"MOVE_ROLLOUT": "Stone",
+	"MOVE_SEISMIC_TOSS": "Stone",
+	"MOVE_COVET": "Stone",
+	"MOVE_VACUUM_WAVE": "Stone",
+	"MOVE_SHOCK_WAVE": "Stone",
+	"MOVE_BUG_BITE": "Stone",
+	"MOVE_AIR_CUTTER": "Stone",
+	"MOVE_SWIFT": "Stone",
+	"MOVE_SNATCH": "Stone",
+	"MOVE_MIMIC": "Stone",
+	"MOVE_MUD_SLAP": "Stone",
+	"MOVE_METRONOME": "Stone",
+	"MOVE_OMINOUS_WIND": "Stone",
+	"MOVE_SUPER_FANG": "Stone",
+	"MOVE_HONE_CLAWS": "Stone",
+	"MOVE_PSYCH_UP": "Stone",
+    "MOVE_FOCUS_ENERGY": "Stone",
+    "MOVE_SPIKES": "Stone",
+    "MOVE_INFESTATION": "Stone",
+
+
+
+    "MOVE_COUNTER": "Knuckle",
+	"MOVE_ENDEAVOR": "Knuckle",
+	"MOVE_WORRY_SEED": "Knuckle",
+	"MOVE_DEFENSE_CURL": "Knuckle",
+	"MOVE_DEFOG": "Knuckle",
+	"MOVE_MAGIC_COAT": "Knuckle",
+	"MOVE_UPROAR": "Knuckle",
+	"MOVE_HEX": "Knuckle",
+	"MOVE_GASTRO_ACID": "Knuckle",
+	"MOVE_SYNTHESIS": "Knuckle",
+	"MOVE_PAIN_SPLIT": "Knuckle",
+	"MOVE_LOW_KICK": "Knuckle",
+	"MOVE_IRON_DEFENSE": "Knuckle",
+	"MOVE_MAGNET_RISE": "Knuckle",
+	"MOVE_SWAGGER": "Knuckle",
+	"MOVE_PIN_MISSILE": "Knuckle",
+	"MOVE_MUD_SHOT": "Knuckle",
+    "MOVE_AGILITY": "Knuckle",
+
+
+
+
+
+    "MOVE_SIGNAL_BEAM": "Dynamo",
+	"MOVE_GRAVITY": "Dynamo",
+	"MOVE_SEED_BOMB": "Dynamo",
+	"MOVE_PSYCHO_CUT": "Dynamo",
+	"MOVE_ICY_WIND": "Dynamo",
+	"MOVE_ELECTROWEB": "Dynamo",
+	"MOVE_THUNDER_FANG": "Dynamo",
+	"MOVE_FIRE_FANG": "Dynamo",
+	"MOVE_ICE_FANG": "Dynamo",
+	"MOVE_BRINE": "Dynamo",
+	"MOVE_RAZOR_SHELL": "Dynamo",
+	"MOVE_REVENGE": "Dynamo",
+	"MOVE_DRAINING_KISS": "Dynamo",
+	"MOVE_LEAF_BLADE": "Dynamo",
+	"MOVE_ROCK_BLAST": "Dynamo",
+	"MOVE_SOFT_BOILED": "Dynamo",
+	"MOVE_AURORA_BEAM": "Dynamo",
+    "MOVE_TELEPORT": "Dynamo",
+
+
+
+
+
+
+	"MOVE_THUNDER_PUNCH": "Heat",
+	"MOVE_FIRE_PUNCH": "Heat",
+	"MOVE_ICE_PUNCH": "Heat",
+	"MOVE_TAILWIND": "Heat",
+	"MOVE_ZEN_HEADBUTT": "Heat",
+	"MOVE_BODY_SLAM": "Heat",
+	"MOVE_ICICLE_SPEAR": "Heat",
+	"MOVE_DUAL_CHOP": "Heat",
+	"MOVE_REVERSAL": "Heat",
+	"MOVE_BUG_BUZZ": "Heat",
+	"MOVE_LAST_RESORT": "Heat",
+	"MOVE_ROLE_PLAY": "Heat",
+	"MOVE_DRILL_RUN": "Heat",
+	"MOVE_BLAZE_KICK": "Heat",
+	"MOVE_CROSS_POISON": "Heat",
+	"MOVE_WEATHER_BALL": "Heat",
+	"MOVE_AIR_SLASH": "Heat",
+    "MOVE_STOMPING_TANTRUM": "Heat",
+
+
+
+
+
+
+    "MOVE_IRON_HEAD": "Balance",
+	"MOVE_AQUA_TAIL": "Balance",
+	"MOVE_POWER_GEM": "Balance",
+	"MOVE_BOUNCE": "Balance",
+	"MOVE_HEAL_BELL": "Balance",
+	"MOVE_SUPERPOWER": "Balance",
+	"MOVE_CRUNCH": "Balance",
+	"MOVE_MYSTICAL_FIRE": "Balance",
+	"MOVE_GUNK_SHOT": "Balance",
+	"MOVE_HYPER_VOICE": "Balance",
+	"MOVE_SKY_ATTACK": "Balance",
+	"MOVE_HEAT_CRASH": "Balance",
+	"MOVE_STORED_POWER": "Balance",
+	"MOVE_TRICK": "Balance",
+	"MOVE_DYNAMIC_PUNCH": "Balance",
+	"MOVE_HELPING_HAND": "Balance",
+	"MOVE_TOXIC_SPIKES": "Balance",
+    "MOVE_HIGH_HORSEPOWER": "Balance",
+
+
+
+
+
+
+
+
+    "MOVE_MEGAHORN": "Feather",
+	"MOVE_AURA_SPHERE": "Feather",
+	"MOVE_THROAT_CHOP": "Feather",
+	"MOVE_EARTH_POWER": "Feather",
+	"MOVE_HEAT_WAVE": "Feather",
+	"MOVE_LIQUIDATION": "Feather",
+	"MOVE_BATON_PASS": "Feather",
+	"MOVE_FOUL_PLAY": "Feather",
+	"MOVE_SOLAR_BLADE": "Feather",
+	"MOVE_PHANTOM_FORCE": "Feather",
+	"MOVE_METEOR_MASH": "Feather",
+	"MOVE_PSYCHIC_FANGS": "Feather",
+	"MOVE_ENCORE": "Feather",
+	"MOVE_GRASSY_TERRAIN": "Feather",
+	"MOVE_ELECTRIC_TERRAIN": "Feather",
+	"MOVE_MISTY_TERRAIN": "Feather",
+	"MOVE_PSYCHIC_TERRAIN": "Feather",
+    "MOVE_POWER_UP_PUNCH": "Feather",
+
+
+
+
+
+
+
+
+    "MOVE_DOUBLE_EDGE": "Mind",
+	"MOVE_PLAY_ROUGH": "Mind",
+	"MOVE_NASTY_PLOT": "Mind",
+	"MOVE_SELF_DESTRUCT": "Mind",
+	"MOVE_CLOSE_COMBAT": "Mind",
+	"MOVE_FLARE_BLITZ": "Mind",
+	"MOVE_BRAVE_BIRD": "Mind",
+	"MOVE_LEAF_STORM": "Mind",
+	"MOVE_POWER_WHIP": "Mind",
+	"MOVE_HURRICANE": "Mind",
+	"MOVE_HYDRO_PUMP": "Mind",
+	"MOVE_DRAGON_DANCE": "Mind",
+	"MOVE_OUTRAGE": "Mind",
+	"MOVE_KNOCK_OFF": "Mind",
+	"MOVE_QUIVER_DANCE": "Mind",
+
+
+
+
+
+
+	"MOVE_EXPANDING_FORCE": "Rain (not obtainable yet)",
+	"MOVE_RISING_VOLTAGE": "Rain (not obtainable yet)",
+	"MOVE_MISTY_EXPLOSION": "Rain (not obtainable yet)",
+	"MOVE_GRASSY_GLIDE": "Rain (not obtainable yet)",
+	"MOVE_TERRAIN_PULSE": "Rain (not obtainable yet)",
+	"MOVE_SCALE_SHOT": "Rain (not obtainable yet)",
+	"MOVE_METEOR_BEAM": "Rain (not obtainable yet)",
+	"MOVE_POLTERGEIST": "Rain (not obtainable yet)",
+	"MOVE_FLIP_TURN": "Rain (not obtainable yet)",
+	"MOVE_TRIPLE_AXEL": "Rain (not obtainable yet)",
+	"MOVE_DUAL_WINGBEAT": "Rain (not obtainable yet)",
+	"MOVE_SCORCHING_SANDS": "Rain (not obtainable yet)",
+	"MOVE_SKITTER_SMACK": "Rain (not obtainable yet)",
+	"MOVE_COACHING": "Rain (not obtainable yet)",
+	"MOVE_BODY_PRESS": "Rain (not obtainable yet)",
+	"MOVE_FOCUS_ENERGY": "Rain (not obtainable yet)",
+	"MOVE_SPIKES": "Rain (not obtainable yet)"
+}
