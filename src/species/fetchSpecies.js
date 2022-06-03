@@ -97,10 +97,12 @@ async function buildSpeciesObj(){
     species = await getEvolution(species)
     species = await getForms(species) // should be called in that order until here
     species = await getBaseStats(species)
+    /*
     species = await getLevelUpLearnsets(species)
     species = await getTMHMLearnsets(species)
     species = await getEggMovesLearnsets(species)
     species = await getTutorLearnsets(species)
+    */
     species = await getSprite(species)
     await localStorage.setItem("species", JSON.stringify(species))
 }
