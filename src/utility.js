@@ -58,7 +58,7 @@ function sanitizeString(string){
 
 async function displaySetup(){
     try {await fetchSpeciesObj()}
-    catch(e) {console.log(e)}
+    catch(e) {catchError(e)}
     
     await document.getElementById("speciesButton").classList.remove("hide")
     await document.getElementById("speciesSearchTable").classList.remove("hide")
@@ -75,14 +75,13 @@ async function displaySetup(){
 }
 
 
-
-
-
-
-
-
-
-
+function catchError(err){
+    let error = document.createElement("p")
+    error.className = "error"
+    error.innerText = err
+    let footer = document.getElementsByTagName("footer")[0]
+    footer.append(error)
+}
 
 
 

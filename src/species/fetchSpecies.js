@@ -90,21 +90,22 @@ async function getSprite(species){
 
 async function buildSpeciesObj(){
     let species = {}
-    species = await getSpecies(species) 
+    try{
+        species = await getSpecies(species) 
     
-    species = await initializeSpeciesObj(species)
+        species = await initializeSpeciesObj(species)
 
-    species = await getEvolution(species)
-    species = await getForms(species) // should be called in that order until here
-    species = await getBaseStats(species)
-    /*
-    species = await getLevelUpLearnsets(species)
-    species = await getTMHMLearnsets(species)
-    species = await getEggMovesLearnsets(species)
-    species = await getTutorLearnsets(species)
-    */
-    species = await getSprite(species)
-    await localStorage.setItem("species", JSON.stringify(species))
+        species = await getEvolution(species)
+        species = await getForms(species) // should be called in that order until here
+        species = await getBaseStats(species)
+        species = await getLevelUpLearnsets(species)
+        species = await getTMHMLearnsets(species)
+        species = await getEggMovesLearnsets(species)
+        species = await getTutorLearnsets(species)
+        species = await getSprite(species)
+        await localStorage.setItem("species", JSON.stringify(species))
+    }
+    catch(e) {catchError(e)}
 }
 
 
@@ -138,7 +139,7 @@ function initializeSpeciesObj(species){
 }
 
 async function forceUpdate(){
-    const update = 4
+    const update = 10
     if(localStorage.getItem("forceUpdate") != update){
         await localStorage.removeItem("species")
         await localStorage.setItem("forceUpdate", update)
@@ -148,15 +149,15 @@ async function forceUpdate(){
 
 
 async function fetchSpeciesObj(){
-    await localStorage.removeItem("pokemon") // can be removed later
-    await forceUpdate()
-    if(!localStorage.getItem("species"))
-        await buildSpeciesObj()
-
     try{
+        await localStorage.removeItem("pokemon") // can be removed later
+        await forceUpdate()
+        if(!localStorage.getItem("species"))
+            await buildSpeciesObj()
+
         window.species = await JSON.parse(localStorage.getItem("species"))
         console.log(species)
         await displaySpecies()
     }
-    catch(e) {console.log(e)}
+    catch(e) {catchError(e)}
 }

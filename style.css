@@ -11,6 +11,11 @@ input, button {
 	display: none;
 }
 
+.error {
+    text-align: center;
+    font-size: 30px;
+}
+
 th {
 	cursor: pointer;
 	background: #333; 
@@ -155,15 +160,6 @@ th:nth-of-type(12) {
 .abilities div {
     border: 1px solid #ccc;
 }
-
-
-/*
-position: relative;
-display: inline-block;
-
-
-formule magic
-*/
 
 
 
