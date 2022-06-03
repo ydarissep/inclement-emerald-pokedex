@@ -138,7 +138,7 @@ function initializeSpeciesObj(species){
 }
 
 async function forceUpdate(){
-    const update = 3
+    const update = 4
     if(localStorage.getItem("forceUpdate") != update){
         await localStorage.removeItem("species")
         await localStorage.setItem("forceUpdate", update)
