@@ -151,8 +151,10 @@ async function fetchSpeciesObj(){
     if(!localStorage.getItem("species"))
         await buildSpeciesObj()
 
-
-    window.species = await JSON.parse(localStorage.getItem("species"))
-    console.log(species)
-    await displaySpecies()
+    try{
+        window.species = await JSON.parse(localStorage.getItem("species"))
+        console.log(species)
+        await displaySpecies()
+    }
+    catch(e) {console.log(e)}
 }
