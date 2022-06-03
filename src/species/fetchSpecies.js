@@ -102,7 +102,7 @@ async function buildSpeciesObj(){
     species = await getEggMovesLearnsets(species)
     species = await getTutorLearnsets(species)
     species = await getSprite(species)
-    localStorage.setItem("species", JSON.stringify(species))
+    await localStorage.setItem("species", JSON.stringify(species))
 }
 
 
@@ -146,7 +146,7 @@ async function forceUpdate(){
 
 
 async function fetchSpeciesObj(){
-    localStorage.removeItem("pokemon") // can be removed later
+    await localStorage.removeItem("pokemon") // can be removed later
     await forceUpdate()
     if(!localStorage.getItem("species"))
         await buildSpeciesObj()
