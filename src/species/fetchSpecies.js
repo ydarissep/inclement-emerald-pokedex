@@ -149,7 +149,7 @@ async function fetchSpeciesObj(){
     await localStorage.removeItem("pokemon") // can be removed later
     await forceUpdate()
     if(!localStorage.getItem("species"))
-        buildSpeciesObj()
+        await buildSpeciesObj()
 
 
     window.species = await JSON.parse(localStorage.getItem("species"))

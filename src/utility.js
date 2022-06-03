@@ -57,7 +57,7 @@ function sanitizeString(string){
 
 
 async function displaySetup(){
-    fetchSpeciesObj()
+    await fetchSpeciesObj()
     
     await document.getElementById("speciesButton").classList.remove("hide")
     await document.getElementById("speciesSearchTable").classList.remove("hide")
