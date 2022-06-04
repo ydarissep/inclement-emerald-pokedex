@@ -49,6 +49,10 @@ table {
 tr:nth-of-type(odd) {  
   background: #eee; 
 }
+tr:hover {
+    background-color: #add8e6;
+    cursor: pointer;
+}
 
 td, th { 
   /* border: 1px solid #ccc; */
@@ -158,7 +162,7 @@ th:nth-of-type(12) {
 }
 
 .abilities div {
-    border: 1px solid #ccc;
+    border: 1px solid black;
 }
 
 
@@ -191,7 +195,6 @@ only screen and (max-width: 700px) {
     }
 
     .abilities div {
-        border: 1px solid #565656;
         position: relative !important;
         display: inline-block !important
     }
