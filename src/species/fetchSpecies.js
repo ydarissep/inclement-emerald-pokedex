@@ -103,7 +103,7 @@ async function buildSpeciesObj(){
         species = await getEggMovesLearnsets(species)
         species = await getTutorLearnsets(species)
         species = await getSprite(species)
-        await localStorage.setItem("species", JSON.stringify(species))
+        await localStorage.setItem("species", LZString.compress(JSON.stringify(species)))
     }
     catch(e) {catchError(e)}
 }
@@ -155,7 +155,7 @@ async function fetchSpeciesObj(){
         if(!localStorage.getItem("species"))
             await buildSpeciesObj()
 
-        window.species = await JSON.parse(localStorage.getItem("species"))
+        window.species = await JSON.parse(LZString.decompress(localStorage.getItem("species")))
         console.log(species)
         await displaySpecies()
     }
