@@ -6,12 +6,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>IE Dex</title>
   <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style/speciesTable.css">
 </head>
 <body onload="displaySetup()">
   <input type="search"  id="speciesInput" class="hide">
   <button type="button" id="speciesButton" class="hide">Species</button>
-  <table id="speciesSearchTable" class="hide">
-    <thead id="speciesSearchHeader">
+  <table id="speciesTable" class="hide">
+    <thead id="speciesTableThead">
       <tr>
         <th id="ID">ID</th>
         <th id="Sprite">Sprite</th>
@@ -27,15 +28,15 @@
         <th id="BST">BST</th>
       </tr>
     </thead>
-    <tbody id="speciesSearchResult"></tbody>
+    <tbody id="speciesTableTbody"></tbody>
   </table>
   <button id="myBtn"><a href="#top" style="color: white">Top</a></button>
+  <script defer src="src/global.js"></script>
   <script defer src="src/lz-string.js"></script>
   <script defer src="src/utility.js"></script>
   <script defer src="src/species/displaySpecies.js"></script>
   <script defer src="src/species/fetchSpecies.js"></script>
   <script defer src="src/species/regexSpecies.js"></script>
-  <script defer src="src/global.js"></script>
 </body>
 <footer>
   <h1>Inclement Emerald<br>Pokedex</h1>

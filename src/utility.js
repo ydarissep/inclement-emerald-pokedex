@@ -57,12 +57,11 @@ function sanitizeString(string){
 
 
 async function displaySetup(){
-    try {await fetchSpeciesObj()}
-    catch(e) {catchError(e)}
+    try {await fetchSpeciesObj()}catch(e) {catchError(e, "fetchSpeciesObj")}
     
-    await document.getElementById("speciesButton").classList.remove("hide")
-    await document.getElementById("speciesSearchTable").classList.remove("hide")
-    await document.getElementById("speciesInput").classList.remove("hide")
+    await speciesButton.classList.remove("hide")
+    await speciesTable.classList.remove("hide")
+    await speciesInput.classList.remove("hide")
     await speciesTable.classList.add("active")
 
     const options = {
@@ -75,13 +74,15 @@ async function displaySetup(){
 }
 
 
-function catchError(err){
+function catchError(err, inFunction){
     let error = document.createElement("p")
     error.className = "error"
-    error.innerText = err
+    error.innerText = err + "\nin " + inFunction
     let footer = document.getElementsByTagName("footer")[0]
     footer.append(error)
 }
+
+
 
 
 

@@ -1,31 +1,31 @@
 function updateDisplayedSpecies(input){
     const inputArray = input.toLowerCase().split(" ")
-    const table = document.getElementById("speciesSearchResult")
     let hideRows = {}
+    const tBody = speciesTableTbody
     let k = 0
-    for (let j = 0; j < table.rows.length; j++){
+    for (let j = 0; j < tBody.rows.length; j++){
         let compareValue = ""
         for (let i = 0; i < 3; i++){
-            compareValue += table.rows[j].cells[2+i].innerText.toLowerCase() + " "
+            compareValue += tBody.rows[j].cells[2+i].innerText.toLowerCase() + " "
         }
         for (let i = 0; i < inputArray.length; i++){
             if(!compareValue.includes(inputArray[i]))
                 hideRows[j.toString()] = "hide"
         }
     }
-    for(let i = 0; i < table.rows.length; i++){
+    for(let i = 0; i < tBody.rows.length; i++){
         if(hideRows[i] !== undefined)
-            table.rows[i].className = "hide"
+            tBody.rows[i].className = "hide"
         else
-            table.rows[i].classList.remove("hide")
+            tBody.rows[i].classList.remove("hide")
         if(k <= 75){
-            if(!table.rows[i].classList.contains("hide")){
-                table.rows[i].classList.remove("hideTemp")
+            if(!tBody.rows[i].classList.contains("hide")){
+                tBody.rows[i].classList.remove("hideTemp")
                 k++
             }
         }
         else
-            table.rows[i].className = "hideTemp"
+            tBody.rows[i].className = "hideTemp"
     }
 }
 
@@ -47,7 +47,7 @@ function speciesButtonClick(){
 
 
 function displaySpecies(){
-    let tBody = document.getElementById("speciesSearchResult")
+    let tBody = speciesTableTbody
     const speciesArray = Object.keys(species)
     tBody.innerText = ""
     for (let i = 0; i < speciesArray.length; i++){
