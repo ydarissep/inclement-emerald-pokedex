@@ -121,48 +121,43 @@
 
 @media 
 only screen and (max-width: 700px) {
-    #speciesTable{ 
+    #speciesTable, #speciesTableThead, #speciesTableTbody, #speciesTable th, #speciesTable tr, #speciesTable td { 
         display: block; 
-    }
-
-    
-    tr {
-    	border: 1px solid #ccc;
     }
     
     .abilities div {
-        display: inline-block;
+        display: inline-block !important;
         border: none;
         font-weight: bold;
         padding-left: 5%;
         padding-right: 5%;
     }
     [class*="TYPE_"] {
-        display: inline-block;
+        display: inline-block !important;
     }
-    td::before {
+    #speciesTable td::before {
         font-weight: normal;
     }
 
-    td:nth-of-type(6)::before { content: "HP ";}
-    td:nth-of-type(7)::before { content: "Atk ";}
-    td:nth-of-type(8)::before { content: "Def ";}
-    td:nth-of-type(9)::before { content: "SpA ";}
-    td:nth-of-type(10)::before { content: "SpD ";}
-    td:nth-of-type(11)::before { content: "Spe ";}
-    td:nth-of-type(12)::before { content: "BST ";}
+    #speciesTable td:nth-of-type(6)::before { content: "HP ";}
+    #speciesTable td:nth-of-type(7)::before { content: "Atk ";}
+    #speciesTable td:nth-of-type(8)::before { content: "Def ";}
+    #speciesTable td:nth-of-type(9)::before { content: "SpA ";}
+    #speciesTable td:nth-of-type(10)::before { content: "SpD ";}
+    #speciesTable td:nth-of-type(11)::before { content: "Spe ";}
+    #speciesTable td:nth-of-type(12)::before { content: "BST ";}
 
 
 
-    td:nth-of-type(6){display: inline-grid; width: 14%; box-sizing: border-box; font-weight: bold;}
-    td:nth-of-type(7){display: inline-grid; width: 14%; box-sizing: border-box; font-weight: bold;}
-    td:nth-of-type(8){display: inline-grid; width: 14%; box-sizing: border-box; font-weight: bold;}
-    td:nth-of-type(9){display: inline-grid; width: 14%; box-sizing: border-box; font-weight: bold;}
-    td:nth-of-type(10){display: inline-grid; width: 14%; box-sizing: border-box; font-weight: bold;}
-    td:nth-of-type(11){display: inline-grid; width: 14%; box-sizing: border-box; font-weight: bold;}
-    td:nth-of-type(12){display: inline-grid; width: 14%; box-sizing: border-box; font-weight: bold;}
+    #speciesTable td:nth-of-type(6){display: inline-grid !important; width: 14%; box-sizing: border-box; font-weight: bold;}
+    #speciesTable td:nth-of-type(7){display: inline-grid !important; width: 14%; box-sizing: border-box; font-weight: bold;}
+    #speciesTable td:nth-of-type(8){display: inline-grid !important; width: 14%; box-sizing: border-box; font-weight: bold;}
+    #speciesTable td:nth-of-type(9){display: inline-grid !important; width: 14%; box-sizing: border-box; font-weight: bold;}
+    #speciesTable td:nth-of-type(10){display: inline-grid !important; width: 14%; box-sizing: border-box; font-weight: bold;}
+    #speciesTable td:nth-of-type(11){display: inline-grid !important; width: 14%; box-sizing: border-box; font-weight: bold;}
+    #speciesTable td:nth-of-type(12){display: inline-grid !important; width: 14%; box-sizing: border-box; font-weight: bold;}
 
-    #tableSpecies th {
+    #speciesTable th {
         min-width: 100%;
         max-width: 100%;
     }
