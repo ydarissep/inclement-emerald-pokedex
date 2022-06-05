@@ -86,6 +86,7 @@ function displaySpecies(){
             types.append(type2)
         row.append(types)
 
+
         let abilities = document.createElement("td")
         let ability1 = document.createElement("div")
         let ability2 = document.createElement("div")

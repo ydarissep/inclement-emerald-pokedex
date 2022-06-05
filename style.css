@@ -167,7 +167,7 @@ th:nth-of-type(12) {
 
 
 
-
+/*
 @media 
 only screen and (max-width: 700px) {
     table, thead, tbody, th, td, tr { 
@@ -177,7 +177,6 @@ only screen and (max-width: 700px) {
     tr { border: 1px solid #ccc; }
     
     td { 
-        /* Behave  like a "row" */
         border: none;
         position: relative;
         padding-left: 50%; 
@@ -203,9 +202,6 @@ only screen and (max-width: 700px) {
         display: inline-block !important;
     }
     
-    /*
-    Label the data
-    */
     td:nth-of-type(1):before { content: "";}
     td:nth-of-type(2):before { content: "";}
     td:nth-of-type(3):before { content: "Name";}
@@ -221,5 +217,104 @@ only screen and (max-width: 700px) {
 
     th {
         min-width: 100%;
+    }
+}
+*/
+
+
+
+
+
+
+/*Floating Back-To-Top Button*/
+    #myBtn {
+        position: fixed;
+        bottom: 10px;
+        float: right;
+        right: 18.5%;
+        left: 77.25%;
+        max-width: 30px;
+        width: 100%;
+        font-size: 12px;
+        border-color: rgba(85, 85, 85, 0.2);
+        background-color: rgb(100,100,100);
+        padding: .5px;
+        border-radius: 4px;
+
+    }
+/*On Hover Color Change*/
+    #myBtn:hover {
+        background-color: #7dbbf1;
+    }
+
+
+
+
+
+
+
+
+
+@media 
+only screen and (max-width: 700px) {
+    table, thead, tbody, th, td, tr { 
+        display: block; 
+    }
+
+    
+    tr { border: 1px solid #ccc; }
+    
+    .abilities div {
+        position: relative !important;
+        display: inline-block !important;
+        margin: 5px;
+    }
+    [class*="TYPE_"] {
+        position: relative !important;
+        display: inline-block !important;
+    }
+    td {
+        font-weight: bold;
+    }
+    td::before {
+        font-weight: normal;
+    }
+
+    td:nth-of-type(6):before { content: "HP ";}
+    td:nth-of-type(7):before { content: "Atk ";}
+    td:nth-of-type(8):before { content: "Def ";}
+    td:nth-of-type(9):before { content: "SpA ";}
+    td:nth-of-type(10):before { content: "SpD ";}
+    td:nth-of-type(11):before { content: "Spe ";}
+    td:nth-of-type(12):before { content: "BST ";}
+
+
+
+    td:nth-of-type(6){display: inline-grid; width: 14%; box-sizing: border-box;}
+    td:nth-of-type(7){display: inline-grid; width: 14%; box-sizing: border-box;}
+    td:nth-of-type(8){display: inline-grid; width: 14%; box-sizing: border-box;}
+    td:nth-of-type(9){display: inline-grid; width: 14%; box-sizing: border-box;}
+    td:nth-of-type(10){display: inline-grid; width: 14%; box-sizing: border-box;}
+    td:nth-of-type(11){display: inline-grid; width: 14%; box-sizing: border-box;}
+    td:nth-of-type(12){display: inline-grid; width: 14%; box-sizing: border-box;}
+
+    /*
+    td:nth-of-type(6){display: inline-grid; width: 10%; box-sizing: border-box; padding-left: 15%; padding-right: 8%;}
+    td:nth-of-type(7){display: inline-grid; width: 10%; box-sizing: border-box;}
+    td:nth-of-type(8){display: inline-grid; width: 10%; box-sizing: border-box;}
+    td:nth-of-type(9){display: inline-grid; width: 10%; box-sizing: border-box;}
+    td:nth-of-type(10){display: inline-grid; width: 10%; box-sizing: border-box;}
+    td:nth-of-type(11){display: inline-grid; width: 10%; box-sizing: border-box;}
+    td:nth-of-type(12){display: inline-grid; width: 10%; box-sizing: border-box;}
+    */
+
+
+    th {
+        min-width: 100%;
+        max-width: 100%;
+    }
+
+    #myBtn:hover {
+        background-color: rgb(100,100,100);
     }
 }
