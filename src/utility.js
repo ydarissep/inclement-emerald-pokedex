@@ -57,7 +57,7 @@ function sanitizeString(string){
 
 
 async function displaySetup(){
-    await fetchSpeciesObj()
+    try {await fetchSpeciesObj()}catch(e) {catchError(e, "fetchSpeciesObj")}
     
     await speciesButton.classList.remove("hide")
     await speciesTable.classList.remove("hide")
@@ -72,6 +72,16 @@ async function displaySetup(){
     const observer = await new IntersectionObserver(isTouching, options)
     await observer.observe(document.querySelector("footer"))
 }
+
+
+function catchError(err, inFunction){
+    let error = document.createElement("p")
+    error.className = "error"
+    error.innerText = err + "\nin " + inFunction
+    let footer = document.getElementsByTagName("footer")[0]
+    footer.append(error)
+}
+
 
 
 
