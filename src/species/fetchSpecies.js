@@ -90,19 +90,18 @@ async function getSprite(species){
 
 async function buildSpeciesObj(){
     let species = {}
-    try{species = await getSpecies(species)} catch(e) {catchError(e, "getSpecies")}
+    species = await getSpecies(species)
     
-    try{species = await initializeSpeciesObj(species)} catch(e) {catchError(e, "initializeSpeciesObj")}
-
-    try{species = await getEvolution(species)} catch(e) {catchError(e, "getEvolution")}
-    try{species = await getForms(species)} catch(e) {catchError(e, "getForms")} // should be called in that order until here
-    try{species = await getBaseStats(species)} catch(e) {catchError(e, "getBaseStats")}
-    try{species = await getLevelUpLearnsets(species)} catch(e) {catchError(e, "getLevelUpLearnsets")}
-    try{species = await getTMHMLearnsets(species)} catch(e) {catchError(e, "getTMHMLearnsets")}
-    try{species = await getEggMovesLearnsets(species)} catch(e) {catchError(e, "getEggMovesLearnsets")}
-    try{species = await getTutorLearnsets(species)} catch(e) {catchError(e, "getTutorLearnsets")}
-    try{species = await getSprite(species)} catch(e) {catchError(e, "getSprite")}
-    try{await localStorage.setItem("species", LZString.compress(JSON.stringify(species)))} catch(e) {catchError(e, "localStorage.setItem('species', LZString.compress(JSON.stringify(species)))")}
+    species = await initializeSpeciesObj(species)
+    species = await getEvolution(species)
+    species = await getForms(species) // should be called in that order until here
+    species = await getBaseStats(species)
+    species = await getLevelUpLearnsets(species)
+    species = await getTMHMLearnsets(species)
+    species = await getEggMovesLearnsets(species)
+    species = await getTutorLearnsets(species)
+    species = await getSprite(species)
+    await localStorage.setItem("species", LZString.compress(JSON.stringify(species)))
 }
 
 
@@ -149,9 +148,9 @@ async function fetchSpeciesObj(){
     await localStorage.removeItem("pokemon") // can be removed later
     await forceUpdate()
     if(!localStorage.getItem("species"))
-        try{await buildSpeciesObj()}catch(e) {catchError(e, "buildSpeciesObj")}
+        await buildSpeciesObj()
 
-        try{window.species = await JSON.parse(LZString.decompress(localStorage.getItem("species")))}catch(e) {catchError(e, "JSON.parse(LZString.decompress(localStorage.getItem('species')))")}
+        window.species = await JSON.parse(LZString.decompress(localStorage.getItem("species")))
         console.log(species)
-        try{await displaySpecies()} catch(e) {catchError(e, "displaySpecies")}
+        await displaySpecies()
 }

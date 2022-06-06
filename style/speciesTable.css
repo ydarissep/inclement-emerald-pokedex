@@ -6,10 +6,11 @@
 
 #speciesTable {
 	margin: auto;
+	/*
   	table-layout: fixed;
+  	*/
   	border-collapse: collapse;
 }
-
 
 #speciesTableThead th:nth-of-type(1) {
 	width: 40px;
@@ -56,68 +57,33 @@
 	display: block;
 	color: white;
 }
-.TYPE_NORMAL {
-	background: #A8A77A;
-}
-.TYPE_FIRE {
-	background: #EE8130;
-}
-.TYPE_WATER {
-	background: #6390F0;
-}
-.TYPE_ELECTRIC {
-	background: #F7D02C;
-}
-.TYPE_GRASS {
-	background: #7AC74C;
-}
-.TYPE_ICE {
-	background: #96D9D6;
-}
-.TYPE_FIGHTING {
-	background: #C22E28;
-}
-.TYPE_POISON {
-	background: #A33EA1;
-}
-.TYPE_GROUND {
-	background: #E2BF65;
-}
-.TYPE_FLYING {
-	background: #A98FF3;
-}
-.TYPE_PSYCHIC {
-	background: #F95587;
-}
-.TYPE_BUG {
-	background: #A6B91A;
-}
-.TYPE_ROCK {
-	background: #B6A136;
-}
-.TYPE_GHOST {
-	background: #735797;
-}
-.TYPE_DRAGON {
-	background: #6F35FC;
-}
-.TYPE_DARK {
-	background: #705746;
-}
-.TYPE_STEEL {
-	background: #B7B7CE;
-}
-.TYPE_FAIRY {
-	background: #D685AD;
-}
+.TYPE_NORMAL {background: #A8A77A;}
+.TYPE_FIRE {background: #EE8130;}
+.TYPE_WATER {background: #6390F0;}
+.TYPE_ELECTRIC {background: #F7D02C;}
+.TYPE_GRASS {background: #7AC74C;}
+.TYPE_ICE {background: #96D9D6;}
+.TYPE_FIGHTING {background: #C22E28;}
+.TYPE_POISON {background: #A33EA1;}
+.TYPE_GROUND {background: #E2BF65;}
+.TYPE_FLYING {background: #A98FF3;}
+.TYPE_PSYCHIC {background: #F95587;}
+.TYPE_BUG {background: #A6B91A;}
+.TYPE_ROCK {background: #B6A136;}
+.TYPE_GHOST {background: #735797;}
+.TYPE_DRAGON {background: #6F35FC;}
+.TYPE_DARK {background: #705746;}
+.TYPE_STEEL {background: #B7B7CE;}
+.TYPE_FAIRY {background: #D685AD;}
 
-.abilities div {
+.Abilities div {
     border: 1px solid grey;
 }
 
 
-
-
+.baseStats {
+	display: flex;
+}
 
 @media 
 only screen and (max-width: 700px) {
@@ -135,27 +101,24 @@ only screen and (max-width: 700px) {
     [class*="TYPE_"] {
         display: inline-block !important;
     }
+
+    [class*="BASESTATS_"] {
+        display: inline-grid !important;
+        width: 14%;
+        box-sizing: border-box;
+        font-weight: bold;
+    }
+    .BASESTATS_HP::before { content: "HP ";}
+    .BASESTATS_ATK::before { content: "Atk ";}
+    .BASESTATS_DEF::before { content: "Def ";}
+    .BASESTATS_SPA::before { content: "SpA ";}
+    .BASESTATS_SPD::before { content: "SpD ";}
+    .BASESTATS_SPE::before { content: "Spe ";}
+    .BASESTATS_BST::before { content: "BST ";}
+
     #speciesTable td::before {
         font-weight: normal;
     }
-
-    #speciesTable td:nth-of-type(6)::before { content: "HP ";}
-    #speciesTable td:nth-of-type(7)::before { content: "Atk ";}
-    #speciesTable td:nth-of-type(8)::before { content: "Def ";}
-    #speciesTable td:nth-of-type(9)::before { content: "SpA ";}
-    #speciesTable td:nth-of-type(10)::before { content: "SpD ";}
-    #speciesTable td:nth-of-type(11)::before { content: "Spe ";}
-    #speciesTable td:nth-of-type(12)::before { content: "BST ";}
-
-
-
-    #speciesTable td:nth-of-type(6){display: inline-grid !important; width: 14%; box-sizing: border-box; font-weight: bold;}
-    #speciesTable td:nth-of-type(7){display: inline-grid !important; width: 14%; box-sizing: border-box; font-weight: bold;}
-    #speciesTable td:nth-of-type(8){display: inline-grid !important; width: 14%; box-sizing: border-box; font-weight: bold;}
-    #speciesTable td:nth-of-type(9){display: inline-grid !important; width: 14%; box-sizing: border-box; font-weight: bold;}
-    #speciesTable td:nth-of-type(10){display: inline-grid !important; width: 14%; box-sizing: border-box; font-weight: bold;}
-    #speciesTable td:nth-of-type(11){display: inline-grid !important; width: 14%; box-sizing: border-box; font-weight: bold;}
-    #speciesTable td:nth-of-type(12){display: inline-grid !important; width: 14%; box-sizing: border-box; font-weight: bold;}
 
     #speciesTable th {
         min-width: 100%;

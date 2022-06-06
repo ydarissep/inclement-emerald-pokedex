@@ -49,7 +49,7 @@ tr:nth-of-type(even) {
     }
     #speciesTableTbody tr:hover {
         background-color: #add8e6;
-       cursor: pointer;
+        cursor: pointer;
     }
     #myBtn:hover {
         background-color: #7dbbf1;
