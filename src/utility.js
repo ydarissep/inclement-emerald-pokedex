@@ -107,7 +107,7 @@ function sortTableByColumn(table, className, asc = true, parseInteger = false) {
     // Remember how the column is currently sorted
     table.querySelectorAll("th").forEach(th => th.classList.remove("th-sort-asc", "th-sort-desc"));
     table.querySelector(`th.${className}`).classList.toggle("th-sort-asc", asc);
-    table.querySelector(`th.${className}`).classList.toggle("th-sort-desc", !asc);
+    table.querySelector(`.${className}`).classList.toggle("th-sort-desc", !asc);
 }
 
 
@@ -121,15 +121,7 @@ function lazyLoading(reset = false){
     const rows = document.getElementsByClassName("active")[0].tBodies[0].rows
     let j = 0
     for(let i = 0; i < rows.length; i++){
-        if(!reset){
-            if(rows[i].classList.contains("hideTemp")){
-                j++
-                rows[i].classList.remove("hideTemp")
-            }
-            if(j >= 75)
-                break
-        }
-        else{
+        if(reset){
             if(j <= 75){
                 if(!rows[i].classList.contains("hide")){
                     rows[i].classList.remove("hideTemp")
@@ -137,7 +129,17 @@ function lazyLoading(reset = false){
                 }
             }
             else
-                rows[i].className = "hideTemp"
+                rows[i].classList.add("hideTemp")
+        }
+        else{
+            if(!rows[i].classList.contains("hide")){
+                if(rows[i].classList.contains("hideTemp")){
+                    j++
+                    rows[i].classList.remove("hideTemp")
+                }
+            }
+            if(j >= 75)
+                break
         }
     }
 }

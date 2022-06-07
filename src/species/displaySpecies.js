@@ -10,23 +10,17 @@ function updateDisplayedSpecies(input){
         }
         for (let i = 0; i < inputArray.length; i++){
             if(!compareValue.includes(inputArray[i]))
-                hideRows[j.toString()] = "hide"
+                hideRows[j] = "hide"
         }
+        console.log(inputArray)
     }
     for(let i = 0; i < tBody.rows.length; i++){
-        if(hideRows[i] !== undefined)
-            tBody.rows[i].className = "hide"
+        if(hideRows[i] === "hide")
+            tBody.rows[i].classList.add("hide")
         else
             tBody.rows[i].classList.remove("hide")
-        if(k <= 75){
-            if(!tBody.rows[i].classList.contains("hide")){
-                tBody.rows[i].classList.remove("hideTemp")
-                k++
-            }
-        }
-        else
-            tBody.rows[i].className = "hideTemp"
     }
+    lazyLoading(true)
 }
 
 
