@@ -51,90 +51,113 @@ function displaySpecies(){
     const speciesArray = Object.keys(species)
     tBody.innerText = ""
     for (let i = 0; i < speciesArray.length; i++){
-        const name = speciesArray[i]
+        const speciesName = speciesArray[i]
         let row = document.createElement("tr")
         tBody.append(row)
 
         row.className = "hideTemp"
 
-        let ID = document.createElement("td")
-        ID.innerText = species[name]["ID"]
-        row.append(ID)
+
+        let IDcontainer = document.createElement("td")
+        let ID = document.createElement("div")
+        IDcontainer.className = "ID"
+        ID.innerText = species[speciesName]["ID"]
+        IDcontainer.append(ID)
+        row.append(IDcontainer)
+
 
         let sprite = document.createElement("td")
         let canvas = document.createElement("canvas")
         canvas.width = 64
         canvas.height = 64
-        renderSprite(species[name]["sprite"], canvas)
-        sprite.alt = sanitizeString(species[name]["species"])
+        renderSprite(species[speciesName]["sprite"], canvas)
+        sprite.className = "sprite"
         sprite.append(canvas)
         row.append(sprite)
 
-        let speciesName = document.createElement("td")
-        speciesName.innerText = sanitizeString(species[name]["species"])
-        row.append(speciesName)
 
-        let types = document.createElement("td")
+        let nameContainer = document.createElement("td")
+        let name = document.createElement("div")
+        nameContainer.className = "species"
+        name.innerText = sanitizeString(species[speciesName]["species"])
+        nameContainer.append(name)
+        row.append(nameContainer)
+
+
+        let typesContainer = document.createElement("td")
+        let types = document.createElement("div")
         let type1 = document.createElement("div")
         let type2 = document.createElement("div")
-        type1.innerText = sanitizeString(species[name]["type1"])
-        type2.innerText = sanitizeString(species[name]["type2"])
-        type1.className = species[name]["type1"]
-        type2.className = species[name]["type2"]
+        typesContainer.className = "types"
+        type1.innerText = sanitizeString(species[speciesName]["type1"])
+        type2.innerText = sanitizeString(species[speciesName]["type2"])
+        type1.className = species[speciesName]["type1"]
+        type2.className = species[speciesName]["type2"]
         types.append(type1)
         if(type1.innerText !== type2.innerText)
             types.append(type2)
-        row.append(types)
+        typesContainer.append(types)
+        row.append(typesContainer)
 
 
-        let abilities = document.createElement("td")
+        let abilitiesContainer = document.createElement("td")
         let ability1 = document.createElement("div")
         let ability2 = document.createElement("div")
         let HA = document.createElement("div")
-        abilities.className = "abilities"
-        const abilitiesArray = sanitizeString(Array.from(new Set(species[name]["abilities"])).join(' ')).split("\n")
+        abilitiesContainer.className = "abilities"
+        const abilitiesArray = sanitizeString(Array.from(new Set(species[speciesName]["abilities"])).join(' ')).split("\n")
         for (let j = 0; j < abilitiesArray.length; j++){
             if(j === 0){
                 ability1.innerText = abilitiesArray[j]
-                abilities.append(ability1)
+                abilitiesContainer.append(ability1)
             }
             else if(j === 1){
                 ability2.innerText = abilitiesArray[j]
-                abilities.append(ability2)
+                abilitiesContainer.append(ability2)
             }                
             else if(j === 2){
                 HA.innerText = abilitiesArray[j]
-                abilities.append(HA)
+                abilitiesContainer.append(HA)
             }                
         }
-        row.append(abilities)
+        row.append(abilitiesContainer)
 
-        let baseHP = document.createElement("td")
-        baseHP.innerText = species[name]["baseHP"]
-        row.append(baseHP)
+        
 
-        let baseAttack = document.createElement("td")
-        baseAttack.innerText = species[name]["baseAttack"]
-        row.append(baseAttack)
+        row.append(createBaseStatsContainer("HP", "baseHP", speciesName))
 
-        let baseDefense = document.createElement("td")
-        baseDefense.innerText = species[name]["baseDefense"]
-        row.append(baseDefense)
+        row.append(createBaseStatsContainer("Atk", "baseAttack", speciesName))
 
-        let baseSpAttack = document.createElement("td")
-        baseSpAttack.innerText = species[name]["baseSpAttack"]
-        row.append(baseSpAttack)
+        row.append(createBaseStatsContainer("Def", "baseDefense", speciesName))
 
-        let baseSpDefense = document.createElement("td")
-        baseSpDefense.innerText = species[name]["baseSpDefense"]
-        row.append(baseSpDefense)
+        row.append(createBaseStatsContainer("SpA", "baseSpAttack", speciesName))
 
-        let baseSpeed = document.createElement("td")
-        baseSpeed.innerText = species[name]["baseSpeed"]
-        row.append(baseSpeed)
+        row.append(createBaseStatsContainer("SpD", "baseSpDefense", speciesName))
 
-        let BST = document.createElement("td")
-        BST.innerText = species[name]["BST"]
-        row.append(BST)
+        row.append(createBaseStatsContainer("Spe", "baseSpeed", speciesName))
+
+        row.append(createBaseStatsContainer("BST", "BST", speciesName))
     }
+}
+
+
+function createBaseStatsContainer(headerText, stats, speciesName){
+    let baseStatsContainer = document.createElement("td")
+    let baseStats = document.createElement("div")
+    let baseStatsHeader = document.createElement("div") //only used for mobile view
+
+
+    baseStatsHeader.innerText = headerText //only used for mobile view
+    baseStatsHeader.style.display = "none" //only used for mobile view
+    baseStatsHeader.className = "baseStatsHeader" //only used for mobile view
+
+    baseStats.className = `baseStatsBold ${stats}` //only used for mobile view
+
+    baseStats.innerText = species[speciesName][stats]
+
+    baseStatsContainer.append(baseStatsHeader)
+    baseStatsContainer.append(baseStats)
+    baseStatsContainer.className = `${stats}Container`
+
+    return baseStatsContainer
 }

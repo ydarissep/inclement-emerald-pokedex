@@ -6,45 +6,46 @@
 
 #speciesTable {
 	margin: auto;
+	/*
   	table-layout: fixed;
+  	*/
   	border-collapse: collapse;
 }
 
-
-#speciesTableThead th:nth-of-type(1) {
+#speciesTableThead th.ID {
 	width: 40px;
 }
-#speciesTableThead th:nth-of-type(2) {
+#speciesTableThead th.sprite {
 	width: 64px;
 }
-#speciesTableThead th:nth-of-type(3) {
+#speciesTableThead th.species {
 	width: 250px;
 }
-#speciesTableThead th:nth-of-type(4) {
+#speciesTableThead th.types {
 	width: 80px;
 }
-#speciesTableThead th:nth-of-type(5) {
+#speciesTableThead th.abilities {
 	width: 175px;
 }
-#speciesTableThead th:nth-of-type(6) {
+#speciesTableThead th.baseHP {
 	width: 40px;
 }
-#speciesTableThead th:nth-of-type(7) {
+#speciesTableThead th.baseAttack {
 	width: 40px;
 }
-#speciesTableThead th:nth-of-type(8) {
+#speciesTableThead th.baseDefense {
 	width: 40px;
 }
-#speciesTableThead th:nth-of-type(9) {
+#speciesTableThead th.baseSpAttack {
 	width: 45px;
 }
-#speciesTableThead th:nth-of-type(10) {
+#speciesTableThead th.baseSpDefense {
 	width: 45px;
 }
-#speciesTableThead th:nth-of-type(11) {
+#speciesTableThead th.baseSpeed {
 	width: 40px;
 }
-#speciesTableThead th:nth-of-type(12) {
+#speciesTableThead th.BST {
 	width: 45px;
 }
 
@@ -56,106 +57,66 @@
 	display: block;
 	color: white;
 }
-.TYPE_NORMAL {
-	background: #A8A77A;
-}
-.TYPE_FIRE {
-	background: #EE8130;
-}
-.TYPE_WATER {
-	background: #6390F0;
-}
-.TYPE_ELECTRIC {
-	background: #F7D02C;
-}
-.TYPE_GRASS {
-	background: #7AC74C;
-}
-.TYPE_ICE {
-	background: #96D9D6;
-}
-.TYPE_FIGHTING {
-	background: #C22E28;
-}
-.TYPE_POISON {
-	background: #A33EA1;
-}
-.TYPE_GROUND {
-	background: #E2BF65;
-}
-.TYPE_FLYING {
-	background: #A98FF3;
-}
-.TYPE_PSYCHIC {
-	background: #F95587;
-}
-.TYPE_BUG {
-	background: #A6B91A;
-}
-.TYPE_ROCK {
-	background: #B6A136;
-}
-.TYPE_GHOST {
-	background: #735797;
-}
-.TYPE_DRAGON {
-	background: #6F35FC;
-}
-.TYPE_DARK {
-	background: #705746;
-}
-.TYPE_STEEL {
-	background: #B7B7CE;
-}
-.TYPE_FAIRY {
-	background: #D685AD;
-}
+.TYPE_NORMAL {background: #A8A77A;}
+.TYPE_FIRE {background: #EE8130;}
+.TYPE_WATER {background: #6390F0;}
+.TYPE_ELECTRIC {background: #F7D02C;}
+.TYPE_GRASS {background: #7AC74C;}
+.TYPE_ICE {background: #96D9D6;}
+.TYPE_FIGHTING {background: #C22E28;}
+.TYPE_POISON {background: #A33EA1;}
+.TYPE_GROUND {background: #E2BF65;}
+.TYPE_FLYING {background: #A98FF3;}
+.TYPE_PSYCHIC {background: #F95587;}
+.TYPE_BUG {background: #A6B91A;}
+.TYPE_ROCK {background: #B6A136;}
+.TYPE_GHOST {background: #735797;}
+.TYPE_DRAGON {background: #6F35FC;}
+.TYPE_DARK {background: #705746;}
+.TYPE_STEEL {background: #B7B7CE;}
+.TYPE_FAIRY {background: #D685AD;}
 
 .abilities div {
     border: 1px solid grey;
 }
 
-
-
-
-
 @media 
 only screen and (max-width: 700px) {
-    #speciesTable, #speciesTableThead, #speciesTableTbody, #speciesTable th, #speciesTable tr, #speciesTable td { 
-        display: block; 
+    #speciesTable, #speciesTableThead, #speciesTableTbody, #speciesTable th, #speciesTable td, #speciesTable tr { 
+        display: block;
+    }
+
+    td.ID, td.sprite, td.species {
+    	display: inline-block !important;
+    	width: 33.3%;
+    	box-sizing: border-box;
+    }
+    .baseHPContainer, 
+    .baseAttackContainer, 
+    .baseDefenseContainer, 
+    .baseSpAttackContainer,
+    .baseSpDefenseContainer,
+    .baseSpeedContainer,
+    .BSTContainer {
+    	display: inline-block !important;
+    	width: 14%;
+    	box-sizing: border-box;
+    }
+
+    [class*="TYPE_"], .baseStatsHeader {
+        display: inline-block !important;
     }
     
     .abilities div {
         display: inline-block !important;
         border: none;
         font-weight: bold;
-        padding-left: 5%;
-        padding-right: 5%;
+        padding-left: 2%;
+        padding-right: 2%;
     }
-    [class*="TYPE_"] {
-        display: inline-block !important;
+    .baseStatsBold {
+    	font-weight: bold;
     }
-    #speciesTable td::before {
-        font-weight: normal;
-    }
-
-    #speciesTable td:nth-of-type(6)::before { content: "HP ";}
-    #speciesTable td:nth-of-type(7)::before { content: "Atk ";}
-    #speciesTable td:nth-of-type(8)::before { content: "Def ";}
-    #speciesTable td:nth-of-type(9)::before { content: "SpA ";}
-    #speciesTable td:nth-of-type(10)::before { content: "SpD ";}
-    #speciesTable td:nth-of-type(11)::before { content: "Spe ";}
-    #speciesTable td:nth-of-type(12)::before { content: "BST ";}
-
-
-
-    #speciesTable td:nth-of-type(6){display: inline-grid !important; width: 14%; box-sizing: border-box; font-weight: bold;}
-    #speciesTable td:nth-of-type(7){display: inline-grid !important; width: 14%; box-sizing: border-box; font-weight: bold;}
-    #speciesTable td:nth-of-type(8){display: inline-grid !important; width: 14%; box-sizing: border-box; font-weight: bold;}
-    #speciesTable td:nth-of-type(9){display: inline-grid !important; width: 14%; box-sizing: border-box; font-weight: bold;}
-    #speciesTable td:nth-of-type(10){display: inline-grid !important; width: 14%; box-sizing: border-box; font-weight: bold;}
-    #speciesTable td:nth-of-type(11){display: inline-grid !important; width: 14%; box-sizing: border-box; font-weight: bold;}
-    #speciesTable td:nth-of-type(12){display: inline-grid !important; width: 14%; box-sizing: border-box; font-weight: bold;}
 
     #speciesTable th {
         min-width: 100%;

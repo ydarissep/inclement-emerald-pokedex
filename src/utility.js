@@ -57,7 +57,7 @@ function sanitizeString(string){
 
 
 async function displaySetup(){
-    try {await fetchSpeciesObj()}catch(e) {catchError(e, "fetchSpeciesObj")}
+    await fetchSpeciesObj()
     
     await speciesButton.classList.remove("hide")
     await speciesTable.classList.remove("hide")
@@ -66,38 +66,26 @@ async function displaySetup(){
 
     const options = {
         root: null,
-        rootMartings: "0px",
-        threshold: 0.5
+        rootMargins: "0px",
+        threshold: 0
     }
     const observer = await new IntersectionObserver(isTouching, options)
     await observer.observe(document.querySelector("footer"))
 }
 
 
-function catchError(err, inFunction){
-    let error = document.createElement("p")
-    error.className = "error"
-    error.innerText = err + "\nin " + inFunction
-    let footer = document.getElementsByTagName("footer")[0]
-    footer.append(error)
-}
 
 
 
-
-
-
-function sortTableByColumn(table, column, asc = true, parseInteger = false) {
+function sortTableByColumn(table, className, asc = true, parseInteger = false) {
     const dirModifier = asc ? 1 : -1;
     const tBody = table.tBodies[0];
     const rows = Array.from(tBody.querySelectorAll("tr"));
-    let j = 0
-
 
     // Sort each row
     const sortedRows = rows.sort((a, b) => {
-        let aColText = a.querySelector(`td:nth-child(${ column + 1 })`).textContent.trim();
-        let bColText = b.querySelector(`td:nth-child(${ column + 1 })`).textContent.trim();
+        let aColText = a.querySelector(`.${className}`).textContent.trim();
+        let bColText = b.querySelector(`.${className}`).textContent.trim();
         if(parseInteger)
         {
             aColText = parseInt(aColText)
@@ -118,8 +106,8 @@ function sortTableByColumn(table, column, asc = true, parseInteger = false) {
 
     // Remember how the column is currently sorted
     table.querySelectorAll("th").forEach(th => th.classList.remove("th-sort-asc", "th-sort-desc"));
-    table.querySelector(`th:nth-child(${ column + 1})`).classList.toggle("th-sort-asc", asc);
-    table.querySelector(`th:nth-child(${ column + 1})`).classList.toggle("th-sort-desc", !asc);
+    table.querySelector(`th.${className}`).classList.toggle("th-sort-asc", asc);
+    table.querySelector(`th.${className}`).classList.toggle("th-sort-desc", !asc);
 }
 
 
