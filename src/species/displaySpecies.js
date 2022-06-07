@@ -12,7 +12,6 @@ function updateDisplayedSpecies(input){
             if(!compareValue.includes(inputArray[i]))
                 hideRows[j] = "hide"
         }
-        console.log(inputArray)
     }
     for(let i = 0; i < tBody.rows.length; i++){
         if(hideRows[i] === "hide")
