@@ -39,7 +39,7 @@ function speciesButtonClick(){
 
 
 
-function displaySpecies(){
+function displaySpecies(species){
     let tBody = speciesTableTbody
     const speciesArray = Object.keys(species)
     tBody.innerText = ""
@@ -115,26 +115,26 @@ function displaySpecies(){
         }
         row.append(abilitiesContainer)
 
-        
+        let speciesObj = species[speciesName]
 
-        row.append(createBaseStatsContainer("HP", "baseHP", speciesName))
+        row.append(createBaseStatsContainer("HP", "baseHP", speciesName, speciesObj))
 
-        row.append(createBaseStatsContainer("Atk", "baseAttack", speciesName))
+        row.append(createBaseStatsContainer("Atk", "baseAttack", speciesName, speciesObj))
 
-        row.append(createBaseStatsContainer("Def", "baseDefense", speciesName))
+        row.append(createBaseStatsContainer("Def", "baseDefense", speciesName, speciesObj))
 
-        row.append(createBaseStatsContainer("SpA", "baseSpAttack", speciesName))
+        row.append(createBaseStatsContainer("SpA", "baseSpAttack", speciesName, speciesObj))
 
-        row.append(createBaseStatsContainer("SpD", "baseSpDefense", speciesName))
+        row.append(createBaseStatsContainer("SpD", "baseSpDefense", speciesName, speciesObj))
 
-        row.append(createBaseStatsContainer("Spe", "baseSpeed", speciesName))
+        row.append(createBaseStatsContainer("Spe", "baseSpeed", speciesName, speciesObj))
 
-        row.append(createBaseStatsContainer("BST", "BST", speciesName))
+        row.append(createBaseStatsContainer("BST", "BST", speciesName, speciesObj))
     }
 }
 
 
-function createBaseStatsContainer(headerText, stats, speciesName){
+function createBaseStatsContainer(headerText, stats, speciesName, speciesObj){
     let baseStatsContainer = document.createElement("td")
     let baseStats = document.createElement("div")
     let baseStatsHeader = document.createElement("div") //only used for mobile view
@@ -146,7 +146,7 @@ function createBaseStatsContainer(headerText, stats, speciesName){
 
     baseStats.className = `baseStatsBold ${stats}` //only used for mobile view
 
-    baseStats.innerText = species[speciesName][stats]
+    baseStats.innerText = speciesObj[stats]
 
     baseStatsContainer.append(baseStatsHeader)
     baseStatsContainer.append(baseStats)
