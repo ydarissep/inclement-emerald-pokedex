@@ -18,8 +18,12 @@ const headerBST = document.querySelector("th.BST")
 const topButton = document.querySelector('.topButton')
 
 document.addEventListener('scroll', () => {
-  window.scrollY ? topButton.style.display = 'flex' : topButton.style.display = 'none'
+  window.scrollY ? topButton.style.filter = 'opacity(100%)' : topButton.style.filter = 'opacity(0%)'
 })
+
+topButton.onclick = () => {
+  window.scrollTo({top: 0, behavior: 'smooth'})
+}
 
 
 speciesButton.addEventListener("click", () => {

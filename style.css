@@ -1,6 +1,5 @@
 * {
 	font-family: sans-serif;
-    scroll-behavior: smooth;
 }
 
 .hide, .hideTemp {
@@ -45,14 +44,15 @@ tr:nth-of-type(odd) {
     }
     .topButton:hover {
         background: salmon;
+        cursor: pointer;
     }
 }
 
-
 .topButton {
+  font-family: monospace;
   position: fixed;
   bottom: 5px;
-  right: 15%;
+  right: 5px;
   background: red;
   width: 50px;
   height: 50px;
@@ -60,10 +60,9 @@ tr:nth-of-type(odd) {
   justify-content: center;
   align-items: center;
   color: white;
-  font-weight: normal;
-  font-size: 2rem;
+  font-size: 1.5rem;
   text-decoration: none;
   border-radius: 50%;
-  transition: 0.1s ease-in;
-  scroll-behavior: smooth;
+  transition: 0.2s ease-in-out;
+  filter: opacity(100%);
 }
