@@ -1,5 +1,6 @@
 * {
 	font-family: sans-serif;
+    scroll-behavior: smooth;
 }
 
 .hide, .hideTemp {
@@ -42,26 +43,27 @@ tr:nth-of-type(odd) {
         background-color: #add8e6;
         cursor: pointer;
     }
-    #myBtn:hover {
-        background-color: #7dbbf1;
+    .topButton:hover {
+        background: salmon;
     }
 }
 
 
-/*Floating Back-To-Top Button*/
-    #myBtn {
-        position: fixed;
-        bottom: 10px;
-        float: right;
-        right: 18.5%;
-        left: 77.25%;
-        max-width: 30px;
-        width: 100%;
-        font-size: 12px;
-        border-color: rgba(85, 85, 85, 0.2);
-        background-color: rgb(100,100,100);
-        padding: .5px;
-        border-radius: 4px;
-
-    }
-
+.topButton {
+  position: fixed;
+  bottom: 5px;
+  right: 15%;
+  background: red;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-weight: normal;
+  font-size: 2rem;
+  text-decoration: none;
+  border-radius: 50%;
+  transition: 0.1s ease-in;
+  scroll-behavior: smooth;
+}

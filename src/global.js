@@ -15,6 +15,11 @@ const headerSpA = document.querySelector("th.baseSpAttack")
 const headerSpD = document.querySelector("th.baseSpDefense")
 const headerSpe = document.querySelector("th.baseSpeed")
 const headerBST = document.querySelector("th.BST")
+const topButton = document.querySelector('.topButton')
+
+document.addEventListener('scroll', () => {
+  window.scrollY ? topButton.style.display = 'flex' : topButton.style.display = 'none'
+})
 
 
 speciesButton.addEventListener("click", () => {
