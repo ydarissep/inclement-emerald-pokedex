@@ -150,7 +150,7 @@ async function fetchSpeciesObj(){
     if(!localStorage.getItem("species"))
         await buildSpeciesObj()
 
-        let species = await JSON.parse(LZString.decompressFromUTF16(localStorage.getItem("species")))
+        window.species = await JSON.parse(LZString.decompressFromUTF16(localStorage.getItem("species")))
         console.log(species)
-        await displaySpecies(species)
+        await displaySpecies()
 }
