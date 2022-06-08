@@ -106,7 +106,7 @@ function sortTableByClassName(table, className, asc = true, parseInteger = false
     // Remember how the column is currently sorted
     table.querySelectorAll("th").forEach(th => th.classList.remove("th-sort-asc", "th-sort-desc"));
     table.querySelector(`th.${className}`).classList.toggle("th-sort-asc", asc);
-    table.querySelector(`.${className}`).classList.toggle("th-sort-desc", !asc);
+    table.querySelector(`th.${className}`).classList.toggle("th-sort-desc", !asc);
 }
 
 
