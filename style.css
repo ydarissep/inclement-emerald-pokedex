@@ -6,11 +6,6 @@
 	display: none !important
 }
 
-.error {
-    text-align: center;
-    font-size: 30px;
-}
-
 th {
 	cursor: pointer;
 	background: #333; 
@@ -38,10 +33,6 @@ h1, td, th {
 tr:nth-of-type(odd) {  
   background: #eee; 
 }
-tr:nth-of-type(even) {  
-  background: white; 
-}
-
 
 @media (hover: hover) {
     thead th:hover {

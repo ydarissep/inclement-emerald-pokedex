@@ -55,7 +55,6 @@ function sanitizeString(string){
 
 
 
-
 async function displaySetup(){
     await fetchSpeciesObj()
     
@@ -77,7 +76,7 @@ async function displaySetup(){
 
 
 
-function sortTableByColumn(table, className, asc = true, parseInteger = false) {
+function sortTableByClassName(table, className, asc = true, parseInteger = false) {
     const dirModifier = asc ? 1 : -1;
     const tBody = table.tBodies[0];
     const rows = Array.from(tBody.querySelectorAll("tr"));
@@ -143,5 +142,3 @@ function lazyLoading(reset = false){
         }
     }
 }
-
-

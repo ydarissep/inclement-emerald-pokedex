@@ -24,75 +24,75 @@ speciesButton.addEventListener("click", () => {
 
 headerID.addEventListener("click", () => {
     if(headerID.classList.contains("th-sort-asc"))
-        sortTableByColumn(speciesTable, "ID", asc = false, parseINT = true)
+        sortTableByClassName(speciesTable, "ID", asc = false, parseINT = true)
     else
-        sortTableByColumn(speciesTable, "ID", asc = true, parseINT = true)
+        sortTableByClassName(speciesTable, "ID", asc = true, parseINT = true)
 })
 headerSprite.addEventListener("click", () => {
     if(headerID.classList.contains("th-sort-asc"))
-        sortTableByColumn(speciesTable, "ID", asc = false, parseINT = true)
+        sortTableByClassName(speciesTable, "ID", asc = false, parseINT = true)
     else
-        sortTableByColumn(speciesTable, "ID", asc = true, parseINT = true)
+        sortTableByClassName(speciesTable, "ID", asc = true, parseINT = true)
 })
 headerName.addEventListener("click", () => {
     if(headerName.classList.contains("th-sort-asc"))
-        sortTableByColumn(speciesTable, "species", asc = false)
+        sortTableByClassName(speciesTable, "species", asc = false)
     else
-        sortTableByColumn(speciesTable, "species", asc = true)
+        sortTableByClassName(speciesTable, "species", asc = true)
 })
 headerType.addEventListener("click", () => {
     if(headerType.classList.contains("th-sort-asc"))
-        sortTableByColumn(speciesTable, "types", asc = false)
+        sortTableByClassName(speciesTable, "types", asc = false)
     else
-        sortTableByColumn(speciesTable, "types", asc = true)
+        sortTableByClassName(speciesTable, "types", asc = true)
 })
 headerAbilities.addEventListener("click", () => {
     if(headerAbilities.classList.contains("th-sort-asc"))
-        sortTableByColumn(speciesTable, "abilities", asc = false)
+        sortTableByClassName(speciesTable, "abilities", asc = false)
     else
-        sortTableByColumn(speciesTable, "abilities", asc = true)
+        sortTableByClassName(speciesTable, "abilities", asc = true)
 })
 headerHP.addEventListener("click", () => {
     if(headerHP.classList.contains("th-sort-asc"))
-        sortTableByColumn(speciesTable, "baseHP", asc = false, parseINT = true)
+        sortTableByClassName(speciesTable, "baseHP", asc = false, parseINT = true)
     else
-        sortTableByColumn(speciesTable, "baseHP", asc = true, parseINT = true)
+        sortTableByClassName(speciesTable, "baseHP", asc = true, parseINT = true)
 })
 headerAtk.addEventListener("click", () => {
     if(headerAtk.classList.contains("th-sort-asc"))
-        sortTableByColumn(speciesTable, "baseAttack", asc = false, parseINT = true)
+        sortTableByClassName(speciesTable, "baseAttack", asc = false, parseINT = true)
     else
-        sortTableByColumn(speciesTable, "baseAttack", asc = true, parseINT = true)
+        sortTableByClassName(speciesTable, "baseAttack", asc = true, parseINT = true)
 })
 headerDef.addEventListener("click", () => {
     if(headerDef.classList.contains("th-sort-asc"))
-        sortTableByColumn(speciesTable, "baseDefense", asc = false, parseINT = true)
+        sortTableByClassName(speciesTable, "baseDefense", asc = false, parseINT = true)
     else
-        sortTableByColumn(speciesTable, "baseDefense", asc = true, parseINT = true)
+        sortTableByClassName(speciesTable, "baseDefense", asc = true, parseINT = true)
 })
 headerSpA.addEventListener("click", () => {
     if(headerSpA.classList.contains("th-sort-asc"))
-        sortTableByColumn(speciesTable, "baseSpAttack", asc = false, parseINT = true)
+        sortTableByClassName(speciesTable, "baseSpAttack", asc = false, parseINT = true)
     else
-        sortTableByColumn(speciesTable, "baseSpAttack", asc = true, parseINT = true)
+        sortTableByClassName(speciesTable, "baseSpAttack", asc = true, parseINT = true)
 })
 headerSpD.addEventListener("click", () => {
     if(headerSpD.classList.contains("th-sort-asc"))
-        sortTableByColumn(speciesTable, "baseSpDefense", asc = false, parseINT = true)
+        sortTableByClassName(speciesTable, "baseSpDefense", asc = false, parseINT = true)
     else
-        sortTableByColumn(speciesTable, "baseSpDefense", asc = true, parseINT = true)
+        sortTableByClassName(speciesTable, "baseSpDefense", asc = true, parseINT = true)
 })
 headerSpe.addEventListener("click", () => {
     if(headerSpe.classList.contains("th-sort-asc"))
-        sortTableByColumn(speciesTable, "baseSpeed", asc = false, parseINT = true)
+        sortTableByClassName(speciesTable, "baseSpeed", asc = false, parseINT = true)
     else
-        sortTableByColumn(speciesTable, "baseSpeed", asc = true, parseINT = true)
+        sortTableByClassName(speciesTable, "baseSpeed", asc = true, parseINT = true)
 })
 headerBST.addEventListener("click", () => {
     if(headerBST.classList.contains("th-sort-asc"))
-        sortTableByColumn(speciesTable, "BST", asc = false, parseINT = true)
+        sortTableByClassName(speciesTable, "BST", asc = false, parseINT = true)
     else
-        sortTableByColumn(speciesTable, "BST", asc = true, parseINT = true)
+        sortTableByClassName(speciesTable, "BST", asc = true, parseINT = true)
 })
 speciesInput.addEventListener("input", e => {
     const value = e.target.value
