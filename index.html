@@ -7,11 +7,33 @@
   <title>IE Dex</title>
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="style/speciesTable.css">
+  <link rel="stylesheet" href="style/abilitiesTable.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 </head>
 <body onload="displaySetup()">
-  <input type="search"  id="speciesInput" class="hide">
-  <button type="button" id="speciesButton" class="hide">Species</button>
+
+  <div id="tableInput">
+    <input type="search"  id="speciesInput" class="hide">
+    <input type="search" id="abilitiesInput" class="hide">
+  </div>
+
+
+  <div id="tableButton">
+    <button type="button" id="abilitiesButton" class="hide">Abilities</button>
+    <button type="button" id="speciesButton" class="hide">Species</button>
+  </div>
+
+  <table id="abilitiesTable" class="hide">
+    <thead id="abilitiesTableThead">
+      <tr>
+        <th class="name">Name</th>
+        <th class="description">Description</th>
+      </tr>
+    </thead>
+    <tbody id="abilitiesTableTbody"></tbody>
+  </table>
+
+
   <table id="speciesTable" class="hide">
     <thead id="speciesTableThead">
       <tr>
@@ -31,13 +53,18 @@
     </thead>
     <tbody id="speciesTableTbody"></tbody>
   </table>
-  <a class="topButton"><span class="material-icons">arrow_upward</span></a>
+
+
+  <a class="topButton hide"><span class="material-icons">arrow_upward</span></a>
   <script defer src="src/global.js"></script>
   <script defer src="src/lz-string.js"></script>
   <script defer src="src/utility.js"></script>
   <script defer src="src/species/displaySpecies.js"></script>
   <script defer src="src/species/fetchSpecies.js"></script>
   <script defer src="src/species/regexSpecies.js"></script>
+  <script defer src="src/abilities/displayAbilities.js"></script>
+  <script defer src="src/abilities/fetchAbilities.js"></script>
+  <script defer src="src/abilities/regexAbilities.js"></script>
 </body>
 <footer>
   <h1>Inclement Emerald<br>Pokedex</h1>

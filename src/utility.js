@@ -56,11 +56,15 @@ function sanitizeString(string){
 
 
 async function displaySetup(){
-    await fetchSpeciesObj()
+    await fetchData()
     
-    await speciesButton.classList.remove("hide")
     await speciesTable.classList.remove("hide")
+    await speciesButton.classList.remove("hide")
     await speciesInput.classList.remove("hide")
+
+    await abilitiesButton.classList.remove("hide")
+
+    await topButton.classList.remove("hide")
     await speciesTable.classList.add("active")
 
     const options = {
@@ -71,6 +75,24 @@ async function displaySetup(){
     const observer = await new IntersectionObserver(isTouching, options)
     await observer.observe(document.querySelector("footer"))
 }
+
+async function fetchData(){
+    await forceUpdate()
+
+    await fetchSpeciesObj()
+    await fetchAbilitiesObj()
+}
+
+
+async function forceUpdate(){
+    const update = 9
+    if(localStorage.getItem("forceUpdate") != update){
+        await localStorage.removeItem("species")
+        await localStorage.removeItem("abilities")
+        await localStorage.setItem("forceUpdate", update)
+    }
+}
+
 
 
 

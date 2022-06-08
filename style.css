@@ -2,13 +2,22 @@
 	font-family: sans-serif;
 }
 
+body {
+    background: #181818;
+    color: white;
+}
+
+#tableButton, #tableInput {
+    text-align: center;
+}
+
 .hide, .hideTemp {
 	display: none !important
 }
 
 th {
 	cursor: pointer;
-	background: #333; 
+	background: #aaaaaa; 
   	color: white; 
   	font-weight: bold; 
 }
@@ -31,7 +40,7 @@ h1, td, th {
 }
 
 tr:nth-of-type(odd) {  
-  background: #eee; 
+  background: #3d3d3d; 
 }
 
 @media (hover: hover) {
@@ -39,7 +48,7 @@ tr:nth-of-type(odd) {
         background: rgba(0, 0, 0, 0.1);
     }
     #speciesTableTbody tr:hover {
-        background-color: #add8e6;
+        background-color: gray;
         cursor: pointer;
     }
     .topButton:hover {

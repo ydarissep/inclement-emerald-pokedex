@@ -27,8 +27,15 @@ function updateDisplayedSpecies(input){
 
 
 
-function speciesButtonClick(){
-    speciesTable.classList.add("active")
+async function speciesButtonClick(){
+    await lazyLoading(reset = true)
+    await abilitiesTable.classList.remove("active")
+    await abilitiesTable.classList.add("hide")
+    await abilitiesInput.classList.add("hide")
+
+    await speciesTable.classList.add("active")
+    await speciesTable.classList.remove("hide")
+    await speciesInput.classList.remove("hide")
 }
 
 
@@ -72,7 +79,7 @@ function displaySpecies(species){
         let nameContainer = document.createElement("td")
         let name = document.createElement("div")
         nameContainer.className = "species"
-        name.innerText = sanitizeString(species[speciesName]["species"])
+        name.innerText = sanitizeString(species[speciesName]["name"])
         nameContainer.append(name)
         row.append(nameContainer)
 

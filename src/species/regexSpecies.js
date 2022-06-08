@@ -19,7 +19,7 @@ function regexSpecies(textSpecies, species){
 
 
                 species[name] = {}
-                species[name]["species"] = name
+                species[name]["name"] = name
 
 
                 if(Number.isInteger(formsStart))

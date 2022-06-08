@@ -131,26 +131,16 @@ function initializeSpeciesObj(species){
         species[name]["forms"] = []
         species[name]["sprite"] = ""
     }
+    delete species["SPECIES_NONE"]
+    delete species["SPECIES_EGG"]
     return species
 }
 
-async function forceUpdate(){
-    const update = 8
-    if(localStorage.getItem("forceUpdate") != update){
-        await localStorage.removeItem("species")
-        await localStorage.setItem("forceUpdate", update)
-    }
-}
-
-
 
 async function fetchSpeciesObj(){
-    await localStorage.removeItem("pokemon") // can be removed later
-    await forceUpdate()
     if(!localStorage.getItem("species"))
         await buildSpeciesObj()
 
-        let species = await JSON.parse(LZString.decompressFromUTF16(localStorage.getItem("species")))
-        console.log(species)
-        await displaySpecies(species)
+    let species = await JSON.parse(LZString.decompressFromUTF16(localStorage.getItem("species")))
+    await displaySpecies(species)
 }

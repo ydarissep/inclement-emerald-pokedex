@@ -1,8 +1,15 @@
+const speciesInput = document.getElementById("speciesInput")
 const speciesButton = document.getElementById("speciesButton")
 const speciesTable = document.getElementById("speciesTable")
 const speciesTableThead = document.getElementById("speciesTableThead")
 const speciesTableTbody = document.getElementById("speciesTableTbody")
-const speciesInput = document.getElementById("speciesInput")
+
+const abilitiesInput = document.getElementById("abilitiesInput")
+const abilitiesButton = document.getElementById("abilitiesButton")
+const abilitiesTable = document.getElementById("abilitiesTable")
+const abilitiesTableThead = document.getElementById("abilitiesTableThead")
+const abilitiesTableTbody = document.getElementById("abilitiesTableTbody")
+
 const headerID = document.querySelector("th.ID")
 const headerSprite = document.querySelector("th.sprite")
 const headerName = document.querySelector("th.species")
@@ -17,18 +24,20 @@ const headerSpe = document.querySelector("th.baseSpeed")
 const headerBST = document.querySelector("th.BST")
 const topButton = document.querySelector('.topButton')
 
-document.addEventListener('scroll', () => {
-  window.scrollY ? topButton.style.filter = 'opacity(100%)' : topButton.style.filter = 'opacity(0%)'
-})
-
 topButton.onclick = () => {
-  window.scrollTo({top: 0, behavior: 'auto'})
+    window.scrollTo({top: 0, behavior: 'auto'})
+    lazyLoading(reset = true)
 }
 
 
 speciesButton.addEventListener("click", () => {
-    if(!speciesButton.classList.contains("active"))
+    if(!speciesTable.classList.contains("active"))
         speciesButtonClick()
+})
+
+abilitiesButton.addEventListener("click", () => {
+    if(!abilitiesTable.classList.contains("active"))
+        abilitiesButtonClick()  
 })
 
 headerID.addEventListener("click", () => {
