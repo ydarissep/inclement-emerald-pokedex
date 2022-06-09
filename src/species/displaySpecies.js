@@ -35,7 +35,8 @@ function displaySpecies(species){
         let row = document.createElement("tr")
         tBody.append(row)
 
-        row.className = "hideTemp"
+        if(i >= 75)
+            row.className = "hideTemp"
 
 
         let IDcontainer = document.createElement("td")

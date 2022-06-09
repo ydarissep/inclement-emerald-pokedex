@@ -69,6 +69,7 @@ async function displaySetup(){
     await topButton.classList.remove("hide")
     await speciesTable.classList.add("activeTable")
     await speciesButton.classList.add("activeButton")
+    await speciesInput.classList.add("activeInput")
 
 
 
@@ -91,7 +92,7 @@ async function fetchData(){
 
 
 async function forceUpdate(){
-    const update = 9
+    const update = 10
     if(localStorage.getItem("forceUpdate") != update){
         await localStorage.removeItem("species")
         await localStorage.removeItem("abilities")
@@ -179,6 +180,7 @@ async function tableButtonClick(input){
     await lazyLoading(reset = true)
     const activeTable = await document.querySelectorAll(".activeTable")
     const activeButton = await document.querySelectorAll(".activeButton")
+    const activeInput = await document.querySelectorAll(".activeInput")
 
     activeTable.forEach(table => {
         table.classList.remove("activeTable")
@@ -190,11 +192,20 @@ async function tableButtonClick(input){
         button.classList.remove("activeButton")
     })
 
+    activeInput.forEach(input => {
+        input.classList.remove("activeInput")
+        input.classList.add("hide")
+    })
+
     const targetTable = await document.getElementById(`${input}Table`)
     const targetButton = await document.getElementById(`${input}Button`)
+    const targetInput = await document.getElementById(`${input}Input`)
 
     targetTable.classList.remove("hide")
     targetTable.classList.add("activeTable")
 
     targetButton.classList.add("activeButton")
+
+    targetInput.classList.remove("hide")
+    targetInput.classList.add("activeInput")
 }

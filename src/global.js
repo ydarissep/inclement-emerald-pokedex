@@ -10,18 +10,22 @@ const abilitiesTable = document.getElementById("abilitiesTable")
 const abilitiesTableThead = document.getElementById("abilitiesTableThead")
 const abilitiesTableTbody = document.getElementById("abilitiesTableTbody")
 
-const headerID = document.querySelector("th.ID")
-const headerSprite = document.querySelector("th.sprite")
-const headerName = document.querySelector("th.species")
-const headerType = document.querySelector("th.types")
-const headerAbilities = document.querySelector("th.abilities")
-const headerHP = document.querySelector("th.baseHP")
-const headerAtk = document.querySelector("th.baseAttack")
-const headerDef = document.querySelector("th.baseDefense")
-const headerSpA = document.querySelector("th.baseSpAttack")
-const headerSpD = document.querySelector("th.baseSpDefense")
-const headerSpe = document.querySelector("th.baseSpeed")
-const headerBST = document.querySelector("th.BST")
+const headerAbilitiesName = document.querySelector("#abilitiesTableThead th.ability")
+const headerAbilitiesDescription = document.querySelector("#abilitiesTableThead th.description")
+
+
+const headerSpeciesID = document.querySelector("#speciesTableThead th.ID")
+const headerSpeciesSprite = document.querySelector("#speciesTableThead th.sprite")
+const headerSpeciesName = document.querySelector("#speciesTableThead th.species")
+const headerSpeciesTypes = document.querySelector("#speciesTableThead th.types")
+const headerSpeciesAbilities = document.querySelector("#speciesTableThead th.abilities")
+const headerSpeciesHP = document.querySelector("#speciesTableThead th.baseHP")
+const headerSpeciesAtk = document.querySelector("#speciesTableThead th.baseAttack")
+const headerSpeciesDef = document.querySelector("#speciesTableThead th.baseDefense")
+const headerSpeciesSpA = document.querySelector("#speciesTableThead th.baseSpAttack")
+const headerSpeciesSpD = document.querySelector("#speciesTableThead th.baseSpDefense")
+const headerSpeciesSpe = document.querySelector("#speciesTableThead th.baseSpeed")
+const headerSpeciesBST = document.querySelector("#speciesTableThead th.BST")
 const topButton = document.querySelector('.topButton')
 
 topButton.onclick = () => {
@@ -31,90 +35,122 @@ topButton.onclick = () => {
 
 
 speciesButton.addEventListener("click", () => {
-    if(!speciesTable.classList.contains("active"))
+    if(!speciesButton.classList.contains("activeButton"))
         tableButtonClick("species")
 })
 
 abilitiesButton.addEventListener("click", () => {
-    if(!abilitiesTable.classList.contains("active"))
+    if(!abilitiesButton.classList.contains("activeButton"))
         tableButtonClick("abilities")  
 })
 
-headerID.addEventListener("click", () => {
-    if(headerID.classList.contains("th-sort-asc"))
+
+
+
+headerAbilitiesName.addEventListener("click", () => {
+    if(headerAbilitiesName.classList.contains("th-sort-asc"))
+        sortTableByClassName(abilitiesTable, "ability", asc = false)
+    else
+        sortTableByClassName(abilitiesTable, "ability", asc = true)
+})
+
+headerAbilitiesDescription.addEventListener("click", () => {
+    if(headerAbilitiesDescription.classList.contains("th-sort-asc"))
+        sortTableByClassName(abilitiesTable, "description", asc = false)
+    else
+        sortTableByClassName(abilitiesTable, "description", asc = true)
+})
+
+
+
+
+
+
+
+headerSpeciesID.addEventListener("click", () => {
+    if(headerSpeciesID.classList.contains("th-sort-asc"))
         sortTableByClassName(speciesTable, "ID", asc = false, parseINT = true)
     else
         sortTableByClassName(speciesTable, "ID", asc = true, parseINT = true)
 })
-headerSprite.addEventListener("click", () => {
-    if(headerID.classList.contains("th-sort-asc"))
+headerSpeciesSprite.addEventListener("click", () => {
+    if(headerSpeciesID.classList.contains("th-sort-asc"))
         sortTableByClassName(speciesTable, "ID", asc = false, parseINT = true)
     else
         sortTableByClassName(speciesTable, "ID", asc = true, parseINT = true)
 })
-headerName.addEventListener("click", () => {
-    if(headerName.classList.contains("th-sort-asc"))
+headerSpeciesName.addEventListener("click", () => {
+    if(headerSpeciesName.classList.contains("th-sort-asc"))
         sortTableByClassName(speciesTable, "species", asc = false)
     else
         sortTableByClassName(speciesTable, "species", asc = true)
 })
-headerType.addEventListener("click", () => {
-    if(headerType.classList.contains("th-sort-asc"))
+headerSpeciesTypes.addEventListener("click", () => {
+    if(headerSpeciesTypes.classList.contains("th-sort-asc"))
         sortTableByClassName(speciesTable, "types", asc = false)
     else
         sortTableByClassName(speciesTable, "types", asc = true)
 })
-headerAbilities.addEventListener("click", () => {
-    if(headerAbilities.classList.contains("th-sort-asc"))
+headerSpeciesAbilities.addEventListener("click", () => {
+    if(headerSpeciesAbilities.classList.contains("th-sort-asc"))
         sortTableByClassName(speciesTable, "abilities", asc = false)
     else
         sortTableByClassName(speciesTable, "abilities", asc = true)
 })
-headerHP.addEventListener("click", () => {
-    if(headerHP.classList.contains("th-sort-asc"))
+headerSpeciesHP.addEventListener("click", () => {
+    if(headerSpeciesHP.classList.contains("th-sort-asc"))
         sortTableByClassName(speciesTable, "baseHP", asc = false, parseINT = true)
     else
         sortTableByClassName(speciesTable, "baseHP", asc = true, parseINT = true)
 })
-headerAtk.addEventListener("click", () => {
-    if(headerAtk.classList.contains("th-sort-asc"))
+headerSpeciesAtk.addEventListener("click", () => {
+    if(headerSpeciesAtk.classList.contains("th-sort-asc"))
         sortTableByClassName(speciesTable, "baseAttack", asc = false, parseINT = true)
     else
         sortTableByClassName(speciesTable, "baseAttack", asc = true, parseINT = true)
 })
-headerDef.addEventListener("click", () => {
-    if(headerDef.classList.contains("th-sort-asc"))
+headerSpeciesDef.addEventListener("click", () => {
+    if(headerSpeciesDef.classList.contains("th-sort-asc"))
         sortTableByClassName(speciesTable, "baseDefense", asc = false, parseINT = true)
     else
         sortTableByClassName(speciesTable, "baseDefense", asc = true, parseINT = true)
 })
-headerSpA.addEventListener("click", () => {
-    if(headerSpA.classList.contains("th-sort-asc"))
+headerSpeciesSpA.addEventListener("click", () => {
+    if(headerSpeciesSpA.classList.contains("th-sort-asc"))
         sortTableByClassName(speciesTable, "baseSpAttack", asc = false, parseINT = true)
     else
         sortTableByClassName(speciesTable, "baseSpAttack", asc = true, parseINT = true)
 })
-headerSpD.addEventListener("click", () => {
-    if(headerSpD.classList.contains("th-sort-asc"))
+headerSpeciesSpD.addEventListener("click", () => {
+    if(headerSpeciesSpD.classList.contains("th-sort-asc"))
         sortTableByClassName(speciesTable, "baseSpDefense", asc = false, parseINT = true)
     else
         sortTableByClassName(speciesTable, "baseSpDefense", asc = true, parseINT = true)
 })
-headerSpe.addEventListener("click", () => {
-    if(headerSpe.classList.contains("th-sort-asc"))
+headerSpeciesSpe.addEventListener("click", () => {
+    if(headerSpeciesSpe.classList.contains("th-sort-asc"))
         sortTableByClassName(speciesTable, "baseSpeed", asc = false, parseINT = true)
     else
         sortTableByClassName(speciesTable, "baseSpeed", asc = true, parseINT = true)
 })
-headerBST.addEventListener("click", () => {
-    if(headerBST.classList.contains("th-sort-asc"))
+headerSpeciesBST.addEventListener("click", () => {
+    if(headerSpeciesBST.classList.contains("th-sort-asc"))
         sortTableByClassName(speciesTable, "BST", asc = false, parseINT = true)
     else
         sortTableByClassName(speciesTable, "BST", asc = true, parseINT = true)
 })
+
+
+
+
 speciesInput.addEventListener("input", e => {
     const value = e.target.value
     updateDisplayedSpecies(value)
+})
+
+abilitiesInput.addEventListener("input", e => {
+    const value = e.target.value
+    updateDisplayedAbilities(value)
 })
 
 
