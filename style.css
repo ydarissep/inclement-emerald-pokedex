@@ -3,8 +3,9 @@
 }
 
 body {
-    background: #181818;
+    background: #232529;
     color: white;
+    margin: 0;
 }
 
 #tableButton, #tableInput {
@@ -15,11 +16,32 @@ body {
 	display: none !important
 }
 
+button[type='button'] {
+  background: rgba(215, 212, 231, 0.075);
+  border: none;
+  outline: none;
+  color: white;
+  padding: 0.5rem 0.75rem;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+  border-radius: 3px;
+}
+
+button[type='button']:hover {
+  background: rgba(215, 212, 231, 0.3);
+}
+
+.activeButton {
+  background: rgba(215, 212, 231, 0.4) !important;
+}
+
+
 th {
 	cursor: pointer;
-	background: #aaaaaa; 
-  	color: white; 
-  	font-weight: bold; 
+    background: rgba(215, 212, 231, 0.075); 
+    color: white; 
+    font-weight: bold; 
+    padding: 0.5rem 0.5rem;
 }
 
 .th-sort-asc::after {
@@ -39,16 +61,41 @@ h1, td, th {
 	text-align: center;
 }
 
+tr, th {
+  transition: background 0.2s ease-in-out;
+}
+
 tr:nth-of-type(odd) {  
-  background: #3d3d3d; 
+  background: #7f85a01a; 
+}
+
+input {
+  padding: 0.5rem;
+  border-radius: 3px;
+  outline: none;
+  border: 1px solid rgba(255, 255, 255, 0.226);
+  box-sizing: border-box;
+  background: none;
+  color: white;
+  transition: background 0.2s ease-in-out;
+  font-weight: 600;
+  width: 300px;
+}
+
+input:focus, input:hover {
+  background: rgba(255, 255, 255, 0.144);
+}
+
+canvas {
+  padding: 0.5rem;
 }
 
 @media (hover: hover) {
     thead th:hover {
-        background: rgba(0, 0, 0, 0.1);
+        background: rgba(113, 117, 126, 0.336);
     }
     #speciesTableTbody tr:hover {
-        background-color: gray;
+        background-color: rgba(129, 135, 156, 0.301);
         cursor: pointer;
     }
     .topButton:hover {
@@ -60,8 +107,8 @@ tr:nth-of-type(odd) {
 .topButton {
   font-family: monospace;
   position: fixed;
-  bottom: 15px;
-  right: 15%;
+  bottom: 5px;
+  right: 5px;
   background: red;
   width: 50px;
   height: 50px;
@@ -74,4 +121,15 @@ tr:nth-of-type(odd) {
   border-radius: 50%;
   transition: 0.2s ease-in-out;
   filter: opacity(100%);
+}
+
+
+table {
+    margin: auto;
+    border-collapse: collapse;
+    box-shadow: 0 0 15px 0 rgba(27, 27, 27, 0.568);
+}
+
+td, th {
+    border: 1px solid rgba(255, 255, 255, 0.048);
 }

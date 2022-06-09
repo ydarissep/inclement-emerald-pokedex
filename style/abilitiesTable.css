@@ -1,15 +1,3 @@
-#abilitiesTable {
-	margin: auto;
-	/*
-  	table-layout: fixed;
-  	*/
-  	border-collapse: collapse;
-}
-
-#abilitiesInput {
-	width: 300px;
-}
-
 #abilitiesButton {
 	width: 100px;
 }

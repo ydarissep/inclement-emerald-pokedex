@@ -57,6 +57,8 @@ function sanitizeString(string){
 
 async function displaySetup(){
     await fetchData()
+
+    
     
     await speciesTable.classList.remove("hide")
     await speciesButton.classList.remove("hide")
@@ -65,7 +67,11 @@ async function displaySetup(){
     await abilitiesButton.classList.remove("hide")
 
     await topButton.classList.remove("hide")
-    await speciesTable.classList.add("active")
+    await speciesTable.classList.add("activeTable")
+    await speciesButton.classList.add("activeButton")
+
+
+
 
     const options = {
         root: null,
@@ -137,9 +143,8 @@ function sortTableByClassName(table, className, asc = true, parseInteger = false
 
 
 
-
 function lazyLoading(reset = false){
-    const rows = document.getElementsByClassName("active")[0].tBodies[0].rows
+    const rows = document.getElementsByClassName("activeTable")[0].tBodies[0].rows
     let j = 0
     for(let i = 0; i < rows.length; i++){
         if(reset){
@@ -163,4 +168,33 @@ function lazyLoading(reset = false){
                 break
         }
     }
+}
+
+
+
+
+
+
+async function tableButtonClick(input){
+    await lazyLoading(reset = true)
+    const activeTable = await document.querySelectorAll(".activeTable")
+    const activeButton = await document.querySelectorAll(".activeButton")
+
+    activeTable.forEach(table => {
+        table.classList.remove("activeTable")
+        table.classList.add("hide")
+    })
+
+
+    activeButton.forEach(button => {
+        button.classList.remove("activeButton")
+    })
+
+    const targetTable = await document.getElementById(`${input}Table`)
+    const targetButton = await document.getElementById(`${input}Button`)
+
+    targetTable.classList.remove("hide")
+    targetTable.classList.add("activeTable")
+
+    targetButton.classList.add("activeButton")
 }

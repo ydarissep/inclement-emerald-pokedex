@@ -32,12 +32,12 @@ topButton.onclick = () => {
 
 speciesButton.addEventListener("click", () => {
     if(!speciesTable.classList.contains("active"))
-        speciesButtonClick()
+        tableButtonClick("species")
 })
 
 abilitiesButton.addEventListener("click", () => {
     if(!abilitiesTable.classList.contains("active"))
-        abilitiesButtonClick()  
+        tableButtonClick("abilities")  
 })
 
 headerID.addEventListener("click", () => {

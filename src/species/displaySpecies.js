@@ -26,26 +26,6 @@ function updateDisplayedSpecies(input){
 
 
 
-
-async function speciesButtonClick(){
-    await lazyLoading(reset = true)
-    await abilitiesTable.classList.remove("active")
-    await abilitiesTable.classList.add("hide")
-    await abilitiesInput.classList.add("hide")
-
-    await speciesTable.classList.add("active")
-    await speciesTable.classList.remove("hide")
-    await speciesInput.classList.remove("hide")
-}
-
-
-
-
-
-
-
-
-
 function displaySpecies(species){
     let tBody = speciesTableTbody
     const speciesArray = Object.keys(species)

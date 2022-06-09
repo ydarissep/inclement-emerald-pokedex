@@ -18,19 +18,6 @@
 
 
 
-async function abilitiesButtonClick(){
-    await lazyLoading(reset = true)
-    await speciesTable.classList.remove("active")
-    await speciesTable.classList.add("hide")
-    await speciesInput.classList.add("hide")
-
-    await abilitiesTable.classList.add("active")
-    await abilitiesTable.classList.remove("hide")
-    await abilitiesInput.classList.remove("hide")
-}
-
-
-
 function displayAbilities(abilities){
     let tBody = abilitiesTableTbody
     const abilitiesArray = Object.keys(abilities)
