@@ -55,4 +55,5 @@ function displayAbilities(abilities){
         description.innerText = abilities[abilitiesName]["description"]
         row.append(description)
     }
+    console.log(abilities)
 }

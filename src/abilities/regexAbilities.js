@@ -43,7 +43,6 @@ function regexAbilities(textAbilities, abilities){
                 const matchDescription = lines[i].match(/_ *\( *" *(.*)" *\) *;/i)
                 if(matchDescription !== null){
                     const description = matchDescription[1]
-                    console.log(description)
                     if(conversionTable[conversionDescription] !== undefined){
                         for(let j = 0; j < conversionTable[conversionDescription].length; j++)
                         abilities[conversionTable[conversionDescription][j]]["description"] = description
