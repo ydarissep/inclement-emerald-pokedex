@@ -96,10 +96,11 @@ async function fetchData(){
 
 
 async function forceUpdate(){
-    const update = 11
+    const update = 12
     if(localStorage.getItem("forceUpdate") != update){
         await localStorage.removeItem("species")
         await localStorage.removeItem("abilities")
+        await localStorage.removeItem("moves")
         await localStorage.setItem("forceUpdate", update)
     }
 }
