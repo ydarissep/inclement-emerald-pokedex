@@ -105,24 +105,24 @@ function displaySpecies(species){
 
         let speciesObj = species[speciesName]
 
-        row.append(createBaseStatsContainer("HP", "baseHP", speciesName, speciesObj))
+        row.append(createBaseStatsContainer("HP", "baseHP", speciesObj))
 
-        row.append(createBaseStatsContainer("Atk", "baseAttack", speciesName, speciesObj))
+        row.append(createBaseStatsContainer("Atk", "baseAttack", speciesObj))
 
-        row.append(createBaseStatsContainer("Def", "baseDefense", speciesName, speciesObj))
+        row.append(createBaseStatsContainer("Def", "baseDefense", speciesObj))
 
-        row.append(createBaseStatsContainer("SpA", "baseSpAttack", speciesName, speciesObj))
+        row.append(createBaseStatsContainer("SpA", "baseSpAttack", speciesObj))
 
-        row.append(createBaseStatsContainer("SpD", "baseSpDefense", speciesName, speciesObj))
+        row.append(createBaseStatsContainer("SpD", "baseSpDefense", speciesObj))
 
-        row.append(createBaseStatsContainer("Spe", "baseSpeed", speciesName, speciesObj))
+        row.append(createBaseStatsContainer("Spe", "baseSpeed", speciesObj))
 
-        row.append(createBaseStatsContainer("BST", "BST", speciesName, speciesObj))
+        row.append(createBaseStatsContainer("BST", "BST", speciesObj))
     }
 }
 
 
-function createBaseStatsContainer(headerText, stats, speciesName, speciesObj){
+function createBaseStatsContainer(headerText, stats, speciesObj){
     let baseStatsContainer = document.createElement("td")
     let baseStats = document.createElement("div")
     let baseStatsHeader = document.createElement("div") //only used for mobile view

@@ -47,13 +47,15 @@ function displayMoves(moves){
 
         let container = document.createElement("td")
 
+        container.className = "type split"
+
         let type = document.createElement("div")
-        type.className = `${moves[moveName]["type"]} type background`
+        type.className = `${moves[moveName]["type"]} background`
         type.innerText = sanitizeString(moves[moveName]["type"])
         container.append(type)
 
         let split = document.createElement("div")
-        split.className = `${moves[moveName]["split"]} split background`
+        split.className = `${moves[moveName]["split"]} background`
         split.innerText = sanitizeString(moves[moveName]["split"])
         container.append(split)
 
@@ -65,73 +67,49 @@ function displayMoves(moves){
         move.innerText = sanitizeString(moves[moveName]["name"])
         row.append(move)
 
+        const moveObj = moves[moveName]
 
-        let power = document.createElement("td")
-        power.className = "power"
-        if(moves[moveName]["power"] == 0 || moves[moveName]["power"] === undefined)
-            power.innerText = "-"
-        else
-            power.innerText = moves[moveName]["power"]
-        row.append(power)
+        row.append(createInputContainer("Power", "power", moveObj))
 
+        row.append(createInputContainer("Acc", "accuracy", moveObj))
 
-        let accuracy = document.createElement("td")
-        accuracy.className = "accuracy"
-        if(moves[moveName]["accuracy"] == 0 || moves[moveName]["accuracy"] === undefined)
-            accuracy.innerText = "-"
-        else
-            accuracy.innerText = moves[moveName]["accuracy"]
-        row.append(accuracy)
+        row.append(createInputContainer("PP", "PP", moveObj))
 
-
-        let PP = document.createElement("td")
-        PP.className = "PP"
-        PP.innerText = moves[moveName]["PP"]
-        row.append(PP)
-
-
-        let priority = document.createElement("td")
-        priority.className = "priority"
-        if(moves[moveName]["priority"] == 0 || moves[moveName]["priority"] === undefined)
-            priority.innerText = "-"
-        else
-            priority.innerText = moves[moveName]["priority"]
-        row.append(priority)
+        row.append(createInputContainer("Prio", "priority", moveObj))
 
 
         let description = document.createElement("td")
         description.className = "description"
         for(let j = 0; j < moves[moveName]["description"].length; j++){
             const desc = document.createElement("div")
-            desc.innerText += moves[moveName]["description"][j].replace("\\n", "")
+            desc.innerText += moves[moveName]["description"][j].replace("\\n", " ")
             description.append(desc)
         }
         row.append(description)
-
-
-
-        /*
-        let flagsContainer = document.createElement("td")
-        flagsContainer.className = "flags"
-        for(let j = 0; j < moves[moveName]["flags"].length; j++){
-            const flags = document.createElement("div")
-            flags.className = "flag"
-            flags.innerText = sanitizeString(moves[moveName]["flags"][j])
-            flagsContainer.append(flags)
-        }
-        row.append(flagsContainer)
-
-        let changesContainer = document.createElement("td")
-        changesContainer.className = "changes"
-        for(let j = 0; j < moves[moveName]["changes"].length; j++){
-            if(moves[moveName]["changes"][j][0] !== "flags"){
-                const change = document.createElement("div")
-                change.className = "change"
-                change.innerText = `${moves[moveName]["changes"][j][0]}: ${sanitizeString(moves[moveName]["changes"][j][1])}`
-                changesContainer.append(change)
-            }
-        }
-        row.append(changesContainer)
-        */
     }
+}
+
+
+function createInputContainer(headerText, input, moveObj){
+    let inputContainer = document.createElement("td")
+    let inputValue = document.createElement("div")
+    let inputHeader = document.createElement("div") //only used for mobile view
+
+
+    inputHeader.innerText = headerText //only used for mobile view
+    inputHeader.style.display = "none" //only used for mobile view
+    inputHeader.className = "movesHeader" //only used for mobile view
+
+    inputValue.className = `movesBold ${input}` //only used for mobile view
+
+    if(moveObj[input] == 0 || moveObj[input] === undefined)
+        inputValue.innerText = "-"
+    else
+        inputValue.innerText = moveObj[input]
+
+    inputContainer.append(inputHeader)
+    inputContainer.append(inputValue)
+    inputContainer.className = `${input}Container`
+
+    return inputContainer
 }
