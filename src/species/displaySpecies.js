@@ -72,8 +72,8 @@ function displaySpecies(species){
         typesContainer.className = "types"
         type1.innerText = sanitizeString(species[speciesName]["type1"])
         type2.innerText = sanitizeString(species[speciesName]["type2"])
-        type1.className = species[speciesName]["type1"]
-        type2.className = species[speciesName]["type2"]
+        type1.className = `${species[speciesName]["type1"]} background`
+        type2.className = `${species[speciesName]["type2"]} background`
         types.append(type1)
         if(type1.innerText !== type2.innerText)
             types.append(type2)

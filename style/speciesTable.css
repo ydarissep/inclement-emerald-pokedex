@@ -39,42 +39,8 @@
 	width: 45px;
 }
 
-
-[class*="TYPE_"] {
-	display: flex;
-    justify-content: center;
-    align-items: center;
-    border: none;
-    width: 4rem;
-    height: 23px;
-    border-radius: 5px;
-    font-weight: bold;
-    font-size: 0.8rem;
-    padding-bottom: 2px;
-}
-
-
-.TYPE_NORMAL {background: #A8A77A;}
-.TYPE_FIRE {background: #EE8130;}
-.TYPE_WATER {background: #6390F0;}
-.TYPE_ELECTRIC {background: #cf9a09;}
-.TYPE_GRASS {background: #62a13d;}
-.TYPE_ICE {background: #65a19e;}
-.TYPE_FIGHTING {background: #C22E28;}
-.TYPE_POISON {background: #A33EA1;}
-.TYPE_GROUND {background: #b1954f;}
-.TYPE_FLYING {background: #8571be;}
-.TYPE_PSYCHIC {background: #F95587;}
-.TYPE_BUG {background: #808f13;}
-.TYPE_ROCK {background: #B6A136;}
-.TYPE_GHOST {background: #735797;}
-.TYPE_DRAGON {background: #6F35FC;}
-.TYPE_DARK {background: #705746;}
-.TYPE_STEEL {background: #8c8c9e;}
-.TYPE_FAIRY {background: #D685AD;}
-
-td.types > div > div {
-    margin: 2px auto;
+#speciesTable .background {
+    margin: 2px auto;   
 }
 
 .abilities :not(th) {
@@ -126,7 +92,7 @@ only screen and (max-width: 700px) {
         max-width: 100%;
         /*display: none;*/
     }
-    td, th {
+    #speciesTable td, #speciesTable th {
         border: none;
     }
 }

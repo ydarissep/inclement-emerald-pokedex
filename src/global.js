@@ -10,6 +10,13 @@ const abilitiesTable = document.getElementById("abilitiesTable")
 const abilitiesTableThead = document.getElementById("abilitiesTableThead")
 const abilitiesTableTbody = document.getElementById("abilitiesTableTbody")
 
+const movesInput = document.getElementById("movesInput")
+const movesButton = document.getElementById("movesButton")
+const movesTable = document.getElementById("movesTable")
+const movesTableThead = document.getElementById("movesTableThead")
+const movesTableTbody = document.getElementById("movesTableTbody")
+
+
 const headerAbilitiesName = document.querySelector("#abilitiesTableThead th.ability")
 const headerAbilitiesDescription = document.querySelector("#abilitiesTableThead th.description")
 
@@ -38,11 +45,16 @@ speciesButton.addEventListener("click", () => {
     if(!speciesButton.classList.contains("activeButton"))
         tableButtonClick("species")
 })
-
 abilitiesButton.addEventListener("click", () => {
     if(!abilitiesButton.classList.contains("activeButton"))
-        tableButtonClick("abilities")  
+        tableButtonClick("abilities")
 })
+movesButton.addEventListener("click", () => {
+    if(!movesButton.classList.contains("activeButton"))
+        tableButtonClick("moves")
+})
+
+
 
 
 
@@ -53,7 +65,6 @@ headerAbilitiesName.addEventListener("click", () => {
     else
         sortTableByClassName(abilitiesTable, "ability", asc = true)
 })
-
 headerAbilitiesDescription.addEventListener("click", () => {
     if(headerAbilitiesDescription.classList.contains("th-sort-asc"))
         sortTableByClassName(abilitiesTable, "description", asc = false)
@@ -143,15 +154,22 @@ headerSpeciesBST.addEventListener("click", () => {
 
 
 
+
+
+
 speciesInput.addEventListener("input", e => {
     const value = e.target.value
     updateDisplayedSpecies(value)
 })
-
 abilitiesInput.addEventListener("input", e => {
     const value = e.target.value
     updateDisplayedAbilities(value)
 })
+
+
+
+
+
 
 
 window.onbeforeunload = () => {  

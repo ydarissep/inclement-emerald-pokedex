@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="style/speciesTable.css">
   <link rel="stylesheet" href="style/abilitiesTable.css">
+  <link rel="stylesheet" href="style/movesTable.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 </head>
 <body onload="displaySetup()">
@@ -15,12 +16,14 @@
   <div id="tableInput">
     <input type="search" id="speciesInput" class="hide">
     <input type="search" id="abilitiesInput" class="hide">
+    <input type="search" id="movesInput" class="hide">
   </div>
 
 
   <div id="tableButton">
     <button type="button" id="abilitiesButton" class="hide">Abilities</button>
     <button type="button" id="speciesButton" class="hide">Species</button>
+    <button type="button" id="movesButton" class="hide">Moves</button>
   </div>
 
   <table id="abilitiesTable" class="hide">
@@ -31,6 +34,22 @@
       </tr>
     </thead>
     <tbody id="abilitiesTableTbody"></tbody>
+  </table>
+
+
+  <table id="movesTable" class="hide">
+    <thead id="movesTableThead">
+      <tr>
+        <th class="split type">Type</th>
+        <th class="move">Name</th>
+        <th class="power">Power</th>
+        <th class="accuracy">Acc</th>
+        <th class="PP">PP</th>
+        <th class="flags">Flags</th>
+        <th class="changes">Changes</th>
+      </tr>
+    </thead>
+    <tbody id="movesTableTbody"></tbody>    
   </table>
 
 
@@ -65,6 +84,9 @@
   <script defer src="src/abilities/displayAbilities.js"></script>
   <script defer src="src/abilities/fetchAbilities.js"></script>
   <script defer src="src/abilities/regexAbilities.js"></script>
+  <script defer src="src/moves/displayMoves.js"></script>
+  <script defer src="src/moves/fetchMoves.js"></script>
+  <script defer src="src/moves/regexMoves.js"></script>
 </body>
 <footer>
   <h1>Inclement Emerald<br>Pokedex</h1>

@@ -33,7 +33,7 @@ function renderSprite(url, canvas){
 
 
 function sanitizeString(string){
-    const regex = /SPECIES_|TYPE_|ABILITY_|SPECIES_NONE|ABILITY_NONE/ig
+    const regex = /^SPECIES_|^TYPE_|ABILITY_|^SPECIES_NONE|^ABILITY_NONE|^MOVE_|^SPLIT_|FLAG_/ig
     const unsanitizedString = string.replace(regex, "")
     let matchArray = unsanitizedString.match(/\w+/g)
     if(matchArray !== null){
@@ -44,8 +44,10 @@ function sanitizeString(string){
             }
             matchArray[i] = matchArray[i].join(" ")
         }
-    }
         return matchArray.join("\n")
+    }
+    else
+        return unsanitizedString
 }
 
 
@@ -65,6 +67,7 @@ async function displaySetup(){
     await speciesInput.classList.remove("hide")
 
     await abilitiesButton.classList.remove("hide")
+    await movesButton.classList.remove("hide")
 
     await topButton.classList.remove("hide")
     await speciesTable.classList.add("activeTable")
@@ -88,6 +91,7 @@ async function fetchData(){
 
     await fetchSpeciesObj()
     await fetchAbilitiesObj()
+    await fetchMovesObj()
 }
 
 

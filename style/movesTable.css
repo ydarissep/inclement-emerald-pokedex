@@ -1,0 +1,28 @@
+#movesButton {
+	width: 100px;
+}
+
+#movesTableThead th.type {
+	width: 80px;
+}
+#movesTableThead th.move {
+	width: 150px;
+}
+#movesTableThead th.flags {
+	width: 250px;
+}
+#movesTableThead th.changes {
+	width: 150px;
+}
+
+
+#movesTableTbody div.flag {
+	display: inline-block;
+	margin: 0px 6px 0px 6px;
+	font-style: italic;
+	font-size: 0.7em;
+}
+
+#movesTable .background {
+    margin: 5px auto;   
+}
