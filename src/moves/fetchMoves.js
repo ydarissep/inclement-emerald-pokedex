@@ -5,9 +5,19 @@ async function getMoves(Moves){
     return regexMoves(textMoves, Moves)
 }
 
+async function getMovesDescription(Moves){
+    const rawMovesDescription = await fetch("https://raw.githubusercontent.com/BuffelSaft/pokeemerald/master/src/data/text/move_descriptions.h")
+    const textMovesDescription = await rawMovesDescription.text()
+
+    return regexMovesDescription(textMovesDescription, Moves)
+}
+
+
+
 async function buildMovesObj(){
     let moves = {}
-    moves = await getMoves(moves) 
+    moves = await getMoves(moves)
+    moves = await getMovesDescription(moves)
     delete moves["MOVE_NONE"]
 
     await localStorage.setItem("moves", LZString.compressToUTF16(JSON.stringify(moves)))

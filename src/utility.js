@@ -96,7 +96,7 @@ async function fetchData(){
 
 
 async function forceUpdate(){
-    const update = 10
+    const update = 11
     if(localStorage.getItem("forceUpdate") != update){
         await localStorage.removeItem("species")
         await localStorage.removeItem("abilities")
@@ -109,7 +109,7 @@ async function forceUpdate(){
 
 
 
-function sortTableByClassName(table, className, asc = true, parseInteger = false) {
+function sortTableByClassName(table, className, asc = true, parseINT = false) {
     const dirModifier = asc ? 1 : -1;
     const tBody = table.tBodies[0];
     const rows = Array.from(tBody.querySelectorAll("tr"));
@@ -118,11 +118,17 @@ function sortTableByClassName(table, className, asc = true, parseInteger = false
     const sortedRows = rows.sort((a, b) => {
         let aColText = a.querySelector(`.${className}`).textContent.trim();
         let bColText = b.querySelector(`.${className}`).textContent.trim();
-        if(parseInteger)
+
+        if(parseINT)
         {
             aColText = parseInt(aColText)
+            if(isNaN(aColText))
+                aColText = 0
             bColText = parseInt(bColText)
+            if(isNaN(bColText))
+                bColText = 0
         }
+
         return aColText > bColText ? (1 * dirModifier) : (-1 * dirModifier);
     });
 

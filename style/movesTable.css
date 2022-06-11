@@ -8,21 +8,40 @@
 #movesTableThead th.move {
 	width: 150px;
 }
-#movesTableThead th.flags {
+#movesTableThead th.power {
+	width: 75px;
+}
+#movesTableThead th.accuracy {
+	width: 50px;
+}
+#movesTableThead th.PP {
+	width: 40px;
+}
+#movesTableThead th.priority {
+	width: 50px;
+}
+#movesTableThead th.description {
 	width: 250px;
 }
-#movesTableThead th.changes {
-	width: 150px;
-}
 
-
-#movesTableTbody div.flag {
-	display: inline-block;
-	margin: 0px 6px 0px 6px;
-	font-style: italic;
-	font-size: 0.7em;
-}
 
 #movesTable .background {
     margin: 5px auto;   
+}
+
+
+
+@media 
+only screen and (max-width: 500px) {
+
+	/*
+	#movesTableThead th.description {
+		display: none !important;
+	}
+
+	#movesTableTbody td.description {
+		display: inline-block !important;
+		width: 100%;
+	}
+	*/
 }

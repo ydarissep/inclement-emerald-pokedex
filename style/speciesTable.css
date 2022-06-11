@@ -76,7 +76,7 @@ only screen and (max-width: 700px) {
     	box-sizing: border-box;
     }
 
-    [class*="TYPE_"], .baseStatsHeader {
+    #speciesTable [class*="TYPE_"], .baseStatsHeader {
         display: inline-flex !important;
         font-weight: bold;
     }

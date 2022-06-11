@@ -3,9 +3,9 @@
 }
 
 #abilitiesTableThead th.ability {
-	width: 254px;
+	width: 250px;
 }
 
 #abilitiesTableThead th.description {
-	width: 650px;
+	width: 400px;
 }

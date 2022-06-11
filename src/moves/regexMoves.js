@@ -1,3 +1,54 @@
+function regexMovesDescription(textMovesDescription, moves){
+    const lines = textMovesDescription.split("\n")
+    let conversionTable = {}, descriptionFound = false, conversionDescription = undefined
+
+    lines.forEach(line => { // first go to get conversionTable
+        const matchMoves = line.match(/MOVE_\w+/i)
+        if(matchMoves !== null){
+            const move = matchMoves[0]
+
+
+            const matchConversionDescription = line.match(/s\w+Description/i)
+            if(matchConversionDescription !== null){
+                const conversionDescription = matchConversionDescription[0]
+
+                if(conversionTable[conversionDescription] === undefined)
+                    conversionTable[conversionDescription] = [move]
+                else
+                    conversionTable[conversionDescription].push(move)
+            }
+        }
+    })
+
+    lines.forEach(line => { // second go with conversionTable
+        const matchConversionDescription = line.match(/static *const *u\d+ *(s\w+Description)/i)
+        if(matchConversionDescription !== null && conversionDescription !== matchConversionDescription[1]){
+            conversionDescription = matchConversionDescription[1]
+
+            descriptionFound = true
+        }
+
+        if(descriptionFound === true){
+            const matchDescription = line.match(/"(.*)"/i)
+            if(matchDescription !== null){
+                const description = matchDescription[1]
+
+                if(conversionTable[conversionDescription] !== undefined){
+                    for(let i = 0; i < conversionTable[conversionDescription].length; i++)
+                        moves[conversionTable[conversionDescription][i]]["description"].push(description)
+                }
+            }
+        }
+
+        if(line.match(";"))
+            descriptionFound = false
+
+    })
+
+    return moves
+}
+
+
 function regexMoves(textMoves, moves){
     const lines = textMoves.split("\n")
     let move = null, change = false, rebalanced = false
@@ -11,6 +62,7 @@ function regexMoves(textMoves, moves){
             moves[move] = {}
             moves[move]["name"] = move
             moves[move]["changes"] = []
+            moves[move]["description"] = []
         }
         if(line.includes("REBALANCED_VERSION"))
             rebalanced = true
@@ -95,7 +147,7 @@ function regexMoves(textMoves, moves){
             }
         }
         else if(line.includes(".priority")){
-            const matchPriority = line.match(/\d+/)
+            const matchPriority = line.match(/-? *\d+/)
             if(matchPriority !== null){
                 const priority = matchPriority[0]
 
