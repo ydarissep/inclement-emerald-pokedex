@@ -57,21 +57,18 @@ function sanitizeString(string){
 
 
 
-async function displaySetup(){
-    await fetchData()
-
-    
-    //await speciesTable.classList.remove("hide")
+async function displaySetup(){    
+    await speciesTable.classList.remove("hide")
     await speciesButton.classList.remove("hide")
-    //await speciesInput.classList.remove("hide")
+    await speciesInput.classList.remove("hide")
 
     await abilitiesButton.classList.remove("hide")
     await movesButton.classList.remove("hide")
 
     await topButton.classList.remove("hide")
-    //await speciesTable.classList.add("activeTable")
-    //await speciesButton.classList.add("activeButton")
-    //await speciesInput.classList.add("activeInput")
+    await speciesTable.classList.add("activeTable")
+    await speciesButton.classList.add("activeButton")
+    await speciesInput.classList.add("activeInput")
 
     footerP("")
 }
@@ -79,9 +76,9 @@ async function displaySetup(){
 async function fetchData(){
     await forceUpdate()
 
-    await fetchSpeciesObj()
-    await fetchAbilitiesObj()
-    await fetchMovesObj()
+    fetchSpeciesObj()
+    fetchAbilitiesObj()
+    fetchMovesObj()
 }
 
 

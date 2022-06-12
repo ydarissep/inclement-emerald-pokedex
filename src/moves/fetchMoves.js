@@ -31,7 +31,6 @@ async function fetchMovesObj(){
         await buildMovesObj()
 
     let moves = await JSON.parse(LZString.decompressFromUTF16(localStorage.getItem("moves")))
-    console.log(moves)
     
     await displayMoves(moves)
 }

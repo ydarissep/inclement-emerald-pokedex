@@ -252,3 +252,8 @@ const options = {
 }
 const observer = new IntersectionObserver(isTouching, options)
 observer.observe(document.querySelector("#footer"))
+
+
+fetchData()
+
+displaySetup()
