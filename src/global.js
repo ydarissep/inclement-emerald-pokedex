@@ -233,9 +233,12 @@ movesInput.addEventListener("input", e => {
 
 
 
+
 window.onbeforeunload = () => {  
-  window.scrollTo(0, 0);
-};
+    if(!speciesButton.classList.contains("activeButton")) // temp fix for mobile
+        tableButtonClick("species") // temp fix for mobile
+    window.scrollTo(0, 0);
+}
 
 function isTouching(entries){
     if(entries[0].isIntersecting)

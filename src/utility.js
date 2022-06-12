@@ -74,8 +74,6 @@ async function displaySetup(){
     await speciesInput.classList.add("activeInput")
 
 
-
-
     const options = {
         root: null,
         rootMargins: "0px",
@@ -85,9 +83,6 @@ async function displaySetup(){
     await observer.observe(document.querySelector("footer"))
 
     footerP("")
-
-    if(!speciesButton.classList.contains("activeButton")) // fix for mobile
-        tableButtonClick("species")   // fix for mobile
 }
 
 async function fetchData(){
