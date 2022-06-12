@@ -234,7 +234,7 @@ movesInput.addEventListener("input", e => {
 
 
 window.onbeforeunload = () => {  
-  window.scrollTo(0, 0);  
+  window.scrollTo(0, 0);
 };
 
 function isTouching(entries){

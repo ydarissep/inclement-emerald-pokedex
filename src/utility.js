@@ -61,7 +61,6 @@ async function displaySetup(){
     await fetchData()
 
     
-    
     await speciesTable.classList.remove("hide")
     await speciesButton.classList.remove("hide")
     await speciesInput.classList.remove("hide")
@@ -86,6 +85,9 @@ async function displaySetup(){
     await observer.observe(document.querySelector("footer"))
 
     footerP("")
+
+    if(!speciesButton.classList.contains("activeButton")) // fix for mobile
+        tableButtonClick("species")   // fix for mobile
 }
 
 async function fetchData(){
