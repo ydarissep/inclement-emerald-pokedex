@@ -1,37 +1,3 @@
-function updateDisplayedMoves(input){
-    const inputArray = input.toLowerCase().split(" ")
-    let hideRows = {}
-    const tBody = movesTableTbody
-    let k = 0
-    for (let j = 0; j < tBody.rows.length; j++){
-        let compareValue = ""
-        for (let i = 0; i < 2; i++){
-            compareValue += tBody.rows[j].cells[i].innerText.toLowerCase() + " " // Type + Name
-        }
-        compareValue += tBody.rows[j].cells[6].innerText.toLowerCase() + " " // Description
-        for (let i = 0; i < inputArray.length; i++){
-            if(!compareValue.includes(inputArray[i]))
-                hideRows[j] = "hide"
-        }
-    }
-    for(let i = 0; i < tBody.rows.length; i++){
-        if(hideRows[i] === "hide")
-            tBody.rows[i].classList.add("hide")
-        else
-            tBody.rows[i].classList.remove("hide")
-    }
-    lazyLoading(true)
-}
-
-
-
-
-
-
-
-
-
-
 function displayMoves(moves){
     let tBody = movesTableTbody
     const movesArray = Object.keys(moves)
@@ -44,7 +10,7 @@ function displayMoves(moves){
 
         if(i >= 75)
             row.className = "hideTemp"
-        
+
 
         let move = document.createElement("td")
         move.className = "move"

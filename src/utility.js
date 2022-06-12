@@ -155,6 +155,37 @@ function sortTableByClassName(table, className, asc = true, parseINT = false) {
 
 
 
+function filterTableInput(input, columns, tbody){
+    const inputArray = input.toLowerCase().split(" ")
+    let hideRows = {}
+    let k = 0
+    for (let j = 0; j < tbody.rows.length; j++){
+        let compareValue = ""
+        for (let i = 0; i < columns.length; i++){
+            compareValue += tbody.rows[j].cells[columns[i]].innerText.toLowerCase() + " "
+        }
+        for (let i = 0; i < inputArray.length; i++){
+            inputArray[i] = inputArray[i].replace("-", " ")
+            if(!compareValue.includes(inputArray[i]))
+                hideRows[j] = "hide"
+        }
+    }
+    for(let i = 0; i < tbody.rows.length; i++){
+        if(hideRows[i] === "hide")
+            tbody.rows[i].classList.add("hide")
+        else
+            tbody.rows[i].classList.remove("hide")
+    }
+    lazyLoading(true)
+}
+
+
+
+
+
+
+
+
 function lazyLoading(reset = false){
     const rows = document.getElementsByClassName("activeTable")[0].tBodies[0].rows
     let j = 0

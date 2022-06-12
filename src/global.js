@@ -215,15 +215,15 @@ headerSpeciesBST.addEventListener("click", () => {
 
 speciesInput.addEventListener("input", e => {
     const value = e.target.value
-    updateDisplayedSpecies(value)
+    filterTableInput(value, [2, 3, 4], speciesTableTbody)
 })
 abilitiesInput.addEventListener("input", e => {
     const value = e.target.value
-    updateDisplayedAbilities(value)
+    filterTableInput(value, [0, 1], abilitiesTableTbody)
 })
 movesInput.addEventListener("input", e => {
     const value = e.target.value
-    updateDisplayedMoves(value)
+    filterTableInput(value, [0, 1, 6], movesTableTbody)
 })
 
 
