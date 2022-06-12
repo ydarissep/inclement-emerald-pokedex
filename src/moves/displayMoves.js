@@ -44,6 +44,13 @@ function displayMoves(moves){
 
         if(i >= 75)
             row.className = "hideTemp"
+        
+
+        let move = document.createElement("td")
+        move.className = "move"
+        move.innerText = sanitizeString(moves[moveName]["name"])
+        row.append(move)
+
 
         let container = document.createElement("td")
 
@@ -62,11 +69,6 @@ function displayMoves(moves){
         row.append(container)
 
 
-        let move = document.createElement("td")
-        move.className = "move"
-        move.innerText = sanitizeString(moves[moveName]["name"])
-        row.append(move)
-
         const moveObj = moves[moveName]
 
         row.append(createInputContainer("Power", "power", moveObj))
@@ -76,7 +78,6 @@ function displayMoves(moves){
         row.append(createInputContainer("PP", "PP", moveObj))
 
         row.append(createInputContainer("Prio", "priority", moveObj))
-
 
         let description = document.createElement("td")
         description.className = "description"

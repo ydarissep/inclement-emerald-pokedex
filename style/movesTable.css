@@ -66,8 +66,8 @@ only screen and (max-width: 500px) {
     }
 
     #movesTable td.type, #movesTable td.move { display: inline-block; } 
-    #movesTable td.type { width: 50% !important; box-sizing: border-box; }
-    #movesTable td.move { width: 50% !important; box-sizing: border-box; font-weight: bold;}
+    #movesTable td.type { width: 25% !important; box-sizing: border-box; }
+    #movesTable td.move { width: 75% !important; box-sizing: border-box; font-weight: bold;}
 
     #movesTableThead th.description {
 		display: none !important;
