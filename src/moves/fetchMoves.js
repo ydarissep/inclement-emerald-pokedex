@@ -1,4 +1,5 @@
 async function getMoves(Moves){
+    footerP("Fetching moves")
     const rawMoves = await fetch("https://raw.githubusercontent.com/BuffelSaft/pokeemerald/master/src/data/battle_moves.h")
     const textMoves = await rawMoves.text()
 
@@ -6,6 +7,7 @@ async function getMoves(Moves){
 }
 
 async function getMovesDescription(Moves){
+    footerP("Fetching moves descriptions")
     const rawMovesDescription = await fetch("https://raw.githubusercontent.com/BuffelSaft/pokeemerald/master/src/data/text/move_descriptions.h")
     const textMovesDescription = await rawMovesDescription.text()
 

@@ -84,6 +84,8 @@ async function displaySetup(){
     }
     const observer = await new IntersectionObserver(isTouching, options)
     await observer.observe(document.querySelector("footer"))
+
+    footerP("")
 }
 
 async function fetchData(){
@@ -96,13 +98,28 @@ async function fetchData(){
 
 
 async function forceUpdate(){
-    const update = 12
+    const update = 13
     if(localStorage.getItem("forceUpdate") != update){
         await localStorage.removeItem("species")
         await localStorage.removeItem("abilities")
         await localStorage.removeItem("moves")
         await localStorage.setItem("forceUpdate", update)
+        footerP("Fetching data please wait... this is only done once.")
     }
+}
+
+
+
+
+
+function footerP(input){
+    if(input === "")
+        document.querySelectorAll("#footer > p").forEach(paragraph => paragraph.remove())
+
+    const paragraph = document.createElement("p")
+    const footer = document.getElementById("footer")
+    paragraph.innerText = input
+    footer.append(paragraph)
 }
 
 

@@ -8,6 +8,10 @@ body {
     margin: 0;
 }
 
+footer > p {
+    text-align: center;
+}
+
 #tableButton, #tableInput {
     text-align: center;
 }
@@ -79,7 +83,7 @@ input {
   color: white;
   transition: background 0.2s ease-in-out;
   font-weight: 600;
-  max-width: 300px;
+  width: 300px;
 }
 
 input:focus, input:hover {
