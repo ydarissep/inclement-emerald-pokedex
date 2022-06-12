@@ -235,8 +235,6 @@ movesInput.addEventListener("input", e => {
 
 
 window.onbeforeunload = () => {  
-    if(!speciesButton.classList.contains("activeButton")) // temp fix for mobile
-        tableButtonClick("species") // temp fix for mobile
     window.scrollTo(0, 0);
 }
 
@@ -244,3 +242,13 @@ function isTouching(entries){
     if(entries[0].isIntersecting)
         lazyLoading(false)
 }
+
+
+
+const options = {
+        root: null,
+        rootMargins: "0px",
+        threshold: 0
+}
+const observer = new IntersectionObserver(isTouching, options)
+observer.observe(document.querySelector("#footer"))

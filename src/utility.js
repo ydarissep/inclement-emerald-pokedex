@@ -61,26 +61,17 @@ async function displaySetup(){
     await fetchData()
 
     
-    await speciesTable.classList.remove("hide")
+    //await speciesTable.classList.remove("hide")
     await speciesButton.classList.remove("hide")
-    await speciesInput.classList.remove("hide")
+    //await speciesInput.classList.remove("hide")
 
     await abilitiesButton.classList.remove("hide")
     await movesButton.classList.remove("hide")
 
     await topButton.classList.remove("hide")
-    await speciesTable.classList.add("activeTable")
-    await speciesButton.classList.add("activeButton")
-    await speciesInput.classList.add("activeInput")
-
-
-    const options = {
-        root: null,
-        rootMargins: "0px",
-        threshold: 0
-    }
-    const observer = await new IntersectionObserver(isTouching, options)
-    await observer.observe(document.querySelector("footer"))
+    //await speciesTable.classList.add("activeTable")
+    //await speciesButton.classList.add("activeButton")
+    //await speciesInput.classList.add("activeInput")
 
     footerP("")
 }
@@ -199,30 +190,34 @@ function filterTableInput(input, columns, tbody){
 
 
 
-
 function lazyLoading(reset = false){
-    const rows = document.getElementsByClassName("activeTable")[0].tBodies[0].rows
-    let j = 0
-    for(let i = 0; i < rows.length; i++){
-        if(reset){
-            if(j <= 75){
+    const activeTables = document.getElementsByClassName("activeTable")
+    let rows = []
+    if(activeTables.length > 0)
+    {
+        rows = activeTables[0].tBodies[0].rows
+        let j = 0
+        for(let i = 0; i < rows.length; i++){
+            if(reset){
+                if(j <= 75){
+                    if(!rows[i].classList.contains("hide")){
+                        rows[i].classList.remove("hideTemp")
+                        j++
+                    }
+                }
+                else
+                    rows[i].classList.add("hideTemp")
+            }
+            else{
                 if(!rows[i].classList.contains("hide")){
-                    rows[i].classList.remove("hideTemp")
-                    j++
+                    if(rows[i].classList.contains("hideTemp")){
+                        j++
+                        rows[i].classList.remove("hideTemp")
+                    }
                 }
+                if(j >= 75)
+                    break
             }
-            else
-                rows[i].classList.add("hideTemp")
-        }
-        else{
-            if(!rows[i].classList.contains("hide")){
-                if(rows[i].classList.contains("hideTemp")){
-                    j++
-                    rows[i].classList.remove("hideTemp")
-                }
-            }
-            if(j >= 75)
-                break
         }
     }
 }
