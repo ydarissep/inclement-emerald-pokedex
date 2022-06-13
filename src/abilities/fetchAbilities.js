@@ -13,15 +13,15 @@ async function buildAbilitiesObj(){
     delete abilities["ABILITY_NAME_LENGTH"]
 
     await localStorage.setItem("abilities", LZString.compressToUTF16(JSON.stringify(abilities)))
+    return abilities
 }
 
 
 async function fetchAbilitiesObj(){
     if(!localStorage.getItem("abilities"))
-        await buildAbilitiesObj()
-
-    window.abilities = await JSON.parse(LZString.decompressFromUTF16(localStorage.getItem("abilities")))
+        window.abilities = await buildAbilitiesObj()
+    else
+        window.abilities = await JSON.parse(LZString.decompressFromUTF16(localStorage.getItem("abilities")))
     
     await displayAbilities()
 }
-

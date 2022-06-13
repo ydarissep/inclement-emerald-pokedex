@@ -78,7 +78,7 @@ async function getTutorLearnsets(species){
 }
 
 async function getSprite(species){
-    footerP("Fetching sprites")
+    footerP("Fetching sprites... this can take a while")
     const rawFrontPicTable = await fetch("https://raw.githubusercontent.com/BuffelSaft/pokeemerald/master/src/data/pokemon_graphics/front_pic_table.h")
     const textFrontPicTable = await rawFrontPicTable.text()
 
@@ -110,7 +110,9 @@ async function buildSpeciesObj(){
     species = await getEggMovesLearnsets(species)
     species = await getTutorLearnsets(species)
     species = await getSprite(species)
+
     await localStorage.setItem("species", LZString.compressToUTF16(JSON.stringify(species)))
+    return species
 }
 
 
@@ -150,8 +152,10 @@ function initializeSpeciesObj(species){
 
 async function fetchSpeciesObj(){
     if(!localStorage.getItem("species"))
-        await buildSpeciesObj()
+        window.species = await buildSpeciesObj()
+    else
+        window.species = await JSON.parse(LZString.decompressFromUTF16(localStorage.getItem("species")))
 
-    window.species = await JSON.parse(LZString.decompressFromUTF16(localStorage.getItem("species")))
     await displaySpecies()
 }
+

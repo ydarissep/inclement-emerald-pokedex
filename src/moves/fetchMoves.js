@@ -23,15 +23,15 @@ async function buildMovesObj(){
     delete moves["MOVE_NONE"]
 
     await localStorage.setItem("moves", LZString.compressToUTF16(JSON.stringify(moves)))
+    return moves
 }
 
 
 async function fetchMovesObj(){
     if(!localStorage.getItem("moves"))
-        await buildMovesObj()
-
-    window.moves = await JSON.parse(LZString.decompressFromUTF16(localStorage.getItem("moves")))
+        window.moves = await buildMovesObj()
+    else
+        window.moves = await JSON.parse(LZString.decompressFromUTF16(localStorage.getItem("moves")))
     
     await displayMoves()
 }
-

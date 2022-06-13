@@ -42,9 +42,9 @@ async function displaySetup(){
 async function fetchData(){
     await forceUpdate()
 
-    await fetchSpeciesObj()
     await fetchMovesObj()
     await fetchAbilitiesObj()
+    await fetchSpeciesObj()
 
     await displaySetup()
 }
