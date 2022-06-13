@@ -51,7 +51,7 @@ async function fetchData(){
 
 
 async function forceUpdate(){
-    const update = 14
+    const update = 15
     if(localStorage.getItem("forceUpdate") != update){
         await localStorage.removeItem("species")
         await localStorage.removeItem("abilities")

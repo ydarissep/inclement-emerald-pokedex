@@ -1,5 +1,6 @@
 function displaySpecies(){
     let tBody = speciesTableTbody
+    let k = 1
     const speciesArray = Object.keys(species)
     tBody.innerText = ""
     for (let i = 0; i < speciesArray.length; i++){
@@ -27,9 +28,9 @@ function displaySpecies(){
             spriteContainer.append(sprite)
         }
         else{
-            let canvas = renderSprite(speciesName, i)
+            k++
+            let canvas = renderSprite(speciesName, k)
             spriteContainer.append(canvas)
-            spriteContainer.classList.add("dataURLNull")
         }
         row.append(spriteContainer)
         
@@ -123,7 +124,7 @@ function createBaseStatsContainer(headerText, stats, speciesObj){
 
 
 
-function renderSprite(speciesName, k){
+function renderSprite(speciesName, total){
     let sprite = new Image()
     let canvas = document.createElement("canvas")
     canvas.width = 64
@@ -150,8 +151,7 @@ function renderSprite(speciesName, k){
         }
         context.putImageData(imageData, 0, 0) 
         species[speciesName]["dataURL"] = canvas.toDataURL()
-        if(k + 1 == Object.keys(species).length){
-            console.log("test")
+        if(total == Object.keys(species).length){
             footerP("Downloading sprites...")
             localStorage.setItem("species", LZString.compressToUTF16(JSON.stringify(species)))
         }
