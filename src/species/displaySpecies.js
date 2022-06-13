@@ -1,4 +1,4 @@
-function displaySpecies(species){
+function displaySpecies(){
     let tBody = speciesTableTbody
     const speciesArray = Object.keys(species)
     tBody.innerText = ""
@@ -19,14 +19,20 @@ function displaySpecies(species){
         row.append(IDcontainer)
 
 
-        let sprite = document.createElement("td")
-        let canvas = document.createElement("canvas")
-        canvas.width = 64
-        canvas.height = 64
-        renderSprite(species[speciesName]["sprite"], canvas)
-        sprite.className = "sprite"
-        sprite.append(canvas)
-        row.append(sprite)
+        let spriteContainer = document.createElement("td")
+        spriteContainer.className = "sprite"
+        if(species[speciesName]["dataURL"] !== ""){
+            let sprite = document.createElement("img")
+            sprite.src = species[speciesName]["dataURL"]
+            spriteContainer.append(sprite)
+        }
+        else{
+            let canvas = renderSprite(speciesName, i)
+            spriteContainer.append(canvas)
+            spriteContainer.classList.add("dataURLNull")
+        }
+        row.append(spriteContainer)
+        
 
 
         let nameContainer = document.createElement("td")
@@ -114,3 +120,42 @@ function createBaseStatsContainer(headerText, stats, speciesObj){
 
     return baseStatsContainer
 }
+
+
+
+function renderSprite(speciesName, k){
+    let sprite = new Image()
+    let canvas = document.createElement("canvas")
+    canvas.width = 64
+    canvas.height = 64
+    sprite.crossOrigin = 'anonymous'
+    sprite.src = species[speciesName]["sprite"]
+
+    const context = canvas.getContext('2d')
+    context.clearRect(0, 0, canvas.width, canvas.height)
+
+    sprite.onload = () => {
+        context.drawImage(sprite, 0, 0)
+        const imageData = context.getImageData(0, 0, canvas.width, canvas.height)
+        const backgroundColor = []
+        for (let i = 0; i < 4; i++) {
+          backgroundColor.push(imageData.data[i])
+        }
+        for (let i = 0; i < imageData.data.length; i += 4) {
+          if (
+            imageData.data[i] === backgroundColor[0] &&
+            imageData.data[i + 1] === backgroundColor[1] &&
+            imageData.data[i + 2] === backgroundColor[2]
+          ) imageData.data[i + 3] = 0
+        }
+        context.putImageData(imageData, 0, 0) 
+        species[speciesName]["dataURL"] = canvas.toDataURL()
+        if(k + 1 == Object.keys(species).length){
+            console.log("test")
+            footerP("Downloading sprites...")
+            localStorage.setItem("species", LZString.compressToUTF16(JSON.stringify(species)))
+        }
+    }
+    return canvas
+}
+

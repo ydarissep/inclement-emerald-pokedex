@@ -1,37 +1,3 @@
-function renderSprite(url, canvas){
-  const sprite = new Image()
-  sprite.crossOrigin = 'anonymous'
-  sprite.src = url
-
-  const context = canvas.getContext('2d')
-  context.clearRect(0, 0, canvas.width, canvas.height)
-
-  sprite.onload = () => {
-    context.drawImage(sprite, 0, 0)
-    const imageData = context.getImageData(0, 0, canvas.width, canvas.height)
-    const backgroundColor = []
-    for (let i = 0; i < 4; i++) {
-      backgroundColor.push(imageData.data[i])
-    }
-    for (let i = 0; i < imageData.data.length; i += 4) {
-      if (
-        imageData.data[i] === backgroundColor[0] &&
-        imageData.data[i + 1] === backgroundColor[1] &&
-        imageData.data[i + 2] === backgroundColor[2]
-      ) imageData.data[i + 3] = 0
-    }
-    context.putImageData(imageData, 0, 0)
-  }
-}
-
-
-
-
-
-
-
-
-
 function sanitizeString(string){
     const regex = /^SPECIES_|^TYPE_|ABILITY_|^SPECIES_NONE|^ABILITY_NONE|^MOVE_|^SPLIT_|FLAG_/ig
     const unsanitizedString = string.replace(regex, "")
@@ -58,6 +24,8 @@ function sanitizeString(string){
 
 
 async function displaySetup(){    
+    await footerP("")
+
     await speciesTable.classList.remove("hide")
     await speciesButton.classList.remove("hide")
     await speciesInput.classList.remove("hide")
@@ -69,27 +37,27 @@ async function displaySetup(){
     await speciesTable.classList.add("activeTable")
     await speciesButton.classList.add("activeButton")
     await speciesInput.classList.add("activeInput")
-
-    footerP("")
 }
 
 async function fetchData(){
     await forceUpdate()
 
-    fetchSpeciesObj()
-    fetchAbilitiesObj()
-    fetchMovesObj()
+    await fetchSpeciesObj()
+    await fetchAbilitiesObj()
+    await fetchMovesObj()
+
+    await displaySetup()
 }
 
 
 async function forceUpdate(){
-    const update = 13
+    const update = 14
     if(localStorage.getItem("forceUpdate") != update){
         await localStorage.removeItem("species")
         await localStorage.removeItem("abilities")
         await localStorage.removeItem("moves")
         await localStorage.setItem("forceUpdate", update)
-        footerP("Fetching data please wait... this is only done once.")
+        await footerP("Fetching data please wait... this is only done once.")
     }
 }
 

@@ -362,8 +362,9 @@ function regexSprite(textSprite, conversionTable, species){
                 if(matchPath !== null){
                     const path = matchPath[1]
                     const url = `https://raw.githubusercontent.com/BuffelSaft/pokeemerald/master/graphics/pokemon/${path}/front.png`
-                    for(let i = 0; i < conversionTable[conversion].length; i++)
+                    for(let i = 0; i < conversionTable[conversion].length; i++){
                         species[speciesArray[i]]["sprite"] = url
+                    }
                 }
             }
         }

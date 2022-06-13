@@ -140,6 +140,7 @@ function initializeSpeciesObj(species){
         species[name]["evolutionLine"] = [name]
         species[name]["forms"] = []
         species[name]["sprite"] = ""
+        species[name]["dataURL"] = ""
     }
     delete species["SPECIES_NONE"]
     delete species["SPECIES_EGG"]
@@ -151,6 +152,6 @@ async function fetchSpeciesObj(){
     if(!localStorage.getItem("species"))
         await buildSpeciesObj()
 
-    let species = await JSON.parse(LZString.decompressFromUTF16(localStorage.getItem("species")))
-    await displaySpecies(species)
+    window.species = await JSON.parse(LZString.decompressFromUTF16(localStorage.getItem("species")))
+    await displaySpecies()
 }

@@ -20,7 +20,7 @@ async function fetchAbilitiesObj(){
     if(!localStorage.getItem("abilities"))
         await buildAbilitiesObj()
 
-    let abilities = await JSON.parse(LZString.decompressFromUTF16(localStorage.getItem("abilities")))
+    window.abilities = await JSON.parse(LZString.decompressFromUTF16(localStorage.getItem("abilities")))
     
-    await displayAbilities(abilities)
+    await displayAbilities()
 }

@@ -227,13 +227,6 @@ movesInput.addEventListener("input", e => {
 })
 
 
-
-
-
-
-
-
-
 window.onbeforeunload = () => {  
     window.scrollTo(0, 0);
 }
@@ -242,7 +235,6 @@ function isTouching(entries){
     if(entries[0].isIntersecting)
         lazyLoading(false)
 }
-
 
 
 const options = {
@@ -255,5 +247,3 @@ observer.observe(document.querySelector("#footer"))
 
 
 fetchData()
-
-displaySetup()

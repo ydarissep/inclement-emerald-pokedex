@@ -1,4 +1,4 @@
-function displayAbilities(abilities){
+function displayAbilities(){
     let tBody = abilitiesTableTbody
     const abilitiesArray = Object.keys(abilities)
     tBody.innerText = ""

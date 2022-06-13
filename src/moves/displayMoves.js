@@ -1,4 +1,4 @@
-function displayMoves(moves){
+function displayMoves(){
     let tBody = movesTableTbody
     const movesArray = Object.keys(moves)
     tBody.innerText = ""

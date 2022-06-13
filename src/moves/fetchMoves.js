@@ -30,7 +30,7 @@ async function fetchMovesObj(){
     if(!localStorage.getItem("moves"))
         await buildMovesObj()
 
-    let moves = await JSON.parse(LZString.decompressFromUTF16(localStorage.getItem("moves")))
+    window.moves = await JSON.parse(LZString.decompressFromUTF16(localStorage.getItem("moves")))
     
-    await displayMoves(moves)
+    await displayMoves()
 }
