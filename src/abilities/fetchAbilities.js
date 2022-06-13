@@ -24,3 +24,4 @@ async function fetchAbilitiesObj(){
     
     await displayAbilities()
 }
+

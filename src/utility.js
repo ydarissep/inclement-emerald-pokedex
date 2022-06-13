@@ -36,31 +36,22 @@ async function displaySetup(){
     await topButton.classList.remove("hide")
     await speciesTable.classList.add("activeTable")
     await speciesButton.classList.add("activeButton")
-    await speciesInput.classList.add("activeInput")
-
-
-
-    if(!offlineSprite){
-        footerP("Downloading sprites...")
-        localStorage.setItem("species", LZString.compressToUTF16(JSON.stringify(species)))
-    }
-    delete window.offlineSprite
-    
+    await speciesInput.classList.add("activeInput")    
 }
 
 async function fetchData(){
     await forceUpdate()
 
     await fetchSpeciesObj()
-    await fetchAbilitiesObj()
     await fetchMovesObj()
+    await fetchAbilitiesObj()
 
     await displaySetup()
 }
 
 
 async function forceUpdate(){
-    const update = 0
+    const update = 1
     if(localStorage.getItem("update") != update){
         await localStorage.clear()
         await localStorage.setItem("update", update)

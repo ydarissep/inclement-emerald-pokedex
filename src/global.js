@@ -247,4 +247,3 @@ observer.observe(document.querySelector("#footer"))
 
 
 fetchData()
-

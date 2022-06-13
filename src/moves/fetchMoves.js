@@ -34,3 +34,4 @@ async function fetchMovesObj(){
     
     await displayMoves()
 }
+

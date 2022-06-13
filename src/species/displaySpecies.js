@@ -1,7 +1,8 @@
-window.offlineSprite = true
+window.toDataURLObj = {}
 
 async function displaySpecies(){
     let tBody = speciesTableTbody
+    let count = 0
     const speciesArray = Object.keys(species)
     tBody.innerText = ""
     for (let i = 0; i < speciesArray.length; i++){
@@ -29,8 +30,7 @@ async function displaySpecies(){
             spriteContainer.append(sprite)
         }
         else{
-            offlineSprite = false
-            let canvas = await renderSprite(speciesName)
+            let canvas = await renderSprite(speciesName, count++)
             spriteContainer.append(canvas)
         }
         row.append(spriteContainer)
@@ -126,7 +126,7 @@ function createBaseStatsContainer(headerText, stats, speciesObj){
 
 
 
-async function renderSprite(speciesName){
+async function renderSprite(speciesName, k){
     let sprite = new Image()
     let canvas = document.createElement("canvas")
     canvas.width = 64
@@ -152,7 +152,17 @@ async function renderSprite(speciesName){
           ) imageData.data[i + 3] = 0
         }
         context.putImageData(imageData, 0, 0) 
-        species[speciesName]["dataURL"] = canvas.toDataURL()
+
+        toDataURLObj[speciesName] = canvas.toDataURL()
+
+        if(k + 1 == Object.keys(species).length){
+            console.log("test")
+            footerP("Downloading sprites...")
+            for (const name of Object.keys(species)){
+                species[name]["dataURL"] = toDataURLObj[name]
+            }
+            localStorage.setItem("species", LZString.compressToUTF16(JSON.stringify(species)))
+        }
     }
     return canvas
 }
