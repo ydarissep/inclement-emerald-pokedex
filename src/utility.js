@@ -51,7 +51,7 @@ async function fetchData(){
 
 
 async function forceUpdate(){
-    const update = 3
+    const update = 4
     if(localStorage.getItem("update") != update){
         await localStorage.clear()
         await localStorage.setItem("update", update)

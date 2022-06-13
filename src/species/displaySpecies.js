@@ -1,8 +1,12 @@
-window.toDataURLObj = {}
+window.spritesObj = {}
+
+
 
 function displaySpecies(){
     let tBody = speciesTableTbody
-    let count = 0
+    if(localStorage.getItem("sprites")){
+        spritesObj = JSON.parse(LZString.decompressFromUTF16(localStorage.getItem("sprites")))
+    }
     const speciesArray = Object.keys(species)
     tBody.innerText = ""
     for (let i = 0; i < speciesArray.length; i++){
@@ -24,13 +28,13 @@ function displaySpecies(){
 
         let spriteContainer = document.createElement("td")
         spriteContainer.className = "sprite"
-        if(species[speciesName]["dataURL"] !== ""){
+        if(localStorage.getItem("sprites")){
             let sprite = document.createElement("img")
-            sprite.src = species[speciesName]["dataURL"]
+            sprite.src = spritesObj[speciesName]
             spriteContainer.append(sprite)
         }
         else{
-            let canvas = renderSprite(speciesName, count++)
+            let canvas = renderSprite(speciesName)
             spriteContainer.append(canvas)
         }
         row.append(spriteContainer)
@@ -99,7 +103,6 @@ function displaySpecies(){
 
         row.append(createBaseStatsContainer("BST", "BST", speciesObj))
     }
-
 }
 
 
@@ -126,7 +129,7 @@ function createBaseStatsContainer(headerText, stats, speciesObj){
 
 
 
-function renderSprite(speciesName, k){
+function renderSprite(speciesName){
     let sprite = new Image()
     let canvas = document.createElement("canvas")
     canvas.width = 64
@@ -153,14 +156,16 @@ function renderSprite(speciesName, k){
         }
         context.putImageData(imageData, 0, 0) 
 
-        toDataURLObj[speciesName] = canvas.toDataURL()
+        spritesObj[speciesName] = canvas.toDataURL()
 
-        if(k + 1 == Object.keys(species).length){
-            for (const name of Object.keys(toDataURLObj)){
-                species[name]["dataURL"] = toDataURLObj[name]
-            }
-            localStorage.setItem("species", LZString.compressToUTF16(JSON.stringify(species)))
+        if(Object.keys(spritesObj).length == Object.keys(species).length){
+            setItemSprites(spritesObj)
         }
     }
     return canvas
+}
+
+
+function setItemSprites(spritesObj){
+    localStorage.setItem("sprites", LZString.compressToUTF16(JSON.stringify(spritesObj)))
 }
