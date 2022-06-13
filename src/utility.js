@@ -37,6 +37,15 @@ async function displaySetup(){
     await speciesTable.classList.add("activeTable")
     await speciesButton.classList.add("activeButton")
     await speciesInput.classList.add("activeInput")
+
+
+
+    if(!offlineSprite){
+        footerP("Downloading sprites...")
+        localStorage.setItem("species", LZString.compressToUTF16(JSON.stringify(species)))
+    }
+    delete window.offlineSprite
+    
 }
 
 async function fetchData(){
@@ -51,12 +60,10 @@ async function fetchData(){
 
 
 async function forceUpdate(){
-    const update = 16
-    if(localStorage.getItem("forceUpdate") != update){
-        await localStorage.removeItem("species")
-        await localStorage.removeItem("abilities")
-        await localStorage.removeItem("moves")
-        await localStorage.setItem("forceUpdate", update)
+    const update = 0
+    if(localStorage.getItem("update") != update){
+        await localStorage.clear()
+        await localStorage.setItem("update", update)
         await footerP("Fetching data please wait... this is only done once.")
     }
 }
