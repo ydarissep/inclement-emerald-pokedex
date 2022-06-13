@@ -51,11 +51,11 @@ async function fetchData(){
 
 
 async function forceUpdate(){
-    const update = 2
+    const update = 3
     if(localStorage.getItem("update") != update){
         await localStorage.clear()
         await localStorage.setItem("update", update)
-        await footerP("Fetching data please wait... this is only done once.")
+        await footerP("Fetching data please wait... this is only run once")
     }
 }
 

@@ -1,6 +1,6 @@
 window.toDataURLObj = {}
 
-async function displaySpecies(){
+function displaySpecies(){
     let tBody = speciesTableTbody
     let count = 0
     const speciesArray = Object.keys(species)
@@ -30,7 +30,7 @@ async function displaySpecies(){
             spriteContainer.append(sprite)
         }
         else{
-            let canvas = await renderSprite(speciesName, count++)
+            let canvas = renderSprite(speciesName, count++)
             spriteContainer.append(canvas)
         }
         row.append(spriteContainer)
@@ -126,7 +126,7 @@ function createBaseStatsContainer(headerText, stats, speciesObj){
 
 
 
-async function renderSprite(speciesName, k){
+function renderSprite(speciesName, k){
     let sprite = new Image()
     let canvas = document.createElement("canvas")
     canvas.width = 64

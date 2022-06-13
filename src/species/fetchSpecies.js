@@ -78,7 +78,7 @@ async function getTutorLearnsets(species){
 }
 
 async function getSprite(species){
-    footerP("Fetching sprites... this can take a while")
+    footerP("Fetching sprites... this could take a while")
     const rawFrontPicTable = await fetch("https://raw.githubusercontent.com/BuffelSaft/pokeemerald/master/src/data/pokemon_graphics/front_pic_table.h")
     const textFrontPicTable = await rawFrontPicTable.text()
 
