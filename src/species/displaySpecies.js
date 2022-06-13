@@ -156,8 +156,6 @@ async function renderSprite(speciesName, k){
         toDataURLObj[speciesName] = canvas.toDataURL()
 
         if(k + 1 == Object.keys(species).length){
-            console.log("test")
-            footerP("Downloading sprites...")
             for (const name of Object.keys(species)){
                 species[name]["dataURL"] = toDataURLObj[name]
             }
