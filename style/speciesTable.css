@@ -57,6 +57,7 @@ only screen and (max-width: 700px) {
     #speciesTable, #speciesTableThead, #speciesTableTbody, #speciesTable th, #speciesTable td, #speciesTable tr { 
         padding: 0.3rem 0;
         display: block;
+        border: none;
     }
 
     td.ID, td.sprite, td.species {
@@ -91,8 +92,5 @@ only screen and (max-width: 700px) {
         min-width: 100%;
         max-width: 100%;
         /*display: none;*/
-    }
-    #speciesTable td, #speciesTable th {
-        border: none;
     }
 }

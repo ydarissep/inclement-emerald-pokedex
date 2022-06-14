@@ -41,6 +41,7 @@
 @media 
 only screen and (max-width: 500px) {
     #movesTable, #movesTableThead, #movesTableTbody, #movesTable td, #movesTable tr, #movesTable th { 
+        padding: 0.3rem 0;
         display: block;
         border: none;
     }
@@ -52,10 +53,6 @@ only screen and (max-width: 500px) {
     #movesTable .description > div {
     	display: inline !important;
     	font-style: italic;
-    }
-
-    #movesTable .description {
-    	padding-bottom: 4px;
     }
 
     .movesHeader {
