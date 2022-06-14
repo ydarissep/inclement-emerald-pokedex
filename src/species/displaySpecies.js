@@ -1,12 +1,5 @@
-window.spritesObj = {}
-
-
-
 function displaySpecies(){
     let tBody = speciesTableTbody
-    if(localStorage.getItem("sprites")){
-        spritesObj = JSON.parse(LZString.decompressFromUTF16(localStorage.getItem("sprites")))
-    }
     const speciesArray = Object.keys(species)
     tBody.innerText = ""
     for (let i = 0; i < speciesArray.length; i++){

@@ -18,21 +18,44 @@ function displayMoves(){
         row.append(move)
 
 
-        let container = document.createElement("td")
 
-        container.className = "type split"
 
+
+
+
+        let typeContainer = document.createElement("td")
         let type = document.createElement("div")
+        let hiddenSplit = document.createElement("div")
+        typeContainer.className = "type"
         type.className = `${moves[moveName]["type"]} background`
         type.innerText = sanitizeString(moves[moveName]["type"])
-        container.append(type)
+        hiddenSplit.innerText = sanitizeString(moves[moveName]["split"])
+        hiddenSplit.className = "hide"
+        typeContainer.append(type)
+        typeContainer.append(hiddenSplit)
+        row.append(typeContainer)
 
+
+        let splitContainer = document.createElement("td")
         let split = document.createElement("div")
-        split.className = `${moves[moveName]["split"]} background`
+        let hiddenType = document.createElement("div")
+        let splitIcon = document.createElement("img")
+        splitContainer.className = "split"
+        split.className = "hide"
         split.innerText = sanitizeString(moves[moveName]["split"])
-        container.append(split)
+        hiddenType.innerText = moves[moveName]["type"]
+        hiddenType.className = "hide"
+        splitIcon.className = `${sanitizeString(moves[moveName]["split"])} splitIcon`
+        splitIcon.src = `src/moves/${moves[moveName]["split"]}.png`
+        splitContainer.append(split)
+        splitContainer.append(hiddenType)
+        splitContainer.append(splitIcon)
+        row.append(splitContainer)
 
-        row.append(container)
+
+
+
+
 
 
         const moveObj = moves[moveName]
@@ -43,7 +66,7 @@ function displayMoves(){
 
         row.append(createInputContainer("PP", "PP", moveObj))
 
-        row.append(createInputContainer("Prio", "priority", moveObj))
+
 
         let description = document.createElement("td")
         description.className = "description"

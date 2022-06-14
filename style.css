@@ -16,9 +16,12 @@ footer > p {
     text-align: center;
 }
 
+
 .hide, .hideTemp {
 	display: none !important
 }
+
+
 
 button[type='button'] {
   background: rgba(215, 212, 231, 0.075);
@@ -86,6 +89,13 @@ input {
   width: 300px;
 }
 
+@media 
+only screen and (max-width: 350px) {
+    input {
+        width: 200px;
+    }
+}
+
 input:focus, input:hover {
   background: rgba(255, 255, 255, 0.144);
 }
@@ -147,8 +157,10 @@ td, th {
     height: 23px;
     border-radius: 5px;
     font-weight: bold;
-    font-size: 0.8rem;
     padding-bottom: 2px;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    text-shadow: 1px 1px rgba(54, 61, 61, 0.788);
 }
 
 .TYPE_NORMAL {background: #A8A77A;}
@@ -170,6 +182,10 @@ td, th {
 .TYPE_STEEL {background: #8c8c9e;}
 .TYPE_FAIRY {background: #D685AD;}
 
-.SPLIT_PHYSICAL {background: #990000;}
-.SPLIT_STATUS {background: #a9a9a9;}
-.SPLIT_SPECIAL {background: #253DA1;}
+
+#movesTableTbody .Physical {filter: brightness(200%);}
+#movesTableTbody .Special {filter: brightness(200%);}
+#movesTableTbody .Status {filter: brightness(300%);}
+
+
+.splitIcon {width: 40px;}

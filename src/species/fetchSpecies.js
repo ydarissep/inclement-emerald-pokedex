@@ -155,6 +155,12 @@ async function fetchSpeciesObj(){
     else
         window.species = await JSON.parse(LZString.decompressFromUTF16(localStorage.getItem("species")))
 
+
+    window.spritesObj = {}
+    if(localStorage.getItem("sprites")){
+        spritesObj = JSON.parse(LZString.decompressFromUTF16(localStorage.getItem("sprites")))
+    }
+
     await displaySpecies()
 }
 

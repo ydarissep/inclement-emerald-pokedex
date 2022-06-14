@@ -2,11 +2,15 @@
 	width: 100px;
 }
 
-#movesTableThead th.type {
-	width: 80px;
-}
+
 #movesTableThead th.move {
 	width: 150px;
+}
+#movesTableThead th.type {
+    width: 80px;
+}
+#movesTableThead th.split {
+    width: 50px;
 }
 #movesTableThead th.power {
 	width: 75px;
@@ -17,13 +21,14 @@
 #movesTableThead th.PP {
 	width: 40px;
 }
-#movesTableThead th.priority {
-	width: 50px;
-}
 #movesTableThead th.description {
 	width: 250px;
 }
 
+
+#movesTableTbody td.description {
+    padding: 10px 0px 10px 0px;
+}
 
 
 #movesTable .background {
@@ -35,12 +40,12 @@
 
 @media 
 only screen and (max-width: 500px) {
-    #movesTable, #movesTableThead, #movesTableTbody, #movesTable td, #movesTable tr { 
+    #movesTable, #movesTableThead, #movesTableTbody, #movesTable td, #movesTable tr, #movesTable th { 
         display: block;
         border: none;
     }
 
-    #movesTable [class*="TYPE_"], #movesTable [class*="SPLIT_"] {
+    #movesTable [class*="TYPE_"] {
     	display: inline-flex !important;
     }
 
@@ -58,18 +63,21 @@ only screen and (max-width: 500px) {
         font-weight: bold;
     }
 
-    .powerContainer, .accuracyContainer, .PPContainer, .priorityContainer {
+    .powerContainer, .accuracyContainer, .PPContainer {
     	padding: 4px 0px 5px 0px;
     	display: inline-block !important;
-    	width: 25% !important;
+    	width: 33.3% !important;
     	box-sizing: border-box;
     }
 
-    #movesTable td.type, #movesTable td.move { display: inline-block; } 
-    #movesTable td.type { width: 25% !important; box-sizing: border-box; }
-    #movesTable td.move { width: 75% !important; box-sizing: border-box; font-weight: bold;}
+    #movesTable td.move, #movesTable td.type, #movesTable td.split{ display: inline-block; } 
+    #movesTable td.move { width: 50% !important; box-sizing: border-box; font-weight: bold; }
+    #movesTable td.type { width: 35% !important; box-sizing: border-box; text-align: right; }
+    #movesTable td.split { width: 15% !important; box-sizing: border-box; }
 
-    #movesTableThead th.description {
-		display: none !important;
-	}
+    #movesTable th {
+        min-width: 100%;
+        max-width: 100%;
+        /*display: none;*/
+    }
 }

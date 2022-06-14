@@ -20,12 +20,12 @@ const movesTableTbody = document.getElementById("movesTableTbody")
 const headerAbilitiesName = document.querySelector("#abilitiesTableThead th.ability")
 const headerAbilitiesDescription = document.querySelector("#abilitiesTableThead th.description")
 
-const headerMovesType = document.querySelector("#movesTableThead th.type")
 const headerMovesMove = document.querySelector("#movesTableThead th.move")
+const headerMovesType = document.querySelector("#movesTableThead th.type")
+const headerMovesSplit = document.querySelector("#movesTableThead th.split")
 const headerMovesPower = document.querySelector("#movesTableThead th.power")
 const headerMovesAccuracy = document.querySelector("#movesTableThead th.accuracy")
 const headerMovesPP = document.querySelector("#movesTableThead th.PP")
-const headerMovesPriority = document.querySelector("#movesTableThead th.priority")
 const headerMovesDescription = document.querySelector("#movesTableThead th.description")
 
 const headerSpeciesID = document.querySelector("#speciesTableThead th.ID")
@@ -84,18 +84,23 @@ headerAbilitiesDescription.addEventListener("click", () => {
 
 
 
-
+headerMovesMove.addEventListener("click", () => {
+    if(headerMovesMove.classList.contains("th-sort-desc"))
+        sortTableByClassName(movesTable, "move", asc = true)
+    else
+        sortTableByClassName(movesTable, "move", asc = false)
+})
 headerMovesType.addEventListener("click", () => {
     if(headerMovesType.classList.contains("th-sort-desc"))
         sortTableByClassName(movesTable, "type", asc = true)
     else
         sortTableByClassName(movesTable, "type", asc = false)
 })
-headerMovesMove.addEventListener("click", () => {
-    if(headerMovesMove.classList.contains("th-sort-desc"))
-        sortTableByClassName(movesTable, "move", asc = true)
+headerMovesSplit.addEventListener("click", () => {
+    if(headerMovesSplit.classList.contains("th-sort-desc"))
+        sortTableByClassName(movesTable, "split", asc = true)
     else
-        sortTableByClassName(movesTable, "move", asc = false)
+        sortTableByClassName(movesTable, "split", asc = false)
 })
 headerMovesPower.addEventListener("click", () => {
     if(headerMovesPower.classList.contains("th-sort-desc"))
@@ -114,12 +119,6 @@ headerMovesPP.addEventListener("click", () => {
         sortTableByClassName(movesTable, "PP", asc = true, parseINT = true)
     else
         sortTableByClassName(movesTable, "PP", asc = false, parseINT = true)
-})
-headerMovesPriority.addEventListener("click", () => {
-    if(headerMovesPriority.classList.contains("th-sort-desc"))
-        sortTableByClassName(movesTable, "priority", asc = true, parseINT = true)
-    else
-        sortTableByClassName(movesTable, "priority", asc = false, parseINT = true)
 })
 headerMovesDescription.addEventListener("click", () => {
     if(headerMovesDescription.classList.contains("th-sort-desc"))
