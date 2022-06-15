@@ -183,9 +183,9 @@ td, th {
 .TYPE_FAIRY {background: #D685AD;}
 
 
-#movesTableTbody .Physical {filter: brightness(200%);}
-#movesTableTbody .Special {filter: brightness(200%);}
-#movesTableTbody .Status {filter: brightness(300%);}
+.Physical {filter: brightness(200%);}
+.Special {filter: brightness(200%);}
+.Status {filter: brightness(300%);}
 
 
 .splitIcon {width: 40px;}

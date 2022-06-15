@@ -1,6 +1,7 @@
 function displayMoves(){
     let tBody = movesTableTbody
     const movesArray = Object.keys(moves)
+    const movesArraySanitized = JSON.stringify(movesArray).replace(/MOVE_|_/ig, "")
     tBody.innerText = ""
 
     for (let i = 0; i < movesArray.length; i++){
@@ -68,14 +69,41 @@ function displayMoves(){
 
 
 
-        let description = document.createElement("td")
-        description.className = "description"
+
+
+
+
+
+        let effectContainer = document.createElement("td")
+        let descriptionContainer = document.createElement("div")
+
+
+        descriptionContainer.className = "description"
         for(let j = 0; j < moves[moveName]["description"].length; j++){
-            const desc = document.createElement("div")
-            desc.innerText += moves[moveName]["description"][j].replace("\\n", " ")
-            description.append(desc)
+            let description = document.createElement("div")
+            description.innerText += moves[moveName]["description"][j].replace("\\n", " ")
+            descriptionContainer.append(description)
         }
-        row.append(description)
+
+        let effect = document.createElement("div")
+        effect.className = "effect"
+        if(!movesArraySanitized.includes(moves[moveName]["effect"].replace(/EFFECT_|_/ig, "")))
+            effect.innerText = `${sanitizeString(moves[moveName]["effect"])}`
+
+
+        let chance = moves[moveName]["chance"]
+        if(chance > 0 && chance < 100)
+            effect.innerText += ` ${chance}%`
+
+        effectContainer.append(descriptionContainer)
+        if(effect.innerText === "")
+            effect.classList.add("hide")
+        
+        effectContainer.append(effect)
+
+        row.append(effectContainer)
+
+        
     }
 }
 

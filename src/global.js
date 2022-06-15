@@ -26,7 +26,7 @@ const headerMovesSplit = document.querySelector("#movesTableThead th.split")
 const headerMovesPower = document.querySelector("#movesTableThead th.power")
 const headerMovesAccuracy = document.querySelector("#movesTableThead th.accuracy")
 const headerMovesPP = document.querySelector("#movesTableThead th.PP")
-const headerMovesDescription = document.querySelector("#movesTableThead th.description")
+const headerMovesEffect = document.querySelector("#movesTableThead th.effect")
 
 const headerSpeciesID = document.querySelector("#speciesTableThead th.ID")
 const headerSpeciesSprite = document.querySelector("#speciesTableThead th.sprite")
@@ -120,11 +120,11 @@ headerMovesPP.addEventListener("click", () => {
     else
         sortTableByClassName(movesTable, "PP", asc = false, parseINT = true)
 })
-headerMovesDescription.addEventListener("click", () => {
-    if(headerMovesDescription.classList.contains("th-sort-desc"))
-        sortTableByClassName(movesTable, "description", asc = true)
+headerMovesEffect.addEventListener("click", () => {
+    if(headerMovesEffect.classList.contains("th-sort-desc"))
+        sortTableByClassName(movesTable, "effect", asc = true)
     else
-        sortTableByClassName(movesTable, "description", asc = false)
+        sortTableByClassName(movesTable, "effect", asc = false)
 })
 
 

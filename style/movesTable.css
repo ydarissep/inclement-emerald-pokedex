@@ -25,9 +25,18 @@
 	width: 250px;
 }
 
+.move {
+    font-weight: 600;
+}
 
-#movesTableTbody td.description {
-    padding: 10px 0px 10px 0px;
+
+#movesTableTbody .description {
+    padding: 5px;
+    font-style: italic;
+}
+#movesTableTbody .effect {
+    padding: 5px;
+    font-weight: bold;
 }
 
 

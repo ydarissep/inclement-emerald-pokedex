@@ -1,5 +1,5 @@
 function sanitizeString(string){
-    const regex = /^SPECIES_|^TYPE_|ABILITY_|^SPECIES_NONE|^ABILITY_NONE|^MOVE_|^SPLIT_|FLAG_/ig
+    const regex = /^SPECIES_|^TYPE_|ABILITY_|^SPECIES_NONE|^ABILITY_NONE|^MOVE_|^SPLIT_|FLAG_|^EFFECT_/ig
     const unsanitizedString = string.replace(regex, "")
     let matchArray = unsanitizedString.match(/\w+/g)
     if(matchArray !== null){
@@ -126,16 +126,17 @@ function sortTableByClassName(table, className, asc = true, parseINT = false) {
 function filterTableInput(input, columns, tbody){
     const inputArray = input.toLowerCase().split(" ")
     let hideRows = {}
-    let k = 0
     for (let j = 0; j < tbody.rows.length; j++){
         let compareValue = ""
         for (let i = 0; i < columns.length; i++){
-            compareValue += tbody.rows[j].cells[columns[i]].innerText.toLowerCase() + " "
+            compareValue += `${tbody.rows[j].cells[columns[i]].textContent.toLowerCase()} `
         }
         for (let i = 0; i < inputArray.length; i++){
             inputArray[i] = inputArray[i].replace("-", " ")
-            if(!compareValue.includes(inputArray[i]))
+            if(!compareValue.includes(inputArray[i])){
                 hideRows[j] = "hide"
+                break
+            }
         }
     }
     for(let i = 0; i < tbody.rows.length; i++){

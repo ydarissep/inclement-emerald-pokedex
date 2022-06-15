@@ -6,10 +6,11 @@
 	width: 40px;
 }
 #speciesTableThead th.sprite {
+    display: none !important;
 	width: 64px;
 }
 #speciesTableThead th.species {
-	width: 250px;
+	width: 314px;
 }
 #speciesTableThead th.types {
 	width: 80px;
@@ -51,6 +52,17 @@
 .species {
     font-weight: 600;
 }
+
+
+
+#speciesTableTbody .sprite {
+    border-right: none !important;
+}
+#speciesTableTbody .species {
+    border-left: none !important;
+}
+
+
 
 @media 
 only screen and (max-width: 700px) {
