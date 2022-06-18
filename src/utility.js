@@ -1,5 +1,5 @@
 function sanitizeString(string){
-    const regex = /^SPECIES_|^TYPE_|ABILITY_|^SPECIES_NONE|^ABILITY_NONE|^MOVE_|^SPLIT_|FLAG_|^EFFECT_/ig
+    const regex = /^SPECIES_|^TYPE_|ABILITY_|^SPECIES_NONE|^ABILITY_NONE|^MOVE_|^SPLIT_|FLAG_|^EFFECT_|^ITEM_/ig
     const unsanitizedString = string.replace(regex, "")
     let matchArray = unsanitizedString.match(/\w+/g)
     if(matchArray !== null){
@@ -23,22 +23,6 @@ function sanitizeString(string){
 
 
 
-async function displaySetup(){    
-    await footerP("")
-
-    await speciesTable.classList.remove("hide")
-    await speciesButton.classList.remove("hide")
-    await speciesInput.classList.remove("hide")
-
-    await abilitiesButton.classList.remove("hide")
-    await movesButton.classList.remove("hide")
-
-    await topButton.classList.remove("hide")
-    await speciesTable.classList.add("activeTable")
-    await speciesButton.classList.add("activeButton")
-    await speciesInput.classList.add("activeInput")    
-}
-
 async function fetchData(){
     await forceUpdate()
 
@@ -46,12 +30,35 @@ async function fetchData(){
     await fetchAbilitiesObj()
     await fetchSpeciesObj()
 
+
     await displaySetup()
 }
 
 
+
+
+
+async function displaySetup(){    
+    await footerP("")
+
+
+    await tableInput.classList.remove("hide")
+
+    await tableButton.classList.remove("hide")
+
+    await tableFilter.classList.remove("hide")
+
+    await table.classList.remove("hide")
+
+    await topButton.classList.remove("hide")
+}
+
+
+
+
+
 async function forceUpdate(){
-    const update = 4
+    const update = 5
     if(localStorage.getItem("update") != update){
         await localStorage.clear()
         await localStorage.setItem("update", update)
@@ -124,7 +131,7 @@ function sortTableByClassName(table, className, asc = true, parseINT = false) {
 
 
 function filterTableInput(input, columns, tbody){
-    const inputArray = input.toLowerCase().split(" ")
+    const inputArray = input.toLowerCase().replace(/-|'/g, " ").split(" ")
     let hideRows = {}
     for (let j = 0; j < tbody.rows.length; j++){
         let compareValue = ""
@@ -132,7 +139,6 @@ function filterTableInput(input, columns, tbody){
             compareValue += `${tbody.rows[j].cells[columns[i]].textContent.toLowerCase()} `
         }
         for (let i = 0; i < inputArray.length; i++){
-            inputArray[i] = inputArray[i].replace("-", " ")
             if(!compareValue.includes(inputArray[i])){
                 hideRows[j] = "hide"
                 break
@@ -140,7 +146,7 @@ function filterTableInput(input, columns, tbody){
         }
     }
     for(let i = 0; i < tbody.rows.length; i++){
-        if(hideRows[i] === "hide")
+        if(hideRows[i] !== undefined)
             tbody.rows[i].classList.add("hide")
         else
             tbody.rows[i].classList.remove("hide")
@@ -164,7 +170,7 @@ function lazyLoading(reset = false){
         for(let i = 0; i < rows.length; i++){
             if(reset){
                 if(j <= 75){
-                    if(!rows[i].classList.contains("hide")){
+                    if(!rows[i].classList.contains("hide") && !rows[i].className.includes("hideFilter")){
                         rows[i].classList.remove("hideTemp")
                         j++
                     }
@@ -173,7 +179,7 @@ function lazyLoading(reset = false){
                     rows[i].classList.add("hideTemp")
             }
             else{
-                if(!rows[i].classList.contains("hide")){
+                if(!rows[i].classList.contains("hide") && !rows[i].className.includes("hideFilter")){
                     if(rows[i].classList.contains("hideTemp")){
                         j++
                         rows[i].classList.remove("hideTemp")
@@ -196,6 +202,7 @@ async function tableButtonClick(input){
     const activeTable = await document.querySelectorAll(".activeTable")
     const activeButton = await document.querySelectorAll(".activeButton")
     const activeInput = await document.querySelectorAll(".activeInput")
+    const activeFilter = await document.querySelectorAll(".activeFilter")
 
     activeTable.forEach(table => {
         table.classList.remove("activeTable")
@@ -212,9 +219,16 @@ async function tableButtonClick(input){
         input.classList.add("hide")
     })
 
+    activeFilter.forEach(filter => {
+        filter.classList.remove("activeInput")
+        filter.classList.add("hide")
+    })
+
+
     const targetTable = await document.getElementById(`${input}Table`)
     const targetButton = await document.getElementById(`${input}Button`)
     const targetInput = await document.getElementById(`${input}Input`)
+    const targetFilter = await document.getElementById(`${input}Filter`)
 
     targetTable.classList.remove("hide")
     targetTable.classList.add("activeTable")
@@ -223,4 +237,116 @@ async function tableButtonClick(input){
 
     targetInput.classList.remove("hide")
     targetInput.classList.add("activeInput")
+
+    targetFilter.classList.remove("hide")
+    targetFilter.classList.add("activeFilter")
+}
+
+
+
+
+
+
+
+
+function createFilter(list , obj, objInputArray, filterCount, element, labelString, className, isInt = false){
+    const filter = document.createElement("div")
+    const label = document.createElement("label")
+    const input = document.createElement("input")
+    const datalist = document.createElement("datalist")
+    let optionArray = []
+
+    filter.setAttribute("id", `filter${filterCount}`)
+
+    label.setAttribute("for", `input${filterCount}`)
+    label.innerText = labelString
+
+    input.setAttribute("type", "search")
+    input.setAttribute("id", `input${filterCount}`)
+    input.setAttribute("list", `datalist${filterCount}`)
+    
+    datalist.setAttribute("id", `datalist${filterCount}`)
+
+
+    for (let i = 0; i < list.length; i++){
+        const option = document.createElement("option")
+        option.innerText = list[i]
+        datalist.append(option)
+    }
+
+    input.addEventListener("input", e => {
+        let value = e.target.value
+        if(!isInt)
+            value = value.replace(/-|'/g, " ").toLowerCase()
+        filterInput(value, objInputArray, filterCount, obj, className, isInt)
+    })
+
+    filter.append(label)
+    filter.append(input)
+    filter.append(datalist)
+    element.append(filter)
+
+}
+
+
+
+function filterInput(value, objInputArray, filterCount, obj, className, isInt = false){
+    const activeTables = document.getElementsByClassName("activeTable")
+    let conversionTable = {}
+    let rows = []
+    let hideRows = {}
+
+    if(activeTables.length > 0){
+
+
+        rows = activeTables[0].tBodies[0].rows
+
+
+        for (let j = 0; j < rows.length; j++){
+
+
+            const key = `${className.toUpperCase()}_${rows[j].querySelector(`.${className}`).textContent.toUpperCase().replace(/ /g, "_")}`
+
+            for (let i = 0; i < objInputArray.length; i++){
+                let compareValue = obj[key][objInputArray[i]]
+                if(isInt){
+                    if(compareValue === value || value == ""){
+                        hideRows[j] = "show"
+                        break                        
+                    }
+                }
+                else{
+                    compareValue = JSON.stringify(compareValue).toLowerCase()
+                    if(compareValue.includes(value.replace(/ /g, "_"))){
+                        hideRows[j] = "show"
+                        break
+                    }
+                }
+            }
+        }
+
+
+        for(let i = 0; i < rows.length; i++){
+            if(hideRows[i] !== "show")
+                rows[i].classList.add(`hideFilter${filterCount}`)
+            else
+                rows[i].classList.remove(`hideFilter${filterCount}`)
+        }
+        lazyLoading(true)
+    }
+}
+
+
+function createOptionArray(objInputArray, obj, isInt = false){
+    let list = []
+    for (const name of Object.keys(obj)){
+        for (let i = 0; i < objInputArray.length; i++){
+            let value = obj[name][objInputArray[i]]
+            if(!isInt)
+                value = sanitizeString(value)
+            if(!list.includes(value))
+                list.push(value)
+        }
+    }
+    return list
 }

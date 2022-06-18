@@ -12,12 +12,13 @@ footer > p {
     text-align: center;
 }
 
-#tableButton, #tableInput {
+#tableButton, #tableInput, #tableFilter {
     text-align: center;
+    padding: 0.5em;
 }
 
 
-.hide, .hideTemp {
+[class*="hide"] {
 	display: none !important
 }
 
@@ -29,8 +30,6 @@ button[type='button'] {
   outline: none;
   color: white;
   padding: 0.5rem 0.75rem;
-  margin-top: 0.5rem;
-  margin-bottom: 0.5rem;
   border-radius: 3px;
 }
 
@@ -76,7 +75,7 @@ tr:nth-of-type(odd) {
   background: #7f85a01a; 
 }
 
-input {
+input[type="search"] {
   padding: 0.5rem;
   border-radius: 3px;
   outline: none;
@@ -91,12 +90,12 @@ input {
 
 @media 
 only screen and (max-width: 350px) {
-    input {
+    input[type="search"] {
         width: 200px;
     }
 }
 
-input:focus, input:hover {
+input[type="search"]:focus, input[type="search"]:hover {
   background: rgba(255, 255, 255, 0.144);
 }
 

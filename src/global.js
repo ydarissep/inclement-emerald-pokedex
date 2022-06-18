@@ -1,8 +1,36 @@
+window.filterCount = 0
+const tableFilter = document.getElementById("tableFilter")
+const speciesFilterCheckbox = document.getElementById("speciesFilterCheckbox")
+const movesFilterCheckbox = document.getElementById("movesFilterCheckbox")
+
+const speciesFilterHP = document.getElementById("speciesFilterHP")
+const speciesFilterAtk = document.getElementById("speciesFilterAtk")
+const speciesFilterDef = document.getElementById("speciesFilterDef")
+const speciesFilterSpA = document.getElementById("speciesFilterSpA")
+const speciesFilterSpD = document.getElementById("speciesFilterSpD")
+const speciesFilterSpe = document.getElementById("speciesFilterSpe")
+const speciesFilterBST = document.getElementById("speciesFilterBST")
+const speciesFilterLearnset = document.getElementById("speciesFilterLearnset")
+const speciesFilterEggGroup = document.getElementById("speciesFilterEggGroup")
+const speciesFilterHeldItem = document.getElementById("speciesFilterHeldItem")
+
+
+const movesFilterFlag = document.getElementById("movesFilterFlag")
+const movesFilterPriority = document.getElementById("movesFilterPriority")
+const movesFilterTarget = document.getElementById("movesFilterTarget")
+
+
+
+
+
+
+
 const speciesInput = document.getElementById("speciesInput")
 const speciesButton = document.getElementById("speciesButton")
 const speciesTable = document.getElementById("speciesTable")
 const speciesTableThead = document.getElementById("speciesTableThead")
 const speciesTableTbody = document.getElementById("speciesTableTbody")
+
 
 const abilitiesInput = document.getElementById("abilitiesInput")
 const abilitiesButton = document.getElementById("abilitiesButton")
@@ -10,12 +38,19 @@ const abilitiesTable = document.getElementById("abilitiesTable")
 const abilitiesTableThead = document.getElementById("abilitiesTableThead")
 const abilitiesTableTbody = document.getElementById("abilitiesTableTbody")
 
+
 const movesInput = document.getElementById("movesInput")
 const movesButton = document.getElementById("movesButton")
 const movesTable = document.getElementById("movesTable")
 const movesTableThead = document.getElementById("movesTableThead")
 const movesTableTbody = document.getElementById("movesTableTbody")
 
+
+
+
+
+
+const table = document.querySelector("#table")
 
 const headerAbilitiesName = document.querySelector("#abilitiesTableThead th.ability")
 const headerAbilitiesDescription = document.querySelector("#abilitiesTableThead th.description")
@@ -41,28 +76,6 @@ const headerSpeciesSpD = document.querySelector("#speciesTableThead th.baseSpDef
 const headerSpeciesSpe = document.querySelector("#speciesTableThead th.baseSpeed")
 const headerSpeciesBST = document.querySelector("#speciesTableThead th.BST")
 const topButton = document.querySelector('.topButton')
-
-topButton.onclick = () => {
-    window.scrollTo({top: 0, behavior: 'auto'})
-    lazyLoading(reset = true)
-}
-
-
-speciesButton.addEventListener("click", () => {
-    if(!speciesButton.classList.contains("activeButton"))
-        tableButtonClick("species")
-})
-abilitiesButton.addEventListener("click", () => {
-    if(!abilitiesButton.classList.contains("activeButton"))
-        tableButtonClick("abilities")
-})
-movesButton.addEventListener("click", () => {
-    if(!movesButton.classList.contains("activeButton"))
-        tableButtonClick("moves")
-})
-
-
-
 
 
 
@@ -224,6 +237,101 @@ movesInput.addEventListener("input", e => {
     const value = e.target.value
     filterTableInput(value, [0, 1, 6], movesTableTbody)
 })
+
+
+speciesButton.addEventListener("click", () => {
+    if(!speciesButton.classList.contains("activeButton"))
+        tableButtonClick("species")
+})
+abilitiesButton.addEventListener("click", () => {
+    if(!abilitiesButton.classList.contains("activeButton"))
+        tableButtonClick("abilities")
+})
+movesButton.addEventListener("click", () => {
+    if(!movesButton.classList.contains("activeButton"))
+        tableButtonClick("moves")
+})
+
+
+
+
+speciesFilterCheckbox.addEventListener("change", e => {
+    if(e.target.checked)
+        document.querySelector("#speciesFilterButton").classList.remove("hide")
+    else
+        document.querySelector("#speciesFilterButton").classList.add("hide")
+})
+movesFilterCheckbox.addEventListener("change", e => {
+    if(e.target.checked)
+        document.querySelector("#movesFilterButton").classList.remove("hide")
+    else
+        document.querySelector("#movesFilterButton").classList.add("hide")
+})
+
+
+
+speciesFilterLearnset.addEventListener("click", () => {
+    const list = createOptionArray(["name"], moves)
+    createFilter(list, species, ["levelUpLearnsets", "TMHMLearnsets", "tutorLearnsets", "eggMovesLearnsets"], filterCount++, speciesFilterButton, "Learnset", "species")
+})
+speciesFilterEggGroup.addEventListener("click", () => {
+    const list = createOptionArray(["eggGroup1", "eggGroup2"], species)
+    createFilter(list, species, ["eggGroup1", "eggGroup2"], filterCount++, speciesFilterButton, "Egg Group", "species")
+})
+speciesFilterHeldItem.addEventListener("click", () => {
+    const list = createOptionArray(["item1", "item2"], species)
+    createFilter(list, species, ["item1", "item2"], filterCount++, speciesFilterButton, "Held Item", "species")
+})
+
+
+
+
+
+
+
+movesFilterFlag.addEventListener("click", () => {
+    let list = []
+    for (const name of Object.keys(moves)){
+        for (let i = 0; i < moves[name]["flags"].length; i++){
+            const value = sanitizeString(moves[name]["flags"][i])
+            if(!list.includes(value))
+                list.push(value)
+        }
+    }
+    createFilter(list, moves, ["flags"], filterCount++, movesFilterButton, "Flag", "move")
+})
+movesFilterPriority.addEventListener("click", () => {
+    const list = createOptionArray(["priority"], moves, isInt = true).sort()
+    createFilter(list, moves, ["priority"], filterCount++, movesFilterButton, "Priority", "move", isInt = true)
+})
+movesFilterTarget.addEventListener("click", () => {
+    const list = createOptionArray(["target"], moves)
+    createFilter(list, moves, ["target"], filterCount++, movesFilterButton, "Target", "move")
+})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+topButton.onclick = () => {
+    window.scrollTo({top: 0, behavior: 'auto'})
+    lazyLoading(reset = true)
+}
+
 
 
 window.onbeforeunload = () => {  

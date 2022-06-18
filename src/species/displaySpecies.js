@@ -59,24 +59,15 @@ function displaySpecies(){
 
 
         let abilitiesContainer = document.createElement("td")
-        let ability1 = document.createElement("div")
-        let ability2 = document.createElement("div")
-        let HA = document.createElement("div")
         abilitiesContainer.className = "abilities"
         const abilitiesArray = sanitizeString(Array.from(new Set(species[speciesName]["abilities"])).join(' ')).split("\n")
         for (let j = 0; j < abilitiesArray.length; j++){
-            if(j === 0){
-                ability1.innerText = abilitiesArray[j]
-                abilitiesContainer.append(ability1)
+            let ability = document.createElement("div")
+            ability.innerText = abilitiesArray[j]
+            if(j >= 1 && j === abilitiesArray.length - 1){
+                ability.style.fontWeight = "bold"
             }
-            else if(j === 1){
-                ability2.innerText = abilitiesArray[j]
-                abilitiesContainer.append(ability2)
-            }                
-            else if(j === 2){
-                HA.innerText = abilitiesArray[j]
-                abilitiesContainer.append(HA)
-            }                
+            abilitiesContainer.append(ability)
         }
         row.append(abilitiesContainer)
 

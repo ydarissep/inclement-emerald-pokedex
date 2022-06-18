@@ -9,76 +9,6 @@
   <link rel="stylesheet" href="style/speciesTable.css">
   <link rel="stylesheet" href="style/abilitiesTable.css">
   <link rel="stylesheet" href="style/movesTable.css">
-</head>
-<body>
-
-  <div id="tableInput">
-    <input type="search" id="speciesInput" class="hide">
-    <input type="search" id="abilitiesInput" class="hide">
-    <input type="search" id="movesInput" class="hide">
-  </div>
-
-
-  <div id="tableButton">
-    <button type="button" id="abilitiesButton" class="hide">Abilities</button>
-    <button type="button" id="speciesButton" class="hide">Species</button>
-    <button type="button" id="movesButton" class="hide">Moves</button>
-  </div>
-
-  <table id="abilitiesTable" class="hide">
-    <thead id="abilitiesTableThead">
-      <tr>
-        <th class="ability">Name</th>
-        <th class="description">Description</th>
-      </tr>
-    </thead>
-    <tbody id="abilitiesTableTbody"></tbody>
-  </table>
-
-
-  <table id="movesTable" class="hide">
-    <thead id="movesTableThead">
-      <tr>
-        <th class="move">Name</th>
-        <th class="type">Type</th>
-        <th class="split">Split</th>
-        <th class="power">Power</th>
-        <th class="accuracy">Acc</th>
-        <th class="PP">PP</th>
-        <th class="effect">Effect</th>
-      </tr>
-    </thead>
-    <tbody id="movesTableTbody"></tbody>    
-  </table>
-
-
-  <table id="speciesTable" class="hide">
-    <thead id="speciesTableThead">
-      <tr>
-        <th class="ID">ID</th>
-        <th class="sprite">Sprite</th>
-        <th class="species" colspan="2">Name</th>
-        <th class="types">Types</th>
-        <th class="abilities">Abilities</th>
-        <th class="baseHP">HP</th>
-        <th class="baseAttack">Atk</th>
-        <th class="baseDefense">Def</th>
-        <th class="baseSpAttack">SpA</th>
-        <th class="baseSpDefense">SpD</th>
-        <th class="baseSpeed">Spe</th>
-        <th class="BST">BST</th>
-      </tr>
-    </thead>
-    <tbody id="speciesTableTbody"></tbody>
-  </table>
-
-
-  <a class="topButton hide">↑</a>
-</body>
-
-
-<footer id="footer">
-  <h1>Inclement Emerald<br>Pokedex</h1>
   <script defer src="src/species/displaySpecies.js"></script>
   <script defer src="src/species/fetchSpecies.js"></script>
   <script defer src="src/species/regexSpecies.js"></script>
@@ -91,5 +21,132 @@
   <script defer src="src/lz-string.js"></script>
   <script defer src="src/utility.js"></script>
   <script defer src="src/global.js"></script>
+</head>
+<body>
+
+
+
+  <div id="tableInput" class="hide">
+    <input type="search" id="abilitiesInput" class="hide">
+    <input type="search" id="speciesInput" class="activeInput">
+    <input type="search" id="movesInput" class="hide">
+  </div>
+
+
+
+
+  <div id="tableButton" class="hide">
+    <button type="button" id="abilitiesButton">Abilities</button>
+    <button type="button" id="speciesButton" class="activeButton">Species</button>
+    <button type="button" id="movesButton">Moves</button>
+  </div>
+
+
+
+
+  <div id="tableFilter" class="hide">
+
+    <div id="abilitiesFilter" class="hide"></div>
+
+    <div id="speciesFilter" class="activeFilter">
+      <label for="speciesFilterCheckbox">Advanced Filter</label>
+      <input type="checkbox" id="speciesFilterCheckbox">
+
+      <div id="speciesFilterButton" class="hide">
+        <button type="button" id="speciesFilterHP">HP</button>
+        <button type="button" id="speciesFilterAtk">Atk</button>
+        <button type="button" id="speciesFilterDef">Def</button>
+        <button type="button" id="speciesFilterSpA">SpA</button>
+        <button type="button" id="speciesFilterSpD">SpD</button>
+        <button type="button" id="speciesFilterSpe">Spe</button>
+        <button type="button" id="speciesFilterBST">BST</button>
+        <button type="button" id="speciesFilterLearnset">Learnset</button>
+        <button type="button" id="speciesFilterEggGroup">Egg Group</button>
+        <button type="button" id="speciesFilterHeldItem">Held Item</button>
+      </div>
+
+    </div>
+
+    <div id="movesFilter" class="hide">
+      <label for="movesFilterCheckbox">Advanced Filter</label>
+      <input type="checkbox" id="movesFilterCheckbox">
+
+      <div id="movesFilterButton" class="hide">
+        <button type="button" id="movesFilterFlag">Flag</button>
+        <button type="button" id="movesFilterPriority">Priority</button>
+        <button type="button" id="movesFilterTarget">Target</button>
+      </div>
+
+    </div>
+
+  </div>
+
+
+
+
+
+
+  <div id="table" class="hide">
+
+
+    <table id="abilitiesTable" class="hide">
+      <thead id="abilitiesTableThead">
+        <tr>
+          <th class="ability">Name</th>
+          <th class="description">Description</th>
+        </tr>
+      </thead>
+    <tbody id="abilitiesTableTbody"></tbody>
+    </table>
+
+
+    <table id="movesTable" class="hide">
+      <thead id="movesTableThead">
+        <tr>
+          <th class="move">Name</th>
+          <th class="type">Type</th>
+          <th class="split">Split</th>
+          <th class="power">Power</th>
+          <th class="accuracy">Acc</th>
+          <th class="PP">PP</th>
+          <th class="effect">Effect</th>
+        </tr>
+      </thead>
+      <tbody id="movesTableTbody"></tbody>    
+    </table>
+
+
+    <table id="speciesTable" class="activeTable">
+      <thead id="speciesTableThead">
+        <tr>
+          <th class="ID">ID</th>
+          <th class="sprite">Sprite</th>
+          <th class="species" colspan="2">Name</th>
+          <th class="types">Types</th>
+          <th class="abilities">Abilities</th>
+          <th class="baseHP">HP</th>
+          <th class="baseAttack">Atk</th>
+          <th class="baseDefense">Def</th>
+          <th class="baseSpAttack">SpA</th>
+          <th class="baseSpDefense">SpD</th>
+          <th class="baseSpeed">Spe</th>
+          <th class="BST">BST</th>
+        </tr>
+      </thead>
+      <tbody id="speciesTableTbody"></tbody>
+    </table>
+
+
+    <a class="topButton hide">↑</a>
+
+
+  </div>
+
+
+</body>
+
+
+<footer id="footer">
+  <h1>Inclement Emerald<br>Pokedex</h1>
 </footer>
 </html>

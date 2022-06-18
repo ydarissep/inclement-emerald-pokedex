@@ -147,7 +147,7 @@ function regexMoves(textMoves, moves){
             }
         }
         else if(line.includes(".priority")){
-            const matchPriority = line.match(/-? *\d+/)
+            const matchPriority = line.match(/-?\d+/)
             if(matchPriority !== null){
                 const priority = matchPriority[0]
 

@@ -4,7 +4,7 @@
 
 
 #movesTableThead th.move {
-	width: 150px;
+	width: 150px !important;
 }
 #movesTableThead th.type {
     width: 80px;
@@ -21,7 +21,7 @@
 #movesTableThead th.PP {
 	width: 40px;
 }
-#movesTableThead th.description {
+#movesTableThead th.effect {
 	width: 250px;
 }
 
@@ -59,7 +59,7 @@ only screen and (max-width: 500px) {
     	display: inline-flex !important;
     }
 
-    #movesTable .description > div {
+    #movesTable .effect > div {
     	display: inline !important;
     	font-style: italic;
     }
