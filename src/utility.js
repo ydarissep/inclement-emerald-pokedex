@@ -297,6 +297,7 @@ function createFilter(list , obj, objInputArray, filterCount, element, labelStri
                 rows[i].classList.remove(`hideFilter${filterCount}`)
             }
             filter.remove()
+            lazyLoading(reset = true)
         })
 
         filter.append(label)
