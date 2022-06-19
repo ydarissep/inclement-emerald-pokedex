@@ -250,91 +250,101 @@ async function tableButtonClick(input){
 
 
 function createFilter(list , obj, objInputArray, filterCount, element, labelString, className, isInt = false){
-    const filter = document.createElement("div")
-    const label = document.createElement("label")
-    const input = document.createElement("input")
-    const datalist = document.createElement("datalist")
-    let optionArray = []
-
-    filter.setAttribute("id", `filter${filterCount}`)
-
-    label.setAttribute("for", `input${filterCount}`)
-    label.innerText = labelString
-
-    input.setAttribute("type", "search")
-    input.setAttribute("id", `input${filterCount}`)
-    input.setAttribute("list", `datalist${filterCount}`)
-    
-    datalist.setAttribute("id", `datalist${filterCount}`)
 
 
-    for (let i = 0; i < list.length; i++){
-        const option = document.createElement("option")
-        option.innerText = list[i]
-        datalist.append(option)
+    const activeTables = document.getElementsByClassName("activeTable")
+    if(activeTables.length > 0){
+        const rows = activeTables[0].tBodies[0].rows
+
+        const filter = document.createElement("div")
+        const label = document.createElement("label")
+        const input = document.createElement("input")
+        const datalist = document.createElement("datalist")
+        const button = document.createElement("button")
+
+        filter.setAttribute("id", `filter${filterCount}`)
+
+        label.setAttribute("for", `input${filterCount}`)
+        label.innerText = labelString
+
+        input.setAttribute("type", "search")
+        input.setAttribute("id", `input${filterCount}`)
+        input.setAttribute("list", `datalist${filterCount}`)
+        
+        datalist.setAttribute("id", `datalist${filterCount}`)
+
+
+        for (let i = 0; i < list.length; i++){
+            const option = document.createElement("option")
+            option.innerText = list[i]
+            datalist.append(option)
+        }
+
+
+        button.setAttribute("type", "button")
+        button.setAttribute("id", `button${filterCount}`)
+        button.innerText = "X"
+
+        input.addEventListener("input", e => {
+            let value = e.target.value
+            if(!isInt)
+                value = value.replace(/-|'/g, " ").toLowerCase()
+            filterInput(value, objInputArray, rows, filterCount, obj, className, isInt)
+        })
+
+        button.addEventListener("click", () => {
+            for (let i = 0; i < rows.length; i++){
+                rows[i].classList.remove(`hideFilter${filterCount}`)
+            }
+            filter.remove()
+        })
+
+        filter.append(label)
+        filter.append(input)
+        filter.append(datalist)
+        filter.append(button)
+        element.append(filter)
     }
-
-    input.addEventListener("input", e => {
-        let value = e.target.value
-        if(!isInt)
-            value = value.replace(/-|'/g, " ").toLowerCase()
-        filterInput(value, objInputArray, filterCount, obj, className, isInt)
-    })
-
-    filter.append(label)
-    filter.append(input)
-    filter.append(datalist)
-    element.append(filter)
-
 }
 
 
 
-function filterInput(value, objInputArray, filterCount, obj, className, isInt = false){
-    const activeTables = document.getElementsByClassName("activeTable")
-    let conversionTable = {}
-    let rows = []
+function filterInput(value, objInputArray, rows, filterCount, obj, className, isInt = false){
     let hideRows = {}
 
-    if(activeTables.length > 0){
+    for (let j = 0; j < rows.length; j++){
 
 
-        rows = activeTables[0].tBodies[0].rows
+        const key = `${className.toUpperCase()}_${rows[j].querySelector(`.${className}`).textContent.toUpperCase().replace(/ /g, "_")}`
 
-
-        for (let j = 0; j < rows.length; j++){
-
-
-            const key = `${className.toUpperCase()}_${rows[j].querySelector(`.${className}`).textContent.toUpperCase().replace(/ /g, "_")}`
-
-            for (let i = 0; i < objInputArray.length; i++){
-                let compareValue = obj[key][objInputArray[i]]
-                if(isInt){
-                    if(compareValue === value || value == ""){
-                        hideRows[j] = "show"
-                        break                        
-                    }
+        for (let i = 0; i < objInputArray.length; i++){
+            let compareValue = obj[key][objInputArray[i]]
+            if(isInt){
+                if(compareValue === value || value == ""){
+                    hideRows[j] = "show"
+                    break                        
                 }
-                else{
-                    compareValue = JSON.stringify(compareValue).toLowerCase()
-                    if(compareValue.includes(value.replace(/ /g, "_"))){
-                        hideRows[j] = "show"
-                        break
-                    }
+            }
+            else{
+                compareValue = JSON.stringify(compareValue).toLowerCase()
+                if(compareValue.includes(value.replace(/ /g, "_"))){
+                    hideRows[j] = "show"
+                    break
                 }
             }
         }
-
-
-        for(let i = 0; i < rows.length; i++){
-            if(hideRows[i] !== "show")
-                rows[i].classList.add(`hideFilter${filterCount}`)
-            else
-                rows[i].classList.remove(`hideFilter${filterCount}`)
-        }
-        lazyLoading(true)
     }
+
+
+    for(let i = 0; i < rows.length; i++){
+        if(hideRows[i] !== "show")
+            rows[i].classList.add(`hideFilter${filterCount}`)
+        else
+            rows[i].classList.remove(`hideFilter${filterCount}`)
+    }
+    lazyLoading(true)
 }
+
 
 
 function createOptionArray(objInputArray, obj, isInt = false){
