@@ -290,6 +290,10 @@ function createFilter(list , obj, objInputArray, filterCount, element, labelStri
             if(!isInt)
                 value = value.replace(/-|'/g, " ").toLowerCase()
             filterInput(value, objInputArray, rows, filterCount, obj, className, isInt)
+
+            if(list.includes(e.target.value))
+                input.blur()
+
         })
 
         button.addEventListener("click", () => {
