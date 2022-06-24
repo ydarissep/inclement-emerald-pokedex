@@ -1,6 +1,6 @@
 async function getSpecies(species){
     footerP("Fetching species")
-    const rawSpecies = await fetch("https://raw.githubusercontent.com/BuffelSaft/pokeemerald/master/include/constants/species.h")
+    const rawSpecies = await fetch(`https://raw.githubusercontent.com/${repo}/master/include/constants/species.h`)
     const textSpecies = await rawSpecies.text()
 
     return regexSpecies(textSpecies, species)
@@ -9,17 +9,17 @@ async function getSpecies(species){
 
 async function getBaseStats(species){
     footerP("Fetching base stats")
-    const rawBaseStats = await fetch("https://raw.githubusercontent.com/BuffelSaft/pokeemerald/master/src/data/pokemon/base_stats.h")
+    const rawBaseStats = await fetch(`https://raw.githubusercontent.com/${repo}/master/src/data/pokemon/base_stats.h`)
     const textBaseStats = await rawBaseStats.text()
     return regexBaseStats(textBaseStats, species)
 }
 
 async function getLevelUpLearnsets(species){
     footerP("Fetching level up learnsets")
-    const rawLevelUpLearnsets = await fetch("https://raw.githubusercontent.com/BuffelSaft/pokeemerald/master/src/data/pokemon/level_up_learnsets.h")
+    const rawLevelUpLearnsets = await fetch(`https://raw.githubusercontent.com/${repo}/master/src/data/pokemon/level_up_learnsets.h`)
     const textLevelUpLearnsets = await rawLevelUpLearnsets.text()
 
-    const rawLevelUpLearnsetsPointers = await fetch("https://raw.githubusercontent.com/BuffelSaft/pokeemerald/master/src/data/pokemon/level_up_learnset_pointers.h")
+    const rawLevelUpLearnsetsPointers = await fetch(`https://raw.githubusercontent.com/${repo}/master/src/data/pokemon/level_up_learnset_pointers.h`)
     const textLevelUpLearnsetsPointers = await rawLevelUpLearnsetsPointers.text()
 
 
@@ -31,7 +31,7 @@ async function getLevelUpLearnsets(species){
 
 async function getTMHMLearnsets(species){
     footerP("Fetching TMHM learnsets")
-    const rawTMHMLearnsets = await fetch("https://raw.githubusercontent.com/BuffelSaft/pokeemerald/master/src/data/pokemon/tmhm_learnsets.h")
+    const rawTMHMLearnsets = await fetch(`https://raw.githubusercontent.com/${repo}/master/src/data/pokemon/tmhm_learnsets.h`)
     const textTMHMLearnsets = await rawTMHMLearnsets.text()
 
     return regexTMHMLearnsets(textTMHMLearnsets, species)
@@ -39,7 +39,7 @@ async function getTMHMLearnsets(species){
 
 async function getEvolution(species){
     footerP("Fetching evolution line")
-    const rawEvolution = await fetch("https://raw.githubusercontent.com/BuffelSaft/pokeemerald/master/src/data/pokemon/evolution.h")
+    const rawEvolution = await fetch(`https://raw.githubusercontent.com/${repo}/master/src/data/pokemon/evolution.h`)
     const textEvolution = await rawEvolution.text()
 
     return regexEvolution(textEvolution, species)
@@ -47,7 +47,7 @@ async function getEvolution(species){
 
 async function getForms(species){
     footerP("Fetching alternate forms")
-    const rawForms = await fetch("https://raw.githubusercontent.com/BuffelSaft/pokeemerald/master/src/data/pokemon/form_species_tables.h")
+    const rawForms = await fetch(`https://raw.githubusercontent.com/${repo}/master/src/data/pokemon/form_species_tables.h`)
     const textForms = await rawForms.text()
 
     return regexForms(textForms, species)
@@ -55,7 +55,7 @@ async function getForms(species){
 
 async function getEggMovesLearnsets(species){
     footerP("Fetching egg moves learnsets")
-    const rawEggMoves = await fetch("https://raw.githubusercontent.com/BuffelSaft/pokeemerald/master/src/data/pokemon/egg_moves.h")
+    const rawEggMoves = await fetch(`https://raw.githubusercontent.com/${repo}/master/src/data/pokemon/egg_moves.h`)
     const textEggMoves = await rawEggMoves.text()
 
     return regexEggMovesLearnsets(textEggMoves, species)
@@ -79,10 +79,10 @@ async function getTutorLearnsets(species){
 
 async function getSprite(species){
     footerP("Fetching sprites... this could take a while")
-    const rawFrontPicTable = await fetch("https://raw.githubusercontent.com/BuffelSaft/pokeemerald/master/src/data/pokemon_graphics/front_pic_table.h")
+    const rawFrontPicTable = await fetch(`https://raw.githubusercontent.com/${repo}/master/src/data/pokemon_graphics/front_pic_table.h`)
     const textFrontPicTable = await rawFrontPicTable.text()
 
-    const rawSprite = await fetch("https://raw.githubusercontent.com/BuffelSaft/pokeemerald/master/src/data/graphics/pokemon.h")
+    const rawSprite = await fetch(`https://raw.githubusercontent.com/${repo}/master/src/data/graphics/pokemon.h`)
     const textSprite = await rawSprite.text()
 
     const spriteConversionTable = getSpriteConversionTable(textFrontPicTable, species)

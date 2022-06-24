@@ -1,5 +1,5 @@
 function sanitizeString(string){
-    const regex = /^SPECIES_|^TYPE_|ABILITY_|^SPECIES_NONE|^ABILITY_NONE|^MOVE_|^SPLIT_|FLAG_|^EFFECT_|^ITEM_|^EGG_GROUP_/ig
+    const regex = /^SPECIES_|^TYPE_|ABILITY_NONE|ABILITY_|^SPECIES_NONE|^MOVE_|^SPLIT_|FLAG_|^EFFECT_|^Z_EFFECT|^ITEM_|^EGG_GROUP_/ig
     const unsanitizedString = string.replace(regex, "")
     let matchArray = unsanitizedString.match(/\w+/g)
     if(matchArray !== null){
@@ -59,9 +59,9 @@ async function displaySetup(){
 
 async function forceUpdate(){
     const update = 5
-    if(localStorage.getItem("update") != update){
+    if(localStorage.getItem("update") != `${update} IE`){
         await localStorage.clear()
-        await localStorage.setItem("update", update)
+        await localStorage.setItem("update", `${update} IE`)
         await footerP("Fetching data please wait... this is only run once")
     }
 }
@@ -249,7 +249,7 @@ async function tableButtonClick(input){
 
 
 
-function createFilter(list , obj, objInputArray, filterCount, element, labelString, className, isInt = false){
+function createFilter(list , obj, objInputArray, filterCount, element, labelString, isInt = false, isOperator = false){
 
 
     const activeTables = document.getElementsByClassName("activeTable")
@@ -265,6 +265,7 @@ function createFilter(list , obj, objInputArray, filterCount, element, labelStri
         filter.setAttribute("id", `filter${filterCount}`)
 
         label.setAttribute("for", `input${filterCount}`)
+        label.style.width = "200px"
         label.innerText = labelString
 
         input.setAttribute("type", "search")
@@ -289,9 +290,9 @@ function createFilter(list , obj, objInputArray, filterCount, element, labelStri
             let value = e.target.value
             if(!isInt)
                 value = value.replace(/-|'/g, " ").toLowerCase()
-            filterInput(value, objInputArray, rows, filterCount, obj, className, isInt)
+            filterInput(value, objInputArray, rows, filterCount, obj, isInt, isOperator)
 
-            if(list.includes(e.target.value))
+            if(list.includes(e.target.value) && e.target.value !== "" && !isOperator)
                 input.blur()
 
         })
@@ -314,18 +315,56 @@ function createFilter(list , obj, objInputArray, filterCount, element, labelStri
 
 
 
-function filterInput(value, objInputArray, rows, filterCount, obj, className, isInt = false){
+function filterInput(value, objInputArray, rows, filterCount, obj, isInt = false, isOperator = false){
     let hideRows = {}
 
     for (let j = 0; j < rows.length; j++){
 
 
-        const key = `${className.toUpperCase()}_${rows[j].querySelector(`.${className}`).textContent.toUpperCase().replace(/ /g, "_")}`
+        const key = rows[j].querySelector(".key").textContent
 
         for (let i = 0; i < objInputArray.length; i++){
             let compareValue = obj[key][objInputArray[i]]
-            if(isInt){
-                if(compareValue === value || value == ""){
+            if(isOperator){
+                const regex = />=|<=|=|<|>/
+                const matchOperator = value.match(regex)
+                if(matchOperator !== null){
+                    const operator = matchOperator[0]
+
+                    const matchInt = value.match(/\d+/)
+                    if(matchInt !== null){
+                        const int = matchInt[0]
+                        switch (operator){
+                            case ">=":
+                                if(compareValue >= int)
+                                    hideRows[j] = "show"
+                                break
+                            case "<=":
+                                if(compareValue <= int)
+                                    hideRows[j] = "show"
+                                break
+                            case ">":
+                                if(compareValue > int)
+                                    hideRows[j] = "show"
+                                break
+                            case "<":
+                                if(compareValue < int)
+                                    hideRows[j] = "show"
+                                break
+                            case "=":
+                                if(compareValue == int)
+                                    hideRows[j] = "show"
+                                break
+                        }
+                    }
+                    else
+                        hideRows[j] = "show"
+                }
+                else
+                    hideRows[j] = "show"
+            }
+            else if(isInt){
+                if(compareValue == value || value == ""){
                     hideRows[j] = "show"
                     break                        
                 }

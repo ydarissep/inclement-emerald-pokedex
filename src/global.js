@@ -1,3 +1,5 @@
+window.repo = "BuffelSaft/pokeemerald"
+
 window.filterCount = 0
 const tableFilter = document.getElementById("tableFilter")
 const speciesFilterCheckbox = document.getElementById("speciesFilterCheckbox")
@@ -270,18 +272,59 @@ movesFilterCheckbox.addEventListener("change", e => {
 
 
 
+
+
+
+
+
+
+
+speciesFilterHP.addEventListener("click", () => {
+    const list = [">=", "<=", ">", "<", "="]
+    createFilter(list, species, ["baseHP"], filterCount++, speciesFilterButton, "HP", isInt = true, isOperator = true)
+})
+speciesFilterAtk.addEventListener("click", () => {
+    const list = [">=", "<=", ">", "<", "="]
+    createFilter(list, species, ["baseAttack"], filterCount++, speciesFilterButton, "Atk", isInt = true, isOperator = true)
+})
+speciesFilterDef.addEventListener("click", () => {
+    const list = [">=", "<=", ">", "<", "="]
+    createFilter(list, species, ["baseDefense"], filterCount++, speciesFilterButton, "Def", isInt = true, isOperator = true)
+})
+speciesFilterSpA.addEventListener("click", () => {
+    const list = [">=", "<=", ">", "<", "="]
+    createFilter(list, species, ["baseSpAttack"], filterCount++, speciesFilterButton, "SpA", isInt = true, isOperator = true)
+})
+speciesFilterSpD.addEventListener("click", () => {
+    const list = [">=", "<=", ">", "<", "="]
+    createFilter(list, species, ["baseSpDefense"], filterCount++, speciesFilterButton, "SpD", isInt = true, isOperator = true)
+})
+speciesFilterSpe.addEventListener("click", () => {
+    const list = [">=", "<=", ">", "<", "="]
+    createFilter(list, species, ["baseSpeed"], filterCount++, speciesFilterButton, "Spe", isInt = true, isOperator = true)
+})
+speciesFilterBST.addEventListener("click", () => {
+    const list = [">=", "<=", ">", "<", "="]
+    createFilter(list, species, ["BST"], filterCount++, speciesFilterButton, "BST", isInt = true, isOperator = true)
+})
 speciesFilterLearnset.addEventListener("click", () => {
     const list = createOptionArray(["name"], moves)
-    createFilter(list, species, ["levelUpLearnsets", "TMHMLearnsets", "tutorLearnsets", "eggMovesLearnsets"], filterCount++, speciesFilterButton, "Learnset", "species")
+    createFilter(list, species, ["levelUpLearnsets", "TMHMLearnsets", "tutorLearnsets", "eggMovesLearnsets"], filterCount++, speciesFilterButton, "Learnset")
 })
 speciesFilterEggGroup.addEventListener("click", () => {
     const list = createOptionArray(["eggGroup1", "eggGroup2"], species)
-    createFilter(list, species, ["eggGroup1", "eggGroup2"], filterCount++, speciesFilterButton, "Egg Group", "species")
+    createFilter(list, species, ["eggGroup1", "eggGroup2"], filterCount++, speciesFilterButton, "Egg Group")
 })
 speciesFilterHeldItem.addEventListener("click", () => {
     const list = createOptionArray(["item1", "item2"], species)
-    createFilter(list, species, ["item1", "item2"], filterCount++, speciesFilterButton, "Held Item", "species")
+    createFilter(list, species, ["item1", "item2"], filterCount++, speciesFilterButton, "Held Item")
 })
+
+
+
+
+
+
 
 
 
@@ -298,15 +341,15 @@ movesFilterFlag.addEventListener("click", () => {
                 list.push(value)
         }
     }
-    createFilter(list, moves, ["flags"], filterCount++, movesFilterButton, "Flag", "move")
+    createFilter(list, moves, ["flags"], filterCount++, movesFilterButton, "Flag")
 })
 movesFilterPriority.addEventListener("click", () => {
     const list = createOptionArray(["priority"], moves, isInt = true).sort()
-    createFilter(list, moves, ["priority"], filterCount++, movesFilterButton, "Priority", "move", isInt = true)
+    createFilter(list, moves, ["priority"], filterCount++, movesFilterButton, "Priority", isInt = true)
 })
 movesFilterTarget.addEventListener("click", () => {
     const list = createOptionArray(["target"], moves)
-    createFilter(list, moves, ["target"], filterCount++, movesFilterButton, "Target", "move")
+    createFilter(list, moves, ["target"], filterCount++, movesFilterButton, "Target")
 })
 
 

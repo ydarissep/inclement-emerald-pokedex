@@ -18,6 +18,8 @@ footer > p {
 }
 
 
+
+
 [class*="hide"] {
 	display: none !important
 }
@@ -135,6 +137,7 @@ canvas {
   transition: 0.2s ease-in-out;
   filter: opacity(100%);
 }
+
 
 
 table {

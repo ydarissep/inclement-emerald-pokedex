@@ -1,6 +1,6 @@
 async function getAbilities(abilities){
     footerP("Fetching abilities")
-    const rawAbilities = await fetch("https://raw.githubusercontent.com/BuffelSaft/pokeemerald/master/src/data/text/abilities.h")
+    const rawAbilities = await fetch(`https://raw.githubusercontent.com/${repo}/master/src/data/text/abilities.h`)
     const textAbilities = await rawAbilities.text()
 
     return regexAbilities(textAbilities, abilities)

@@ -36,8 +36,13 @@ function displaySpecies(){
 
         let nameContainer = document.createElement("td")
         let name = document.createElement("div")
-        nameContainer.className = "species"
-        name.innerText = sanitizeString(species[speciesName]["name"])
+        let ingameName = document.createElement("div")
+        nameContainer.className = "nameContainer"
+        name.className = "key hide"
+        name.innerText = species[speciesName]["name"]
+        ingameName.className = "species"
+        ingameName.innerText = sanitizeString(species[speciesName]["name"])
+        nameContainer.append(ingameName)
         nameContainer.append(name)
         row.append(nameContainer)
 

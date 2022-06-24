@@ -13,10 +13,17 @@ function displayMoves(){
             row.className = "hideTemp"
 
 
-        let move = document.createElement("td")
-        move.className = "move"
-        move.innerText = sanitizeString(moves[moveName]["name"])
-        row.append(move)
+        let nameContainer = document.createElement("td")
+        let name = document.createElement("div")
+        let ingameName = document.createElement("div")
+        nameContainer.className = "nameContainer"
+        name.className = "key hide"
+        name.innerText = moves[moveName]["name"]
+        ingameName.className = "move"
+        ingameName.innerText = moves[moveName]["ingameName"]
+        nameContainer.append(name)
+        nameContainer.append(ingameName)
+        row.append(nameContainer)
 
 
 
@@ -87,7 +94,7 @@ function displayMoves(){
 
         let effect = document.createElement("div")
         effect.className = "effect"
-        if(!movesArraySanitized.includes(moves[moveName]["effect"].replace(/EFFECT_|_/ig, "")))
+        if(moves[moves[moveName]["effect"].replace("EFFECT_", "MOVE_")] === undefined)
             effect.innerText = `${sanitizeString(moves[moveName]["effect"])}`
 
 

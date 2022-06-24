@@ -63,6 +63,7 @@ function regexMoves(textMoves, moves){
             moves[move]["name"] = move
             moves[move]["changes"] = []
             moves[move]["description"] = []
+            moves[move]["ingameName"] = sanitizeString(move)
         }
         if(line.includes("REBALANCED_VERSION"))
             rebalanced = true
@@ -150,6 +151,8 @@ function regexMoves(textMoves, moves){
             const matchPriority = line.match(/-?\d+/)
             if(matchPriority !== null){
                 const priority = matchPriority[0]
+                if(priority >= 50)
+                    priority -= 256
 
                 moves[move] = setMove(moves[move], change, "priority", priority)
             }
@@ -204,7 +207,7 @@ function normalizeMoves(moves){
             moves[move]["chance"] = 0
 
         if(moves[move]["target"] === undefined)
-            moves[move]["target"] = []
+            moves[move]["target"] = ""
 
         if(moves[move]["flags"] === undefined)
             moves[move]["flags"] = [""]

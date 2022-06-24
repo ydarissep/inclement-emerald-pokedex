@@ -8,7 +8,7 @@ function regexSpecies(textSpecies, species){
             formsStart = ID
 
         const matchSpecies = line.match(/#define *(SPECIES_\w+)/i)
-        if(matchSpecies !== null && /SPECIES_NONE /i.test(line) !== true && /SPECIES_EGG /i.test(line) !== true){
+        if(matchSpecies !== null && /SPECIES_NONE/i.test(line) !== true && /SPECIES_EGG/i.test(line) !== true){
             const name = matchSpecies[1]
 
 
@@ -55,45 +55,46 @@ function regexBaseStats(textBaseStats, species){
 
 
         const matchSpecies = line.match(/SPECIES_\w+/i)
-        if(matchSpecies !== null && /SPECIES_NONE/i.test(line) !== true){
+        if(matchSpecies !== null){
             name = matchSpecies[0]
             change = false
         }
 
 
+        if(name !== "SPECIES_NONE" && name !== "SPECIES_EGG"){
+            const matchRegex = line.match(regex)
+            if(matchRegex !== null){
+                const match = matchRegex[0]
 
-        const matchRegex = line.match(regex)
-        if(matchRegex !== null){
-            const match = matchRegex[0]
 
 
-
-            if(match === "baseHP" || match === "baseAttack" || match === "baseDefense" || match === "baseSpeed" || match === "baseSpAttack" || match === "baseSpDefense"){
-                const matchInt = line.match(/\d+/)
-                if(matchInt !== null)
-                    value = parseInt(matchInt[0])
-            }
-            else if(match === "type1" || match === "type2" || match === "item1" || match === "item2" || match === "eggGroup1" || match === "eggGroup2"){
-                value = line.match(/\w+_\w+/i)
-                if(value !== null)
-                    value = value[0]
-            }
-            else if(match === "abilities"){
-                value = line.match(/ABILITY_\w+/ig)
-                if(value !== null){
-                    for (let i = 0; i < 3; i++){
-                        if(value[i] === "ABILITY_NONE" || value[i] === undefined && i >= 1)
-                            value[i] = value[i-1]
+                if(match === "baseHP" || match === "baseAttack" || match === "baseDefense" || match === "baseSpeed" || match === "baseSpAttack" || match === "baseSpDefense"){
+                    const matchInt = line.match(/\d+/)
+                    if(matchInt !== null)
+                        value = parseInt(matchInt[0])
+                }
+                else if(match === "type1" || match === "type2" || match === "item1" || match === "item2" || match === "eggGroup1" || match === "eggGroup2"){
+                    value = line.match(/\w+_\w+/i)
+                    if(value !== null)
+                        value = value[0]
+                }
+                else if(match === "abilities"){
+                    value = line.match(/ABILITY_\w+/ig)
+                    if(value !== null){
+                        for (let i = 0; i < 3; i++){
+                            if(value[i] === "ABILITY_NONE" || value[i] === undefined && i >= 1)
+                                value[i] = value[i-1]
+                        }
                     }
                 }
+
+
+
+                if(change === true)
+                    species[name]["changes"].push([match, value])
+                else if(change === false)
+                    species[name][match] = value
             }
-
-
-
-            if(change === true)
-                species[name]["changes"].push([match, value])
-            else if(change === false)
-                species[name][match] = value
         }
     })
     return getBST(species)

@@ -49,7 +49,7 @@
     font-size: 0.9rem;
 }
 
-.species {
+#speciesTableTbody .nameContainer {
     font-weight: 600;
 }
 
@@ -58,7 +58,7 @@
 #speciesTableTbody .sprite {
     border-right: none !important;
 }
-#speciesTableTbody .species {
+#speciesTableTbody .nameContainer {
     border-left: none !important;
 }
 
@@ -72,7 +72,7 @@ only screen and (max-width: 700px) {
         border: none;
     }
 
-    td.ID, td.sprite, td.species {
+    td.ID, td.sprite, #speciesTableTbody td.nameContainer {
     	display: inline-block !important;
     	width: 33.3%;
     	box-sizing: border-box;
