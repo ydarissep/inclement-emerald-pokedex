@@ -333,7 +333,7 @@ function filterInput(value, objInputArray, rows, filterCount, obj, isInt = false
 
                     const matchInt = value.match(/\d+/)
                     if(matchInt !== null){
-                        const int = matchInt[0]
+                        const int = parseInt(matchInt[0])
                         switch (operator){
                             case ">=":
                                 if(compareValue >= int)
