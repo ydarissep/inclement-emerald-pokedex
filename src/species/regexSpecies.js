@@ -227,20 +227,23 @@ function regexEvolution(textEvolution, species){
 }
 
 function getEvolutionLine(species){
-    for (const name of Object.keys(species)){
+    for(let i = 0; i < 2; i++) // FUTURE ME DO NOT DARE QUESTION ME
+    {
+        for (const name of Object.keys(species)){
 
-        for (let j = 0; j < species[name]["evolution"].length; j++){
+            for (let j = 0; j < species[name]["evolution"].length; j++){
 
-            const targetSpecies = species[name]["evolution"][j][2]
-            species[name]["evolutionLine"].push(targetSpecies)
-        }
+                const targetSpecies = species[name]["evolution"][j][2]
+                species[name]["evolutionLine"].push(targetSpecies)
+            }
 
 
 
-        for (let j = 0; j < species[name]["evolution"].length; j++){
+            for (let j = 0; j < species[name]["evolution"].length; j++){
 
-            const targetSpecies = species[name]["evolution"][j][2]
-            species[targetSpecies]["evolutionLine"] = species[name]["evolutionLine"]
+                const targetSpecies = species[name]["evolution"][j][2]
+                species[targetSpecies]["evolutionLine"] = species[name]["evolutionLine"]
+            }
         }
     }
 

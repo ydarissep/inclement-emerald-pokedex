@@ -128,6 +128,7 @@ canvas {
   width: 50px;
   height: 50px;
   display: flex;
+  z-index: 2;
   justify-content: center;
   align-items: center;
   color: white;
@@ -137,8 +138,6 @@ canvas {
   transition: 0.2s ease-in-out;
   filter: opacity(100%);
 }
-
-
 
 table {
     margin: auto;
@@ -191,3 +190,45 @@ td, th {
 
 
 .splitIcon {width: 40px;}
+
+
+.underline {
+    text-decoration: underline;
+}
+
+.italic {
+    font-style: italic;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+.wrap {
+    flex-wrap: wrap;
+}
+
+.flex {
+    display: flex;
+}
+
+.flexColumn {
+    flex-direction: column;
+}
+
+.flexRow {
+    flex-direction: row;
+}
+
+.flexCenter {
+    justify-content: center;
+    align-items: center;
+}
+
+.flexAlign {
+    align-items: center;   
+}
+
+.hover {
+        cursor: pointer;
+}

@@ -1,0 +1,163 @@
+#speciesPanelCloseButton {
+	float: right;
+}
+
+#speciesPanelMainContainer {
+	justify-content: center;
+	background: rgba(0, 0, 0, 0.15);
+}
+
+#speciesPanelContainer {
+	width: 700px;
+}
+
+#speciesName {
+	font-size: 16pt;
+}
+
+#speciesID {
+	font-size: 11pt;
+	margin-left: 5px;
+	color: #999999;
+}
+
+#speciesSprite {
+	padding-right: 10px;
+	width: 64px;
+    height: 64px;
+    aspect-ratio: auto 64 / 64;
+}
+
+.speciesPanelText {
+	margin-bottom: 5px;
+	font-size: 9pt !important;
+	font-weight: bold;
+	color: #777777;	
+}
+
+#speciesAbilitiesContainer {
+	font-size: 11pt;
+}
+
+#speciesPanelSubcontainer2 {
+	padding: 15px 0px 0px 0px;
+}
+
+
+.speciesPanelTextPadding {
+	padding: 2px 0px 7px 15px;
+}
+.speciesPanelAbilitiesDescriptionPadding {
+	padding: 0px 0px 7px 15px;
+}
+
+#speciesEggGroupsContainer, #speciesHeldItemsContainer, #speciesChangesContainer {
+	width: 33.33%;
+}
+
+.evoMethod {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	cursor: pointer;
+	font-size: 18px;
+	padding: 5px 0px 5px 0px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+#speciesBaseStatsGraphContainer {
+	/*
+	justify-content: center;
+	*/
+}
+
+
+
+#statsSection {
+  justify-content: center;
+  padding: 10px 0px 10px 0px;
+  /*
+  background: #121418;
+  color: white;
+  width: 310px;
+  padding: 5px;
+  border-radius: 20px;
+  margin: 0 auto;
+  */
+}
+
+#statsNames {
+  display: grid;
+  grid-template-rows: repeat(1fr);
+  font-size: 13px;
+  line-height: 0;
+}
+
+
+#statsNames p {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-right: 5px;
+  font-weight: bold;
+}
+
+
+
+#statsNames p > span {
+  font-weight: 800;
+}
+
+
+#statsGraph {
+  width: 200px;
+  display: grid;
+  grid-template-rows: repeat(1fr);
+}
+
+
+#statsGraph > div {
+  margin: 0.4rem 0;
+  filter: opacity(90%);
+  border-radius: 3px;
+}
+
+
+
+
+
+.miniSprite {
+	padding: 0px 5px 5px 15px;
+	width: 32px;
+    height: 32px;
+    aspect-ratio: auto 32 / 32;
+}
+
+.miniSprite2 {
+	padding-left: 5px;
+	width: 32px;
+    height: 32px;
+    aspect-ratio: auto 32 / 32;
+}
+
+
+@media 
+only screen and (max-width: 700px) {
+
+	#speciesPanelSubcontainer4 {
+		flex-direction: column;
+	}
+	.evoMethod {
+		font-size: 10px;
+	}
+}

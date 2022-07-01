@@ -5,6 +5,7 @@ function displaySpecies(){
     for (let i = 0; i < speciesArray.length; i++){
         const speciesName = speciesArray[i]
         let row = document.createElement("tr")
+        row.setAttribute("id", `${speciesName}`)
         tBody.append(row)
 
         if(i >= 75)
@@ -24,10 +25,12 @@ function displaySpecies(){
         if(localStorage.getItem("sprites")){
             let sprite = document.createElement("img")
             sprite.src = spritesObj[speciesName]
+            sprite.className = "src"
             spriteContainer.append(sprite)
         }
         else{
             let canvas = renderSprite(speciesName)
+            canvas.className = "src"
             spriteContainer.append(canvas)
         }
         row.append(spriteContainer)
@@ -91,6 +94,11 @@ function displaySpecies(){
         row.append(createBaseStatsContainer("Spe", "baseSpeed", speciesObj))
 
         row.append(createBaseStatsContainer("BST", "BST", speciesObj))
+
+        row.addEventListener("click", () => {
+            createSpeciesPanel(speciesName)
+            window.scrollTo(0, 0);
+        })
     }
 }
 

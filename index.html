@@ -9,6 +9,7 @@
   <link rel="stylesheet" href="style/speciesTable.css">
   <link rel="stylesheet" href="style/abilitiesTable.css">
   <link rel="stylesheet" href="style/movesTable.css">
+  <link rel="stylesheet" href="style/speciesPanel.css">
   <script defer src="src/species/displaySpecies.js"></script>
   <script defer src="src/species/fetchSpecies.js"></script>
   <script defer src="src/species/regexSpecies.js"></script>
@@ -19,10 +20,116 @@
   <script defer src="src/moves/fetchMoves.js"></script>
   <script defer src="src/moves/regexMoves.js"></script>
   <script defer src="src/lz-string.js"></script>
-  <script defer src="src/utility.js"></script>
+  <script defer src="src/tableUtility.js"></script>
+  <script defer src="src/speciesPanelUtility.js"></script>
   <script defer src="src/global.js"></script>
 </head>
 <body>
+
+
+
+
+
+
+
+
+
+
+
+<div id="speciesPanelMainContainer" class="hide flex">
+ <div id="speciesPanelContainer" class="flex flexColumn">
+    <div id="speciesPanelSubcontainer1">
+      <span id="speciesName"></span>
+      <span id="speciesID"></span>
+      <button type="button" id="speciesPanelCloseButton">X</button>
+    </div>
+    <div id="speciesPanelSubcontainer2" class="flex">
+      <img id="speciesSprite">
+      <div id="speciesPanelSubcontainer3">
+        <div id="speciesTypesMainContainer">
+          <span id="speciesTypesText" class="speciesPanelText">Types:</span>
+          <div id="speciesTypesContainer" class="flex wrap speciesPanelTextPadding">
+            <span id="speciesType1"></span>
+            <span id="speciesType2"></span>
+          </div>
+        </div>
+        <div id="speciesAbilitiesMainContainer">
+          <span id="speciesAbilitiesText" class="speciesPanelText">Abilities:</span>
+          <div id="speciesAbilitiesContainer" class="flex wrap speciesPanelTextPadding">
+            <span id="speciesAbilities"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="speciesBaseStatsGraphContainer" class="flex">
+      <section id="statsSection" class="flex">
+        <div id="statsNames">
+          <p>HP:<span></span></p>
+          <p>Attack:<span></span></p>
+          <p>Defense:<span></span></p>
+          <p>Sp. Atk:<span></span></p>
+          <p>Sp. Def:<span></span></p>
+          <p>Speed:<span></span></p>
+        </div>
+        <div id="statsGraph">
+          <div id="statsGraphHP"></div>
+          <div id="statsGraphAttack"></div>
+          <div id="statsGraphDefense"></div>
+          <div id="statsGraphSpAttack"></div>
+          <div id="statsGraphSpDefense"></div>
+          <div id="statsGraphSpeed"></div>
+        </div>
+      </section>
+    </div>
+    <div id="speciesEvolutionsMainContainer">
+      <div id="speciesEvolutionsText" class="speciesPanelText">Evolution:</div>
+      <div id="speciesEvolutionsContainer" class="flex wrap"></div>
+      <div id="speciesEvoMethod" class="flex wrap flexColumn"></div>
+    </div>
+    <div id="speciesFormesContainer">
+      <div id="speciesFormesText" class="speciesPanelText">Formes:</div>
+      <div id="speciesFormes" class="flex wrap"></div>
+    </div>
+    <div id="speciesPanelSubcontainer4" class="flex">
+      <div id="speciesEggGroupsContainer">
+        <div id="speciesEggGroupsText" class="speciesPanelText">Egg Groups:</div>
+        <div id="speciesEggGroups" class="flex flexColumn wrap speciesPanelTextPadding"></div>
+      </div>
+      <div id="speciesHeldItemsContainer">
+        <div id="speciesHeldItemsText" class="speciesPanelText">Held Items:</div>
+        <div id="speciesHeldItems" class="flex flexColumn wrap speciesPanelTextPadding"></div>
+      </div>
+      <div id="speciesChangesContainer" class="hide">
+        <div id="speciesChangesText" class="speciesPanelText">Changes:</div>
+        <div id="speciesChanges" class="flex flexColumn wrap speciesPanelTextPadding"></div>
+      </div>
+    </div>
+  </div>
+</div>  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -49,7 +156,7 @@
     <div id="abilitiesFilter" class="hide"></div>
 
     <div id="speciesFilter" class="activeFilter">
-      <label for="speciesFilterCheckbox">Advanced Filter</label>
+      <label for="speciesFilterCheckbox">Show Filters</label>
       <input type="checkbox" id="speciesFilterCheckbox">
 
       <div id="speciesFilterButton" class="hide">
@@ -68,7 +175,7 @@
     </div>
 
     <div id="movesFilter" class="hide">
-      <label for="movesFilterCheckbox">Advanced Filter</label>
+      <label for="movesFilterCheckbox">Show Filters</label>
       <input type="checkbox" id="movesFilterCheckbox">
 
       <div id="movesFilterButton" class="hide">
@@ -136,17 +243,14 @@
       <tbody id="speciesTableTbody"></tbody>
     </table>
 
-
     <a class="topButton hide">↑</a>
-
 
   </div>
 
-
 </body>
-
 
 <footer id="footer">
   <h1>Inclement Emerald<br>Pokedex</h1>
 </footer>
+
 </html>
