@@ -166,21 +166,21 @@
 
 
 
-	"MOVE_EXPANDING_FORCE": "Rain (not obtainable yet)",
-	"MOVE_RISING_VOLTAGE": "Rain (not obtainable yet)",
-	"MOVE_MISTY_EXPLOSION": "Rain (not obtainable yet)",
-	"MOVE_GRASSY_GLIDE": "Rain (not obtainable yet)",
-	"MOVE_TERRAIN_PULSE": "Rain (not obtainable yet)",
-	"MOVE_SCALE_SHOT": "Rain (not obtainable yet)",
-	"MOVE_METEOR_BEAM": "Rain (not obtainable yet)",
-	"MOVE_POLTERGEIST": "Rain (not obtainable yet)",
-	"MOVE_FLIP_TURN": "Rain (not obtainable yet)",
-	"MOVE_TRIPLE_AXEL": "Rain (not obtainable yet)",
-	"MOVE_DUAL_WINGBEAT": "Rain (not obtainable yet)",
-	"MOVE_SCORCHING_SANDS": "Rain (not obtainable yet)",
-	"MOVE_SKITTER_SMACK": "Rain (not obtainable yet)",
-	"MOVE_COACHING": "Rain (not obtainable yet)",
-	"MOVE_BODY_PRESS": "Rain (not obtainable yet)",
-	"MOVE_FOCUS_ENERGY": "Rain (not obtainable yet)",
-	"MOVE_SPIKES": "Rain (not obtainable yet)"
+	"MOVE_EXPANDING_FORCE": "Rain (WIP)",
+	"MOVE_RISING_VOLTAGE": "Rain (WIP)",
+	"MOVE_MISTY_EXPLOSION": "Rain (WIP)",
+	"MOVE_GRASSY_GLIDE": "Rain (WIP)",
+	"MOVE_TERRAIN_PULSE": "Rain (WIP)",
+	"MOVE_SCALE_SHOT": "Rain (WIP)",
+	"MOVE_METEOR_BEAM": "Rain (WIP)",
+	"MOVE_POLTERGEIST": "Rain (WIP)",
+	"MOVE_FLIP_TURN": "Rain (WIP)",
+	"MOVE_TRIPLE_AXEL": "Rain (WIP)",
+	"MOVE_DUAL_WINGBEAT": "Rain (WIP)",
+	"MOVE_SCORCHING_SANDS": "Rain (WIP)",
+	"MOVE_SKITTER_SMACK": "Rain (WIP)",
+	"MOVE_COACHING": "Rain (WIP)",
+	"MOVE_BODY_PRESS": "Rain (WIP)",
+	"MOVE_FOCUS_ENERGY": "Rain (WIP)",
+	"MOVE_SPIKES": "Rain (WIP)"
 }
