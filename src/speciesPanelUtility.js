@@ -88,15 +88,21 @@ async function createSpeciesPanel(name){
     species[name]["baseDefense"], 
     species[name]["baseSpAttack"], 
     species[name]["baseSpDefense"], 
-    species[name]["baseSpeed"]]
+    species[name]["baseSpeed"],
+    species[name]["BST"]]
 
-
+    
     graphStats.forEach ((stat, index) => {
         statDisplays[index].innerText = monStats[index]
-        stat.style.width = `${(monStats[index] / 255) * graph.offsetWidth}px`
 
-
-        stat.style.background = `hsl(${monStats[index]*0.7},85%,45%)`
+        if(index !== 6){
+            stat.style.width = `${(monStats[index] / 255) * graph.offsetWidth}px`
+            stat.style.background = `hsl(${monStats[index]*0.7},85%,45%)`
+        }
+        else{
+            stat.style.width = `${(monStats[index] / 255) * graph.offsetWidth/6}px`
+            stat.style.background = `hsl(${(monStats[index]*1)/6},85%,45%)`   
+        }
     })
 
 
