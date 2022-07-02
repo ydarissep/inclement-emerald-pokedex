@@ -1,5 +1,5 @@
 * {
-	font-family: sans-serif;
+    font-family: Verdana,Helvetica,Arial,sans-serif;
 }
 
 body {
@@ -44,7 +44,7 @@ button[type='button']:hover {
 }
 
 
-th {
+#table > table > thead > tr > th {
 	cursor: pointer;
     background: rgba(215, 212, 231, 0.075); 
     color: white; 
@@ -62,7 +62,7 @@ th {
 
 .th-sort-asc,
 .th-sort-desc {
-  background: rgba(0, 0, 0, 0.1);
+  background: rgba(0, 0, 0, 0.1) !important;
 }
 
 h1, td, th {
@@ -106,14 +106,14 @@ canvas {
 }
 
 @media (hover: hover) {
-    thead th:hover {
+    #table > table > thead > tr > th:hover {
         background: rgba(113, 117, 126, 0.336);
     }
     #speciesTableTbody tr:hover {
         background-color: rgba(129, 135, 156, 0.301);
         cursor: pointer;
     }
-    .topButton:hover {
+    .topButton:hover, #speciesPanelCloseButton:hover {
         background: salmon;
         cursor: pointer;
     }
@@ -146,7 +146,9 @@ table {
 }
 
 td, th {
+    /*
     border: 1px solid rgba(255, 255, 255, 0.048);
+    */
 }
 
 .background {
@@ -159,7 +161,7 @@ td, th {
     border-radius: 5px;
     font-weight: bold;
     padding-bottom: 2px;
-    font-size: 0.7rem;
+    font-size: 0.6rem;
     text-transform: uppercase;
     text-shadow: 1px 1px rgba(54, 61, 61, 0.788);
 }

@@ -58,7 +58,7 @@ async function displaySetup(){
 
 
 async function forceUpdate(){
-    const update = 6
+    const update = 7
     if(localStorage.getItem("update") != `${update} IE`){
         await localStorage.clear()
         await localStorage.setItem("update", `${update} IE`)

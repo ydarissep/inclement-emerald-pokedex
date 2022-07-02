@@ -20,6 +20,11 @@ const speciesEggGroups = document.getElementById("speciesEggGroups")
 const speciesHeldItems = document.getElementById("speciesHeldItems")
 const speciesHeldItemsContainer = document.getElementById("speciesHeldItemsContainer")
 const speciesChangesContainer = document.getElementById("speciesChangesContainer")
+const speciesPanelLevelUpTableTbody = document.getElementById("speciesPanelLevelUpTableTbody")
+const speciesPanelTMHMTableTbody = document.getElementById("speciesPanelTMHMTableTbody")
+const speciesPanelTutorTableTbody = document.getElementById("speciesPanelTutorTableTbody")
+const speciesPanelEggMovesTableTbody = document.getElementById("speciesPanelEggMovesTableTbody")
+
 
 async function createSpeciesPanel(name){
     speciesPanelMainContainer.classList.remove("hide")
@@ -206,6 +211,22 @@ async function createSpeciesPanel(name){
         speciesChangesContainer.classList.add("hide")
     */
 
+    while(speciesPanelLevelUpTableTbody.firstChild)
+        speciesPanelLevelUpTableTbody.removeChild(speciesPanelLevelUpTableTbody.firstChild)
+    buildSpeciesPanelLearnsetsTable(speciesPanelLevelUpTableTbody, name, "levelUpLearnsets")
+
+    while(speciesPanelTMHMTableTbody.firstChild)
+        speciesPanelTMHMTableTbody.removeChild(speciesPanelTMHMTableTbody.firstChild)
+    buildSpeciesPanelLearnsetsTable(speciesPanelTMHMTableTbody, name, "TMHMLearnsets")
+
+    while(speciesPanelTutorTableTbody.firstChild)
+        speciesPanelTutorTableTbody.removeChild(speciesPanelTutorTableTbody.firstChild)
+    buildSpeciesPanelLearnsetsTable(speciesPanelTutorTableTbody, name, "tutorLearnsets")
+
+    while(speciesPanelEggMovesTableTbody.firstChild)
+        speciesPanelEggMovesTableTbody.removeChild(speciesPanelEggMovesTableTbody.firstChild)
+    buildSpeciesPanelEggMovesTable(speciesPanelEggMovesTableTbody, name, "eggMovesLearnsets")
+
 }
 
 
@@ -251,6 +272,132 @@ function createClickableImgAndName(speciesName){
 }
 
 
+function buildSpeciesPanelLearnsetsTable(Tbody, name, input){
+    for (let i = 0; i < species[name][input].length; i++){
+        const row = document.createElement("tr")
+
+        const level = document.createElement("td")
+        level.innerText = species[name][input][i][1]
+        row.append(level)
+
+        const moveName = document.createElement("td")
+        moveName.innerText = moves[species[name][input][i][0]]["ingameName"]
+        row.append(moveName)
+
+        const typeContainer = document.createElement("td")
+        const type = document.createElement("div")
+        type.innerText = sanitizeString(moves[species[name][input][i][0]]["type"])
+        type.className = `${moves[species[name][input][i][0]]["type"]} background`
+        typeContainer.append(type)
+        row.append(typeContainer)
+
+        const splitContainer = document.createElement("td")
+        const splitIcon = document.createElement("img")
+        splitIcon.src = `src/moves/${moves[species[name][input][i][0]]["split"]}.png`
+        splitIcon.className = `${sanitizeString(moves[species[name][input][i][0]]["split"])} splitIcon`
+        splitContainer.append(splitIcon)
+        row.append(splitContainer)
+
+        const power = document.createElement("td")
+        power.className = "speciesPanelLearnsetsPower"
+        if(moves[species[name][input][i][0]]["power"] != 0){
+            power.innerText = moves[species[name][input][i][0]]["power"]
+        }
+        else{
+            power.innerText = "-"   
+        }
+        row.append(power)
+
+        const accuracy = document.createElement("td")
+        accuracy.className = "speciesPanelLearnsetsAccuracy"
+        if(moves[species[name][input][i][0]]["accuracy"] != 0){
+            accuracy.innerText = moves[species[name][input][i][0]]["accuracy"]
+        }
+        else{
+            accuracy.innerText = "-"   
+        }
+        row.append(accuracy)
+
+        const PP = document.createElement("td")
+        PP.className = "speciesPanelLearnsetsPP"
+        PP.innerText = moves[species[name][input][i][0]]["PP"]
+        row.append(PP)
+
+        const description = document.createElement("td")
+        description.className = "speciesPanelLearnsetsEffect"
+        for (let j = 0; j < moves[species[name][input][i][0]]["description"].length; j++){
+            description.innerText += moves[species[name][input][i][0]]["description"][j].replace("\\n", " ")
+        }
+        row.append(description)
+
+        Tbody.append(row)
+    }
+}
+
+
+function buildSpeciesPanelEggMovesTable(Tbody, name, input){
+    for (let i = 0; i < species[name][input].length; i++){
+        const row = document.createElement("tr")
+
+        const moveName = document.createElement("td")
+        moveName.innerText = moves[species[name][input][i]]["ingameName"]
+        row.append(moveName)
+
+        const typeContainer = document.createElement("td")
+        const type = document.createElement("div")
+        type.innerText = sanitizeString(moves[species[name][input][i]]["type"])
+        type.className = `${moves[species[name][input][i]]["type"]} background`
+        typeContainer.append(type)
+        row.append(typeContainer)
+
+        const splitContainer = document.createElement("td")
+        const splitIcon = document.createElement("img")
+        splitIcon.src = `src/moves/${moves[species[name][input][i]]["split"]}.png`
+        splitIcon.className = `${sanitizeString(moves[species[name][input][i]]["split"])} splitIcon`
+        splitContainer.append(splitIcon)
+        row.append(splitContainer)
+
+        const power = document.createElement("td")
+        power.className = "speciesPanelLearnsetsPower"
+        if(moves[species[name][input][i]]["power"] != 0){
+            power.innerText = moves[species[name][input][i]]["power"]
+        }
+        else{
+            power.innerText = "-"   
+        }
+        row.append(power)
+
+        const accuracy = document.createElement("td")
+        accuracy.className = "speciesPanelLearnsetsAccuracy"
+        if(moves[species[name][input][i]]["accuracy"] != 0){
+            accuracy.innerText = moves[species[name][input][i]]["accuracy"]
+        }
+        else{
+            accuracy.innerText = "-"   
+        }
+        row.append(accuracy)
+
+        const PP = document.createElement("td")
+        PP.className = "speciesPanelLearnsetsPP"
+        PP.innerText = moves[species[name][input][i]]["PP"]
+        row.append(PP)
+
+        const description = document.createElement("td")
+        description.className = "speciesPanelLearnsetsEffect"
+        for (let j = 0; j < moves[species[name][input][i]]["description"].length; j++){
+            description.innerText += moves[species[name][input][i]]["description"][j].replace("\\n", " ")
+        }
+        row.append(description)
+
+        Tbody.append(row)
+    }
+}
+
+
+
+
+
 speciesPanelCloseButton.addEventListener("click", () => {
     speciesPanelMainContainer.classList.add("hide")
 })
+

@@ -1,5 +1,6 @@
 #speciesPanelCloseButton {
 	float: right;
+	background-color: red;
 }
 
 #speciesPanelMainContainer {
@@ -8,7 +9,7 @@
 }
 
 #speciesPanelContainer {
-	width: 700px;
+	width: 1000px;
 }
 
 #speciesName {
@@ -62,7 +63,9 @@
 .evoMethod {
 	display: flex;
 	align-items: center;
+	/*
 	justify-content: center;
+	*/
 	cursor: pointer;
 	font-size: 18px;
 	padding: 5px 0px 5px 0px;
@@ -156,6 +159,31 @@
 }
 
 
+
+
+
+
+
+#speciesPanelTablesContainer > table > thead > tr > th {
+    background: rgba(215, 212, 231, 0.075); 
+    color: white; 
+    font-weight: bold; 
+    padding: 0.5rem 0.5rem;
+}
+
+.speciesPanelLearnsetsTableMargin {
+	margin-top: 75px;
+}
+
+#speciesPanelTablesContainer {
+	font-size: min(max(1vmax, 10px), 15px)
+}
+
+
+
+
+
+
 @media 
 only screen and (max-width: 700px) {
 
@@ -164,5 +192,33 @@ only screen and (max-width: 700px) {
 	}
 	.evoMethod {
 		font-size: 10px;
+	}
+}
+
+@media 
+only screen and (max-width: 550px) {
+	.speciesPanelLearnsetsEffect {
+		display: none;
+	}
+}
+
+@media 
+only screen and (max-width: 325px) {
+	.speciesPanelLearnsetsPP {
+		display: none;
+	}
+}
+
+@media 
+only screen and (max-width: 275px) {
+	.speciesPanelLearnsetsAccuracy {
+		display: none;
+	}
+}
+
+@media 
+only screen and (max-width: 225px) {
+	.speciesPanelLearnsetsPower {
+		display: none;
 	}
 }

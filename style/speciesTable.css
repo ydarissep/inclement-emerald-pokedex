@@ -10,7 +10,7 @@
 	width: 64px;
 }
 #speciesTableThead th.species {
-	width: 314px;
+	width: 350px;
 }
 #speciesTableThead th.types {
 	width: 80px;
@@ -34,7 +34,7 @@
 	width: 45px;
 }
 #speciesTableThead th.baseSpeed {
-	width: 40px;
+	width: 45px;
 }
 #speciesTableThead th.BST {
 	width: 45px;
