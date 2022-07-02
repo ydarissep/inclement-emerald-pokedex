@@ -55,6 +55,10 @@
 	width: 33.33%;
 }
 
+#speciesEggGroups, #speciesHeldItems, #speciesChanges {
+	font-size: 15px;
+}
+
 .evoMethod {
 	display: flex;
 	align-items: center;

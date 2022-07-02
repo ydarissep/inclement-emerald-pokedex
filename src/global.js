@@ -20,6 +20,7 @@ const speciesFilterHeldItem = document.getElementById("speciesFilterHeldItem")
 const movesFilterFlag = document.getElementById("movesFilterFlag")
 const movesFilterPriority = document.getElementById("movesFilterPriority")
 const movesFilterTarget = document.getElementById("movesFilterTarget")
+const movesFilterPower = document.getElementById("movesFilterPower")
 
 
 
@@ -351,14 +352,10 @@ movesFilterTarget.addEventListener("click", () => {
     const list = createOptionArray(["target"], moves)
     createFilter(list, moves, ["target"], filterCount++, movesFilterButton, "Target")
 })
-
-
-
-
-
-
-
-
+movesFilterPower.addEventListener("click", () => {
+    const list = [">=", "<=", ">", "<", "="]
+    createFilter(list, moves, ["power"], filterCount++, movesFilterButton, "Power", isInt = true, isOperator = true)
+})
 
 
 

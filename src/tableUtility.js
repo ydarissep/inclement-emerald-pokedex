@@ -289,10 +289,14 @@ function createFilter(list , obj, objInputArray, filterCount, element, labelStri
             let value = e.target.value
             if(!isInt)
                 value = value.replace(/-|'/g, " ").toLowerCase()
-            filterInput(value, objInputArray, rows, filterCount, obj, isInt, isOperator)
 
-            if(list.includes(e.target.value) && e.target.value !== "" && !isOperator)
+            if(list.includes(e.target.value) && e.target.value !== "" && !isOperator){
+                input.setAttribute("placeholder", `${value}`)
                 input.blur()
+                filterInput(value, objInputArray, rows, filterCount, obj, isInt, isOperator)
+            }
+            else if(isOperator)
+                filterInput(value, objInputArray, rows, filterCount, obj, isInt, isOperator)
 
         })
 
