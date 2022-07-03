@@ -374,11 +374,20 @@ movesFilterPower.addEventListener("click", () => {
 
 
 openCredits.addEventListener("click", () => {
-    modal.showModal()
-})
+    modal.classList.remove("hide")
+    if(typeof document.createElement('dialog').showModal === 'function'){
+        modal.showModal()
+    }
+    else if(typeof document.createElement('dialog').show === 'function'){
+        modal.show()
+    }
 
+})
 closeCredits.addEventListener("click", () => {
-    modal.close()
+    modal.classList.add("hide")
+    if(typeof document.createElement('dialog').close === 'function'){
+        modal.close()
+    }
 })
 
 
