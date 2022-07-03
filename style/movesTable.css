@@ -4,7 +4,7 @@
 
 
 #movesTableThead th.move {
-    width: 150px !important;
+    width: 150px;
 }
 #movesTableThead th.type {
     width: 80px;
@@ -55,6 +55,18 @@ only screen and (max-width: 700px) {
         border: none;
     }
 
+    #movesTable th {
+        width: 60px !important;
+        /*display: none;*/
+    }
+
+    #movesTableThead > tr {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(calc(60px + 1rem), 1fr));
+        justify-items: center;
+        gap: 3px;
+    }
+
     #movesTable [class*="TYPE_"] {
         display: inline-flex !important;
     }
@@ -80,10 +92,4 @@ only screen and (max-width: 700px) {
     #movesTable td.nameContainer { width: 50% !important; box-sizing: border-box; font-weight: bold; }
     #movesTable td.type { width: 35% !important; box-sizing: border-box; text-align: right; }
     #movesTable td.split { width: 15% !important; box-sizing: border-box; }
-
-    #movesTable th {
-        width: 75px !important;
-        display: inline-block;
-        /*display: none;*/
-    }
 }

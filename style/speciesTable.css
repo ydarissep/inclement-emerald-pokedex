@@ -72,8 +72,9 @@ only screen and (max-width: 700px) {
         border: none;
     }
 
-    #speciesTableThead th {
+    #speciesTable th {
         width: 60px !important;
+        /*display: none;*/
     }
 
     #speciesTableThead > tr {

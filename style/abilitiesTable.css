@@ -9,3 +9,11 @@
 #abilitiesTableThead th.description {
 	width: 400px;
 }
+
+
+@media 
+only screen and (max-width: 350px) {
+	#abilitiesTableTbody {
+		font-size: 14px;
+	}
+}
