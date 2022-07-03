@@ -5,6 +5,13 @@ const tableFilter = document.getElementById("tableFilter")
 const speciesFilterCheckbox = document.getElementById("speciesFilterCheckbox")
 const movesFilterCheckbox = document.getElementById("movesFilterCheckbox")
 
+
+const openCredits = document.getElementById("openCredits")
+const closeCredits = document.getElementById("closeCredits")
+const modal = document.getElementById("modal")
+
+
+
 const speciesFilterHP = document.getElementById("speciesFilterHP")
 const speciesFilterAtk = document.getElementById("speciesFilterAtk")
 const speciesFilterDef = document.getElementById("speciesFilterDef")
@@ -364,6 +371,15 @@ movesFilterPower.addEventListener("click", () => {
 
 
 
+
+
+openCredits.addEventListener("click", () => {
+    modal.showModal()
+})
+
+closeCredits.addEventListener("click", () => {
+    modal.close()
+})
 
 
 
