@@ -381,7 +381,6 @@ openCredits.addEventListener("click", () => {
     else if(typeof document.createElement('dialog').show === 'function'){
         modal.show()
     }
-
 })
 closeCredits.addEventListener("click", () => {
     modal.classList.add("hide")
