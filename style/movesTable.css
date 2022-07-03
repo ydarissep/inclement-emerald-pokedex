@@ -49,7 +49,7 @@
 
 @media 
 only screen and (max-width: 700px) {
-    #movesTable, #movesTableThead, #movesTableTbody, #movesTable td, #movesTable tr, #movesTable th { 
+    #movesTable, #movesTableThead, #movesTableTbody, #movesTable td, #movesTable tr { 
         padding: 0.3rem 0;
         display: block;
         border: none;
@@ -82,8 +82,8 @@ only screen and (max-width: 700px) {
     #movesTable td.split { width: 15% !important; box-sizing: border-box; }
 
     #movesTable th {
-        min-width: 100%;
-        max-width: 100%;
+        width: 75px !important;
+        display: inline-block;
         /*display: none;*/
     }
 }

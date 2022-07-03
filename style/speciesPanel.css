@@ -176,7 +176,7 @@
 }
 
 #speciesPanelTablesContainer {
-	font-size: min(max(1vmax, 10px), 15px)
+	font-size: min(max(1vmax, 11px), 16px)
 }
 
 
@@ -196,28 +196,28 @@ only screen and (max-width: 700px) {
 }
 
 @media 
-only screen and (max-width: 550px) {
+only screen and (max-width: 525px) {
 	.speciesPanelLearnsetsEffect {
 		display: none;
 	}
 }
 
 @media 
-only screen and (max-width: 325px) {
+only screen and (max-width: 350px) {
 	.speciesPanelLearnsetsPP {
 		display: none;
 	}
 }
 
 @media 
-only screen and (max-width: 275px) {
+only screen and (max-width: 325px) {
 	.speciesPanelLearnsetsAccuracy {
 		display: none;
 	}
 }
 
 @media 
-only screen and (max-width: 225px) {
+only screen and (max-width: 275px) {
 	.speciesPanelLearnsetsPower {
 		display: none;
 	}

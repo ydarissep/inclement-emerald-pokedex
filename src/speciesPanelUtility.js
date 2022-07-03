@@ -400,4 +400,3 @@ function buildSpeciesPanelEggMovesTable(Tbody, name, input){
 speciesPanelCloseButton.addEventListener("click", () => {
     speciesPanelMainContainer.classList.add("hide")
 })
-
