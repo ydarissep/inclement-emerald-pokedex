@@ -10,6 +10,7 @@
 
 #speciesPanelContainer {
 	width: 1000px;
+	padding-top: 2rem;
 }
 
 #speciesName {
@@ -162,7 +163,9 @@
 
 
 
-
+#speciesPanelTablesContainer > table {
+    width: 100%;
+}
 
 #speciesPanelTablesContainer > table > thead > tr > th {
     background: rgba(215, 212, 231, 0.075); 
