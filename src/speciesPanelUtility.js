@@ -88,19 +88,19 @@ async function createSpeciesPanel(name){
 
 
 
-    let monStats = [species[name]["baseHP"], 
+    let monStats = [species[name]["BST"],
+    species[name]["baseHP"], 
     species[name]["baseAttack"], 
     species[name]["baseDefense"], 
     species[name]["baseSpAttack"], 
     species[name]["baseSpDefense"], 
-    species[name]["baseSpeed"],
-    species[name]["BST"]]
+    species[name]["baseSpeed"]]
 
     
     graphStats.forEach ((stat, index) => {
         statDisplays[index].innerText = monStats[index]
 
-        if(index !== 6){
+        if(index !== 0){
             stat.style.width = `${(monStats[index] / 255) * graph.offsetWidth}px`
             stat.style.background = `hsl(${monStats[index]*0.7},85%,45%)`
         }
