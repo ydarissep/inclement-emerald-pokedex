@@ -94,18 +94,18 @@ function displayMoves(){
 
         let effect = document.createElement("div")
         effect.className = "effect"
-        if(moves[moves[moveName]["effect"].replace("EFFECT_", "MOVE_")] === undefined)
-            effect.innerText = `${sanitizeString(moves[moveName]["effect"])}`
+        effect.innerText = `${sanitizeString(moves[moveName]["effect"])}`
 
 
         let chance = moves[moveName]["chance"]
-        if(chance > 0 && chance < 100)
+        if(chance > 0 && chance < 100){
             effect.innerText += ` ${chance}%`
+        }
+        else{
+            effect.classList.add("hide")
+        }
 
         effectContainer.append(descriptionContainer)
-        if(effect.innerText === "")
-            effect.classList.add("hide")
-        
         effectContainer.append(effect)
 
         row.append(effectContainer)
