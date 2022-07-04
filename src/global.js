@@ -26,6 +26,7 @@ const speciesFilterHeldItem = document.getElementById("speciesFilterHeldItem")
 
 const movesFilterFlag = document.getElementById("movesFilterFlag")
 const movesFilterPriority = document.getElementById("movesFilterPriority")
+const movesFilterEffect = document.getElementById("movesFilterEffect")
 const movesFilterTarget = document.getElementById("movesFilterTarget")
 const movesFilterPower = document.getElementById("movesFilterPower")
 
@@ -354,6 +355,10 @@ movesFilterFlag.addEventListener("click", () => {
 movesFilterPriority.addEventListener("click", () => {
     const list = createOptionArray(["priority"], moves, isInt = true).sort()
     createFilter(list, moves, ["priority"], filterCount++, movesFilterButton, "Priority", isInt = true)
+})
+movesFilterEffect.addEventListener("click", () => {
+    const list = createOptionArray(["effect"], moves)
+    createFilter(list, moves, ["effect"], filterCount++, movesFilterButton, "Effect")
 })
 movesFilterTarget.addEventListener("click", () => {
     const list = createOptionArray(["target"], moves)

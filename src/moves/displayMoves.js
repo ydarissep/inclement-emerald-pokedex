@@ -92,6 +92,8 @@ function displayMoves(){
             descriptionContainer.append(description)
         }
 
+        effectContainer.append(descriptionContainer)
+
         let effect = document.createElement("div")
         effect.className = "effect"
         effect.innerText = `${sanitizeString(moves[moveName]["effect"])}`
@@ -100,13 +102,9 @@ function displayMoves(){
         let chance = moves[moveName]["chance"]
         if(chance > 0 && chance < 100){
             effect.innerText += ` ${chance}%`
-        }
-        else{
-            effect.classList.add("hide")
+            effectContainer.append(effect)
         }
 
-        effectContainer.append(descriptionContainer)
-        effectContainer.append(effect)
 
         row.append(effectContainer)
 
