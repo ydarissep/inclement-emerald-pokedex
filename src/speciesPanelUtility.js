@@ -282,6 +282,7 @@ function buildSpeciesPanelLearnsetsTable(Tbody, name, input){
 
         const moveName = document.createElement("td")
         moveName.innerText = moves[species[name][input][i][0]]["ingameName"]
+        moveName.className = "bold"
         row.append(moveName)
 
         const typeContainer = document.createElement("td")
@@ -341,6 +342,7 @@ function buildSpeciesPanelEggMovesTable(Tbody, name, input){
 
         const moveName = document.createElement("td")
         moveName.innerText = moves[species[name][input][i]]["ingameName"]
+        moveName.className = "bold"
         row.append(moveName)
 
         const typeContainer = document.createElement("td")
