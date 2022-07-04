@@ -102,9 +102,12 @@ function displayMoves(){
         let chance = moves[moveName]["chance"]
         if(chance > 0 && chance < 100){
             effect.innerText += ` ${chance}%`
-            effectContainer.append(effect)
+        }
+        else{
+            effect.classList.add("hide")
         }
 
+        effectContainer.append(effect)
 
         row.append(effectContainer)
 
