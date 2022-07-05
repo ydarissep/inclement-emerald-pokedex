@@ -123,7 +123,7 @@ canvas {
   font-family: monospace;
   position: fixed;
   bottom: 5px;
-  right: 5px;
+  right: calc(50vw - 650px);
   background: red;
   width: 50px;
   height: 50px;
@@ -137,6 +137,13 @@ canvas {
   border-radius: 50%;
   transition: 0.2s ease-in-out;
   filter: opacity(100%);
+}
+
+@media 
+only screen and (max-width: 1300px) {
+    .topButton {
+        right: 5px !important;
+    }
 }
 
 table {

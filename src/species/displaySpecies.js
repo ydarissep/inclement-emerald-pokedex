@@ -71,7 +71,7 @@ function displaySpecies(){
         const abilitiesArray = sanitizeString(Array.from(new Set(species[speciesName]["abilities"])).join(' ')).split("\n")
         for (let j = 0; j < abilitiesArray.length; j++){
             let ability = document.createElement("div")
-            ability.innerText = abilitiesArray[j]
+            ability.innerText = `${abilitiesArray[j]} `
             if(j >= 1 && j === abilitiesArray.length - 1){
                 ability.style.fontWeight = "bold"
             }
