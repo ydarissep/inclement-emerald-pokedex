@@ -1,5 +1,7 @@
 window.repo = "BuffelSaft/pokeemerald"
 
+window.panelSpecies = ""
+
 window.filterCount = 0
 const tableFilter = document.getElementById("tableFilter")
 const speciesFilterCheckbox = document.getElementById("speciesFilterCheckbox")
@@ -86,7 +88,7 @@ const headerSpeciesSpA = document.querySelector("#speciesTableThead th.baseSpAtt
 const headerSpeciesSpD = document.querySelector("#speciesTableThead th.baseSpDefense")
 const headerSpeciesSpe = document.querySelector("#speciesTableThead th.baseSpeed")
 const headerSpeciesBST = document.querySelector("#speciesTableThead th.BST")
-const topButton = document.querySelector('.topButton')
+const utilityButton = document.querySelector('.utilityButton')
 
 
 
@@ -396,21 +398,15 @@ closeCredits.addEventListener("click", () => {
 
 
 
-topButton.onclick = () => {
-    window.scrollTo({top: 0, behavior: 'auto'})
-    lazyLoading(reset = true)
-}
 
 
 
-window.onbeforeunload = () => {  
-    window.scrollTo(0, 0);
-}
 
-function isTouching(entries){
-    if(entries[0].isIntersecting)
-        lazyLoading(false)
-}
+
+
+
+
+
 
 
 const options = {
@@ -418,8 +414,74 @@ const options = {
         rootMargins: "0px",
         threshold: 0
 }
-const observer = new IntersectionObserver(isTouching, options)
-observer.observe(document.querySelector("#footer"))
+
+function footerIsTouching(entries){
+    if(entries[0].isIntersecting){
+        lazyLoading(false)
+    }
+}
+
+
+function speciesPanelIsTouching(entries){
+    if(entries[0].isIntersecting){
+        utilityButton.innerText = "X"
+    }
+    else{
+
+        speciesPanelMainContainer.classList.add("hide")
+
+        if(table.getBoundingClientRect().top < 0){
+            utilityButton.innerText = "↑"
+        }
+        else if(tableInput.getBoundingClientRect().top < 0){
+            utilityButton.innerText = "☰"
+        }
+    }
+}
+function tableIsTouching(entries){
+    if(entries[0].isIntersecting && tableInput.getBoundingClientRect().top <= 0){
+        utilityButton.innerText = "☰"
+    }
+    else{
+        if(table.getBoundingClientRect().top < 0){
+            utilityButton.innerText = "↑"
+        }
+        else if(tableInput.getBoundingClientRect().top < 0){
+            utilityButton.innerText = "☰"
+        }
+    }
+}
+
+
+const observerFooter = new IntersectionObserver(footerIsTouching, options)
+observerFooter.observe(document.getElementById("footer"))
+
+const observeTable = new IntersectionObserver(tableIsTouching, options)
+observeTable.observe(document.getElementById("observerCheck"))
+
+const observeSpeciesPanel = new IntersectionObserver(speciesPanelIsTouching, options)
+observeSpeciesPanel.observe(speciesPanelMainContainer)
+
+
+utilityButton.onclick = () => {
+    if(utilityButton.innerText === "X"){
+        speciesPanelMainContainer.classList.add("hide")
+        document.getElementById(`${panelSpecies}`).scrollIntoView({ block: "center" })
+    }
+    else if(utilityButton.innerText === "☰" && panelSpecies !== ""){
+        speciesPanelMainContainer.classList.remove("hide")
+        window.scrollTo({ top: 0, behavior: 'smooth' })
+    }
+    else{
+        window.scrollTo({top: 0})
+    }
+}
+
+
+
+window.onbeforeunload = () => {  
+    window.scrollTo(0, 0);
+}
 
 
 fetchData()

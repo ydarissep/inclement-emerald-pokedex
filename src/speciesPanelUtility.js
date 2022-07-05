@@ -27,11 +27,12 @@ const speciesPanelEggMovesTableTbody = document.getElementById("speciesPanelEggM
 
 
 async function createSpeciesPanel(name){
+    panelSpecies = name
     speciesPanelMainContainer.classList.remove("hide")
 
     speciesPanelCloseButton.addEventListener("click", () => {
         speciesPanelMainContainer.classList.add("hide")
-        document.getElementById(`${name}`).scrollIntoView({ behavior: "smooth", block: "center" })
+        document.getElementById(`${panelSpecies}`).scrollIntoView({ block: "center" })
     })
 
     const row = document.getElementById(`${name}`)

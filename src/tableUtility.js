@@ -50,7 +50,7 @@ async function displaySetup(){
 
     await table.classList.remove("hide")
 
-    await topButton.classList.remove("hide")
+    await utilityButton.classList.remove("hide")
 }
 
 

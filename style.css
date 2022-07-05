@@ -113,13 +113,13 @@ canvas {
         background-color: rgba(129, 135, 156, 0.301);
         cursor: pointer;
     }
-    .topButton:hover, #speciesPanelCloseButton:hover {
+    .utilityButton:hover, #speciesPanelCloseButton:hover {
         background: salmon;
         cursor: pointer;
     }
 }
 
-.topButton {
+.utilityButton {
   font-family: monospace;
   position: fixed;
   bottom: 5px;
@@ -141,7 +141,7 @@ canvas {
 
 @media 
 only screen and (max-width: 1300px) {
-    .topButton {
+    .utilityButton {
         right: 5px !important;
     }
 }
