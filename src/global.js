@@ -424,7 +424,7 @@ function footerIsTouching(entries){
 
 function speciesPanelIsTouching(entries){
     if(entries[0].isIntersecting){
-        utilityButton.innerText = "X"
+        utilityButton.innerText = "↓"
     }
     else{
 
@@ -464,7 +464,7 @@ observeSpeciesPanel.observe(speciesPanelMainContainer)
 
 
 utilityButton.onclick = () => {
-    if(utilityButton.innerText === "X"){
+    if(utilityButton.innerText === "↓"){
         speciesPanelMainContainer.classList.add("hide")
         document.getElementById(`${panelSpecies}`).scrollIntoView({ block: "center" })
     }

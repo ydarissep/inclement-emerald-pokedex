@@ -30,11 +30,6 @@ async function createSpeciesPanel(name){
     panelSpecies = name
     speciesPanelMainContainer.classList.remove("hide")
 
-    speciesPanelCloseButton.addEventListener("click", () => {
-        speciesPanelMainContainer.classList.add("hide")
-        document.getElementById(`${panelSpecies}`).scrollIntoView({ block: "center" })
-    })
-
     const row = document.getElementById(`${name}`)
 
     speciesName.innerText = row.getElementsByClassName("species")[0].innerText
@@ -403,3 +398,8 @@ function buildSpeciesPanelEggMovesTable(Tbody, name, input){
 
 
 
+
+
+speciesPanelCloseButton.addEventListener("click", () => {
+        speciesPanelMainContainer.classList.add("hide")
+})
