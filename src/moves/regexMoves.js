@@ -1,48 +1,32 @@
 function regexMovesDescription(textMovesDescription, moves){
     const lines = textMovesDescription.split("\n")
-    let conversionTable = {}, descriptionFound = false, conversionDescription = undefined
+    let move = []
 
-    lines.forEach(line => { // first go to get conversionTable
-        const matchMoves = line.match(/MOVE_\w+/i)
-        if(matchMoves !== null){
-            const move = matchMoves[0]
+    lines.forEach(line => {
+        const matchDesc = line.match(/DESC_\w+/i)
+        if(matchDesc !== null){
+            const descToMove = matchDesc[0].replace("DESC_", "MOVE_")
+            if(moves[descToMove] !== undefined)
+                move.push(descToMove)
+            if(moves[`${descToMove}_S`] !== undefined)
+                move.push(`${descToMove}_S`)
+            if(moves[`${descToMove}_P`] !== undefined)
+                move.push(`${descToMove}_P`)
 
 
-            const matchConversionDescription = line.match(/s\w+Description/i)
-            if(matchConversionDescription !== null){
-                const conversionDescription = matchConversionDescription[0]
+            const sanitizedMove = descToMove.replace(/_/g, "").replace("MOVE", "MOVE_")
+            if(moves[sanitizedMove] !== undefined && sanitizedMove !== descToMove)
+                move.push(sanitizedMove)
 
-                if(conversionTable[conversionDescription] === undefined)
-                    conversionTable[conversionDescription] = [move]
-                else
-                    conversionTable[conversionDescription].push(move)
+        }
+        else{
+            if(line.length < 10)
+                move = []
+            else if(move.length > 0){
+                for(let i = 0; i < move.length; i++)
+                    moves[move[i]]["description"] = [line.replace(/\\n/g, " ")]
             }
         }
-    })
-
-    lines.forEach(line => { // second go with conversionTable
-        const matchConversionDescription = line.match(/static *const *u\d+ *(s\w+Description)/i)
-        if(matchConversionDescription !== null && conversionDescription !== matchConversionDescription[1]){
-            conversionDescription = matchConversionDescription[1]
-
-            descriptionFound = true
-        }
-
-        if(descriptionFound === true){
-            const matchDescription = line.match(/"(.*)"/i)
-            if(matchDescription !== null){
-                const description = matchDescription[1]
-
-                if(conversionTable[conversionDescription] !== undefined){
-                    for(let i = 0; i < conversionTable[conversionDescription].length; i++)
-                        moves[conversionTable[conversionDescription][i]]["description"].push(description)
-                }
-            }
-        }
-
-        if(line.match(";"))
-            descriptionFound = false
-
     })
 
     return moves
@@ -54,19 +38,27 @@ function regexMoves(textMoves, moves){
     let move = null, change = false, rebalanced = false
 
     lines.forEach(line => {
-
         const matchMoves = line.match(/\[ *(MOVE_\w+) *\]/i)
         if(matchMoves !== null){
             move = matchMoves[1]
-            
-            moves[move] = {}
-            moves[move]["name"] = move
-            moves[move]["changes"] = []
-            moves[move]["description"] = []
-            moves[move]["ingameName"] = sanitizeString(move)
+            if(moves[move] === undefined){
+                moves[move] = {}
+                moves[move]["name"] = move
+                moves[move]["changes"] = []
+                moves[move]["description"] = []
+                moves[move]["ingameName"] = sanitizeString(move)
+            }
+            else{ // assuming dynamax power
+                const matchMaxPower = line.match(/\d+/)
+                if(matchMaxPower !== null){
+                   const maxPower = matchMaxPower[0]
+                   moves[move] = setMove(moves[move], change, "maxPower", maxPower)
+                }
+            }
         }
-        if(line.includes("REBALANCED_VERSION"))
+        if(line.includes("#ifdef")){
             rebalanced = true
+        }
         else if(line.includes("else") && rebalanced === true){
             rebalanced = false
             change = true
@@ -150,11 +142,27 @@ function regexMoves(textMoves, moves){
         else if(line.includes(".priority")){
             const matchPriority = line.match(/-?\d+/)
             if(matchPriority !== null){
-                const priority = matchPriority[0]
+                let priority = matchPriority[0]
                 if(priority >= 50)
                     priority -= 256
 
-                moves[move] = setMove(moves[move], change, "priority", priority)
+                moves[move] = setMove(moves[move], change, "priority", `${priority}`)
+            }
+        }
+        else if(line.includes(".z_move_power")){
+            const matchZpower = line.match(/\d+/)
+            if(matchZpower !== null){
+                const Zpower = matchZpower[0]
+
+                moves[move] = setMove(moves[move], change, "Zpower", Zpower)
+            }
+        }
+        else if(line.includes(".z_move_effect")){
+            const matchZeffect = line.match(/Z_EFFECT_\w+/i)
+            if(matchZeffect !== null){
+                const Zeffect = matchZeffect[0]
+
+                moves[move] = setMove(moves[move], change, "Zeffect", Zeffect)
             }
         }
     })
@@ -181,6 +189,151 @@ function setMove(move, change, input, output){
 }
 
 
+
+
+
+
+
+
+
+
+function regexMovesIngameName(textMovesIngameName, moves){
+    const lines = textMovesIngameName.split("\n")
+    let nameLongFound = false, move = []
+
+
+    lines.forEach(line => {
+        if(nameLongFound === true){
+            for (let i = 0; i < move.length; i++)
+                moves[move[i]]["ingameName"] = line.trim()
+            nameLongFound = false
+            move = []
+        }
+
+
+        const matchNameLong = line.match(/NAME_LONG_(\w+)/i)
+        if(matchNameLong !== null){
+            const nameLong = `MOVE_${matchNameLong[1]}`
+            const nameLongReplaced = `MOVE_${matchNameLong[1].replace(/'|_/g, "")}`
+
+            if(moves[nameLong] !== undefined){
+                nameLongFound = true
+                move.push(nameLong)
+            }
+            if(moves[`${nameLong}_S`] !== undefined){
+                nameLongFound = true
+                move.push(`${nameLong}_S`)
+            }
+            if(moves[`${nameLong}_P`] !== undefined){
+                nameLongFound = true
+                move.push(`${nameLong}_P`)
+            }
+            if(moves[nameLongReplaced] !== undefined){
+                nameLongFound = true
+                move.push(nameLongReplaced)
+            }
+            if(moves[`${nameLongReplaced}_S`] !== undefined){
+                nameLongFound = true
+                move.push(`${nameLongReplaced}_S`)
+            }
+            if(moves[`${nameLongReplaced}_P`] !== undefined){
+                nameLongFound = true
+                move.push(`${nameLongReplaced}_P`)
+            }
+        }
+        else{
+            const test = `MOVE_${line.trim().replace(/ |-|_|'/g, "").toUpperCase()}`
+            if(moves[test] != undefined)
+                moves[test]["ingameName"] = line.trim()
+        }
+    })
+
+    return moves
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function regexVanillaMovesDescription(textVanillaMovesDescription, moves){
+    const lines = textVanillaMovesDescription.split("\n")
+    let conversionTable = {}
+
+    for(let i = lines.length - 1; i >= 0; i--){
+        let move = lines[i].match(/(MOVE_\w+)/i) //this is going to get confusing real quick :)
+        if(move !== null){
+            move = move[0].replace(/_/g, "").replace(/MOVE/i, "MOVE_")
+
+            if(move === "MOVE_FAINTATTACK")
+                move = "MOVE_FEINTATTACK"
+            else if(move === "MOVE_HIJUMPKICK")
+                move = "MOVE_JUMPKICK"
+
+        }
+
+
+        const matchConversionDescription = lines[i].match(/gMoveDescription_\w+/i)
+        if(matchConversionDescription !== null){
+            const conversionDescription = matchConversionDescription[0]
+
+
+
+            if(move !== null){ // :=)
+
+
+                if(conversionTable[conversionDescription] === undefined)
+                    conversionTable[conversionDescription] = [move]
+                else
+                    conversionTable[conversionDescription].push(move)
+
+
+            }
+            else{
+                const matchDescription = lines[i].match(/_ *\( *" *(.*)" *\) *;/i)
+                if(matchDescription !== null){
+                    const description = [matchDescription[1]]
+                    if(conversionTable[conversionDescription] !== undefined){
+                        if(moves[conversionTable[conversionDescription][0]] !== undefined){
+                            for(let j = 0; j < conversionTable[conversionDescription].length; j++)
+                                moves[conversionTable[conversionDescription][j]]["description"] = description
+                        }
+                    }
+                }
+            }
+        }
+    }
+    return moves
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 function normalizeMoves(moves){
 
     for (const move of Object.keys(moves)){
@@ -200,6 +353,9 @@ function normalizeMoves(moves){
         if(moves[move]["split"] === undefined)
             moves[move]["split"] = ""
 
+        if(moves[move]["effect"] === undefined)
+            moves[move]["effect"] = ""
+
         if(moves[move]["chance"] === undefined)
             moves[move]["chance"] = ""
 
@@ -214,6 +370,18 @@ function normalizeMoves(moves){
 
         if(moves[move]["priority"] === undefined)
             moves[move]["priority"] = 0
+
+        if(moves[move]["Zpower"] === undefined)
+            moves[move]["Zpower"] = 0
+
+        if(moves[move]["Zeffect"] === undefined)
+            moves[move]["Zeffect"] = ""
+
+        if(moves[move]["Zeffect"] === undefined)
+            moves[move]["Zeffect"] = ""
+
+        if(moves[move]["maxPower"] === undefined)
+            moves[move]["maxPower"] = ""
     }
 
     return moves

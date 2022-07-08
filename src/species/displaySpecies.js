@@ -55,12 +55,12 @@ function displaySpecies(){
         let type1 = document.createElement("div")
         let type2 = document.createElement("div")
         typesContainer.className = "types"
-        type1.innerText = sanitizeString(species[speciesName]["type1"])
+        type1.innerText = `${sanitizeString(species[speciesName]["type1"])} `
         type2.innerText = sanitizeString(species[speciesName]["type2"])
         type1.className = `${species[speciesName]["type1"]} background`
         type2.className = `${species[speciesName]["type2"]} background`
         types.append(type1)
-        if(type1.innerText !== type2.innerText)
+        if(species[speciesName]["type1"] !== species[speciesName]["type2"])
             types.append(type2)
         typesContainer.append(types)
         row.append(typesContainer)
@@ -68,7 +68,13 @@ function displaySpecies(){
 
         let abilitiesContainer = document.createElement("td")
         abilitiesContainer.className = "abilities"
-        const abilitiesArray = sanitizeString(Array.from(new Set(species[speciesName]["abilities"])).join(' ')).split("\n")
+        let abilitiesArray = []
+        for (let j = 0; j < species[speciesName]["abilities"].length; j++){
+            if(abilities[species[speciesName]["abilities"][j]] !== undefined)
+                abilitiesArray.push(abilities[species[speciesName]["abilities"][j]]["ingameName"])
+        }
+
+        abilitiesArray = Array.from(new Set(abilitiesArray))
         for (let j = 0; j < abilitiesArray.length; j++){
             let ability = document.createElement("div")
             ability.innerText = `${abilitiesArray[j]} `

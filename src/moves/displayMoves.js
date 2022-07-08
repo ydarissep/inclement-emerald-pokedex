@@ -21,6 +21,8 @@ function displayMoves(){
         name.innerText = moves[moveName]["name"]
         ingameName.className = "move"
         ingameName.innerText = moves[moveName]["ingameName"]
+        if(moves[moveName]["effect"] === "EFFECT_MAX_MOVE")
+            ingameName.innerText = sanitizeString(moves[moveName]["name"])
         nameContainer.append(name)
         nameContainer.append(ingameName)
         row.append(nameContainer)
@@ -88,7 +90,7 @@ function displayMoves(){
         descriptionContainer.className = "description"
         for(let j = 0; j < moves[moveName]["description"].length; j++){
             let description = document.createElement("div")
-            description.innerText += moves[moveName]["description"][j].replace("\\n", " ")
+            description.innerText += moves[moveName]["description"][j].replace(/\\n/g, " ").replace(/\\/g, "")
             descriptionContainer.append(description)
         }
 
@@ -111,7 +113,6 @@ function displayMoves(){
 
         row.append(effectContainer)
 
-        
     }
 }
 

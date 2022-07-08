@@ -85,9 +85,9 @@ only screen and (max-width: 700px) {
     }
 
     td.ID, td.sprite, #speciesTableTbody td.nameContainer {
-    	display: inline-block !important;
-    	width: 33.3%;
-    	box-sizing: border-box;
+        display: inline-block !important;
+        width: 33.3%;
+        box-sizing: border-box;
     }
     .baseHPContainer, 
     .baseAttackContainer, 
@@ -96,9 +96,9 @@ only screen and (max-width: 700px) {
     .baseSpDefenseContainer,
     .baseSpeedContainer,
     .BSTContainer {
-    	display: inline-block !important;
-    	width: 14%;
-    	box-sizing: border-box;
+        display: inline-block !important;
+        width: 14%;
+        box-sizing: border-box;
     }
 
     #speciesTable [class*="TYPE_"], .baseStatsHeader {

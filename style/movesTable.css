@@ -1,10 +1,10 @@
 #movesButton {
-    width: 100px;
+	width: 100px;
 }
 
 
 #movesTableThead th.move {
-    width: 150px;
+	width: 150px;
 }
 #movesTableThead th.type {
     width: 80px;
@@ -13,16 +13,16 @@
     width: 50px;
 }
 #movesTableThead th.power {
-    width: 75px;
+	width: 75px;
 }
 #movesTableThead th.accuracy {
-    width: 50px;
+	width: 50px;
 }
 #movesTableThead th.PP {
-    width: 40px;
+	width: 40px;
 }
 #movesTableThead th.effect {
-    width: 250px;
+	width: 350px;
 }
 
 #movesTableTbody .nameContainer {
@@ -68,12 +68,12 @@ only screen and (max-width: 700px) {
     }
 
     #movesTable [class*="TYPE_"] {
-        display: inline-flex !important;
+    	display: inline-flex !important;
     }
 
     #movesTable .effect > div {
-        display: inline !important;
-        font-style: italic;
+    	display: inline !important;
+    	font-style: italic;
     }
 
     .movesHeader {
@@ -82,10 +82,10 @@ only screen and (max-width: 700px) {
     }
 
     .powerContainer, .accuracyContainer, .PPContainer {
-        padding: 4px 0px 5px 0px;
-        display: inline-block !important;
-        width: 33.3% !important;
-        box-sizing: border-box;
+    	padding: 4px 0px 5px 0px;
+    	display: inline-block !important;
+    	width: 33.3% !important;
+    	box-sizing: border-box;
     }
 
     #movesTable td.nameContainer, #movesTable td.type, #movesTable td.split{ display: inline-block; } 

@@ -4,28 +4,19 @@ function regexSpecies(textSpecies, species){
 
     lines.forEach(line => {
 
-        if (/#define *FORMS_START *\w+/i.test(line))
-            formsStart = ID
-
         const matchSpecies = line.match(/#define *(SPECIES_\w+)/i)
         if(matchSpecies !== null && /SPECIES_NONE/i.test(line) !== true && /SPECIES_EGG/i.test(line) !== true){
             const name = matchSpecies[1]
 
-
-            matchInt = line.match(/\d+/g)
-            if(matchInt !== null){
-                ID = parseInt(matchInt[matchInt.length-1])
-
-
+            matchID = line.match(/0[xX][0-9a-fA-F]+/i)
+            if(matchID !== null){
+                ID = parseInt(matchID[0])
 
                 species[name] = {}
                 species[name]["name"] = name
 
 
-                if(Number.isInteger(formsStart))
-                    species[name]["ID"] = ID+formsStart
-                else
-                    species[name]["ID"] = ID
+                species[name]["ID"] = ID
             }
         }
     })
@@ -43,7 +34,7 @@ function regexSpecies(textSpecies, species){
 function regexBaseStats(textBaseStats, species){
     const lines = textBaseStats.split("\n")
 
-    const regex = /baseHP|baseAttack|baseDefense|baseSpeed|baseSpAttack|baseSpDefense|type1|type2|item1|item2|eggGroup1|eggGroup2|abilities/i
+    const regex = /baseHP|baseAttack|baseDefense|baseSpeed|baseSpAttack|baseSpDefense|type1|type2|item1|item2|eggGroup1|eggGroup2|ability1|ability2|hiddenAbility/i
     let change = false, value, name
 
     lines.forEach(line => {
@@ -73,27 +64,24 @@ function regexBaseStats(textBaseStats, species){
                     if(matchInt !== null)
                         value = parseInt(matchInt[0])
                 }
-                else if(match === "type1" || match === "type2" || match === "item1" || match === "item2" || match === "eggGroup1" || match === "eggGroup2"){
+                else if(match === "type1" || match === "type2" || match === "item1" || match === "item2" || match === "eggGroup1" || match === "eggGroup2" || match === "ability1" || match === "ability2" || match === "hiddenAbility"){
                     value = line.match(/\w+_\w+/i)
                     if(value !== null)
                         value = value[0]
-                }
-                else if(match === "abilities"){
-                    value = line.match(/ABILITY_\w+/ig)
-                    if(value !== null){
-                        for (let i = 0; i < 3; i++){
-                            if(value[i] === "ABILITY_NONE" || value[i] === undefined && i >= 1)
-                                value[i] = value[i-1]
-                        }
-                    }
                 }
 
 
 
                 if(change === true)
                     species[name]["changes"].push([match, value])
-                else if(change === false)
-                    species[name][match] = value
+                else if(change === false){
+                    if(match === "ability1" || match === "ability2" || match === "hiddenAbility"){
+                        species[name]["abilities"].push(value)
+                    }
+                    else{
+                        species[name][match] = value
+                    }
+                }
             }
         }
     })
@@ -116,7 +104,7 @@ function getLevelUpLearnsetsConversionTable(textLevelUpLearnsetsPointers){
     lines.forEach(line => {
 
         const matchSpecies = line.match(/SPECIES_\w+/i)
-        if(matchSpecies != null && /SPECIES_NONE/i.test(line) !== true){
+        if(matchSpecies != null && /SPECIES_NONE/i.test(line) !== true && /SPECIES_ZYGARDE_CORE/i.test(line) !== true && /SPECIES_ZYGARDE_CELL/i.test(line) !== true){
             const value = matchSpecies[0]
 
 
@@ -155,6 +143,14 @@ function regexLevelUpLearnsets(textLevelUpLearnsets, conversionTable, species){
                 species[speciesArray[i]]["levelUpLearnsets"].push([move, level])
         }
     })
+    for (const name of Object.keys(conversionTable)){
+
+        if(conversionTable[name].length >= 2){
+                for (let j = 0; j < conversionTable[name].length; j++){
+                    species[conversionTable[name][j]]["forms"] = conversionTable[name]
+                }
+        }
+    }
     return species
 }
 
@@ -167,31 +163,116 @@ function regexLevelUpLearnsets(textLevelUpLearnsets, conversionTable, species){
 
 
 
-function regexTMHMLearnsets(textTMHMLearnsets, species){
+function regexTMHMLearnsets(textTMHMLearnsets, species, start, end){
     const lines = textTMHMLearnsets.split("\n")
-    let name = null
+    let name = null, startFound = false, TMHM = 0, count = 0
 
     lines.forEach(line => {
-        const matchSpecies = line.match(/SPECIES_\w+/i)
-        if(matchSpecies !== null){
-            name = matchSpecies[0]
+        if(line.includes(start))
+            startFound = true
+        else if(line.includes(end))
+            startFound = false
+
+
+        if(startFound){
+            const matchMove = line.trim().match(/^MOVE_\w+/i)
+            if(matchMove !== null){
+                let move = moves[matchMove[0]]["ingameName"]
+                count++
+
+                if(move === "Solar Beam")
+                    move = "Solarbeam"
+                else if(move === "Will-O-Wisp")
+                    move = "Will-o-Wisp"
+                else if(move === "U-turn")
+                    move = "U-Turn"
+
+                const rawTMHM = fetch(`https://raw.githubusercontent.com/${repo2}/master/src/tm_compatibility/${count} - ${move}.txt`)
+                .then(promises => {
+                    const textTMHM = promises.text()
+                    .then(promises => {
+                        const lines = promises.split("\n")
+
+                        lines.forEach(line => {
+                            const matchTMHM = line.match(/TM\d+|HM\d+/i)
+                            if(matchTMHM !== null)
+                                TMHM = matchTMHM[0]
+
+
+                            const matchSpecies = `SPECIES_${line.trim()}`
+                            if(species[matchSpecies] !== undefined)
+                                species[matchSpecies]["TMHMLearnsets"].push([matchMove[0], TMHM])
+                        })
+                    })
+                })
+            }
         }
-
-
-        const matchTmhmMove = line.match(/TMHM\d* *\((\w+ *\d+) *_ *(\w+)/i)
-        if(matchTmhmMove !== null){
-            const TMHM = matchTmhmMove[1]
-            let move = matchTmhmMove[2]
-            if(move === "SOLARBEAM")
-                move = "SOLAR_BEAM" // Fuck Oldplayer :)
-            move = `MOVE_${move}`
-
-            species[name]["TMHMLearnsets"].push([move, TMHM])
-        }
+        
     })
 
-    return altFormsLearnsets(species, "forms", "TMHMLearnsets")
+    return species
+    //return altFormsLearnsets(species, "forms", "TMHMLearnsets")
 }
+
+
+
+
+
+
+
+function regexTutorLearnsets(textTutorLearnsets, species, start, end){
+    const lines = textTutorLearnsets.split("\n")
+    let name = null, startFound = false, tutor = 0, count = 0
+
+    lines.forEach(line => {
+        if(line.includes(start))
+            startFound = true
+        else if(line.includes(end))
+            startFound = false
+
+
+        if(startFound){
+            const matchMove = line.trim().match(/^MOVE_\w+/i)
+            if(matchMove !== null){
+                let move = moves[matchMove[0]]["ingameName"]
+                count++
+
+                if(move === "Buring Jealousy")
+                    move = "Burning Jealousy"
+                else if(move === "Soft-Boiled")
+                    move = "Softboiled"
+
+                if(move !== "Block"){ // Could be removed later
+                    const rawTutor = fetch(`https://raw.githubusercontent.com/${repo2}/master/src/tutor_compatibility/${count} - ${move}.txt`)
+                    .then(promises => {
+                        const textTutor = promises.text()
+                        .then(promises => {
+                            const lines = promises.split("\n")
+
+                            lines.forEach(line => {
+                                if(line.includes(":")){
+                                    const matchTutor = line.match(/\d+/)
+                                    if(matchTutor !== null)
+                                        tutor = matchTutor[0]
+                                }
+
+
+                                const matchSpecies = `SPECIES_${line.trim()}`
+                                if(species[matchSpecies] !== undefined)
+                                    species[matchSpecies]["tutorLearnsets"].push([matchMove[0], tutor])
+                            })
+                        })
+                    })
+                } 
+            }
+        }
+        
+    })
+
+    return species
+    //return altFormsLearnsets(species, "forms", "tutorLearnsets")
+}
+
 
 
 
@@ -262,6 +343,7 @@ function getEvolutionLine(species){
 
 
 
+
 function regexForms(textForms, species){
     const lines = textForms.split("\n")
     let speciesArray = []
@@ -300,8 +382,9 @@ function regexEggMovesLearnsets(textEggMoves, species){
         const matchMove = line.match(/MOVE_\w+/i)
         if(matchMove !== null){
             const move = matchMove[0]
-            if(name !== null)
+            if(name !== null){
                 species[name]["eggMovesLearnsets"].push(move)
+            }
         }
         else if(name === null){
             const matchLine = line.match(/(\w+),/i)
@@ -319,56 +402,41 @@ function regexEggMovesLearnsets(textEggMoves, species){
 
 
 
-
-
-
-
-
-
-function getSpriteConversionTable(textFrontPicTable, species){
-    const lines = textFrontPicTable.split("\n")
-    const speciesString = JSON.stringify(Object.keys(species))
-    let conversionTable = {}
+function regexReplaceAbilities(textReplaceAbilities, species){
+    const lines = textReplaceAbilities.split("\n")
+    let speciesName = "", ability = "", replaceAbility = ""
 
     lines.forEach(line => {
-
-        const matchConversionSpecies = line.match(/(\w+) *, *(gMonFrontPic_\w+)/i)
-        if(matchConversionSpecies != null){
-
-            const testSpecies = `SPECIES_${matchConversionSpecies[1]}`
-            if(speciesString.includes(testSpecies)){
-                const species = testSpecies
-                const index = matchConversionSpecies[2]
-
-                if(conversionTable[index] === undefined) // DO NOT TOUCH THAT FUTURE ME, THIS IS THE WAY, DON'T QUESTION ME
-                    conversionTable[index] = [species]
-                else // DO NOT TOUCH THAT FUTURE ME, THIS IS THE WAY, DON'T QUESTION ME
-                    conversionTable[index].push(species)
-            }
+        if(line.includes("{")){
+            speciesName = ""
+            ability = ""
+            replaceAbility = ""
         }
-    })
-    return conversionTable
-}
+        const matchSpecies = line.match(/SPECIES_\w+/i)
+        if(matchSpecies !== null){
+            speciesName = matchSpecies[0]
+        }
+        const matchAbility = line.match(/ABILITY_\w+/i)
+        if(matchAbility !== null){
+            ability = matchAbility[0]
+        }
+        const matchReplaceAbility = line.match(/NAME_\w+/i)
+        if(matchReplaceAbility !== null){
+            replaceAbility = matchReplaceAbility[0].replace("NAME_", "ABILITY_")
+        }
 
-function regexSprite(textSprite, conversionTable, species){
-    const lines = textSprite.split("\n")
-    const conversionTableString = JSON.stringify(Object.keys(conversionTable))
-
-    lines.forEach(line => {
-        const matchgMonFrontPic = line.match(/gMonFrontPic_\w+/i)
-        if(matchgMonFrontPic !== null){
-
-            const conversion = matchgMonFrontPic[0]
-            if(conversionTableString.includes(conversion)){
-                const speciesArray = conversionTable[conversion]
-
-                const matchPath = line.match(/graphics\/pokemon\/(\w+\/\w+\/\w+\/\w+\/\w+|\w+\/\w+\/\w+\/\w+|\w+\/\w+\/\w+|\w+\/\w+|\w+)\//i) // ¯\_(ツ)_/¯
-                if(matchPath !== null){
-                    const path = matchPath[1]
-                    const url = `https://raw.githubusercontent.com/BuffelSaft/pokeemerald/master/graphics/pokemon/${path}/front.png`
-                    for(let i = 0; i < conversionTable[conversion].length; i++){
-                        species[speciesArray[i]]["sprite"] = url
-                    }
+        if(speciesName !== "" && ability !== "" && replaceAbility !== ""){
+            /*
+            if(abilities[replaceAbility] == undefined){
+                abilities[replaceAbility] = {}
+                abilities[replaceAbility]["description"] = abilities[ability]["description"]
+                abilities[replaceAbility]["ingameName"] = sanitizeString(replaceAbility)
+                abilities[replaceAbility]["name"] = replaceAbility
+            }
+            */
+            for (let i = 0; i < species[speciesName]["abilities"].length; i++){
+                if(species[speciesName]["abilities"][i] === ability){
+                    species[speciesName]["abilities"][i] = replaceAbility
                 }
             }
         }
@@ -378,51 +446,29 @@ function regexSprite(textSprite, conversionTable, species){
 
 
 
-
-
-
-
-
-
-
-
-function getTutorLearnsetsConversionTable(textMoves){
-    const lines = textMoves.split("\n")
-    let conversionTable = {}
+function regexSprite(textSprite, species){
+    const lines = textSprite.split("\n")
 
     lines.forEach(line => {
-        const matchMoveID = line.match(/#define *(MOVE_\w+) *(\d+)/i)
-        if(matchMoveID !== null){
-            const move = matchMoveID[1]
-            const ID = matchMoveID[2]
-            conversionTable[ID] = move
+        const matchSpecies = line.match(/SPECIES_\w+/i)
+        if(matchSpecies !== null && /SPECIES_NONE/i.test(line) !== true && /SPECIES_EGG/i.test(line) !== true){
+            let name = matchSpecies[0]
+            if(name === "SPECIES_ENAMORUS_T")
+                name = "SPECIES_ENAMORUS_THERIAN"
+
+            const matchURL = line.match(/gFrontSprite\w+Tiles/i)
+            if(matchURL !== null){
+                let url = `https://raw.githubusercontent.com/${repo2}/master/graphics/frontspr/${matchURL[0].replace("Tiles", ".png")}`
+
+                if(name === "SPECIES_CASTFORM")
+                    url = `https://raw.githubusercontent.com/${repo2}/master/graphics/castform/gFrontSprite385Castform.png`
+
+                species[name]["sprite"] = url
+            }
         }
     })
-    return conversionTable
-}
-
-function regexTutorLearnsets(tutorLearnsets, conversionTable, conversionMoveBadge, species){
-    for (const name of Object.keys(species)){
-        const speciesID = species[name]["ID"]
-        for (let i = 0; i < tutorLearnsets[speciesID].length; i++){
-            const move = conversionTable[tutorLearnsets[speciesID][i]]
-            let badge = conversionMoveBadge[move]
-            if(badge === undefined){
-                badge = "Special"
-            }
-            species[name]["tutorLearnsets"].push([move, badge])
-        }
-        if(species[name]["tutorLearnsets"].length === 0){
-            const targetSpecies = species[name]["forms"][0]
-            if(targetSpecies !== undefined){
-                species[name]["tutorLearnsets"] = species[targetSpecies]["tutorLearnsets"]
-            }
-        }
-    }
     return species
 }
-
-
 
 
 
@@ -441,14 +487,14 @@ function altFormsLearnsets(species, input, output){
 
         if(species[name][input].length >= 2){
 
-                for (let j = 0; j < species[name][input].length; j++){
-                    const targetSpecies = species[name][input][j]
-                    
 
-                    if(species[targetSpecies][output].length <= 0){
-                        species[targetSpecies][output] = species[name][output]
-                    }
+            for (let j = 0; j < species[name][input].length; j++){
+                const targetSpecies = species[name][input][j]
+
+                if(species[targetSpecies][output].length < species[name][output].length){
+                    species[targetSpecies][output] = species[name][output]
                 }
+            }
         }
     }
     return species

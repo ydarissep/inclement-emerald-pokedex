@@ -1,4 +1,6 @@
 window.repo = "BuffelSaft/pokeemerald"
+window.repo1 = "Greenphx9/Complete-Fire-Red-Upgrade"
+window.repo2 = "Greenphx9/Dynamic-Pokemon-Expansion"
 
 window.panelSpecies = ""
 
@@ -8,9 +10,11 @@ const speciesFilterCheckbox = document.getElementById("speciesFilterCheckbox")
 const movesFilterCheckbox = document.getElementById("movesFilterCheckbox")
 
 
+
 const openCredits = document.getElementById("openCredits")
 const closeCredits = document.getElementById("closeCredits")
 const modal = document.getElementById("modal")
+const update = document.getElementById("update")
 
 
 
@@ -26,6 +30,7 @@ const speciesFilterEggGroup = document.getElementById("speciesFilterEggGroup")
 const speciesFilterHeldItem = document.getElementById("speciesFilterHeldItem")
 
 
+const movesFilterMaxPower = document.getElementById("movesFilterMaxPower")
 const movesFilterFlag = document.getElementById("movesFilterFlag")
 const movesFilterPriority = document.getElementById("movesFilterPriority")
 const movesFilterEffect = document.getElementById("movesFilterEffect")
@@ -290,6 +295,10 @@ movesFilterCheckbox.addEventListener("change", e => {
 
 
 
+
+
+
+
 speciesFilterHP.addEventListener("click", () => {
     const list = [">=", "<=", ">", "<", "="]
     createFilter(list, species, ["baseHP"], filterCount++, speciesFilterButton, "HP", isInt = true, isOperator = true)
@@ -343,6 +352,12 @@ speciesFilterHeldItem.addEventListener("click", () => {
 
 
 
+
+
+movesFilterMaxPower.addEventListener("click", () => {
+    const list = [">=", "<=", ">", "<", "="]
+    createFilter(list, moves, ["maxPower"], filterCount++, movesFilterButton, "maxPower", isInt = true, isOperator = true)
+})
 movesFilterFlag.addEventListener("click", () => {
     let list = []
     for (const name of Object.keys(moves)){
@@ -380,6 +395,7 @@ movesFilterPower.addEventListener("click", () => {
 
 
 
+
 openCredits.addEventListener("click", () => {
     modal.classList.remove("hide")
     if(typeof document.createElement('dialog').showModal === 'function'){
@@ -388,6 +404,7 @@ openCredits.addEventListener("click", () => {
     else if(typeof document.createElement('dialog').show === 'function'){
         modal.show()
     }
+
 })
 closeCredits.addEventListener("click", () => {
     modal.classList.add("hide")
@@ -418,6 +435,12 @@ const options = {
 function footerIsTouching(entries){
     if(entries[0].isIntersecting){
         lazyLoading(false)
+        openCredits.classList.remove("hide")
+        update.classList.remove("hide")
+    }
+    else{
+        openCredits.classList.add("hide")   
+        update.classList.add("hide")
     }
 }
 
@@ -478,6 +501,11 @@ utilityButton.onclick = () => {
 }
 
 
+update.addEventListener("click", () => {
+    localStorage.clear()
+    window.location.reload()
+})
+
 
 window.onbeforeunload = () => {  
     window.scrollTo(0, 0);
@@ -485,3 +513,6 @@ window.onbeforeunload = () => {
 
 
 fetchData()
+
+
+
