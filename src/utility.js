@@ -1,5 +1,5 @@
 function sanitizeString(string){
-    const regex = /^SPECIES_|^TYPE_|ABILITY_NONE|ABILITY_|^SPECIES_NONE|^MOVE_|^SPLIT_|FLAG_|^EFFECT_|^Z_EFFECT_|^ITEM_|^EGG_GROUP_|^EVO_/ig
+    const regex = /^SPECIES_|^TYPE_|ABILITY_NONE|ABILITY_|^SPECIES_NONE|^MOVE_|^SPLIT_|FLAG_|^EFFECT_|^Z_EFFECT|^ITEM_|^EGG_GROUP_|^EVO_/ig
     const unsanitizedString = string.replace(regex, "")
     let matchArray = unsanitizedString.match(/\w+/g)
     if(matchArray !== null){
@@ -15,6 +15,8 @@ function sanitizeString(string){
     else
         return unsanitizedString
 }
+
+
 
 
 
@@ -39,14 +41,27 @@ async function fetchData(){
 
 
 
+
+
+
+
+
+
 async function forceUpdate(){
-    const update = 8
-    if(localStorage.getItem("update") != `${update} IR`){
+    const update = 7
+    if(localStorage.getItem("update") != `${update} IE`){
         await localStorage.clear()
-        await localStorage.setItem("update", `${update} IR`)
+        await localStorage.setItem("update", `${update} IE`)
         await footerP("Fetching data please wait... this is only run once")
     }
 }
+
+
+
+
+
+
+
 
 
 

@@ -11,6 +11,7 @@ const movesFilterCheckbox = document.getElementById("movesFilterCheckbox")
 const openCredits = document.getElementById("openCredits")
 const closeCredits = document.getElementById("closeCredits")
 const modal = document.getElementById("modal")
+const update = document.getElementById("update")
 
 
 
@@ -418,6 +419,12 @@ const options = {
 function footerIsTouching(entries){
     if(entries[0].isIntersecting){
         lazyLoading(false)
+        openCredits.classList.remove("hide")
+        update.classList.remove("hide")
+    }
+    else{
+        openCredits.classList.add("hide")   
+        update.classList.add("hide")
     }
 }
 
@@ -477,6 +484,11 @@ utilityButton.onclick = () => {
     }
 }
 
+
+update.addEventListener("click", () => {
+    localStorage.clear()
+    window.location.reload()
+})
 
 
 window.onbeforeunload = () => {  
