@@ -1,6 +1,6 @@
 async function getSpecies(species){
     footerP("Fetching species")
-    const rawSpecies = await fetch(`https://raw.githubusercontent.com/${repo1}/master/include/constants/species.h`)
+    const rawSpecies = await fetch(`https://raw.githubusercontent.com/${repo}/master/include/constants/species.h`)
     const textSpecies = await rawSpecies.text()
 
     return regexSpecies(textSpecies, species)
@@ -9,17 +9,17 @@ async function getSpecies(species){
 
 async function getBaseStats(species){
     footerP("Fetching base stats")
-    const rawBaseStats = await fetch(`https://raw.githubusercontent.com/${repo1}/master/src/base_stats.c`)
+    const rawBaseStats = await fetch(`https://raw.githubusercontent.com/${repo}/master/src/data/pokemon/base_stats.h`)
     const textBaseStats = await rawBaseStats.text()
     return regexBaseStats(textBaseStats, species)
 }
 
 async function getLevelUpLearnsets(species){
     footerP("Fetching level up learnsets")
-    const rawLevelUpLearnsets = await fetch(`https://raw.githubusercontent.com/${repo1}/master/src/Tables/level_up_learnsets.c`)
+    const rawLevelUpLearnsets = await fetch(`https://raw.githubusercontent.com/${repo}/master/src/data/pokemon/level_up_learnsets.h`)
     const textLevelUpLearnsets = await rawLevelUpLearnsets.text()
 
-    const rawLevelUpLearnsetsPointers = await fetch(`https://raw.githubusercontent.com/${repo1}/master/src/Tables/level_up_learnsets.c`)
+    const rawLevelUpLearnsetsPointers = await fetch(`https://raw.githubusercontent.com/${repo}/master/src/data/pokemon/level_up_learnset_pointers.h`)
     const textLevelUpLearnsetsPointers = await rawLevelUpLearnsetsPointers.text()
 
 
@@ -31,23 +31,15 @@ async function getLevelUpLearnsets(species){
 
 async function getTMHMLearnsets(species){
     footerP("Fetching TMHM learnsets")
-    const rawTMHMLearnsets = await fetch(`https://raw.githubusercontent.com/${repo2}/master/src/TM_Tutor_Tables.c`)
+    const rawTMHMLearnsets = await fetch(`https://raw.githubusercontent.com/${repo}/master/src/data/pokemon/tmhm_learnsets.h`)
     const textTMHMLearnsets = await rawTMHMLearnsets.text()
 
-    return regexTMHMLearnsets(textTMHMLearnsets, species, "gTMHMMoves", "gMoveTutorMoves")
-}
-
-async function getTutorLearnsets(species){
-    footerP("Fetching tutor learnsets")
-    const rawTutorLearnsets = await fetch(`https://raw.githubusercontent.com/${repo2}/master/src/TM_Tutor_Tables.c`)
-    const textTutorLearnsets = await rawTutorLearnsets.text()
-
-    return regexTutorLearnsets(textTutorLearnsets, species, "gMoveTutorMoves", "gTMHMMoves")
+    return regexTMHMLearnsets(textTMHMLearnsets, species)
 }
 
 async function getEvolution(species){
     footerP("Fetching evolution line")
-    const rawEvolution = await fetch(`https://raw.githubusercontent.com/${repo2}/master/src/Evolution%20Table.c`)
+    const rawEvolution = await fetch(`https://raw.githubusercontent.com/${repo}/master/src/data/pokemon/evolution.h`)
     const textEvolution = await rawEvolution.text()
 
     return regexEvolution(textEvolution, species)
@@ -63,27 +55,41 @@ async function getForms(species){
 
 async function getEggMovesLearnsets(species){
     footerP("Fetching egg moves learnsets")
-    const rawEggMoves = await fetch(`https://raw.githubusercontent.com/${repo2}/master/src/Egg_Moves.c`)
+    const rawEggMoves = await fetch(`https://raw.githubusercontent.com/${repo}/master/src/data/pokemon/egg_moves.h`)
     const textEggMoves = await rawEggMoves.text()
 
     return regexEggMovesLearnsets(textEggMoves, species)
 }
 
+async function getTutorLearnsets(species){
+    footerP("Fetching tutor learnsets")
+    const rawTutorLearnsets = await fetch("https://raw.githubusercontent.com/ydarissep/inclement-emerald-pokedex/main/src/species/tutorLearnsets.json");
+    const tutorLearnsets = await rawTutorLearnsets.json();
+
+    const rawConversionMoveBadge = await fetch("https://raw.githubusercontent.com/ydarissep/inclement-emerald-pokedex/main/src/species/conversionMoveBadge.json")
+    const conversionMoveBadge = await rawConversionMoveBadge.json();
+
+    const rawMoves = await fetch("https://raw.githubusercontent.com/BuffelSaft/pokeemerald/master/include/constants/moves.h")
+    const textMoves = await rawMoves.text()
+
+    const tutorLearnsetsConversionTable = getTutorLearnsetsConversionTable(textMoves)
+
+    return regexTutorLearnsets(tutorLearnsets, tutorLearnsetsConversionTable, conversionMoveBadge, species)
+}
+
 async function getSprite(species){
     footerP("Fetching sprites... this could take a while")
+    const rawFrontPicTable = await fetch(`https://raw.githubusercontent.com/${repo}/master/src/data/pokemon_graphics/front_pic_table.h`)
+    const textFrontPicTable = await rawFrontPicTable.text()
 
-    const rawSprite = await fetch(`https://raw.githubusercontent.com/${repo2}/master/src/Front_Pic_Table.c`)
+    const rawSprite = await fetch(`https://raw.githubusercontent.com/${repo}/master/src/data/graphics/pokemon.h`)
     const textSprite = await rawSprite.text()
 
-    return regexSprite(textSprite, species)
+    const spriteConversionTable = getSpriteConversionTable(textFrontPicTable, species)
+
+    return regexSprite(textSprite, spriteConversionTable, species)
 }
 
-async function getReplaceAbilities(species){
-    const rawReplaceAbilities = await fetch(`https://raw.githubusercontent.com/${repo1}/master/src/Tables/replace_abilities.h`)
-    const textReplaceAbilities = await rawReplaceAbilities.text()
-
-    return regexReplaceAbilities(textReplaceAbilities, species)
-}
 
 
 
@@ -97,52 +103,13 @@ async function buildSpeciesObj(){
     
     species = await initializeSpeciesObj(species)
     species = await getEvolution(species)
-    //species = await getForms(species) // should be called in that order until here    // done in getLevelUpLearnsets for IR
+    species = await getForms(species) // should be called in that order until here
     species = await getBaseStats(species)
     species = await getLevelUpLearnsets(species)
     species = await getTMHMLearnsets(species)
     species = await getEggMovesLearnsets(species)
     species = await getTutorLearnsets(species)
-    species = await getReplaceAbilities(species)
     species = await getSprite(species)
-
-
-
-
-
-    species = await altFormsLearnsets(species, "forms", "tutorLearnsets")
-    species = await altFormsLearnsets(species, "forms", "TMHMLearnsets")
-
-
-    delete species["SPECIES_ZYGARDE_CORE"]
-    delete species["SPECIES_ZYGARDE_CELL"]
-    delete species["SPECIES_SHADOW_WARRIOR"]
-
-    Object.keys(species).forEach(name => {
-        species[name]["tutorLearnsets"].sort((a,b) => a[1] - b[1])
-        species[name]["TMHMLearnsets"].sort(function(a,b) {
-            a = parseInt(a[1].match(/\d+/)[0])
-            b = parseInt(b[1].match(/\d+/)[0])
-
-            return a - b
-        })
-        species[name]["TMHMLearnsets"].sort(function(a,b) {
-            if(a[1].includes("TM")){
-                a = 1
-            }
-            else{
-                a = 2
-            }
-            if(b[1].includes("TM")){
-                b = 1
-            }
-            else{
-                b = 2
-            }
-
-            return a - b
-        })
-    })
 
     await localStorage.setItem("species", LZString.compressToUTF16(JSON.stringify(species)))
     return species

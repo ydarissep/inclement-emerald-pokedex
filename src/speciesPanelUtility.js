@@ -68,7 +68,7 @@ async function createSpeciesPanel(name){
         const abilityName = document.createElement("span")
         const abilityDescription = document.createElement("span")
 
-        abilityName.innerText = `${abilities[abilitiesArray[i]]["ingameName"]}`
+        abilityName.innerText = `${sanitizeString(abilities[abilitiesArray[i]]["name"])}`
         abilityDescription.innerText = abilities[abilitiesArray[i]]["description"]
 
         if(i === abilitiesArray.length - 1 && i > 0)
@@ -188,12 +188,12 @@ async function createSpeciesPanel(name){
 
 
 
-    if(species[name]["item1"] !== "ITEM_NONE"){
+    if(species[name]["item1"] !== ""){
         const heldItem1 = document.createElement("div")
         heldItem1.innerText = `50% ${sanitizeString(species[name]["item1"])}`
         speciesHeldItems.append(heldItem1)
     }
-    if(species[name]["item2"] !== "ITEM_NONE"){
+    if(species[name]["item2"] !== ""){
         const heldItem2 = document.createElement("div")
         heldItem2.innerText = `5% ${sanitizeString(species[name]["item2"])}`
         speciesHeldItems.append(heldItem2)
@@ -328,7 +328,7 @@ function buildSpeciesPanelLearnsetsTable(Tbody, name, input){
         const description = document.createElement("td")
         description.className = "speciesPanelLearnsetsEffect"
         for (let j = 0; j < moves[species[name][input][i][0]]["description"].length; j++){
-            description.innerText += moves[species[name][input][i][0]]["description"][j].replace(/\\n/gi, " ").replace(/\\/g, "")
+            description.innerText += moves[species[name][input][i][0]]["description"][j].replace("\\n", " ")
         }
         row.append(description)
 
@@ -388,7 +388,7 @@ function buildSpeciesPanelEggMovesTable(Tbody, name, input){
         const description = document.createElement("td")
         description.className = "speciesPanelLearnsetsEffect"
         for (let j = 0; j < moves[species[name][input][i]]["description"].length; j++){
-            description.innerText += moves[species[name][input][i]]["description"][j].replace(/\\n/gi, " ").replace(/\\/g, "")
+            description.innerText += moves[species[name][input][i]]["description"][j].replace("\\n", " ")
         }
         row.append(description)
 
@@ -403,4 +403,3 @@ function buildSpeciesPanelEggMovesTable(Tbody, name, input){
 speciesPanelCloseButton.addEventListener("click", () => {
         speciesPanelMainContainer.classList.add("hide")
 })
-

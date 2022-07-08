@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>IR Dex</title>
+  <title>IE Dex</title>
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="style/speciesTable.css">
   <link rel="stylesheet" href="style/abilitiesTable.css">
@@ -20,15 +20,11 @@
   <script defer src="src/moves/fetchMoves.js"></script>
   <script defer src="src/moves/regexMoves.js"></script>
   <script defer src="src/lz-string.js"></script>
-  <script defer src="src/utility.js"></script>
   <script defer src="src/tableUtility.js"></script>
   <script defer src="src/speciesPanelUtility.js"></script>
   <script defer src="src/global.js"></script>
 </head>
 <body>
-
-
-
 
 
 
@@ -147,7 +143,7 @@
         <caption class="bold">Tutor</caption>
         <thead id="speciesPanelTutorTableTHead">
           <tr>
-            <th>Tutor</th>
+            <th>Badge</th>
             <th>Name</th>
             <th>Type</th>
             <th>Split</th>
@@ -178,7 +174,6 @@
     </div>
   </div>
 </div>  
-
 
 
 
@@ -252,7 +247,6 @@
       <input type="checkbox" id="movesFilterCheckbox">
 
       <div id="movesFilterButton" class="hide">
-        <button type="button" id="movesFilterMaxPower">MaxPower</button>
         <button type="button" id="movesFilterFlag">Flag</button>
         <button type="button" id="movesFilterPriority">Priority</button>
         <button type="button" id="movesFilterEffect">Effect</button>
@@ -263,7 +257,6 @@
     </div>
 
   </div>
-
 
 
 
@@ -326,11 +319,11 @@
 </body>
 
 <footer id="footer" class="flex flexCenter flexColumn">
-  <h1>Inflamed Red<br>Pokedex</h1>
+  <h1>Inclement Emerald<br>Pokedex</h1>
 
   <noscript>This page requires JavaScript.</noscript>
   
-  <button type="button" id="openCredits" class="hide">Credits</button>
+  <button type="button" id="openCredits">Credits</button>
   <dialog class="modal hide" id="modal">
     <ul>  
       <li>Credit to ris#0001 for
@@ -347,8 +340,7 @@
     <button type="button" id="closeCredits">OK</button>
   </dialog>
 
-  <button type="button" id="update" class="hide">Update</button>
-  
+
 </footer>
 
 </html>

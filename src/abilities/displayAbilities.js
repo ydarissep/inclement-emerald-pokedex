@@ -14,7 +14,7 @@ function displayAbilities(){
 
         let ability = document.createElement("td")
         ability.className = "ability"
-        ability.innerText = abilities[abilitiesName]["ingameName"]
+        ability.innerText = sanitizeString(abilities[abilitiesName]["name"])
         row.append(ability)
 
         let description = document.createElement("td")

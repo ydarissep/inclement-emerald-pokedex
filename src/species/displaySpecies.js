@@ -68,13 +68,7 @@ function displaySpecies(){
 
         let abilitiesContainer = document.createElement("td")
         abilitiesContainer.className = "abilities"
-        let abilitiesArray = []
-        for (let j = 0; j < species[speciesName]["abilities"].length; j++){
-            if(abilities[species[speciesName]["abilities"][j]] !== undefined)
-                abilitiesArray.push(abilities[species[speciesName]["abilities"][j]]["ingameName"])
-        }
-
-        abilitiesArray = Array.from(new Set(abilitiesArray))
+        const abilitiesArray = sanitizeString(Array.from(new Set(species[speciesName]["abilities"])).join(' ')).split("\n")
         for (let j = 0; j < abilitiesArray.length; j++){
             let ability = document.createElement("div")
             ability.innerText = `${abilitiesArray[j]} `
