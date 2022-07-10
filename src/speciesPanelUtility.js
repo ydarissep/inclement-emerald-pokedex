@@ -1,6 +1,6 @@
 const graph = document.getElementById("statsGraph")
 const graphStats = [...graph.children]
-const statDisplays = [...document.querySelectorAll('p > span')]
+const statDisplays = [...document.querySelectorAll(".statsGraphHeader")]
 
 
 const speciesPanelMainContainer = document.getElementById("speciesPanelMainContainer")
@@ -18,6 +18,7 @@ const speciesFormes = document.getElementById("speciesFormes")
 const speciesFormesText = document.getElementById("speciesFormesText")
 const speciesEggGroups = document.getElementById("speciesEggGroups")
 const speciesHeldItems = document.getElementById("speciesHeldItems")
+const speciesChanges = document.getElementById("speciesChanges")
 const speciesHeldItemsContainer = document.getElementById("speciesHeldItemsContainer")
 const speciesChangesContainer = document.getElementById("speciesChangesContainer")
 const speciesPanelLevelUpTableTbody = document.getElementById("speciesPanelLevelUpTableTbody")
@@ -170,10 +171,19 @@ async function createSpeciesPanel(name){
 
 
 
+
+
+
+
+
+
     while (speciesEggGroups.firstChild) 
         speciesEggGroups.removeChild(speciesEggGroups.firstChild);
     while (speciesHeldItems.firstChild)
         speciesHeldItems.removeChild(speciesHeldItems.firstChild)
+    while (speciesChanges.firstChild)
+        speciesChanges.removeChild(speciesChanges.firstChild)
+
 
 
     const eggGroup1 = document.createElement("div")
@@ -183,6 +193,9 @@ async function createSpeciesPanel(name){
     speciesEggGroups.append(eggGroup1)
     if(species[name]["eggGroup1"] !== species[name]["eggGroup2"])
         speciesEggGroups.append(eggGroup2)
+
+
+
 
 
 
@@ -205,12 +218,33 @@ async function createSpeciesPanel(name){
         speciesHeldItemsContainer.classList.add("hide")
 
 
-    /*
-    if(species[name]["changes"].length !== 0)
+
+
+
+
+
+
+    if(species[name]["changes"].length !== 0){
+        for (let i = 0; i < species[name]["changes"].length; i++){
+            const stat = species[name]["changes"][i][0]
+            const oldStat = species[name]["changes"][i][1]
+            const newStat = species[name][stat]
+            createChange(stat, oldStat, newStat, name)
+        }
+    }
+    if(speciesChanges.firstChild)
         speciesChangesContainer.classList.remove("hide")
     else
         speciesChangesContainer.classList.add("hide")
-    */
+
+
+
+
+
+
+
+
+
 
     while(speciesPanelLevelUpTableTbody.firstChild)
         speciesPanelLevelUpTableTbody.removeChild(speciesPanelLevelUpTableTbody.firstChild)
@@ -271,6 +305,140 @@ function createClickableImgAndName(speciesName){
 
     return container
 }
+
+
+
+
+
+
+function createChange(stat, oldStat = [""], newStat = [""], speciesName){
+
+    if(typeof newStat == "object"){
+        for (let i = 0; i < newStat.length; i++){
+
+
+            const changeMainContainer = document.createElement("div")
+            const changeContainer = document.createElement("span")
+            const statContainer = document.createElement("span")
+
+            const oldStatContainer = document.createElement("span")
+            const newStatContainer = document.createElement("span")
+
+            statContainer.innerText = stat
+
+
+            if(newStat[i] !== oldStat[i]){
+                if(newStat.includes(oldStat[i]) && !oldStat.includes(newStat[i])){ // purely a buff
+                    newStatContainer.innerText = `${sanitizeString(newStat[i])}`
+                    changeContainer.classList.add("buff")
+                    appendChangesToMainContainer(changeMainContainer, statContainer, changeContainer, oldStatContainer, newStatContainer)   
+                }
+                else if(!oldStat.includes(newStat[i])){ // neutral
+                    oldStatContainer.innerText = `${sanitizeString(oldStat[i])}`
+                    newStatContainer.innerText = `${sanitizeString(newStat[i])}`
+                    appendChangesToMainContainer(changeMainContainer, statContainer, changeContainer, oldStatContainer, newStatContainer)
+                }
+                else if(!newStat.includes(oldStat[i])){ // purely a nerf
+                    oldStatContainer.innerText = `${sanitizeString(oldStat[i])}`
+                    changeContainer.classList.add("nerf")
+                    appendChangesToMainContainer(changeMainContainer, statContainer, changeContainer, oldStatContainer, newStatContainer)   
+                }
+            }
+
+
+        }
+    }
+    else if(newStat !== oldStat){
+
+
+        const changeMainContainer = document.createElement("div")
+        const changeContainer = document.createElement("span")
+        const statContainer = document.createElement("span")
+
+        const oldStatContainer = document.createElement("span")
+        const newStatContainer = document.createElement("span")
+
+        statContainer.innerText = stat
+
+
+        oldStatContainer.innerText = `${sanitizeString(oldStat)}`
+        newStatContainer.innerText = `${sanitizeString(newStat)}`
+        if(!isNaN(newStat)){
+            if(newStat > oldStat){
+                changeContainer.classList.add("buff")
+            }
+            else{
+                changeContainer.classList.add("nerf")
+            }
+        }
+        else if(stat === "type1" || stat === "type2"){
+            oldStatContainer.className = `${oldStat} backgroundChange`
+            newStatContainer.className = `${newStat} backgroundChange`
+            if(oldStat === species[speciesName]["type1"] || oldStat === species[speciesName]["type2"]){
+                oldStatContainer.innerText = ""
+                oldStatContainer.className = ""
+            }
+        }
+        appendChangesToMainContainer(changeMainContainer, statContainer, changeContainer, oldStatContainer, newStatContainer)   
+    }
+}
+
+
+
+function appendChangesToMainContainer(changeMainContainer, statContainer, changeContainer, oldStatContainer, newStatContainer){
+    changeMainContainer.className = "flex flexAlign"
+    changeContainer.classList.add("textAlign")
+    changeContainer.classList.add("changeTextAlignFlex")
+    statContainer.classList.add("speciesPanelStatPadding")
+
+    const changeContainerTransition = document.createElement("span")
+    changeContainerTransition.innerText = " ➝ "
+
+    changeContainer.append(oldStatContainer, changeContainerTransition, newStatContainer)
+
+    changeMainContainer.append(statContainer, changeContainer)
+    speciesChanges.append(changeMainContainer)
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 function buildSpeciesPanelLearnsetsTable(Tbody, name, input){

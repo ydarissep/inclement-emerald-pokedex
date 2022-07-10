@@ -173,6 +173,20 @@ td, th {
     text-shadow: 1px 1px rgba(54, 61, 61, 0.788);
 }
 
+.backgroundChange {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    width: 3rem;
+    height: 20px;
+    border-radius: 5px;
+    font-weight: bold;
+    font-size: 0.6rem;
+    text-transform: uppercase;
+    text-shadow: 1px 1px rgba(54, 61, 61, 0.788);
+}
+
 .TYPE_NORMAL {background: #A8A77A;}
 .TYPE_FIRE {background: #EE8130;}
 .TYPE_WATER {background: #6390F0;}

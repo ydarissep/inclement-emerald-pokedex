@@ -54,12 +54,31 @@
 }
 
 #speciesEggGroupsContainer, #speciesHeldItemsContainer, #speciesChangesContainer {
-	width: 33.33%;
+	flex: 1;
 }
 
 #speciesEggGroups, #speciesHeldItems, #speciesChanges {
 	font-size: 15px;
+	width: max-content;
 }
+
+.nerf {
+	color: red;
+}
+
+.buff {
+	color: #07FA34;
+}
+
+.changeTextAlignFlex {
+	flex: 1;
+	text-align: right;
+}
+
+.speciesPanelStatPadding {
+	padding-right: 15px;
+}
+
 
 .evoMethod {
 	display: flex;
@@ -122,7 +141,7 @@
 
 
 
-#statsNames p > span {
+.statsGraphHeader {
   font-weight: 800;
 }
 
