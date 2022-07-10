@@ -41,7 +41,7 @@
 	font-size: 11pt;
 }
 
-#speciesPanelSubcontainer2 {
+#speciesPanelSubcontainer2, #speciesEvolutionsMainContainer {
 	padding: 15px 0px 0px 0px;
 }
 
@@ -63,11 +63,11 @@
 }
 
 .nerf {
-	color: red;
+	color: #ef5350;
 }
 
 .buff {
-	color: #07FA34;
+	color: #64dd17;
 }
 
 .changeTextAlignFlex {
@@ -157,6 +157,11 @@
   margin: 0.4rem 0;
   filter: opacity(90%);
   border-radius: 3px;
+}
+
+
+#statsNames p:last-child, #statsGraph div:last-child {
+  transform: translateY(15px);
 }
 
 

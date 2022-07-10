@@ -270,3 +270,7 @@ td, th {
 .hover {
         cursor: pointer;
 }
+
+.reduceOpacity {
+    opacity: 0.75;
+}

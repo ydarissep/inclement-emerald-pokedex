@@ -90,19 +90,19 @@ async function createSpeciesPanel(name){
 
 
 
-    let monStats = [species[name]["BST"],
-    species[name]["baseHP"], 
+    let monStats = [species[name]["baseHP"], 
     species[name]["baseAttack"], 
     species[name]["baseDefense"], 
     species[name]["baseSpAttack"], 
     species[name]["baseSpDefense"], 
-    species[name]["baseSpeed"]]
+    species[name]["baseSpeed"],
+    species[name]["BST"]]
 
     
     graphStats.forEach ((stat, index) => {
         statDisplays[index].innerText = monStats[index]
 
-        if(index !== 0){
+        if(index !== 6){
             stat.style.width = `${(monStats[index] / 255) * graph.offsetWidth}px`
             stat.style.background = `hsl(${monStats[index]*0.7},85%,45%)`
         }
@@ -324,7 +324,7 @@ function createChange(stat, oldStat = [""], newStat = [""], speciesName){
             const oldStatContainer = document.createElement("span")
             const newStatContainer = document.createElement("span")
 
-            statContainer.innerText = stat
+            statContainer.innerText = replaceStatString(stat)
 
 
             if(newStat[i] !== oldStat[i]){
@@ -358,7 +358,7 @@ function createChange(stat, oldStat = [""], newStat = [""], speciesName){
         const oldStatContainer = document.createElement("span")
         const newStatContainer = document.createElement("span")
 
-        statContainer.innerText = stat
+        statContainer.innerText = replaceStatString(stat)
 
 
         oldStatContainer.innerText = `${sanitizeString(oldStat)}`
@@ -390,6 +390,8 @@ function appendChangesToMainContainer(changeMainContainer, statContainer, change
     changeContainer.classList.add("textAlign")
     changeContainer.classList.add("changeTextAlignFlex")
     statContainer.classList.add("speciesPanelStatPadding")
+    oldStatContainer.classList.add("reduceOpacity")
+    newStatContainer.classList.add("bold")
 
     const changeContainerTransition = document.createElement("span")
     changeContainerTransition.innerText = " ➝ "
@@ -408,7 +410,27 @@ function appendChangesToMainContainer(changeMainContainer, statContainer, change
 
 
 
-
+function replaceStatString(stat){
+    replaceStringObject = {
+        "type1": "Type",
+        "type2": "Type",
+        "eggGroup1": "Egg Group",
+        "eggGroup2": "Egg Group",
+        "abilities": "Ability",
+        "baseHP": "HP",
+        "baseAttack": "Atk",
+        "baseDefense": "Def",
+        "baseSpAttack": "SpA",
+        "baseSpDefense": "SpD",
+        "baseSpeed": "Spe",
+    }
+    if(stat in replaceStringObject){
+        return replaceStringObject[stat]
+    }
+    else{
+        return stat
+    }
+}
 
 
 
