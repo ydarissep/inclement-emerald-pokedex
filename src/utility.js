@@ -48,7 +48,7 @@ async function fetchData(){
 
 
 async function forceUpdate(){
-    const update = 7
+    const update = 9
     if(localStorage.getItem("update") != `${update} IE`){
         await localStorage.clear()
         await localStorage.setItem("update", `${update} IE`)

@@ -153,7 +153,7 @@ function renderSprite(speciesName){
         }
         context.putImageData(imageData, 0, 0) 
 
-        spritesObj[speciesName] = canvas.toDataURL()
+        spritesObj[speciesName] = LZString.compressToUTF16(canvas.toDataURL())
 
         if(Object.keys(spritesObj).length == Object.keys(species).length){
             setItemSprites(spritesObj)
@@ -163,6 +163,6 @@ function renderSprite(speciesName){
 }
 
 
-function setItemSprites(spritesObj){
-    localStorage.setItem("sprites", LZString.compressToUTF16(JSON.stringify(spritesObj)))
+async function setItemSprites(spritesObj){
+    await localStorage.setItem("sprites", JSON.stringify(spritesObj))
 }
