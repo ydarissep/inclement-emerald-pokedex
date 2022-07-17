@@ -480,7 +480,7 @@ utilityButton.onclick = () => {
         window.scrollTo({ top: 0, behavior: 'smooth' })
     }
     else{
-        window.scrollTo({top: 0})
+        window.scrollTo({top: 1})
     }
 }
 
@@ -492,7 +492,7 @@ update.addEventListener("click", () => {
 
 
 window.onbeforeunload = () => {  
-    window.scrollTo(0, 0);
+    window.scrollTo(0, 0)
 }
 
 

@@ -101,10 +101,6 @@ input[type="search"]:focus, input[type="search"]:hover {
   background: rgba(255, 255, 255, 0.144);
 }
 
-canvas {
-  padding: 0.5rem;
-}
-
 @media (hover: hover) {
     #table > table > thead > tr > th:hover {
         background: rgba(113, 117, 126, 0.336);
@@ -170,8 +166,8 @@ only screen and (max-width: 500px) {
     .filterLabel {
         width: calc(50vw - 75px);
     }
-    #tableFilter input {
-        width: 150px;
+    .filterInput {
+        width: 150px !important;
     }
 }
 
@@ -190,7 +186,7 @@ only screen and (max-width: 500px) {
     text-shadow: 1px 1px rgba(54, 61, 61, 0.788);
 }
 
-.backgroundChange {
+.background2 {
     display: inline-flex;
     justify-content: center;
     align-items: center;
@@ -200,6 +196,21 @@ only screen and (max-width: 500px) {
     border-radius: 5px;
     font-weight: bold;
     font-size: 0.6rem;
+    text-transform: uppercase;
+    text-shadow: 1px 1px rgba(54, 61, 61, 0.788);
+}
+
+.background3 {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2px;
+    border: none;
+    width: 3rem;
+    height: 20px;
+    border-radius: 5px;
+    font-weight: bold;
+    /*font-size: 0.6rem;*/
     text-transform: uppercase;
     text-shadow: 1px 1px rgba(54, 61, 61, 0.788);
 }

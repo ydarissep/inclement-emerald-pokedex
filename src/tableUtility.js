@@ -206,6 +206,7 @@ function createFilter(list , obj, objInputArray, filterCount, element, labelStri
         input.setAttribute("type", "search")
         input.setAttribute("id", `input${filterCount}`)
         input.setAttribute("list", `datalist${filterCount}`)
+        input.className = "filterInput"
         
         datalist.setAttribute("id", `datalist${filterCount}`)
 

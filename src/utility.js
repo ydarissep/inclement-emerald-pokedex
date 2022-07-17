@@ -31,6 +31,7 @@ async function fetchData(){
     await fetchMovesObj()
     await fetchAbilitiesObj()
     await fetchSpeciesObj()
+    await fetchTypeChart()
 
 
     await displaySetup()
@@ -38,7 +39,10 @@ async function fetchData(){
 }
 
 
-
+async function fetchTypeChart(){
+    const rawTypeChart = await fetch("https://raw.githubusercontent.com/ydarissep/inclement-emerald-pokedex/main/src/typeChart.json")
+    window.typeChart = await rawTypeChart.json()
+}
 
 
 
