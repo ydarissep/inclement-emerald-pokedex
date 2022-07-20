@@ -60,8 +60,7 @@ async function createSpeciesPanel(name){
     let abilitiesArray = []
 
     for (let i = 0; i < species[name]["abilities"].length; i++){
-        if(species[name]["abilities"][i] !== "ABILITY_NONE" 
-        && !abilitiesArray.includes(species[name]["abilities"][i]))
+        if(species[name]["abilities"][i] !== "ABILITY_NONE")
             abilitiesArray.push(species[name]["abilities"][i])
     }
 
@@ -73,7 +72,7 @@ async function createSpeciesPanel(name){
         abilityName.innerText = `${sanitizeString(abilities[abilitiesArray[i]]["name"])}`
         abilityDescription.innerText = abilities[abilitiesArray[i]]["description"]
 
-        if(i === abilitiesArray.length - 1 && i > 0)
+        if(i === species[name]["abilities"].length - 1 && i > 0)
             abilityName.className = "bold"
         else
             abilityName.className = "italic"
@@ -334,55 +333,43 @@ function createClickableImgAndName(speciesName){
 
 
 function createChange(stat, oldStat = [""], newStat = [""], speciesName){
-
     if(typeof newStat == "object"){
         for (let i = 0; i < newStat.length; i++){
-
-
             const changeMainContainer = document.createElement("div")
             const changeContainer = document.createElement("span")
             const statContainer = document.createElement("span")
-
             const oldStatContainer = document.createElement("span")
             const newStatContainer = document.createElement("span")
 
-            statContainer.innerText = replaceStatString(stat)
+            statContainer.innerText = replaceStatString(`${stat}${i}`)
 
 
             if(newStat[i] !== oldStat[i]){
-                if(newStat.includes(oldStat[i]) && !oldStat.includes(newStat[i])){ // purely a buff
-                    newStatContainer.innerText = `${sanitizeString(newStat[i])}`
-                    changeContainer.classList.add("buff")
-                    appendChangesToMainContainer(changeMainContainer, statContainer, changeContainer, oldStatContainer, newStatContainer)   
+                if(oldStat[i] in abilities){
+                    oldStatContainer.innerText = abilities[oldStat[i]]["ingameName"]
                 }
-                else if(!oldStat.includes(newStat[i])){ // neutral
+                else{
                     oldStatContainer.innerText = `${sanitizeString(oldStat[i])}`
+                }
+                if(newStat[i] in abilities){
+                    newStatContainer.innerText = abilities[newStat[i]]["ingameName"]
+                }
+                else{
                     newStatContainer.innerText = `${sanitizeString(newStat[i])}`
-                    appendChangesToMainContainer(changeMainContainer, statContainer, changeContainer, oldStatContainer, newStatContainer)
                 }
-                else if(!newStat.includes(oldStat[i])){ // purely a nerf
-                    oldStatContainer.innerText = `${sanitizeString(oldStat[i])}`
-                    changeContainer.classList.add("nerf")
-                    appendChangesToMainContainer(changeMainContainer, statContainer, changeContainer, oldStatContainer, newStatContainer)   
-                }
+                appendChangesToMainContainer(changeMainContainer, statContainer, changeContainer, oldStatContainer, newStatContainer)   
             }
 
 
         }
     }
     else if(newStat !== oldStat){
-
-
         const changeMainContainer = document.createElement("div")
         const changeContainer = document.createElement("span")
         const statContainer = document.createElement("span")
-
         const oldStatContainer = document.createElement("span")
         const newStatContainer = document.createElement("span")
-
         statContainer.innerText = replaceStatString(stat)
-
-
         oldStatContainer.innerText = `${sanitizeString(oldStat)}`
         newStatContainer.innerText = `${sanitizeString(newStat)}`
         if(!isNaN(newStat)){
@@ -396,10 +383,6 @@ function createChange(stat, oldStat = [""], newStat = [""], speciesName){
         else if(stat === "type1" || stat === "type2"){
             oldStatContainer.className = `${oldStat} background2`
             newStatContainer.className = `${newStat} background2`
-            if(oldStat === species[speciesName]["type1"] || oldStat === species[speciesName]["type2"]){
-                oldStatContainer.innerText = ""
-                oldStatContainer.className = ""
-            }
         }
         appendChangesToMainContainer(changeMainContainer, statContainer, changeContainer, oldStatContainer, newStatContainer)   
     }
@@ -434,11 +417,14 @@ function appendChangesToMainContainer(changeMainContainer, statContainer, change
 
 function replaceStatString(stat){
     const replaceStringObject = {
-        "type1": "Type",
-        "type2": "Type",
-        "eggGroup1": "Egg Group",
-        "eggGroup2": "Egg Group",
+        "type1": "Type 1",
+        "type2": "Type 2",
+        "eggGroup1": "Egg Group 1",
+        "eggGroup2": "Egg Group 2",
         "abilities": "Ability",
+        "abilities0": "Ability 1",
+        "abilities1": "Ability 2",
+        "abilities2": "HA",
         "baseHP": "HP",
         "baseAttack": "Atk",
         "baseDefense": "Def",
