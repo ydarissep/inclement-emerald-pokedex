@@ -24,7 +24,10 @@ footer > p {
 	display: none !important
 }
 
-
+.addFilterButton {
+    margin-bottom: 5px !important;
+    background: rgba(215, 212, 231, 0.2) !important;
+}
 
 button[type='button'] {
   background: rgba(215, 212, 231, 0.075);
@@ -33,10 +36,6 @@ button[type='button'] {
   color: white;
   padding: 0.5rem 0.75rem;
   border-radius: 3px;
-}
-
-button[type='button']:hover {
-  background: rgba(215, 212, 231, 0.3);
 }
 
 .activeButton {
@@ -113,6 +112,13 @@ input[type="search"]:focus, input[type="search"]:hover {
         background: salmon;
         cursor: pointer;
     }
+    button[type='button']:hover {
+        background: rgba(215, 212, 231, 0.3);
+    }
+
+    .addFilterButton:hover {
+        background: rgba(215, 212, 231, 0.5) !important;
+    }
 }
 
 .utilityButton {
@@ -152,6 +158,10 @@ td, th {
     /*
     border: 1px solid rgba(255, 255, 255, 0.048);
     */
+}
+
+.tableFilter {
+    padding-top: 5px;
 }
 
 .filterLabel {

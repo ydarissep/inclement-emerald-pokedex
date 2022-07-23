@@ -39,6 +39,9 @@
     font-weight: bold;
 }
 
+#movesFilterButton {
+    padding-bottom: 5px;
+}
 
 #movesTable .background {
     margin: 5px auto;   

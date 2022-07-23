@@ -4,8 +4,6 @@ window.panelSpecies = ""
 
 window.filterCount = 0
 const tableFilter = document.getElementById("tableFilter")
-const speciesFilterCheckbox = document.getElementById("speciesFilterCheckbox")
-const movesFilterCheckbox = document.getElementById("movesFilterCheckbox")
 
 
 const openCredits = document.getElementById("openCredits")
@@ -14,7 +12,11 @@ const modal = document.getElementById("modal")
 const update = document.getElementById("update")
 
 
-
+const speciesFilterType = document.getElementById("speciesFilterType")
+const speciesFilterAbility = document.getElementById("speciesFilterAbility")
+const speciesFilterLearnset = document.getElementById("speciesFilterLearnset")
+const speciesFilterHeldItem = document.getElementById("speciesFilterHeldItem")
+const speciesFilterEggGroup = document.getElementById("speciesFilterEggGroup")
 const speciesFilterHP = document.getElementById("speciesFilterHP")
 const speciesFilterAtk = document.getElementById("speciesFilterAtk")
 const speciesFilterDef = document.getElementById("speciesFilterDef")
@@ -22,16 +24,14 @@ const speciesFilterSpA = document.getElementById("speciesFilterSpA")
 const speciesFilterSpD = document.getElementById("speciesFilterSpD")
 const speciesFilterSpe = document.getElementById("speciesFilterSpe")
 const speciesFilterBST = document.getElementById("speciesFilterBST")
-const speciesFilterLearnset = document.getElementById("speciesFilterLearnset")
-const speciesFilterEggGroup = document.getElementById("speciesFilterEggGroup")
-const speciesFilterHeldItem = document.getElementById("speciesFilterHeldItem")
 
 
+
+const movesFilterType = document.getElementById("movesFilterType")
 const movesFilterFlag = document.getElementById("movesFilterFlag")
 const movesFilterPriority = document.getElementById("movesFilterPriority")
 const movesFilterEffect = document.getElementById("movesFilterEffect")
 const movesFilterTarget = document.getElementById("movesFilterTarget")
-const movesFilterPower = document.getElementById("movesFilterPower")
 
 
 
@@ -61,7 +61,9 @@ const movesTableTbody = document.getElementById("movesTableTbody")
 
 
 
-
+const abilitiesInputDataList = document.getElementById("abilitiesInputDataList")
+const speciesInputDataList = document.getElementById("speciesInputDataList")
+const movesInputDataList = document.getElementById("movesInputDataList")
 
 
 const table = document.querySelector("#table")
@@ -241,14 +243,23 @@ headerSpeciesBST.addEventListener("click", () => {
 
 speciesInput.addEventListener("input", e => {
     const value = e.target.value
+    if(speciesIngameNameArray.includes(value)){
+        speciesInput.blur()
+    }
     filterTableInput(value, [2, 3, 4], speciesTableTbody)
 })
 abilitiesInput.addEventListener("input", e => {
     const value = e.target.value
+    if(abilitiesIngameNameArray.includes(value)){
+        abilitiesInput.blur()
+    }
     filterTableInput(value, [0, 1], abilitiesTableTbody)
 })
 movesInput.addEventListener("input", e => {
     const value = e.target.value
+    if(movesIngameNameArray.includes(value)){
+        movesInput.blur()
+    }
     filterTableInput(value, [0, 1, 6], movesTableTbody)
 })
 
@@ -269,28 +280,30 @@ movesButton.addEventListener("click", () => {
 
 
 
-speciesFilterCheckbox.addEventListener("change", e => {
-    if(e.target.checked)
-        document.querySelector("#speciesFilterButton").classList.remove("hide")
-    else
-        document.querySelector("#speciesFilterButton").classList.add("hide")
+
+
+
+
+speciesFilterType.addEventListener("click", () => {
+    const list = createOptionArray(["type1", "type2"], species)
+    createFilter(list, species, ["type1", "type2"], filterCount++, speciesFilterButton, "Type")
 })
-movesFilterCheckbox.addEventListener("change", e => {
-    if(e.target.checked)
-        document.querySelector("#movesFilterButton").classList.remove("hide")
-    else
-        document.querySelector("#movesFilterButton").classList.add("hide")
+speciesFilterAbility.addEventListener("click", () => {
+    const list = abilitiesIngameNameArray
+    createFilter(list, species, ["abilities"], filterCount++, speciesFilterButton, "Ability")
 })
-
-
-
-
-
-
-
-
-
-
+speciesFilterLearnset.addEventListener("click", () => {
+    const list = movesIngameNameArray
+    createFilter(list, species, ["levelUpLearnsets", "TMHMLearnsets", "tutorLearnsets", "eggMovesLearnsets"], filterCount++, speciesFilterButton, "Learnset")
+})
+speciesFilterHeldItem.addEventListener("click", () => {
+    const list = createOptionArray(["item1", "item2"], species)
+    createFilter(list, species, ["item1", "item2"], filterCount++, speciesFilterButton, "Held Item")
+})
+speciesFilterEggGroup.addEventListener("click", () => {
+    const list = createOptionArray(["eggGroup1", "eggGroup2"], species)
+    createFilter(list, species, ["eggGroup1", "eggGroup2"], filterCount++, speciesFilterButton, "Egg Group")
+})
 speciesFilterHP.addEventListener("click", () => {
     const list = [">=", "<=", ">", "<", "="]
     createFilter(list, species, ["baseHP"], filterCount++, speciesFilterButton, "HP", isInt = true, isOperator = true)
@@ -319,31 +332,23 @@ speciesFilterBST.addEventListener("click", () => {
     const list = [">=", "<=", ">", "<", "="]
     createFilter(list, species, ["BST"], filterCount++, speciesFilterButton, "BST", isInt = true, isOperator = true)
 })
-speciesFilterLearnset.addEventListener("click", () => {
-    const list = createOptionArray(["name"], moves)
-    createFilter(list, species, ["levelUpLearnsets", "TMHMLearnsets", "tutorLearnsets", "eggMovesLearnsets"], filterCount++, speciesFilterButton, "Learnset")
+
+
+
+
+
+
+
+
+
+movesFilterType.addEventListener("click", () => {
+    const list = createOptionArray(["type"], moves)
+    createFilter(list, moves, ["type"], filterCount++, movesFilterButton, "Type")
 })
-speciesFilterEggGroup.addEventListener("click", () => {
-    const list = createOptionArray(["eggGroup1", "eggGroup2"], species)
-    createFilter(list, species, ["eggGroup1", "eggGroup2"], filterCount++, speciesFilterButton, "Egg Group")
+movesFilterPower.addEventListener("click", () => {
+    const list = [">=", "<=", ">", "<", "="]
+    createFilter(list, moves, ["power"], filterCount++, movesFilterButton, "Power", isInt = true, isOperator = true)
 })
-speciesFilterHeldItem.addEventListener("click", () => {
-    const list = createOptionArray(["item1", "item2"], species)
-    createFilter(list, species, ["item1", "item2"], filterCount++, speciesFilterButton, "Held Item")
-})
-
-
-
-
-
-
-
-
-
-
-
-
-
 movesFilterFlag.addEventListener("click", () => {
     let list = []
     for (const name of Object.keys(moves)){
@@ -367,11 +372,6 @@ movesFilterTarget.addEventListener("click", () => {
     const list = createOptionArray(["target"], moves)
     createFilter(list, moves, ["target"], filterCount++, movesFilterButton, "Target")
 })
-movesFilterPower.addEventListener("click", () => {
-    const list = [">=", "<=", ">", "<", "="]
-    createFilter(list, moves, ["power"], filterCount++, movesFilterButton, "Power", isInt = true, isOperator = true)
-})
-
 
 
 
