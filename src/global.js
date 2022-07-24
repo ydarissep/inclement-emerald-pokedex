@@ -11,6 +11,7 @@ const closeCredits = document.getElementById("closeCredits")
 const modal = document.getElementById("modal")
 const update = document.getElementById("update")
 
+const showOnlyChangedPokemonCheckbox = document.getElementById("showOnlyChangedPokemonCheckbox")
 
 const speciesFilterType = document.getElementById("speciesFilterType")
 const speciesFilterAbility = document.getElementById("speciesFilterAbility")
@@ -284,6 +285,22 @@ movesButton.addEventListener("click", () => {
 
 
 
+
+showOnlyChangedPokemonCheckbox.addEventListener("change", e => {
+    Object.keys(species).forEach(name => {
+        const row = document.getElementById(name)
+        if((e.target.checked && species[name]["changes"].length > 0) || !e.target.checked){
+            row.classList.remove("hideChanged")
+        }
+        else{
+            row.classList.add("hideChanged")
+        }
+    })
+    lazyLoading(reset = true)
+})
+
+
+
 speciesFilterType.addEventListener("click", () => {
     const list = createOptionArray(["type1", "type2"], species)
     createFilter(list, species, ["type1", "type2"], filterCount++, speciesFilterButton, "Type")
@@ -459,6 +476,12 @@ function tableIsTouching(entries){
     }
 }
 
+function openCreditsIsTouching(entries){
+    if(entries[0].isIntersecting){
+        lazyLoading(false)
+    }
+}
+
 
 const observerFooter = new IntersectionObserver(footerIsTouching, options)
 observerFooter.observe(document.getElementById("footer"))
@@ -468,6 +491,9 @@ observeTable.observe(document.getElementById("observerCheck"))
 
 const observeSpeciesPanel = new IntersectionObserver(speciesPanelIsTouching, options)
 observeSpeciesPanel.observe(speciesPanelMainContainer)
+
+const observeOpenCredits = new IntersectionObserver(openCreditsIsTouching, options)
+observeOpenCredits.observe(openCredits)
 
 
 utilityButton.onclick = () => {
