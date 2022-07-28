@@ -70,7 +70,7 @@ async function createSpeciesPanel(name){
             const abilityName = document.createElement("span")
             const abilityDescription = document.createElement("span")
 
-            abilityName.innerText = abilities[ability]["ingameName"]
+            abilityName.innerText = sanitizeString(ability)
             abilityDescription.innerText = abilities[ability]["description"]
 
             if(i === 2)
