@@ -57,31 +57,26 @@ async function createSpeciesPanel(name){
     while (speciesAbilities.firstChild)
         speciesAbilities.removeChild(speciesAbilities.firstChild)
 
-    let abilitiesArray = []
-
     for (let i = 0; i < species[name]["abilities"].length; i++){
-        if(species[name]["abilities"][i] !== "ABILITY_NONE")
-            abilitiesArray.push(species[name]["abilities"][i])
-    }
+        if(species[name]["abilities"][i] !== "ABILITY_NONE"){
+            const abilityContainer = document.createElement("div")
+            const abilityName = document.createElement("span")
+            const abilityDescription = document.createElement("span")
 
-    for (let i = 0; i < abilitiesArray.length; i++){
-        const abilityContainer = document.createElement("div")
-        const abilityName = document.createElement("span")
-        const abilityDescription = document.createElement("span")
+            abilityName.innerText = `${abilities[species[name]["abilities"][i]]["ingameName"]}`
+            abilityDescription.innerText = abilities[species[name]["abilities"][i]]["description"]
 
-        abilityName.innerText = `${sanitizeString(abilities[abilitiesArray[i]]["name"])}`
-        abilityDescription.innerText = abilities[abilitiesArray[i]]["description"]
+            if(i === species[name]["abilities"].length - 1 && i > 0)
+                abilityName.className = "bold"
+            else
+                abilityName.className = "italic"
+            abilityDescription.className = "speciesPanelAbilitiesDescriptionPadding"
+            abilityContainer.className = "flex wrap"
 
-        if(i === species[name]["abilities"].length - 1 && i > 0)
-            abilityName.className = "bold"
-        else
-            abilityName.className = "italic"
-        abilityDescription.className = "speciesPanelAbilitiesDescriptionPadding"
-        abilityContainer.className = "flex wrap"
-
-        abilityContainer.append(abilityName)
-        abilityContainer.append(abilityDescription)
-        speciesAbilities.append(abilityContainer)
+            abilityContainer.append(abilityName)
+            abilityContainer.append(abilityDescription)
+            speciesAbilities.append(abilityContainer)
+        }
     }
 
 
@@ -178,7 +173,7 @@ async function createSpeciesPanel(name){
 
 
     while (speciesEggGroups.firstChild) 
-        speciesEggGroups.removeChild(speciesEggGroups.firstChild);
+        speciesEggGroups.removeChild(speciesEggGroups.firstChild)
     while (speciesHeldItems.firstChild)
         speciesHeldItems.removeChild(speciesHeldItems.firstChild)
     while (speciesChanges.firstChild)
@@ -229,7 +224,7 @@ async function createSpeciesPanel(name){
             const stat = species[name]["changes"][i][0]
             const oldStat = species[name]["changes"][i][1]
             const newStat = species[name][stat]
-            createChange(stat, oldStat, newStat, name)
+            createChange(stat, oldStat, newStat, name, speciesChanges)
         }
     }
     if(speciesChanges.firstChild)
@@ -332,7 +327,7 @@ function createClickableImgAndName(speciesName){
 
 
 
-function createChange(stat, oldStat = [""], newStat = [""], speciesName){
+function createChange(stat, oldStat = [""], newStat = [""], speciesName, obj){
     if(typeof newStat == "object"){
         for (let i = 0; i < newStat.length; i++){
             const changeMainContainer = document.createElement("div")
@@ -357,7 +352,7 @@ function createChange(stat, oldStat = [""], newStat = [""], speciesName){
                 else{
                     newStatContainer.innerText = `${sanitizeString(newStat[i])}`
                 }
-                appendChangesToMainContainer(changeMainContainer, statContainer, changeContainer, oldStatContainer, newStatContainer)   
+                appendChangesToObj(changeMainContainer, statContainer, changeContainer, oldStatContainer, newStatContainer, obj)   
             }
 
 
@@ -384,13 +379,13 @@ function createChange(stat, oldStat = [""], newStat = [""], speciesName){
             oldStatContainer.className = `${oldStat} background2`
             newStatContainer.className = `${newStat} background2`
         }
-        appendChangesToMainContainer(changeMainContainer, statContainer, changeContainer, oldStatContainer, newStatContainer)   
+        appendChangesToObj(changeMainContainer, statContainer, changeContainer, oldStatContainer, newStatContainer, obj)   
     }
 }
 
 
 
-function appendChangesToMainContainer(changeMainContainer, statContainer, changeContainer, oldStatContainer, newStatContainer){
+function appendChangesToObj(changeMainContainer, statContainer, changeContainer, oldStatContainer, newStatContainer, obj){
     changeMainContainer.className = "flex flexAlign"
     changeContainer.classList.add("textAlign")
     changeContainer.classList.add("changeTextAlignFlex")
@@ -404,7 +399,7 @@ function appendChangesToMainContainer(changeMainContainer, statContainer, change
     changeContainer.append(oldStatContainer, changeContainerTransition, newStatContainer)
 
     changeMainContainer.append(statContainer, changeContainer)
-    speciesChanges.append(changeMainContainer)
+    obj.append(changeMainContainer)
 }
 
 
