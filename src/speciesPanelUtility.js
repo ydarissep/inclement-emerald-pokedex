@@ -58,18 +58,26 @@ async function createSpeciesPanel(name){
         speciesAbilities.removeChild(speciesAbilities.firstChild)
 
     for (let i = 0; i < species[name]["abilities"].length; i++){
+        const ability = species[name]["abilities"][i]
+        if(i === 1 && ability === species[name]["abilities"][0]){
+            continue
+        }
+        else if(i === 2 && (ability === species[name]["abilities"][0] || ability === "ABILITY_NONE") && (ability === species[name]["abilities"][1] || ability === "ABILITY_NONE")){
+            continue
+        }
         if(species[name]["abilities"][i] !== "ABILITY_NONE"){
             const abilityContainer = document.createElement("div")
             const abilityName = document.createElement("span")
             const abilityDescription = document.createElement("span")
 
-            abilityName.innerText = `${abilities[species[name]["abilities"][i]]["ingameName"]}`
-            abilityDescription.innerText = abilities[species[name]["abilities"][i]]["description"]
+            abilityName.innerText = abilities[ability]["ingameName"]
+            abilityDescription.innerText = abilities[ability]["description"]
 
-            if(i === species[name]["abilities"].length - 1 && i > 0)
+            if(i === 2)
                 abilityName.className = "bold"
             else
                 abilityName.className = "italic"
+
             abilityDescription.className = "speciesPanelAbilitiesDescriptionPadding"
             abilityContainer.className = "flex wrap"
 
