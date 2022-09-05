@@ -111,6 +111,8 @@ async function buildSpeciesObj(){
     species = await getTutorLearnsets(species)
     species = await getSprite(species)
 
+    species["SPECIES_GRANBULL"]["changes"].push(["type2", "TYPE_FAIRY"])
+
     await localStorage.setItem("species", LZString.compressToUTF16(JSON.stringify(species)))
     return species
 }
