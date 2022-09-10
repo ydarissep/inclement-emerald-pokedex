@@ -214,7 +214,6 @@ function renderSprite(speciesName){
                 setItemSprites(spritesObj)
                 delete spritesObj
             }
-            console.log('test')
         }   
     }
     return canvas
