@@ -100,6 +100,7 @@ function lazyLoading(reset = false){
     if(activeTables.length > 0)
     {
         rows = activeTables[0].tBodies[0].rows
+        console.log("test")
         let j = 0
         for(let i = 0; i < rows.length; i++){
             if(reset){
