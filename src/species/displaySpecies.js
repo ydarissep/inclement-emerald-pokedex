@@ -204,14 +204,18 @@ function renderSprite(speciesName){
             imageData.data[i + 2] === backgroundColor[2]
           ) imageData.data[i + 3] = 0
         }
-        context.putImageData(imageData, 0, 0) 
+        context.putImageData(imageData, 0, 0)
 
-        spritesObj[speciesName] = LZString.compressToUTF16(canvas.toDataURL())
+        if(!window.matchMedia("(any-pointer:coarse)").matches){ 
 
-        if(Object.keys(spritesObj).length == Object.keys(species).length){
-            setItemSprites(spritesObj)
-            delete spritesObj
-        }
+            spritesObj[speciesName] = LZString.compressToUTF16(canvas.toDataURL())
+
+            if(Object.keys(spritesObj).length == Object.keys(species).length){
+                setItemSprites(spritesObj)
+                delete spritesObj
+            }
+            console.log('test')
+        }   
     }
     return canvas
 }
