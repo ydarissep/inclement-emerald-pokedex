@@ -64,10 +64,10 @@ async function getEggMovesLearnsets(species){
 async function getTutorLearnsets(species){
     footerP("Fetching tutor learnsets")
     const rawTutorLearnsets = await fetch("https://raw.githubusercontent.com/ydarissep/inclement-emerald-pokedex/main/src/species/tutorLearnsets.json");
-    const tutorLearnsets = await rawTutorLearnsets.json();
+    const tutorLearnsets = await rawTutorLearnsets.json()
 
     const rawConversionMoveBadge = await fetch("https://raw.githubusercontent.com/ydarissep/inclement-emerald-pokedex/main/src/species/conversionMoveBadge.json")
-    const conversionMoveBadge = await rawConversionMoveBadge.json();
+    const conversionMoveBadge = await rawConversionMoveBadge.json()
 
     const rawMoves = await fetch("https://raw.githubusercontent.com/BuffelSaft/pokeemerald/master/include/constants/moves.h")
     const textMoves = await rawMoves.text()

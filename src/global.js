@@ -248,7 +248,8 @@ speciesInput.addEventListener("input", e => {
     if(speciesIngameNameArray.includes(value)){
         speciesInput.blur()
     }
-    filterTableInput(value, [2, 3, 4], speciesTableTbody)
+    filterTableInputParse(value, species, speciesTableTbody)
+    //filterTableInput(value, [2, 3, 4], speciesTableTbody)
 })
 abilitiesInput.addEventListener("input", e => {
     const value = e.target.value
