@@ -92,15 +92,14 @@ function filterTableInput(input, columns, tbody){
 
 
 
-function filterTableInputParse(input, obj, keyNum,tbody){
+function filterTableInputParse(input, obj, keyArray,tbody){
     const inputArray = input.toUpperCase().replace(/-|'/g, " ").split(" ")
     let hideRows = {}
     for (let j = 0; j < tbody.rows.length; j++){
         const key = tbody.rows[j].getElementsByClassName("key")[0].innerText
         let compareValue = ""
-        const objKey = Object.keys(obj[key])
-        for (let i = 0; i < keyNum.length; i++){
-            compareValue += `${JSON.stringify(obj[key][objKey[keyNum[i]]])} `
+        for (let i = 0; i < keyArray.length; i++){
+            compareValue += `${JSON.stringify(obj[key][keyArray[i]])} `
         }
         for (let i = 0; i < inputArray.length; i++){
             if(!compareValue.includes(inputArray[i])){
