@@ -21,7 +21,7 @@ async function buildLocationsObj(){
     locations = await getGameCornerLocations(locations)
 
 
-    //await localStorage.setItem("locations", LZString.compressToUTF16(JSON.stringify(locations)))
+    await localStorage.setItem("locations", LZString.compressToUTF16(JSON.stringify(locations)))
     return locations
 }
 
