@@ -9,6 +9,7 @@
   <link rel="stylesheet" href="style/speciesTable.css">
   <link rel="stylesheet" href="style/abilitiesTable.css">
   <link rel="stylesheet" href="style/movesTable.css">
+  <link rel="stylesheet" href="style/locationsTable.css">
   <link rel="stylesheet" href="style/speciesPanel.css">
   <script defer src="src/species/displaySpecies.js"></script>
   <script defer src="src/species/fetchSpecies.js"></script>
@@ -19,6 +20,11 @@
   <script defer src="src/moves/displayMoves.js"></script>
   <script defer src="src/moves/fetchMoves.js"></script>
   <script defer src="src/moves/regexMoves.js"></script>
+  <script defer src="src/moves/regexMoves.js"></script>
+  <script defer src="src/locations/displayLocations.js"></script>
+  <script defer src="src/locations/fetchLocations.js"></script>
+  <script defer src="src/locations/regexLocations.js"></script>
+  <script defer src="src/locations/filterLocations.js"></script>
   <script defer src="src/lz-string.js"></script>
   <script defer src="src/utility.js"></script>
   <script defer src="src/tableUtility.js"></script>
@@ -210,6 +216,7 @@
   <div id="tableInput" class="hide">
     <input type="search" id="abilitiesInput" class="hide" list="abilitiesInputDataList">
     <input type="search" id="speciesInput" class="activeInput" list="speciesInputDataList">
+    <input type="search" id="locationsInput" class="hide" list="speciesInputDataList">
     <input type="search" id="movesInput" class="hide" list="movesInputDataList">
     <datalist id="abilitiesInputDataList"></datalist>
     <datalist id="speciesInputDataList"></datalist>
@@ -222,6 +229,7 @@
   <div id="tableButton" class="hide">
     <button type="button" id="abilitiesButton">Abilities</button>
     <button type="button" id="speciesButton" class="activeButton">Species</button>
+    <button type="button" id="locationsButton">Locations</button>
     <button type="button" id="movesButton">Moves</button>
   </div>
 
@@ -261,6 +269,12 @@
         <button type="button" id="speciesFilterSpD" class="addFilterButton">SpD</button>
         <button type="button" id="speciesFilterSpe" class="addFilterButton">Spe</button>
         <button type="button" id="speciesFilterBST" class="addFilterButton">BST</button>
+      </div>
+    </div>
+
+    <div id="locationsFilter" class="hide">
+      <div id="locationsFilterButton">
+        <button type="button" id="locationsFilterType" class="addFilterButton">Type</button>
       </div>
     </div>
 
@@ -330,6 +344,19 @@
         </tr>
       </thead>
       <tbody id="speciesTableTbody"></tbody>
+    </table>
+
+
+    <table id="locationsTable" class="hide">
+      <thead id="locationsTableThead">
+        <tr>
+          <th class="sprite hide">Sprite</th>
+          <th class="species hide" colspan="2">Name</th>
+          <th class="rarity hide">%</th>
+          <th class="zone hide">Zone</th>
+        </tr>
+      </thead>
+      <tbody id="locationsTableTbody"></tbody>
     </table>
   </div>
 
