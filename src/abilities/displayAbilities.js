@@ -8,8 +8,10 @@ function displayAbilities(){
         let row = document.createElement("tr")
         tBody.append(row)
 
+        /*
         if(i >= 75)
             row.className = "hideTemp"
+        */
 
 
         let ability = document.createElement("td")

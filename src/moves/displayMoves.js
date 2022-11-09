@@ -9,8 +9,10 @@ function displayMoves(){
         let row = document.createElement("tr")
         tBody.append(row)
 
+        /*
         if(i >= 75)
             row.className = "hideTemp"
+        */
 
 
         let nameContainer = document.createElement("td")

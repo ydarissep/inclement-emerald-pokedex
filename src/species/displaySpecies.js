@@ -8,8 +8,10 @@ function displaySpecies(){
         row.setAttribute("id", `${speciesName}`)
         tBody.append(row)
 
+        /*
         if(i >= 75)
             row.className = "hideTemp"
+        */
 
 
         let IDcontainer = document.createElement("td")

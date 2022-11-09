@@ -50,7 +50,7 @@ function sortTableByClassName(table, className, asc = true, parseINT = false) {
     // Re-add the newly sorted rows
     tBody.append(...sortedRows);
 
-    lazyLoading(true)
+    //lazyLoading(true)
 
     // Remember how the column is currently sorted
     table.querySelectorAll("th").forEach(th => th.classList.remove("th-sort-asc", "th-sort-desc"));
@@ -85,7 +85,7 @@ function filterTableInput(input, columns, tbody){
         else
             tbody.rows[i].classList.remove("hide")
     }
-    lazyLoading(true)
+    //lazyLoading(true)
 }
 
 
@@ -114,7 +114,7 @@ function filterTableInputParse(input, obj, keyArray,tbody){
         else
             tbody.rows[i].classList.remove("hide")
     }
-    lazyLoading(true)
+    //lazyLoading(true)
 }
 
 
@@ -161,7 +161,7 @@ function lazyLoading(reset = false){
 
 
 async function tableButtonClick(input){
-    await lazyLoading(reset = true)
+    //await lazyLoading(reset = true)
     const activeTable = await document.querySelectorAll(".activeTable")
     const activeButton = await document.querySelectorAll(".activeButton")
     const activeInput = await document.querySelectorAll(".activeInput")
@@ -275,7 +275,7 @@ function createFilter(list , obj, objInputArray, filterCount, element, labelStri
                 rows[i].classList.remove(`hideFilter${filterCount}`)
             }
             filter.remove()
-            lazyLoading(reset = true)
+            //lazyLoading(reset = true)
         })
 
         filter.append(label)
@@ -365,7 +365,7 @@ function filterInput(value, objInputArray, rows, filterCount, obj, isInt = false
         else
             rows[i].classList.remove(`hideFilter${filterCount}`)
     }
-    lazyLoading(true)
+    //lazyLoading(true)
 }
 
 
