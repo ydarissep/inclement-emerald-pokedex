@@ -116,5 +116,5 @@ function refreshLocations(){
             }
         }
     }
-    //lazyLoading(true)
+    lazyLoading(true)
 }
