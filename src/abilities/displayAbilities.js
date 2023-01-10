@@ -11,10 +11,13 @@ function displayAbilities(){
         if(i >= 75)
             row.className = "hideTemp"
 
-
         let ability = document.createElement("td")
+        const abilityName = document.createElement("span")
         ability.className = "ability"
-        ability.innerText = sanitizeString(abilities[abilitiesName]["name"])
+        ability.innerText = abilities[abilitiesName]["ingameName"]
+        abilityName.className = "key hide"
+        abilityName.innerText = abilities[abilitiesName]["name"]
+        ability.append(abilityName)
         row.append(ability)
 
         let description = document.createElement("td")
@@ -26,8 +29,8 @@ function displayAbilities(){
             if(!speciesButton.classList.contains("activeButton"))
                 await tableButtonClick("species")
             window.scrollTo({ top: 0})
-            const list = abilitiesIngameNameArray
-            createFilter(list, species, ["abilities"], filterCount++, speciesFilterButton, "Ability", isInt = false, isOperator = false, text = abilities[abilitiesName]["ingameName"])
+            deleteFiltersFromTable()
+            createFilter(abilities[abilitiesName]["ingameName"], "Ability")
         })
     }
 }
