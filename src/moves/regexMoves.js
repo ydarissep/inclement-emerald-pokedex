@@ -4,12 +4,12 @@ function regexMovesDescription(textMovesDescription, moves){
 
     lines.forEach(line => { // first go to get conversionTable
         const matchMoves = line.match(/MOVE_\w+/i)
-        if(matchMoves !== null){
+        if(matchMoves){
             const move = matchMoves[0]
 
 
             const matchConversionDescription = line.match(/s\w+Description/i)
-            if(matchConversionDescription !== null){
+            if(matchConversionDescription){
                 const conversionDescription = matchConversionDescription[0]
 
                 if(conversionTable[conversionDescription] === undefined)
@@ -22,7 +22,7 @@ function regexMovesDescription(textMovesDescription, moves){
 
     lines.forEach(line => { // second go with conversionTable
         const matchConversionDescription = line.match(/static *const *u\d+ *(s\w+Description)/i)
-        if(matchConversionDescription !== null && conversionDescription !== matchConversionDescription[1]){
+        if(matchConversionDescription && conversionDescription !== matchConversionDescription[1]){
             conversionDescription = matchConversionDescription[1]
 
             descriptionFound = true
@@ -30,7 +30,7 @@ function regexMovesDescription(textMovesDescription, moves){
 
         if(descriptionFound === true){
             const matchDescription = line.match(/"(.*)"/i)
-            if(matchDescription !== null){
+            if(matchDescription){
                 const description = matchDescription[1]
 
                 if(conversionTable[conversionDescription] !== undefined){
@@ -56,7 +56,7 @@ function regexMoves(textMoves, moves){
     lines.forEach(line => {
 
         const matchMoves = line.match(/\[ *(MOVE_\w+) *\]/i)
-        if(matchMoves !== null){
+        if(matchMoves){
             move = matchMoves[1]
             
             moves[move] = {}
@@ -77,7 +77,7 @@ function regexMoves(textMoves, moves){
 
         if(line.includes(".power")){
             const matchPower = line.match(/\d+/)
-            if(matchPower !== null){
+            if(matchPower){
                 const power = matchPower[0]
 
                 moves[move] = setMove(moves[move], change, "power", power)
@@ -85,7 +85,7 @@ function regexMoves(textMoves, moves){
         }
         else if(line.includes(".pp")){
             const matchPP = line.match(/\d+/)
-            if(matchPP !== null){
+            if(matchPP){
                 const PP = matchPP[0]
 
                 moves[move] = setMove(moves[move], change, "PP", PP)
@@ -93,7 +93,7 @@ function regexMoves(textMoves, moves){
         }
         else if(line.includes(".type")){
             const matchType = line.match(/TYPE_\w+/i)
-            if(matchType !== null){
+            if(matchType){
                 const type = matchType[0]
 
                 moves[move] = setMove(moves[move], change, "type", type)
@@ -101,7 +101,7 @@ function regexMoves(textMoves, moves){
         }
         else if(line.includes(".accuracy")){
             const matchAccuracy = line.match(/\d+/)
-            if(matchAccuracy !== null){
+            if(matchAccuracy){
                 const accuracy = matchAccuracy[0]
 
                 moves[move] = setMove(moves[move], change, "accuracy", accuracy)
@@ -109,7 +109,7 @@ function regexMoves(textMoves, moves){
         }
         else if(line.includes(".split")){
             const matchSplit = line.match(/SPLIT_\w+/i)
-            if(matchSplit !== null){
+            if(matchSplit){
                 const split = matchSplit[0]
 
                 moves[move] = setMove(moves[move], change, "split", split)
@@ -117,7 +117,7 @@ function regexMoves(textMoves, moves){
         }
         else if(line.includes(".effect")){
             const matchEffect = line.match(/EFFECT_\w+/i)
-            if(matchEffect !== null){
+            if(matchEffect){
                 const effect = matchEffect[0]
 
                 moves[move] = setMove(moves[move], change, "effect", effect)
@@ -125,7 +125,7 @@ function regexMoves(textMoves, moves){
         }
         else if(line.includes(".secondaryEffectChance")){
             const matchChance = line.match(/\d+/)
-            if(matchChance !== null){
+            if(matchChance){
                 const chance = matchChance[0]
 
                 moves[move] = setMove(moves[move], change, "chance", chance)
@@ -133,7 +133,7 @@ function regexMoves(textMoves, moves){
         }
         else if(line.includes(".target")){
             const matchTarget = line.match(/MOVE_TARGET_\w+/i)
-            if(matchTarget !== null){
+            if(matchTarget){
                 const target = matchTarget[0]
 
                 moves[move] = setMove(moves[move], change, "target", target)
@@ -141,7 +141,7 @@ function regexMoves(textMoves, moves){
         }
         else if(line.includes(".flags")){
             const matchFlags = line.match(/FLAG_\w+/ig)
-            if(matchFlags !== null){
+            if(matchFlags){
                 const flags = matchFlags
 
                 moves[move] = setMove(moves[move], change, "flags", flags)
@@ -149,7 +149,7 @@ function regexMoves(textMoves, moves){
         }
         else if(line.includes(".priority")){
             const matchPriority = line.match(/-?\d+/)
-            if(matchPriority !== null){
+            if(matchPriority){
                 const priority = matchPriority[0]
                 if(priority >= 50)
                     priority -= 256

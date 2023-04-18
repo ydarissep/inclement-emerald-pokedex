@@ -118,7 +118,7 @@ function regexGameCornerLocations(textGameCornerLocations, locations){
 
 
 function replaceMethodString(method, index){
-	if(method.match(/fish/i) !== null){
+	if(method.match(/fish/i)){
 		if(index >=0 && index <= 1)
 			return "Old Rod"
 		else if(index >= 2 && index <= 4)
@@ -128,16 +128,16 @@ function replaceMethodString(method, index){
 		else
 			return "Fishing"
 	}
-	else if(method.match(/water/i) !== null){
+	else if(method.match(/water/i)){
 		return "Surfing"
 	}
-	else if(method.match(/smash/i) !== null){
+	else if(method.match(/smash/i)){
 		return "Rock Smash"
 	}
-	else if(method.match(/land/i) !== null){
+	else if(method.match(/land/i)){
 		return "Land"
 	}
-	else if(method.match(/honey/i) !== null){
+	else if(method.match(/honey/i)){
 		return "Honey"
 	}
     else{

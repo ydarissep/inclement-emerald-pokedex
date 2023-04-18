@@ -4,7 +4,7 @@ function regexAbilities(textAbilities, abilities){
 
     for(let i = lines.length - 1; i >= 0; i--){
         let ability = lines[i].match(/(ABILITY_\w+)/i) //this is going to get confusing real quick :)
-        if(ability !== null){
+        if(ability){
             ability = ability[0]
 
 
@@ -15,7 +15,7 @@ function regexAbilities(textAbilities, abilities){
             
 
             const matchAbilityIngameName = lines[i].match(/_ *\( *" *(.*)" *\) *,/i)
-            if(matchAbilityIngameName !== null){
+            if(matchAbilityIngameName){
                 const abilityIngameName = matchAbilityIngameName[1]
 
                 abilities[ability]["ingameName"] = abilityIngameName
@@ -24,12 +24,12 @@ function regexAbilities(textAbilities, abilities){
 
 
         const matchConversionDescription = lines[i].match(/s\w+Description/i)
-        if(matchConversionDescription !== null){
+        if(matchConversionDescription){
             const conversionDescription = matchConversionDescription[0]
 
 
 
-            if(ability !== null){ // :=)
+            if(ability){ // :=)
 
 
                 if(conversionTable[conversionDescription] === undefined)
@@ -41,7 +41,7 @@ function regexAbilities(textAbilities, abilities){
             }
             else{
                 const matchDescription = lines[i].match(/_ *\( *" *(.*)" *\) *;/i)
-                if(matchDescription !== null){
+                if(matchDescription){
                     const description = matchDescription[1]
                     if(conversionTable[conversionDescription] !== undefined){
                         for(let j = 0; j < conversionTable[conversionDescription].length; j++)
