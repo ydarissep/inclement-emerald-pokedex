@@ -1,6 +1,6 @@
 function appendAbilitiesToTable(abilitiesName){
 
-    if(!abilities[abilitiesName]["description"]){
+    if(!abilities[abilitiesName]["description"] || !/[1-9aA-zZ]/.test(abilities[abilitiesName]["ingameName"])){
         return
     }
     
