@@ -145,7 +145,6 @@ function initializeSpeciesObj(species){
         species[name]["forms"] = []
         species[name]["sprite"] = ""
     }
-
     return species
 }
 

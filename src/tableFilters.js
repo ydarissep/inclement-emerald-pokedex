@@ -5,22 +5,22 @@ function filterSpeciesForm(value, label){
             name = tracker[i]["key"].split("\\")[2]
         }
         if(value === "Mega"){
-            if(!/_MEGA$|_MEGA_Y$|_MEGA_X$/i.test(key)){
+            if(!/_MEGA$|_MEGA_Y$|_MEGA_X$/i.test(name)){
                 tracker[i]["filter"].push(`filter${label}${value}`.replaceAll(" ", ""))
             }
         }
         else if(value === "Alolan"){
-            if(!/_ALOLAN$/i.test(key) || /UNOWN/i.test(key)){
+            if(!/_ALOLAN$/i.test(name) || /UNOWN/i.test(name)){
                 tracker[i]["filter"].push(`filter${label}${value}`.replaceAll(" ", ""))
             }   
         }
         else if(value === "Galarian"){
-            if(!/_GALARIAN$|PERRSERKER$|SIRFETCHD$|MR_RIME$|CURSOLA$|OBSTAGOON$|RUNERIGUS$/i.test(key) || /UNOWN/i.test(key)){
+            if(!/_GALARIAN$|PERRSERKER$|SIRFETCHD$|MR_RIME$|CURSOLA$|OBSTAGOON$|RUNERIGUS$/i.test(name) || /UNOWN/i.test(name)){
                 tracker[i]["filter"].push(`filter${label}${value}`.replaceAll(" ", ""))
             }   
         }
         else if(value === "Hisuian"){
-            if(!/_HISUIAN$|OVERQWIL$|SNEASLER$|BASCULEGION$/i.test(key) || /UNOWN/i.test(key)){
+            if(!/_HISUIAN$|OVERQWIL$|SNEASLER$|BASCULEGION$/i.test(name) || /UNOWN/i.test(name)){
                 tracker[i]["filter"].push(`filter${label}${value}`.replaceAll(" ", ""))
             }   
         }

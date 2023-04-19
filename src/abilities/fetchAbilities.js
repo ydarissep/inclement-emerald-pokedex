@@ -9,8 +9,6 @@ async function getAbilities(abilities){
 async function buildAbilitiesObj(){
     let abilities = {}
     abilities = await getAbilities(abilities) 
-    delete abilities["ABILITY_NONE"]
-    delete abilities["ABILITY_NAME_LENGTH"]
 
     await localStorage.setItem("abilities", LZString.compressToUTF16(JSON.stringify(abilities)))
     return abilities

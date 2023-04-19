@@ -1,4 +1,9 @@
 function appendAbilitiesToTable(abilitiesName){
+
+    if(!abilities[abilitiesName]["description"]){
+        return
+    }
+    
     let tBody = abilitiesTableTbody
 
     let row = document.createElement("tr")

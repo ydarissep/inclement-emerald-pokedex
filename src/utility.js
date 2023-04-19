@@ -94,23 +94,48 @@ function footerP(input){
 
 function setDataList(){
     window.speciesIngameNameArray = []
-    Object.keys(species).forEach(speciesName => {
+    for(const speciesName in species){
+        if(species[speciesName]["baseSpeed"] <= 0){
+            continue
+        }
         const option = document.createElement("option")
         option.innerText = sanitizeString(speciesName)
         speciesIngameNameArray.push(option.innerText)
         speciesPanelInputSpeciesDataList.append(option)
-    })
+    }
 
     window.abilitiesIngameNameArray = []
-    Object.keys(abilities).forEach(abilityName => {
+    for(const abilityName in abilities){
+        if(!abilities[abilityName]["description"]){
+            continue
+        }
         const option = document.createElement("option")
         option.innerText = sanitizeString(abilityName)
         abilitiesIngameNameArray.push(option.innerText)
         abilitiesInputDataList.append(option)
-    })
+    }
 }
 
 
+
+
+
+
+
+
+function getSpeciesSpriteSrc(speciesName){
+    if(sprites[speciesName]){
+        if(sprites[speciesName].length < 500){
+            return species[speciesName]["sprite"]
+        }
+        else{
+            return sprites[speciesName]
+        }
+    }
+    else{
+        return species[speciesName]["sprite"]
+    }
+}
 
 
 
