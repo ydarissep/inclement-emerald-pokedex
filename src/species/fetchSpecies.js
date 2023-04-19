@@ -78,7 +78,7 @@ async function getTutorLearnsets(species){
 }
 
 async function getSprite(species){
-    footerP("Fetching sprites... this could take a while")
+    footerP("Fetching sprites")
     const rawFrontPicTable = await fetch(`https://raw.githubusercontent.com/${repo}/src/data/pokemon_graphics/front_pic_table.h`)
     const textFrontPicTable = await rawFrontPicTable.text()
 
@@ -160,12 +160,14 @@ async function fetchSpeciesObj(){
     window.speciesTracker = []
 
     await Object.keys(species).forEach(async name => {
-        if(!localStorage.getItem(`${name}`)){
-            await spriteRemoveBgReturnBase64(name, species)
-        }
         if(localStorage.getItem(`${name}`)){
             sprites[name] = await LZString.decompressFromUTF16(localStorage.getItem(`${name}`))
+            if(sprites[name].length < 500){
+                localStorage.removeItem(name)
+                spriteRemoveBgReturnBase64(name, species)
+            }
         }
+        
     })
     for(let i = 0, j = Object.keys(species).length; i < j; i++){
         speciesTracker[i] = {}
