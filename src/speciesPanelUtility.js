@@ -32,7 +32,7 @@ const speciesPanelEggMovesTableTbody = document.getElementById("speciesPanelEggM
 
 async function createSpeciesPanel(name){
     panelSpecies = name
-    speciesPanelMainContainer.classList.remove("hide")
+    speciesPanel("show")
 
     const row = document.getElementById(`${name}`)
 
@@ -591,7 +591,7 @@ function buildSpeciesPanelEggMovesTable(Tbody, name, input){
         const description = document.createElement("td")
         description.className = "speciesPanelLearnsetsEffect"
         for (let j = 0; j < moves[species[name][input][i]]["description"].length; j++){
-            description.innerText += moves[species[name][input][i]]["description"][j].replace("\\n", " ")
+            description.innerText += moves[species[name][input][i]]["description"][j].replace("\\n", " ").replace(/\\/g, "")
         }
         row.append(description)
 
@@ -604,5 +604,18 @@ function buildSpeciesPanelEggMovesTable(Tbody, name, input){
 
 
 speciesPanelCloseButton.addEventListener("click", () => {
-        speciesPanelMainContainer.classList.add("hide")
+    speciesPanel("hide")
 })
+
+async function speciesPanel(param){
+    if(param === "hide"){
+        speciesPanelMainContainer.classList.add("hide")
+    }
+    else if(param === "show"){
+        speciesPanelMainContainer.classList.remove("hide")
+    }
+    else{
+        speciesPanelMainContainer.classList.toggle("hide")
+    }
+    refreshURLParams()
+}
