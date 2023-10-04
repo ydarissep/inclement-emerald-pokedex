@@ -184,7 +184,7 @@ function regexTMHMLearnsets(textTMHMLearnsets, species){
                 move = "SOLAR_BEAM" // Fuck Oldplayer :)
             move = `MOVE_${move}`
 
-            species[name]["TMHMLearnsets"].push([move, TMHM])
+            species[name]["TMHMLearnsets"].push(move)
         }
     })
 
@@ -409,7 +409,7 @@ function regexTutorLearnsets(tutorLearnsets, conversionTable, conversionMoveBadg
                 if(badge === undefined){
                     badge = "Special"
                 }
-                species[name]["tutorLearnsets"].push([move, badge])
+                species[name]["tutorLearnsets"].push(move)
             }
             if(species[name]["tutorLearnsets"].length === 0){
                 const targetSpecies = species[name]["forms"][0]
