@@ -31,7 +31,7 @@ function regexMovesDescription(textMovesDescription, moves){
         if(descriptionFound === true){
             const matchDescription = line.match(/"(.*)"/i)
             if(matchDescription){
-                const description = matchDescription[1]
+                const description = matchDescription[1].replaceAll("\\n", " ")
 
                 if(conversionTable[conversionDescription] !== undefined){
                     for(let i = 0; i < conversionTable[conversionDescription].length; i++)
