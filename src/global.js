@@ -1,5 +1,5 @@
 window.repo = "BuffelSaft/pokeemerald/master"
-window.checkUpdate = "12 IE"
+window.checkUpdate = "13 IE"
 
 
 fetch('https://raw.githubusercontent.com/ydarissep/dex-core/main/index.html').then(async response => {
@@ -15,6 +15,9 @@ fetch('https://raw.githubusercontent.com/ydarissep/dex-core/main/index.html').th
     document.title = "IE Dex"
     document.getElementById("footerName").innerText = "Inclement Emerald\nYdarissep Pokedex"
 
+
+    const tutorLearnsetsBadgeHeader = document.createElement("th"); tutorLearnsetsBadgeHeader.innerText = "Badge"
+    document.querySelector("#speciesPanelTutorTableTHead > tr").insertBefore(tutorLearnsetsBadgeHeader, document.querySelector("#speciesPanelTutorTableTHead > tr").firstChild)
 
 
     await fetch("https://raw.githubusercontent.com/ydarissep/dex-core/main/src/global.js").then(async response => {

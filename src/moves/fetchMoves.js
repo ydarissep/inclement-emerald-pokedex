@@ -21,6 +21,15 @@ async function buildMovesObj(){
     moves = await getMoves(moves)
     moves = await getMovesDescription(moves)
 
+    Object.keys(moves).forEach(move => {
+        if(moves[move]["priority"] > 0){
+            moves[move]["flags"].push(`FLAG_PRIORITY_PLUS_${moves[move]["priority"]}`)
+        }
+        else if(moves[move]["priority"] < 0){
+            moves[move]["flags"].push(`FLAG_PRIORITY_MINUS_${Math.abs(moves[move]["priority"])}`)
+        }
+    })
+
     await localStorage.setItem("moves", LZString.compressToUTF16(JSON.stringify(moves)))
     return moves
 }

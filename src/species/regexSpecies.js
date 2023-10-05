@@ -409,7 +409,7 @@ function regexTutorLearnsets(tutorLearnsets, conversionTable, conversionMoveBadg
                 if(badge === undefined){
                     badge = "Special"
                 }
-                species[name]["tutorLearnsets"].push(move)
+                species[name]["tutorLearnsets"].push([move, badge])
             }
             if(species[name]["tutorLearnsets"].length === 0){
                 const targetSpecies = species[name]["forms"][0]
