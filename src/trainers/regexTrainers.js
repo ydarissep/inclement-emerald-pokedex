@@ -147,6 +147,25 @@ async function regexTrainersParties(textTrainersParties, [trainers, conversionTa
     const lines = textTrainersParties.split("\n")
     let comment = false, trainer = null, zone = null, difficulty = "Normal", mon = {}
 
+    const rawTrainerSpreads = await fetch(`https://raw.githubusercontent.com/${repo}/src/data/trainer_spreads.h`)
+    const textTrainerSpreads = await rawTrainerSpreads.text()
+
+    let spreadToStats = {}
+    textTrainerSpreads.match(/\[SPREAD_\w+\].+?(?=.nature).+?(?=})/gs).forEach(spread => {
+        const spreadMatch = spread.match(/\[(SPREAD_\w+)\](.+?(?=EVs).+?)((?=IVs).+?)((?=nature).*)/s)
+        if(spreadMatch){
+            const spreadName = spreadMatch[1].match(/SPREAD_\w+/i)[0]
+            spreadToStats[spreadName] = {}
+            spreadToStats[spreadName]["evs"] = spreadMatch[2].match(/\d+/g)
+            if(!spreadToStats[spreadName]["evs"]){
+                spreadToStats[spreadName]["evs"] = [0]
+            }
+            spreadToStats[spreadName]["ivs"] = spreadMatch[3].match(/\d+/g)
+            spreadToStats[spreadName]["nature"] = spreadMatch[4].match(/NATURE_\w+/i)[0]            
+        }
+    })
+    
+
     lines.forEach(line => {
         line = line.trim()
 
@@ -193,32 +212,43 @@ async function regexTrainersParties(textTrainersParties, [trainers, conversionTa
                         mon["ability"] = matchAbility[0]
                     }
                 }
-                else if(/.ivs *=/i.test(line)){
-                    const matchIVs = line.match(/\d+/g)
-                    if(matchIVs){
-                        mon["ivs"] = matchIVs
-                    }
-                }
-                else if(/.evs *=/i.test(line)){
-                    const matchEVs = line.match(/\d+/g)
-                    if(matchEVs){
-                        mon["evs"] = matchEVs
-                    }
-                }
-                else if(/.nature *=/i.test(line)){
-                    const matchNature = line.match(/NATURE_\w+/i)
-                    if(matchNature){
-                        mon["nature"] = matchNature[0]
-                    }
-                }
                 else if(/.moves *=/i.test(line)){
                     const matchMoves = line.match(/MOVE_\w+/ig)
                     if(matchMoves){
                         mon["moves"] = matchMoves
                     }
                 }
+                else if(/.spread *=/i.test(line)){
+                    const spreadMatch = line.match(/SPREAD_\w+/i)
+                    if(spreadMatch){
+                        const spreadName = spreadMatch[0]
+                        if(spreadToStats[spreadName]){
+                            mon["ivs"] = spreadToStats[spreadName]["ivs"]
+                            mon["evs"] = spreadToStats[spreadName]["evs"]
+                            mon["nature"] = spreadToStats[spreadName]["nature"]
+                        }
+                    }
+                }
                 else if(/^} *,?$/.test(line)){
-                    if(mon["lvl"] && mon["name"] && mon["item"] && mon["ability"] && mon["ivs"] && mon["evs"] && mon["nature"] && mon["moves"]){
+                    if(mon["lvl"] && mon["name"] && mon["moves"]){ 
+                        if(!mon["item"]){
+                            mon["item"] = "ITEM_NONE"
+                        }
+                        if(!mon["ability"]){
+                            mon["ability"] = 0
+                        }
+                        if(!mon["ivs"]){
+                            mon["ivs"] = [0]
+                        }
+                        if(!mon["evs"]){
+                            mon["evs"] = [0]
+                        }
+                        if(!mon["nature"]){
+                            mon["nature"] = "NATURE_DOCILE"
+                        }
+                        while(mon["moves"].length < 4){
+                            mon["moves"].push("MOVE_NONE")
+                        }
                         if(!trainers[zone][trainer]["party"][difficulty]){
                             trainers[zone][trainer]["party"][difficulty] = []
                         }
