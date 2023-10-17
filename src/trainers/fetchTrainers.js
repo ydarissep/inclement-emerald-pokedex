@@ -24,7 +24,7 @@ async function buildTrainersObj(){
     
     trainers = await bugFixTrainers(trainers)
 
-    //await localStorage.setItem("trainers", LZString.compressToUTF16(JSON.stringify(trainers)))
+    await localStorage.setItem("trainers", LZString.compressToUTF16(JSON.stringify(trainers)))
     return trainers
 }
 
