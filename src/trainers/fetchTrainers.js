@@ -163,7 +163,6 @@ async function bugFixTrainers(trainers){
                     if(trainers[zone][trainer]["rematch"]){
                         trainers[zone][trainers[zone][trainer]["rematch"]]["rematchArray"] = trainers[zone][trainers[zone][trainer]["rematch"]]["rematchArray"].filter(value => value !== trainer)
                     }
-                    console.log("empty: ", zone, trainer)
                     delete trainers[zone][trainer]
                 }
 
