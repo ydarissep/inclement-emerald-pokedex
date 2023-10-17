@@ -161,14 +161,14 @@ async function regexTrainersParties(textTrainersParties, [trainers, conversionTa
                 spreadToStats[spreadName]["evs"] = [0]
             }
             else if(spreadToStats[spreadName]["evs"].length === 6){
-                spreadToStats[spreadName]["evs"].push(spreadToStats[spreadName]["evs"].splice(3, 1))
+                spreadToStats[spreadName]["evs"].push(spreadToStats[spreadName]["evs"].splice(3, 1)[0])
             }
             spreadToStats[spreadName]["ivs"] = spreadMatch[3].match(/\d+/g)
             if(!spreadToStats[spreadName]["ivs"]){
                 spreadToStats[spreadName]["ivs"] = [0]
             }
             else if(spreadToStats[spreadName]["ivs"].length === 6){
-                spreadToStats[spreadName]["ivs"].push(spreadToStats[spreadName]["ivs"].splice(3, 1))
+                spreadToStats[spreadName]["ivs"].push(spreadToStats[spreadName]["ivs"].splice(3, 1)[0])
             }
             spreadToStats[spreadName]["nature"] = spreadMatch[4].match(/NATURE_\w+/i)[0]            
         }
