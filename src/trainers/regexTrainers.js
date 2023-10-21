@@ -255,9 +255,6 @@ async function regexTrainersParties(textTrainersParties, [trainers, conversionTa
                         if(!mon["nature"]){
                             mon["nature"] = "NATURE_DOCILE"
                         }
-                        while(mon["moves"].length < 4){
-                            mon["moves"].push("MOVE_NONE")
-                        }
                         if(!trainers[zone][trainer]["party"][difficulty]){
                             trainers[zone][trainer]["party"][difficulty] = []
                         }
