@@ -191,7 +191,7 @@ async function regexTrainersParties(textTrainersParties, [trainers, conversionTa
                 if(conversionTable[party]){
                     trainer = conversionTable[party]
                     zone = trainerToZone[trainer]
-                    if(/Insane$/i.test(party)){
+                    if(/Insane$/.test(party)){
                         difficulty = "Elite"
                     }
                 }
