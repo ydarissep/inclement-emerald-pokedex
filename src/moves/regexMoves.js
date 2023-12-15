@@ -65,13 +65,13 @@ function regexMoves(textMoves, moves){
             moves[move]["description"] = []
             moves[move]["ingameName"] = sanitizeString(move)
         }
-        if(line.includes("REBALANCED_VERSION"))
+        if(line.includes("#if"))
             rebalanced = true
-        else if(line.includes("else") && rebalanced === true){
+        else if(line.includes("#el") && rebalanced === true){
             rebalanced = false
             change = true
         }
-        else if(line.includes("endif") && change === true)
+        else if(line.includes("#endif") && change === true)
             change = false
 
 
