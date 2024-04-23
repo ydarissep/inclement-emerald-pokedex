@@ -19,80 +19,6 @@ async function regexScripts(textScripts, tradeText, specialFunctions){
 
 
 
-async function regexItems(textItems){
-    const lines = textItems.split("\n")
-    const regex = /.name|.description|.holdEffectParam|.price|.pocket/i
-    let item = null, conversionTable = {}
-
-    lines.forEach(line => {
-        const regexMatch = line.match(regex)
-        if(/\[\s*ITEM_\w+\s*\]/.test(line)){
-            item = line.match(/\[\s*(ITEM_\w+)\s*\]/)[1]
-            initItem(item)
-        }
-        else if(regexMatch){
-            const match = regexMatch[0]
-            if(match === ".name"){
-                items[item]["ingameName"] = line.match(/_\("(.*)"\)/)[1]
-            }
-            else if(match === ".description"){
-                const descMatch = line.match(/s\w+Desc/i)
-                if(descMatch){
-                    const desc = descMatch[0]
-                    if(!(desc in conversionTable)){
-                        conversionTable[desc] = [item]
-                    }
-                    else{
-                        conversionTable[desc].push(item)
-                    }
-                }
-            }
-            else if(match === ".holdEffectParam"){
-                items[item]["effect"] = line.match(/=\s*(.*)\s*,/)[1]
-            }
-            else if(match === ".price"){
-                items[item]["price"] = line.match(/\d+/)[0]
-            }
-            else if(match === ".pocket"){
-                items[item]["pocket"] = line.match(/POCKET_\w+/)[0]
-            }
-        }
-    })
-
-    return conversionTable
-}
-
-
-
-
-
-
-
-async function regexItemDescriptions(textItemDescriptions, conversionTable){
-    const lines = textItemDescriptions.split("\n")
-    let desc = null, description = ""
-
-    lines.forEach(line => {
-        const descMatch = line.match(/s\w+Desc/i)
-        if(descMatch){
-            desc = descMatch[0]
-        }
-        else if(/".*"/.test(line)){
-            description += line.match(/"(.*)"/)[1].replaceAll("-\\n", "").replaceAll("\\n", " ")
-        }
-
-        if(/"\s*\)\s*;/.test(line)){
-            conversionTable[desc].forEach(item => {
-                items[item]["description"] = description
-            })
-
-            desc = null
-            description = ""
-        }
-    })
-}
-
-
 
 
 
@@ -350,6 +276,92 @@ async function regexTrainersParties(textTrainersParties, [conversionTable, train
         }
     })
 }
+
+
+
+
+
+
+
+
+
+async function regexItems(textItems){
+    const lines = textItems.split("\n")
+    const regex = /.name|.description|.holdEffectParam|.price|.pocket/i
+    let item = null, conversionTable = {}
+
+    lines.forEach(line => {
+        const regexMatch = line.match(regex)
+        if(/\[\s*ITEM_\w+\s*\]/.test(line)){
+            item = line.match(/\[\s*(ITEM_\w+)\s*\]/)[1]
+            initItem(item)
+        }
+        else if(regexMatch){
+            const match = regexMatch[0]
+            if(match === ".name"){
+                items[item]["ingameName"] = line.match(/_\("(.*)"\)/)[1]
+            }
+            else if(match === ".description"){
+                const descMatch = line.match(/s\w+Desc/i)
+                if(descMatch){
+                    const desc = descMatch[0]
+                    if(!(desc in conversionTable)){
+                        conversionTable[desc] = [item]
+                    }
+                    else{
+                        conversionTable[desc].push(item)
+                    }
+                }
+            }
+            else if(match === ".holdEffectParam"){
+                items[item]["effect"] = line.match(/=\s*(.*)\s*,/)[1]
+            }
+            else if(match === ".price"){
+                items[item]["price"] = line.match(/\d+/)[0]
+            }
+            else if(match === ".pocket"){
+                items[item]["pocket"] = line.match(/POCKET_\w+/)[0]
+            }
+        }
+    })
+
+    return conversionTable
+}
+
+
+
+
+
+
+
+async function regexItemDescriptions(textItemDescriptions, conversionTable){
+    const lines = textItemDescriptions.split("\n")
+    let desc = null, description = ""
+
+    lines.forEach(line => {
+        const descMatch = line.match(/s\w+Desc/i)
+        if(descMatch){
+            desc = descMatch[0]
+        }
+        else if(/".*"/.test(line)){
+            description += line.match(/"(.*)"/)[1].replaceAll("-\\n", "").replaceAll("\\n", " ")
+        }
+
+        if(/"\s*\)\s*;/.test(line)){
+            conversionTable[desc].forEach(item => {
+                items[item]["description"] = description
+            })
+
+            desc = null
+            description = ""
+        }
+    })
+}
+
+
+
+
+
 
 
 
