@@ -1,5 +1,5 @@
 window.repo = "BuffelSaft/pokeemerald/master"
-window.checkUpdate = "15 IE"
+window.checkUpdate = "16 IE"
 
 
 fetch('https://raw.githubusercontent.com/ydarissep/dex-core/main/index.html').then(async response => {

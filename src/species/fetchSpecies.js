@@ -8,14 +8,12 @@ async function getSpecies(species){
 
 
 async function getBaseStats(species){
-    footerP("Fetching base stats")
     const rawBaseStats = await fetch(`https://raw.githubusercontent.com/${repo}/src/data/pokemon/base_stats.h`)
     const textBaseStats = await rawBaseStats.text()
     return regexBaseStats(textBaseStats, species)
 }
 
 async function getLevelUpLearnsets(species){
-    footerP("Fetching level up learnsets")
     const rawLevelUpLearnsets = await fetch(`https://raw.githubusercontent.com/${repo}/src/data/pokemon/level_up_learnsets.h`)
     const textLevelUpLearnsets = await rawLevelUpLearnsets.text()
 
@@ -30,7 +28,6 @@ async function getLevelUpLearnsets(species){
 }
 
 async function getTMHMLearnsets(species){
-    footerP("Fetching TMHM learnsets")
     const rawTMHMLearnsets = await fetch(`https://raw.githubusercontent.com/${repo}/src/data/pokemon/tmhm_learnsets.h`)
     const textTMHMLearnsets = await rawTMHMLearnsets.text()
 
@@ -38,7 +35,6 @@ async function getTMHMLearnsets(species){
 }
 
 async function getEvolution(species){
-    footerP("Fetching evolution line")
     const rawEvolution = await fetch(`https://raw.githubusercontent.com/${repo}/src/data/pokemon/evolution.h`)
     const textEvolution = await rawEvolution.text()
 
@@ -46,7 +42,6 @@ async function getEvolution(species){
 }
 
 async function getForms(species){
-    footerP("Fetching alternate forms")
     const rawForms = await fetch(`https://raw.githubusercontent.com/${repo}/src/data/pokemon/form_species_tables.h`)
     const textForms = await rawForms.text()
 
@@ -54,7 +49,6 @@ async function getForms(species){
 }
 
 async function getEggMovesLearnsets(species){
-    footerP("Fetching egg moves learnsets")
     const rawEggMoves = await fetch(`https://raw.githubusercontent.com/${repo}/src/data/pokemon/egg_moves.h`)
     const textEggMoves = await rawEggMoves.text()
 
@@ -62,7 +56,6 @@ async function getEggMovesLearnsets(species){
 }
 
 async function getTutorLearnsets(species){
-    footerP("Fetching tutor learnsets")
     const rawTutorLearnsets = await fetch("https://raw.githubusercontent.com/ydarissep/inclement-emerald-pokedex/main/src/species/tutorLearnsets.json");
     const tutorLearnsets = await rawTutorLearnsets.json()
 
@@ -78,7 +71,6 @@ async function getTutorLearnsets(species){
 }
 
 async function getSprite(species){
-    footerP("Fetching sprites")
     const rawFrontPicTable = await fetch(`https://raw.githubusercontent.com/${repo}/src/data/pokemon_graphics/front_pic_table.h`)
     const textFrontPicTable = await rawFrontPicTable.text()
 
@@ -158,17 +150,7 @@ async function fetchSpeciesObj(){
 
     window.sprites = {}
     window.speciesTracker = []
-
-    await Object.keys(species).forEach(async name => {
-        if(localStorage.getItem(`${name}`)){
-            sprites[name] = await LZString.decompressFromUTF16(localStorage.getItem(`${name}`))
-            if(sprites[name].length < 500){
-                localStorage.removeItem(name)
-                spriteRemoveBgReturnBase64(name, species)
-            }
-        }
-        
-    })
+    
     for(let i = 0, j = Object.keys(species).length; i < j; i++){
         speciesTracker[i] = {}
         speciesTracker[i]["key"] = Object.keys(species)[i]

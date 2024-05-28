@@ -7,7 +7,6 @@ async function getMoves(Moves){
 }
 
 async function getMovesDescription(Moves){
-    footerP("Fetching moves descriptions")
     const rawMovesDescription = await fetch(`https://raw.githubusercontent.com/${repo}/src/data/text/move_descriptions.h`)
     const textMovesDescription = await rawMovesDescription.text()
 
