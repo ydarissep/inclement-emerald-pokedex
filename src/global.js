@@ -1,5 +1,6 @@
 window.repo = "BuffelSaft/pokeemerald/master"
 window.checkUpdate = "16 IE"
+window.showShinyToggle = true
 
 
 fetch('https://raw.githubusercontent.com/ydarissep/dex-core/main/index.html').then(async response => {
